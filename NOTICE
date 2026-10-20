@@ -1,0 +1,14 @@
+This repository distributes an original software catalogue, interface summaries,
+examples and website code. It does not distribute or relicense the third-party
+solvers, applications, commercial manuals, PDKs or datasets linked by the catalogue.
+Product names and trademarks belong to their respective owners. Inclusion does
+not imply endorsement, affiliation or a verified commercial support relationship.
+
+docs/assets/OpticsAtlasSans.otf is a subset of Noto Sans CJK SC Regular, renamed
+Optics Atlas Sans. Original font metadata retains the copyright attribution.
+Source: https://github.com/notofonts/noto-cjk
+Font license: docs/assets/FONT_LICENSE.txt (SIL Open Font License 1.1).
+The generated HTML embeds this font subset and the font license text.
+
+The English and Chinese catalogues share identifiers, source URLs, categories
+and integration-status classifications. Descriptions are localized for readability.

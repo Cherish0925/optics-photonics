@@ -1,0 +1,29 @@
+name: Add or correct a tool / 工具补充与纠错
+description: Propose a software entry or correct its capabilities, license, or interfaces.
+title: "[Catalogue] "
+body:
+  - type: input
+    id: software
+    attributes:
+      label: Software name or stable ID / 软件名称或编号
+    validations:
+      required: true
+  - type: textarea
+    id: change
+    attributes:
+      label: Proposed addition or correction / 建议修改
+      description: Describe the physical task, executable interface, license and relevant limitation.
+    validations:
+      required: true
+  - type: textarea
+    id: sources
+    attributes:
+      label: Primary sources / 原始资料
+      description: Maintainer repository, license, official API, author paper or vendor documentation.
+    validations:
+      required: true
+  - type: textarea
+    id: usage
+    attributes:
+      label: Practical experience / 实际使用情况
+      description: Optional version, platform and a reproducible example. Do not include credentials.

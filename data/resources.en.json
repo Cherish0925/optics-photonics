@@ -1,0 +1,2206 @@
+[
+  {
+    "url": "https://optics.ansys.com/hc/en-us/articles/42661773562899-Sample-code-for-ZOS-API-users",
+    "label": "API / project documentation",
+    "kind": "docs",
+    "software_ids": [
+      "opticstudio"
+    ],
+    "software_names": [
+      "Ansys Zemax OpticStudio"
+    ]
+  },
+  {
+    "url": "https://optics.ansys.com/hc/en-us/articles/42661790380179-ZOS-API-NET-An-Overview",
+    "label": "Official documentation / website",
+    "kind": "docs",
+    "software_ids": [
+      "opticstudio"
+    ],
+    "software_names": [
+      "Ansys Zemax OpticStudio"
+    ]
+  },
+  {
+    "url": "https://github.com/jaruiz6363/OpticStudioMCPServer",
+    "label": "Community OpticStudioMCPServer using ZOS-API",
+    "kind": "agent",
+    "software_ids": [
+      "opticstudio"
+    ],
+    "software_names": [
+      "Ansys Zemax OpticStudio"
+    ]
+  },
+  {
+    "url": "https://www.keysight.com.cn/cn/zh/products/software/optical-solutions-software/optical-design-solutions/codev.html",
+    "label": "Official product / platform",
+    "kind": "docs",
+    "software_ids": [
+      "codev"
+    ],
+    "software_names": [
+      "Keysight CODE V"
+    ]
+  },
+  {
+    "url": "https://www.keysight.com/es/en/products/software/optical-solutions-software/optical-design-solutions/lighttools.html",
+    "label": "Official product / platform",
+    "kind": "docs",
+    "software_ids": [
+      "lighttools"
+    ],
+    "software_names": [
+      "Keysight LightTools"
+    ]
+  },
+  {
+    "url": "https://github.com/Mestas/Lighttools",
+    "label": "Community integration",
+    "kind": "code",
+    "software_ids": [
+      "lighttools"
+    ],
+    "software_names": [
+      "Keysight LightTools"
+    ]
+  },
+  {
+    "url": "https://support.photonengr.com/article/176-raytrace-and-analysis-loop",
+    "label": "Scripting / programming reference",
+    "kind": "docs",
+    "software_ids": [
+      "fred"
+    ],
+    "software_names": [
+      "FRED"
+    ]
+  },
+  {
+    "url": "https://photonengr.com/",
+    "label": "Official product / platform",
+    "kind": "docs",
+    "software_ids": [
+      "fred"
+    ],
+    "software_names": [
+      "FRED"
+    ]
+  },
+  {
+    "url": "https://photonengr.com/academic-licenses",
+    "label": "Free / paid feature boundaries",
+    "kind": "license",
+    "software_ids": [
+      "fred"
+    ],
+    "software_names": [
+      "FRED"
+    ]
+  },
+  {
+    "url": "https://lambdares.com/hubfs/TracePro_Users_Manual_2026.pdf",
+    "label": "Official manual",
+    "kind": "docs",
+    "software_ids": [
+      "tracepro"
+    ],
+    "software_names": [
+      "TracePro"
+    ]
+  },
+  {
+    "url": "https://lambdares.com/tracepro-2",
+    "label": "Official documentation / website",
+    "kind": "docs",
+    "software_ids": [
+      "tracepro"
+    ],
+    "software_names": [
+      "TracePro"
+    ]
+  },
+  {
+    "url": "https://lambdares.com/oslo",
+    "label": "Official product / platform",
+    "kind": "docs",
+    "software_ids": [
+      "oslo"
+    ],
+    "software_names": [
+      "OSLO"
+    ]
+  },
+  {
+    "url": "https://lambdares.com/edu",
+    "label": "Official documentation / website",
+    "kind": "docs",
+    "software_ids": [
+      "oslo",
+      "osloedu"
+    ],
+    "software_names": [
+      "OSLO",
+      "OSLO EDU"
+    ]
+  },
+  {
+    "url": "https://lambdares.com/hubfs/Support/support/oslo/oslo_releases/OSLOProgramReference.pdf",
+    "label": "Scripting / programming reference",
+    "kind": "docs",
+    "software_ids": [
+      "oslo"
+    ],
+    "software_names": [
+      "OSLO"
+    ]
+  },
+  {
+    "url": "https://breault.com/asap/",
+    "label": "Scripting / programming reference",
+    "kind": "docs",
+    "software_ids": [
+      "asap"
+    ],
+    "software_names": [
+      "ASAP"
+    ]
+  },
+  {
+    "url": "https://programmingreference.lighttrans.com/2026.2/api/VirtualLab.Programming.html",
+    "label": "API / project documentation",
+    "kind": "docs",
+    "software_ids": [
+      "virtuallab"
+    ],
+    "software_names": [
+      "VirtualLab Fusion"
+    ]
+  },
+  {
+    "url": "https://www.lighttrans.com/product/virtuallab-fusion/frequently-asked-questions/general-faqs.html",
+    "label": "Official documentation / website",
+    "kind": "docs",
+    "software_ids": [
+      "virtuallab"
+    ],
+    "software_names": [
+      "VirtualLab Fusion"
+    ]
+  },
+  {
+    "url": "https://optics.ansys.com/hc/en-us/articles/24752772596371-Optical-Automation-library-introduction",
+    "label": "Official documentation / website",
+    "kind": "docs",
+    "software_ids": [
+      "speos"
+    ],
+    "software_names": [
+      "Ansys Speos"
+    ]
+  },
+  {
+    "url": "https://github.com/ansys/optical-automation",
+    "label": "Source repository",
+    "kind": "code",
+    "software_ids": [
+      "speos"
+    ],
+    "software_names": [
+      "Ansys Speos"
+    ]
+  },
+  {
+    "url": "https://optics.ansys.com/hc/en-us/articles/360037824513-Python-API-overview",
+    "label": "Python interface",
+    "kind": "docs",
+    "software_ids": [
+      "lumerical"
+    ],
+    "software_names": [
+      "Ansys Lumerical"
+    ]
+  },
+  {
+    "url": "https://github.com/ansys/pylumerical-mcp",
+    "label": "MCP implementation / documentation",
+    "kind": "agent",
+    "software_ids": [
+      "lumerical"
+    ],
+    "software_names": [
+      "Ansys Lumerical"
+    ]
+  },
+  {
+    "url": "https://github.com/zxqcreations/Lumerical_MCP_Skill",
+    "label": "Community Lumerical_MCP_Skill",
+    "kind": "agent",
+    "software_ids": [
+      "lumerical"
+    ],
+    "software_names": [
+      "Ansys Lumerical"
+    ]
+  },
+  {
+    "url": "https://www.comsol.com/support/learning-center/article/overview-of-the-comsol-api-107912",
+    "label": "API / project documentation",
+    "kind": "docs",
+    "software_ids": [
+      "comsol"
+    ],
+    "software_names": [
+      "COMSOL Multiphysics"
+    ]
+  },
+  {
+    "url": "https://www.comsol.com/livelink-for-matlab",
+    "label": "Official documentation / website",
+    "kind": "docs",
+    "software_ids": [
+      "comsol"
+    ],
+    "software_names": [
+      "COMSOL Multiphysics"
+    ]
+  },
+  {
+    "url": "https://github.com/Ching-Chiang/comsol-mcp",
+    "label": "MCP implementation / documentation",
+    "kind": "agent",
+    "software_ids": [
+      "comsol"
+    ],
+    "software_names": [
+      "COMSOL Multiphysics"
+    ]
+  },
+  {
+    "url": "https://www.3ds.com/products/simulia/cst-studio-suite",
+    "label": "Python interface",
+    "kind": "docs",
+    "software_ids": [
+      "cst"
+    ],
+    "software_names": [
+      "CST Studio Suite"
+    ]
+  },
+  {
+    "url": "https://blog.3ds.com/brands/simulia/cst-studio-suite-release-2021x-highlights/",
+    "label": "Python interface",
+    "kind": "docs",
+    "software_ids": [
+      "cst"
+    ],
+    "software_names": [
+      "CST Studio Suite"
+    ]
+  },
+  {
+    "url": "https://www.keysight.com/zz/en/products/software/optical-solutions-software/photonic-design-solutions.html",
+    "label": "API / project documentation",
+    "kind": "docs",
+    "software_ids": [
+      "rsoft"
+    ],
+    "software_names": [
+      "Keysight RSoft Photonic Device Tools"
+    ]
+  },
+  {
+    "url": "https://www.jcmwave.com/jcmsuite/interface/",
+    "label": "API / project documentation",
+    "kind": "docs",
+    "software_ids": [
+      "jcm"
+    ],
+    "software_names": [
+      "JCMsuite"
+    ]
+  },
+  {
+    "url": "https://docs.jcmwave.com/JCMsuite/html/PythonInterface/bf647454e36069fd16f1a7a35cf6a865.html",
+    "label": "Python interface",
+    "kind": "docs",
+    "software_ids": [
+      "jcm"
+    ],
+    "software_names": [
+      "JCMsuite"
+    ]
+  },
+  {
+    "url": "https://photond.com/fimmwave/features/scripting-optimisation",
+    "label": "Scripting / programming reference",
+    "kind": "docs",
+    "software_ids": [
+      "photond"
+    ],
+    "software_names": [
+      "Photon Design FIMMWAVE / FIMMPROP"
+    ]
+  },
+  {
+    "url": "https://photond.com/fimmwave/options/feature-option-table",
+    "label": "Official documentation / website",
+    "kind": "docs",
+    "software_ids": [
+      "photond"
+    ],
+    "software_names": [
+      "Photon Design FIMMWAVE / FIMMPROP"
+    ]
+  },
+  {
+    "url": "https://docs.flexcompute.com/projects/tidy3d/en/stable/faq/docs/faq/How-is-using-Tidy3D-billed.html",
+    "label": "Free / paid feature boundaries",
+    "kind": "docs",
+    "software_ids": [
+      "tidy3d"
+    ],
+    "software_names": [
+      "Flexcompute Tidy3D"
+    ]
+  },
+  {
+    "url": "https://github.com/flexcompute/tidy3d",
+    "label": "Python interface",
+    "kind": "code",
+    "software_ids": [
+      "tidy3d"
+    ],
+    "software_names": [
+      "Flexcompute Tidy3D"
+    ]
+  },
+  {
+    "url": "https://github.com/flexcompute/plugin-marketplace",
+    "label": "Agent plugins / Skills",
+    "kind": "agent",
+    "software_ids": [
+      "tidy3d",
+      "photonforge"
+    ],
+    "software_names": [
+      "Flexcompute Tidy3D",
+      "PhotonForge Community"
+    ]
+  },
+  {
+    "url": "https://www.lucedaphotonics.com/luceda-photonics-design-platform",
+    "label": "Official product / platform",
+    "kind": "docs",
+    "software_ids": [
+      "ipkiss"
+    ],
+    "software_names": [
+      "Luceda IPKISS"
+    ]
+  },
+  {
+    "url": "https://academy.lucedaphotonics.com/tutorials/device_sim/",
+    "label": "API / project documentation",
+    "kind": "docs",
+    "software_ids": [
+      "ipkiss"
+    ],
+    "software_names": [
+      "Luceda IPKISS"
+    ]
+  },
+  {
+    "url": "https://www.vpiphotonics.com/Tools/DesignSuite/Features/",
+    "label": "API / project documentation",
+    "kind": "docs",
+    "software_ids": [
+      "vpi"
+    ],
+    "software_names": [
+      "VPIphotonics Design Suite"
+    ]
+  },
+  {
+    "url": "https://www.vpiphotonics.com/Tools/DesignSuite/",
+    "label": "Official product / platform",
+    "kind": "docs",
+    "software_ids": [
+      "vpi"
+    ],
+    "software_names": [
+      "VPIphotonics Design Suite"
+    ]
+  },
+  {
+    "url": "https://optiwave.com/forums/topic/co-simulation-using-python/",
+    "label": "Python interface",
+    "kind": "docs",
+    "software_ids": [
+      "optisystem"
+    ],
+    "software_names": [
+      "Optiwave OptiSystem"
+    ]
+  },
+  {
+    "url": "https://cdn.optiwave.com/wp-content/uploads/2017/11/OptiSystem_15_New_Features.pdf",
+    "label": "Official manual",
+    "kind": "docs",
+    "software_ids": [
+      "optisystem"
+    ],
+    "software_names": [
+      "Optiwave OptiSystem"
+    ]
+  },
+  {
+    "url": "https://www.thinfilmcenter.com/essential.php",
+    "label": "Official product / platform",
+    "kind": "docs",
+    "software_ids": [
+      "macleod"
+    ],
+    "software_names": [
+      "Essential Macleod"
+    ]
+  },
+  {
+    "url": "https://www.thinfilmcenter.com/function.php",
+    "label": "Scripting / programming reference",
+    "kind": "docs",
+    "software_ids": [
+      "macleod"
+    ],
+    "software_names": [
+      "Essential Macleod"
+    ]
+  },
+  {
+    "url": "https://optilayer.com/com-automation/",
+    "label": "Official documentation / website",
+    "kind": "docs",
+    "software_ids": [
+      "optilayer"
+    ],
+    "software_names": [
+      "OptiLayer / OptiRE / OptiChar"
+    ]
+  },
+  {
+    "url": "https://optilayer.com/development-history/new-features-in-optilayer-2018-version-12-83/",
+    "label": "Python interface",
+    "kind": "docs",
+    "software_ids": [
+      "optilayer"
+    ],
+    "software_names": [
+      "OptiLayer / OptiRE / OptiChar"
+    ]
+  },
+  {
+    "url": "https://optilayer.com/downloads/",
+    "label": "Official product / platform",
+    "kind": "docs",
+    "software_ids": [
+      "optilayer"
+    ],
+    "software_names": [
+      "OptiLayer / OptiRE / OptiChar"
+    ]
+  },
+  {
+    "url": "https://www.rp-photonics.com/rp_fiber_power_interface.html",
+    "label": "API / project documentation",
+    "kind": "docs",
+    "software_ids": [
+      "rpfiber"
+    ],
+    "software_names": [
+      "RP Fiber Power"
+    ]
+  },
+  {
+    "url": "https://www.rp-photonics.com/software_script_language.html",
+    "label": "Scripting / programming reference",
+    "kind": "docs",
+    "software_ids": [
+      "rpfiber"
+    ],
+    "software_names": [
+      "RP Fiber Power"
+    ]
+  },
+  {
+    "url": "https://www.rp-photonics.com/software_overview.html",
+    "label": "Official product / platform",
+    "kind": "docs",
+    "software_ids": [
+      "rpresonator"
+    ],
+    "software_names": [
+      "RP Resonator / RP ProPulse"
+    ]
+  },
+  {
+    "url": "https://www.rp-photonics.com/rp_propulse_interface.html",
+    "label": "Scripting / programming reference",
+    "kind": "docs",
+    "software_ids": [
+      "rpresonator"
+    ],
+    "software_names": [
+      "RP Resonator / RP ProPulse"
+    ]
+  },
+  {
+    "url": "https://crosslight.com/",
+    "label": "Official product / platform",
+    "kind": "docs",
+    "software_ids": [
+      "crosslight"
+    ],
+    "software_names": [
+      "Crosslight APSYS / PICS3D"
+    ]
+  },
+  {
+    "url": "https://osdoptics.com/accessinstallation/",
+    "label": "Official documentation / website",
+    "kind": "docs",
+    "software_ids": [
+      "synopsys-osd"
+    ],
+    "software_names": [
+      "SYNOPSYS Lens Design(OSD)"
+    ]
+  },
+  {
+    "url": "https://osdoptics.com/wp-content/uploads/2024/09/SYNOPSYSTM-Lens-Design-Software-Starting-Guide-Ui-Plus.pdf",
+    "label": "Scripting / programming reference",
+    "kind": "docs",
+    "software_ids": [
+      "synopsys-osd"
+    ],
+    "software_names": [
+      "SYNOPSYS Lens Design(OSD)"
+    ]
+  },
+  {
+    "url": "https://www.sspectra.com/",
+    "label": "Official documentation / website",
+    "kind": "docs",
+    "software_ids": [
+      "tfcalc"
+    ],
+    "software_names": [
+      "TFCalc"
+    ]
+  },
+  {
+    "url": "https://www.hulinks.co.jp/en/",
+    "label": "Official documentation / website",
+    "kind": "docs",
+    "software_ids": [
+      "tfcalc"
+    ],
+    "software_names": [
+      "TFCalc"
+    ]
+  },
+  {
+    "url": "https://github.com/matlab/matlab-mcp-server",
+    "label": "MCP implementation / documentation",
+    "kind": "agent",
+    "software_ids": [
+      "matlab"
+    ],
+    "software_names": [
+      "MATLAB / Simulink"
+    ]
+  },
+  {
+    "url": "https://www.mathworks.com/help/cloudcenter/ug/run-matlab-with-ai-agentic-and-ai-assistant-applications.html",
+    "label": "Official documentation / website",
+    "kind": "docs",
+    "software_ids": [
+      "matlab"
+    ],
+    "software_names": [
+      "MATLAB / Simulink"
+    ]
+  },
+  {
+    "url": "https://www.wolfram.com/ai/mcp/",
+    "label": "MCP implementation / documentation",
+    "kind": "agent",
+    "software_ids": [
+      "mathematica"
+    ],
+    "software_names": [
+      "Wolfram Mathematica"
+    ]
+  },
+  {
+    "url": "https://www.wolfram.com/artificial-intelligence/mcp/local/wolfram-mcp-local/",
+    "label": "MCP implementation / documentation",
+    "kind": "agent",
+    "software_ids": [
+      "mathematica"
+    ],
+    "software_names": [
+      "Wolfram Mathematica"
+    ]
+  },
+  {
+    "url": "https://github.com/WolframResearch/AgentTools",
+    "label": "Maintainer repository",
+    "kind": "agent",
+    "software_ids": [
+      "mathematica"
+    ],
+    "software_names": [
+      "Wolfram Mathematica"
+    ]
+  },
+  {
+    "url": "https://jp.maplesoft.com/support/help/maple/view.aspx?path=OpenMaple%2FPython%2FAPI",
+    "label": "Python interface",
+    "kind": "docs",
+    "software_ids": [
+      "maple"
+    ],
+    "software_names": [
+      "Maple"
+    ]
+  },
+  {
+    "url": "https://www.maplesoft.com/documentation_center/maple2024/ProgrammingGuide.pdf",
+    "label": "Official manual",
+    "kind": "docs",
+    "software_ids": [
+      "maple"
+    ],
+    "software_names": [
+      "Maple"
+    ]
+  },
+  {
+    "url": "https://docs.flexcompute.com/projects/photonforge/en/latest/getting_started.html",
+    "label": "Free / paid feature boundaries",
+    "kind": "docs",
+    "software_ids": [
+      "photonforge"
+    ],
+    "software_names": [
+      "PhotonForge Community"
+    ]
+  },
+  {
+    "url": "https://github.com/ptycho/ptypy",
+    "label": "API / project documentation",
+    "kind": "code",
+    "software_ids": [
+      "ptypy"
+    ],
+    "software_names": [
+      "PtyPy"
+    ]
+  },
+  {
+    "url": "https://raw.githubusercontent.com/ptycho/ptypy/HEAD/LICENSE",
+    "label": "License / usage terms",
+    "kind": "license",
+    "software_ids": [
+      "ptypy"
+    ],
+    "software_names": [
+      "PtyPy"
+    ]
+  },
+  {
+    "url": "https://github.com/NanoComp/meep",
+    "label": "API / project documentation",
+    "kind": "code",
+    "software_ids": [
+      "meep"
+    ],
+    "software_names": [
+      "Meep"
+    ]
+  },
+  {
+    "url": "https://raw.githubusercontent.com/NanoComp/meep/HEAD/LICENSE",
+    "label": "License / usage terms",
+    "kind": "license",
+    "software_ids": [
+      "meep"
+    ],
+    "software_names": [
+      "Meep"
+    ]
+  },
+  {
+    "url": "https://github.com/NanoComp/mpb",
+    "label": "API / project documentation",
+    "kind": "code",
+    "software_ids": [
+      "mpb"
+    ],
+    "software_names": [
+      "MPB"
+    ]
+  },
+  {
+    "url": "https://raw.githubusercontent.com/NanoComp/mpb/HEAD/COPYING",
+    "label": "License / usage terms",
+    "kind": "license",
+    "software_ids": [
+      "mpb"
+    ],
+    "software_names": [
+      "MPB"
+    ]
+  },
+  {
+    "url": "https://github.com/ymahlau/fdtdx",
+    "label": "API / project documentation",
+    "kind": "code",
+    "software_ids": [
+      "fdtdx"
+    ],
+    "software_names": [
+      "FDTDX"
+    ]
+  },
+  {
+    "url": "https://raw.githubusercontent.com/ymahlau/fdtdx/HEAD/LICENSE",
+    "label": "License / usage terms",
+    "kind": "license",
+    "software_ids": [
+      "fdtdx"
+    ],
+    "software_names": [
+      "FDTDX"
+    ]
+  },
+  {
+    "url": "https://github.com/thliebig/openEMS",
+    "label": "API / project documentation",
+    "kind": "code",
+    "software_ids": [
+      "openems"
+    ],
+    "software_names": [
+      "openEMS"
+    ]
+  },
+  {
+    "url": "https://raw.githubusercontent.com/thliebig/openEMS/HEAD/COPYING",
+    "label": "License / usage terms",
+    "kind": "license",
+    "software_ids": [
+      "openems"
+    ],
+    "software_names": [
+      "openEMS"
+    ]
+  },
+  {
+    "url": "https://github.com/victorliu/S4",
+    "label": "API / project documentation",
+    "kind": "code",
+    "software_ids": [
+      "s4"
+    ],
+    "software_names": [
+      "S⁴ / S4"
+    ]
+  },
+  {
+    "url": "https://raw.githubusercontent.com/victorliu/S4/HEAD/COPYING",
+    "label": "License / usage terms",
+    "kind": "license",
+    "software_ids": [
+      "s4"
+    ],
+    "software_names": [
+      "S⁴ / S4"
+    ]
+  },
+  {
+    "url": "https://github.com/kch3782/torcwa",
+    "label": "API / project documentation",
+    "kind": "code",
+    "software_ids": [
+      "torcwa"
+    ],
+    "software_names": [
+      "torcwa"
+    ]
+  },
+  {
+    "url": "https://raw.githubusercontent.com/kch3782/torcwa/HEAD/LICENSE",
+    "label": "License / usage terms",
+    "kind": "license",
+    "software_ids": [
+      "torcwa"
+    ],
+    "software_names": [
+      "torcwa"
+    ]
+  },
+  {
+    "url": "https://github.com/weiliangjinca/grcwa",
+    "label": "API / project documentation",
+    "kind": "code",
+    "software_ids": [
+      "grcwa"
+    ],
+    "software_names": [
+      "grcwa"
+    ]
+  },
+  {
+    "url": "https://raw.githubusercontent.com/weiliangjinca/grcwa/HEAD/LICENSE",
+    "label": "License / usage terms",
+    "kind": "license",
+    "software_ids": [
+      "grcwa"
+    ],
+    "software_names": [
+      "grcwa"
+    ]
+  },
+  {
+    "url": "https://github.com/fancompute/legume",
+    "label": "API / project documentation",
+    "kind": "code",
+    "software_ids": [
+      "legume"
+    ],
+    "software_names": [
+      "legume"
+    ]
+  },
+  {
+    "url": "https://raw.githubusercontent.com/fancompute/legume/HEAD/LICENSE",
+    "label": "License / usage terms",
+    "kind": "license",
+    "software_ids": [
+      "legume"
+    ],
+    "software_names": [
+      "legume"
+    ]
+  },
+  {
+    "url": "https://github.com/fancompute/ceviche",
+    "label": "API / project documentation",
+    "kind": "code",
+    "software_ids": [
+      "ceviche"
+    ],
+    "software_names": [
+      "Ceviche"
+    ]
+  },
+  {
+    "url": "https://raw.githubusercontent.com/fancompute/ceviche/HEAD/LICENSE",
+    "label": "License / usage terms",
+    "kind": "license",
+    "software_ids": [
+      "ceviche"
+    ],
+    "software_names": [
+      "Ceviche"
+    ]
+  },
+  {
+    "url": "https://github.com/sbyrnes321/tmm",
+    "label": "API / project documentation",
+    "kind": "code",
+    "software_ids": [
+      "tmm"
+    ],
+    "software_names": [
+      "tmm"
+    ]
+  },
+  {
+    "url": "https://raw.githubusercontent.com/sbyrnes321/tmm/HEAD/LICENSE.txt",
+    "label": "License / usage terms",
+    "kind": "license",
+    "software_ids": [
+      "tmm"
+    ],
+    "software_names": [
+      "tmm"
+    ]
+  },
+  {
+    "url": "https://github.com/qpv-research-group/solcore5",
+    "label": "Maintainer repository",
+    "kind": "code",
+    "software_ids": [
+      "solcore"
+    ],
+    "software_names": [
+      "Solcore"
+    ]
+  },
+  {
+    "url": "https://docs.solcore.solar/en/latest/Optics/optics.html",
+    "label": "Official documentation / website",
+    "kind": "docs",
+    "software_ids": [
+      "solcore"
+    ],
+    "software_names": [
+      "Solcore"
+    ]
+  },
+  {
+    "url": "https://raw.githubusercontent.com/qpv-research-group/solcore5/HEAD/LICENSE.txt",
+    "label": "License / usage terms",
+    "kind": "license",
+    "software_ids": [
+      "solcore"
+    ],
+    "software_names": [
+      "Solcore"
+    ]
+  },
+  {
+    "url": "https://github.com/mjhoptics/ray-optics",
+    "label": "API / project documentation",
+    "kind": "code",
+    "software_ids": [
+      "rayoptics"
+    ],
+    "software_names": [
+      "RayOptics"
+    ]
+  },
+  {
+    "url": "https://raw.githubusercontent.com/mjhoptics/ray-optics/HEAD/LICENSE",
+    "label": "License / usage terms",
+    "kind": "license",
+    "software_ids": [
+      "rayoptics"
+    ],
+    "software_names": [
+      "RayOptics"
+    ]
+  },
+  {
+    "url": "https://github.com/optiland/optiland",
+    "label": "API / project documentation",
+    "kind": "code",
+    "software_ids": [
+      "optiland"
+    ],
+    "software_names": [
+      "Optiland"
+    ]
+  },
+  {
+    "url": "https://raw.githubusercontent.com/optiland/optiland/HEAD/LICENSE",
+    "label": "License / usage terms",
+    "kind": "license",
+    "software_ids": [
+      "optiland"
+    ],
+    "software_names": [
+      "Optiland"
+    ]
+  },
+  {
+    "url": "https://github.com/raysect/source",
+    "label": "API / project documentation",
+    "kind": "code",
+    "software_ids": [
+      "raysect"
+    ],
+    "software_names": [
+      "Raysect"
+    ]
+  },
+  {
+    "url": "https://raw.githubusercontent.com/raysect/source/HEAD/LICENSE.txt",
+    "label": "License / usage terms",
+    "kind": "license",
+    "software_ids": [
+      "raysect"
+    ],
+    "software_names": [
+      "Raysect"
+    ]
+  },
+  {
+    "url": "https://github.com/DCC-Lab/RayTracing",
+    "label": "API / project documentation",
+    "kind": "code",
+    "software_ids": [
+      "raytracing"
+    ],
+    "software_names": [
+      "DCC-Lab RayTracing"
+    ]
+  },
+  {
+    "url": "https://raw.githubusercontent.com/DCC-Lab/RayTracing/HEAD/LICENSE",
+    "label": "License / usage terms",
+    "kind": "license",
+    "software_ids": [
+      "raytracing"
+    ],
+    "software_names": [
+      "DCC-Lab RayTracing"
+    ]
+  },
+  {
+    "url": "https://github.com/opticspy/lightpipes",
+    "label": "API / project documentation",
+    "kind": "code",
+    "software_ids": [
+      "lightpipes"
+    ],
+    "software_names": [
+      "LightPipes"
+    ]
+  },
+  {
+    "url": "https://raw.githubusercontent.com/opticspy/lightpipes/HEAD/LICENSE.txt",
+    "label": "License / usage terms",
+    "kind": "license",
+    "software_ids": [
+      "lightpipes"
+    ],
+    "software_names": [
+      "LightPipes"
+    ]
+  },
+  {
+    "url": "https://github.com/spacetelescope/poppy",
+    "label": "API / project documentation",
+    "kind": "code",
+    "software_ids": [
+      "poppy"
+    ],
+    "software_names": [
+      "POPPY"
+    ]
+  },
+  {
+    "url": "https://raw.githubusercontent.com/spacetelescope/poppy/HEAD/LICENSE.md",
+    "label": "License / usage terms",
+    "kind": "license",
+    "software_ids": [
+      "poppy"
+    ],
+    "software_names": [
+      "POPPY"
+    ]
+  },
+  {
+    "url": "https://github.com/ehpor/hcipy",
+    "label": "API / project documentation",
+    "kind": "code",
+    "software_ids": [
+      "hcipy"
+    ],
+    "software_names": [
+      "HCIPy"
+    ]
+  },
+  {
+    "url": "https://raw.githubusercontent.com/ehpor/hcipy/HEAD/LICENSE",
+    "label": "License / usage terms",
+    "kind": "license",
+    "software_ids": [
+      "hcipy"
+    ],
+    "software_names": [
+      "HCIPy"
+    ]
+  },
+  {
+    "url": "https://github.com/brandondube/prysm",
+    "label": "API / project documentation",
+    "kind": "code",
+    "software_ids": [
+      "prysm"
+    ],
+    "software_names": [
+      "prysm"
+    ]
+  },
+  {
+    "url": "https://raw.githubusercontent.com/brandondube/prysm/HEAD/LICENSE.md",
+    "label": "License / usage terms",
+    "kind": "license",
+    "software_ids": [
+      "prysm"
+    ],
+    "software_names": [
+      "prysm"
+    ]
+  },
+  {
+    "url": "https://github.com/optbrea/diffractio",
+    "label": "API / project documentation",
+    "kind": "code",
+    "software_ids": [
+      "diffractio"
+    ],
+    "software_names": [
+      "Diffractio"
+    ]
+  },
+  {
+    "url": "https://raw.githubusercontent.com/optbrea/diffractio/HEAD/LICENSE",
+    "label": "License / usage terms",
+    "kind": "license",
+    "software_ids": [
+      "diffractio"
+    ],
+    "software_names": [
+      "Diffractio"
+    ]
+  },
+  {
+    "url": "https://github.com/MatthewFilipovich/torchoptics",
+    "label": "API / project documentation",
+    "kind": "code",
+    "software_ids": [
+      "torchoptics"
+    ],
+    "software_names": [
+      "TorchOptics"
+    ]
+  },
+  {
+    "url": "https://raw.githubusercontent.com/MatthewFilipovich/torchoptics/HEAD/LICENSE",
+    "label": "License / usage terms",
+    "kind": "license",
+    "software_ids": [
+      "torchoptics"
+    ],
+    "software_names": [
+      "TorchOptics"
+    ]
+  },
+  {
+    "url": "https://github.com/ebezzam/waveprop",
+    "label": "API / project documentation",
+    "kind": "code",
+    "software_ids": [
+      "waveprop"
+    ],
+    "software_names": [
+      "waveprop"
+    ]
+  },
+  {
+    "url": "https://raw.githubusercontent.com/ebezzam/waveprop/HEAD/LICENSE",
+    "label": "License / usage terms",
+    "kind": "license",
+    "software_ids": [
+      "waveprop"
+    ],
+    "software_names": [
+      "waveprop"
+    ]
+  },
+  {
+    "url": "https://github.com/gdsfactory/gdsfactory",
+    "label": "API / project documentation",
+    "kind": "code",
+    "software_ids": [
+      "gdsfactory"
+    ],
+    "software_names": [
+      "gdsfactory"
+    ]
+  },
+  {
+    "url": "https://raw.githubusercontent.com/gdsfactory/gdsfactory/HEAD/LICENSE",
+    "label": "License / usage terms",
+    "kind": "license",
+    "software_ids": [
+      "gdsfactory"
+    ],
+    "software_names": [
+      "gdsfactory"
+    ]
+  },
+  {
+    "url": "https://github.com/gdsfactory/gdsfactory/blob/main/.agents/skills/gdsfactory-component-designer/SKILL.md",
+    "label": "Official gdsfactory component-designer Skill",
+    "kind": "agent",
+    "software_ids": [
+      "gdsfactory"
+    ],
+    "software_names": [
+      "gdsfactory"
+    ]
+  },
+  {
+    "url": "https://github.com/KLayout/klayout",
+    "label": "API / project documentation",
+    "kind": "code",
+    "software_ids": [
+      "klayout"
+    ],
+    "software_names": [
+      "KLayout"
+    ]
+  },
+  {
+    "url": "https://raw.githubusercontent.com/KLayout/klayout/HEAD/LICENSE",
+    "label": "License / usage terms",
+    "kind": "license",
+    "software_ids": [
+      "klayout"
+    ],
+    "software_names": [
+      "KLayout"
+    ]
+  },
+  {
+    "url": "https://github.com/geniuskey/klayout-draw-mcp",
+    "label": "Community klayout-draw-mcp; Python-module layout operations",
+    "kind": "agent",
+    "software_ids": [
+      "klayout"
+    ],
+    "software_names": [
+      "KLayout"
+    ]
+  },
+  {
+    "url": "https://github.com/flaport/sax",
+    "label": "API / project documentation",
+    "kind": "code",
+    "software_ids": [
+      "sax"
+    ],
+    "software_names": [
+      "SAX"
+    ]
+  },
+  {
+    "url": "https://raw.githubusercontent.com/flaport/sax/HEAD/LICENSE",
+    "label": "License / usage terms",
+    "kind": "license",
+    "software_ids": [
+      "sax"
+    ],
+    "software_names": [
+      "SAX"
+    ]
+  },
+  {
+    "url": "https://github.com/SiEPIC/SiEPIC-Tools",
+    "label": "API / project documentation",
+    "kind": "code",
+    "software_ids": [
+      "siepic"
+    ],
+    "software_names": [
+      "SiEPIC-Tools"
+    ]
+  },
+  {
+    "url": "https://raw.githubusercontent.com/SiEPIC/SiEPIC-Tools/HEAD/LICENSE.md",
+    "label": "License / usage terms",
+    "kind": "license",
+    "software_ids": [
+      "siepic"
+    ],
+    "software_names": [
+      "SiEPIC-Tools"
+    ]
+  },
+  {
+    "url": "https://nazca-design.org/about/",
+    "label": "License / usage terms",
+    "kind": "license",
+    "software_ids": [
+      "nazca"
+    ],
+    "software_names": [
+      "Nazca Design"
+    ]
+  },
+  {
+    "url": "https://nazca-design.org/manual/introduction.html",
+    "label": "Official documentation / website",
+    "kind": "docs",
+    "software_ids": [
+      "nazca"
+    ],
+    "software_names": [
+      "Nazca Design"
+    ]
+  },
+  {
+    "url": "https://github.com/adda-team/adda",
+    "label": "API / project documentation",
+    "kind": "code",
+    "software_ids": [
+      "adda"
+    ],
+    "software_names": [
+      "ADDA"
+    ]
+  },
+  {
+    "url": "https://raw.githubusercontent.com/adda-team/adda/HEAD/LICENSE",
+    "label": "License / usage terms",
+    "kind": "license",
+    "software_ids": [
+      "adda"
+    ],
+    "software_names": [
+      "ADDA"
+    ]
+  },
+  {
+    "url": "https://github.com/scottprahl/miepython",
+    "label": "API / project documentation",
+    "kind": "code",
+    "software_ids": [
+      "miepython"
+    ],
+    "software_names": [
+      "miepython"
+    ]
+  },
+  {
+    "url": "https://raw.githubusercontent.com/scottprahl/miepython/HEAD/LICENSE.txt",
+    "label": "License / usage terms",
+    "kind": "license",
+    "software_ids": [
+      "miepython"
+    ],
+    "software_names": [
+      "miepython"
+    ]
+  },
+  {
+    "url": "https://github.com/tfp-photonics/treams",
+    "label": "API / project documentation",
+    "kind": "code",
+    "software_ids": [
+      "treams"
+    ],
+    "software_names": [
+      "treams"
+    ]
+  },
+  {
+    "url": "https://raw.githubusercontent.com/tfp-photonics/treams/HEAD/LICENSE",
+    "label": "License / usage terms",
+    "kind": "license",
+    "software_ids": [
+      "treams"
+    ],
+    "software_names": [
+      "treams"
+    ]
+  },
+  {
+    "url": "https://smuthi.readthedocs.io/en/latest/_source/01%20about/about_smuthi.html",
+    "label": "License / usage terms",
+    "kind": "license",
+    "software_ids": [
+      "smuthi"
+    ],
+    "software_names": [
+      "SMUTHI"
+    ]
+  },
+  {
+    "url": "https://github.com/KMCzajkowski/smuthi",
+    "label": "Maintainer repository",
+    "kind": "code",
+    "software_ids": [
+      "smuthi"
+    ],
+    "software_names": [
+      "SMUTHI"
+    ]
+  },
+  {
+    "url": "https://wiechapeter.gitlab.io/",
+    "label": "Methods publication",
+    "kind": "docs",
+    "software_ids": [
+      "pygdm"
+    ],
+    "software_names": [
+      "pyGDM"
+    ]
+  },
+  {
+    "url": "https://homepages.laas.fr/pwiecha/pygdm_doc/apidoc.html",
+    "label": "API / project documentation",
+    "kind": "docs",
+    "software_ids": [
+      "pygdm"
+    ],
+    "software_names": [
+      "pyGDM"
+    ]
+  },
+  {
+    "url": "https://gitlab.com/wiechapeter/pyGDM2",
+    "label": "Official documentation / website",
+    "kind": "docs",
+    "software_ids": [
+      "pygdm"
+    ],
+    "software_names": [
+      "pyGDM"
+    ]
+  },
+  {
+    "url": "https://github.com/qutip/qutip",
+    "label": "API / project documentation",
+    "kind": "code",
+    "software_ids": [
+      "qutip"
+    ],
+    "software_names": [
+      "QuTiP"
+    ]
+  },
+  {
+    "url": "https://raw.githubusercontent.com/qutip/qutip/HEAD/LICENSE.txt",
+    "label": "License / usage terms",
+    "kind": "license",
+    "software_ids": [
+      "qutip"
+    ],
+    "software_names": [
+      "QuTiP"
+    ]
+  },
+  {
+    "url": "https://github.com/qojulia/QuantumOptics.jl",
+    "label": "API / project documentation",
+    "kind": "code",
+    "software_ids": [
+      "quantumoptics"
+    ],
+    "software_names": [
+      "QuantumOptics.jl"
+    ]
+  },
+  {
+    "url": "https://raw.githubusercontent.com/qojulia/QuantumOptics.jl/HEAD/LICENSE.md",
+    "label": "License / usage terms",
+    "kind": "license",
+    "software_ids": [
+      "quantumoptics"
+    ],
+    "software_names": [
+      "QuantumOptics.jl"
+    ]
+  },
+  {
+    "url": "https://github.com/Quandela/Perceval",
+    "label": "API / project documentation",
+    "kind": "code",
+    "software_ids": [
+      "perceval"
+    ],
+    "software_names": [
+      "Perceval"
+    ]
+  },
+  {
+    "url": "https://raw.githubusercontent.com/Quandela/Perceval/HEAD/LICENSE",
+    "label": "License / usage terms",
+    "kind": "license",
+    "software_ids": [
+      "perceval"
+    ],
+    "software_names": [
+      "Perceval"
+    ]
+  },
+  {
+    "url": "https://github.com/XanaduAI/strawberryfields",
+    "label": "API / project documentation",
+    "kind": "code",
+    "software_ids": [
+      "strawberry"
+    ],
+    "software_names": [
+      "Strawberry Fields"
+    ]
+  },
+  {
+    "url": "https://raw.githubusercontent.com/XanaduAI/strawberryfields/HEAD/LICENSE",
+    "label": "License / usage terms",
+    "kind": "license",
+    "software_ids": [
+      "strawberry"
+    ],
+    "software_names": [
+      "Strawberry Fields"
+    ]
+  },
+  {
+    "url": "https://github.com/LupoLab/Luna.jl",
+    "label": "API / project documentation",
+    "kind": "code",
+    "software_ids": [
+      "luna"
+    ],
+    "software_names": [
+      "Luna.jl"
+    ]
+  },
+  {
+    "url": "https://raw.githubusercontent.com/LupoLab/Luna.jl/HEAD/LICENSE",
+    "label": "License / usage terms",
+    "kind": "license",
+    "software_ids": [
+      "luna"
+    ],
+    "software_names": [
+      "Luna.jl"
+    ]
+  },
+  {
+    "url": "https://github.com/omelchert/py-fmas",
+    "label": "API / project documentation",
+    "kind": "code",
+    "software_ids": [
+      "pyfmas"
+    ],
+    "software_names": [
+      "py-fmas"
+    ]
+  },
+  {
+    "url": "https://raw.githubusercontent.com/omelchert/py-fmas/HEAD/LICENSE.md",
+    "label": "License / usage terms",
+    "kind": "license",
+    "software_ids": [
+      "pyfmas"
+    ],
+    "software_names": [
+      "py-fmas"
+    ]
+  },
+  {
+    "url": "https://github.com/laserfun/laserfun",
+    "label": "API / project documentation",
+    "kind": "code",
+    "software_ids": [
+      "laserfun"
+    ],
+    "software_names": [
+      "laserfun"
+    ]
+  },
+  {
+    "url": "https://raw.githubusercontent.com/laserfun/laserfun/HEAD/LICENSE",
+    "label": "License / usage terms",
+    "kind": "license",
+    "software_ids": [
+      "laserfun"
+    ],
+    "software_names": [
+      "laserfun"
+    ]
+  },
+  {
+    "url": "https://github.com/edsonportosilva/OptiCommPy",
+    "label": "API / project documentation",
+    "kind": "code",
+    "software_ids": [
+      "opticomm"
+    ],
+    "software_names": [
+      "OptiCommPy"
+    ]
+  },
+  {
+    "url": "https://raw.githubusercontent.com/edsonportosilva/OptiCommPy/HEAD/LICENSE",
+    "label": "License / usage terms",
+    "kind": "license",
+    "software_ids": [
+      "opticomm"
+    ],
+    "software_names": [
+      "OptiCommPy"
+    ]
+  },
+  {
+    "url": "https://finesse.ifosim.org/docs/latest/",
+    "label": "Official documentation / website",
+    "kind": "docs",
+    "software_ids": [
+      "finesse"
+    ],
+    "software_names": [
+      "Finesse 3"
+    ]
+  },
+  {
+    "url": "https://finesse.docs.ligo.org/finesse-ligo/index.html",
+    "label": "Official documentation / website",
+    "kind": "docs",
+    "software_ids": [
+      "finesse"
+    ],
+    "software_names": [
+      "Finesse 3"
+    ]
+  },
+  {
+    "url": "https://git.ligo.org/finesse/finesse3",
+    "label": "Official documentation / website",
+    "kind": "docs",
+    "software_ids": [
+      "finesse"
+    ],
+    "software_names": [
+      "Finesse 3"
+    ]
+  },
+  {
+    "url": "https://github.com/orion-project/rezonator2",
+    "label": "Maintainer repository",
+    "kind": "code",
+    "software_ids": [
+      "rezonator"
+    ],
+    "software_names": [
+      "reZonator 2"
+    ]
+  },
+  {
+    "url": "https://raw.githubusercontent.com/orion-project/rezonator2/HEAD/LICENSE",
+    "label": "License / usage terms",
+    "kind": "license",
+    "software_ids": [
+      "rezonator"
+    ],
+    "software_names": [
+      "reZonator 2"
+    ]
+  },
+  {
+    "url": "https://github.com/fangq/mcx",
+    "label": "API / project documentation",
+    "kind": "code",
+    "software_ids": [
+      "mcx"
+    ],
+    "software_names": [
+      "MCX"
+    ]
+  },
+  {
+    "url": "https://raw.githubusercontent.com/fangq/mcx/HEAD/LICENSE.txt",
+    "label": "License / usage terms",
+    "kind": "license",
+    "software_ids": [
+      "mcx"
+    ],
+    "software_names": [
+      "MCX"
+    ]
+  },
+  {
+    "url": "https://github.com/fangq/mmc",
+    "label": "API / project documentation",
+    "kind": "code",
+    "software_ids": [
+      "mmc"
+    ],
+    "software_names": [
+      "MMC"
+    ]
+  },
+  {
+    "url": "https://raw.githubusercontent.com/fangq/mmc/HEAD/LICENSE.txt",
+    "label": "License / usage terms",
+    "kind": "license",
+    "software_ids": [
+      "mmc"
+    ],
+    "software_names": [
+      "MMC"
+    ]
+  },
+  {
+    "url": "https://github.com/manoharan-lab/holopy",
+    "label": "API / project documentation",
+    "kind": "code",
+    "software_ids": [
+      "holopy"
+    ],
+    "software_names": [
+      "HoloPy"
+    ]
+  },
+  {
+    "url": "https://raw.githubusercontent.com/manoharan-lab/holopy/HEAD/LICENSE",
+    "label": "License / usage terms",
+    "kind": "license",
+    "software_ids": [
+      "holopy"
+    ],
+    "software_names": [
+      "HoloPy"
+    ]
+  },
+  {
+    "url": "https://github.com/catrujilla/pyDHM",
+    "label": "Maintainer repository",
+    "kind": "code",
+    "software_ids": [
+      "pydhm"
+    ],
+    "software_names": [
+      "pyDHM"
+    ]
+  },
+  {
+    "url": "https://catrujilla.github.io/pyDHM/",
+    "label": "Official documentation / website",
+    "kind": "docs",
+    "software_ids": [
+      "pydhm"
+    ],
+    "software_names": [
+      "pyDHM"
+    ]
+  },
+  {
+    "url": "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0275818",
+    "label": "Methods publication",
+    "kind": "docs",
+    "software_ids": [
+      "pydhm"
+    ],
+    "software_names": [
+      "pyDHM"
+    ]
+  },
+  {
+    "url": "https://pynx.esrf.fr/en/stable/",
+    "label": "License / usage terms",
+    "kind": "license",
+    "software_ids": [
+      "pynx"
+    ],
+    "software_names": [
+      "PyNX"
+    ]
+  },
+  {
+    "url": "https://pynx.esrf.fr/en/stable/scripts/",
+    "label": "Official documentation / website",
+    "kind": "docs",
+    "software_ids": [
+      "pynx"
+    ],
+    "software_names": [
+      "PyNX"
+    ]
+  },
+  {
+    "url": "https://github.com/mitsuba-renderer/mitsuba3",
+    "label": "API / project documentation",
+    "kind": "code",
+    "software_ids": [
+      "mitsuba"
+    ],
+    "software_names": [
+      "Mitsuba 3"
+    ]
+  },
+  {
+    "url": "https://raw.githubusercontent.com/mitsuba-renderer/mitsuba3/HEAD/LICENSE",
+    "label": "License / usage terms",
+    "kind": "license",
+    "software_ids": [
+      "mitsuba"
+    ],
+    "software_names": [
+      "Mitsuba 3"
+    ]
+  },
+  {
+    "url": "https://github.com/mmp/pbrt-v4",
+    "label": "API / project documentation",
+    "kind": "code",
+    "software_ids": [
+      "pbrt"
+    ],
+    "software_names": [
+      "PBRT v4"
+    ]
+  },
+  {
+    "url": "https://raw.githubusercontent.com/mmp/pbrt-v4/HEAD/LICENSE.txt",
+    "label": "License / usage terms",
+    "kind": "license",
+    "software_ids": [
+      "pbrt"
+    ],
+    "software_names": [
+      "PBRT v4"
+    ]
+  },
+  {
+    "url": "https://github.com/ochubar/SRW",
+    "label": "API / project documentation",
+    "kind": "code",
+    "software_ids": [
+      "srw"
+    ],
+    "software_names": [
+      "SRW"
+    ]
+  },
+  {
+    "url": "https://pypi.org/project/oasys-srwpy/1.0.3/",
+    "label": "License / usage terms",
+    "kind": "license",
+    "software_ids": [
+      "srw"
+    ],
+    "software_names": [
+      "SRW"
+    ]
+  },
+  {
+    "url": "https://github.com/oasys-kit/shadow4",
+    "label": "Maintainer repository",
+    "kind": "code",
+    "software_ids": [
+      "shadow"
+    ],
+    "software_names": [
+      "SHADOW4 / OASYS"
+    ]
+  },
+  {
+    "url": "https://github.com/oasys-kit/shadow4/blob/master/LICENSE",
+    "label": "License / usage terms",
+    "kind": "license",
+    "software_ids": [
+      "shadow"
+    ],
+    "software_names": [
+      "SHADOW4 / OASYS"
+    ]
+  },
+  {
+    "url": "https://github.com/oasys-kit/OASYS1-shadow4",
+    "label": "Maintainer repository",
+    "kind": "code",
+    "software_ids": [
+      "shadow"
+    ],
+    "software_names": [
+      "SHADOW4 / OASYS"
+    ]
+  },
+  {
+    "url": "https://github.com/kklmn/xrt",
+    "label": "API / project documentation",
+    "kind": "code",
+    "software_ids": [
+      "xrt"
+    ],
+    "software_names": [
+      "xrt"
+    ]
+  },
+  {
+    "url": "https://raw.githubusercontent.com/kklmn/xrt/HEAD/LICENSE.txt",
+    "label": "License / usage terms",
+    "kind": "license",
+    "software_ids": [
+      "xrt"
+    ],
+    "software_names": [
+      "xrt"
+    ]
+  },
+  {
+    "url": "https://github.com/sympy/sympy",
+    "label": "API / project documentation",
+    "kind": "code",
+    "software_ids": [
+      "sympy"
+    ],
+    "software_names": [
+      "SymPy"
+    ]
+  },
+  {
+    "url": "https://raw.githubusercontent.com/sympy/sympy/HEAD/LICENSE",
+    "label": "License / usage terms",
+    "kind": "license",
+    "software_ids": [
+      "sympy"
+    ],
+    "software_names": [
+      "SymPy"
+    ]
+  },
+  {
+    "url": "https://www.sagemath.org/",
+    "label": "Official documentation / website",
+    "kind": "docs",
+    "software_ids": [
+      "sage"
+    ],
+    "software_names": [
+      "SageMath"
+    ]
+  },
+  {
+    "url": "https://github.com/FreeCAD/FreeCAD",
+    "label": "API / project documentation",
+    "kind": "code",
+    "software_ids": [
+      "freecad"
+    ],
+    "software_names": [
+      "FreeCAD"
+    ]
+  },
+  {
+    "url": "https://raw.githubusercontent.com/FreeCAD/FreeCAD/HEAD/LICENSE",
+    "label": "License / usage terms",
+    "kind": "license",
+    "software_ids": [
+      "freecad"
+    ],
+    "software_names": [
+      "FreeCAD"
+    ]
+  },
+  {
+    "url": "https://gmsh.info/",
+    "label": "License / usage terms",
+    "kind": "license",
+    "software_ids": [
+      "gmsh"
+    ],
+    "software_names": [
+      "Gmsh"
+    ]
+  },
+  {
+    "url": "https://gmsh.info/doc/texinfo/",
+    "label": "Official manual",
+    "kind": "docs",
+    "software_ids": [
+      "gmsh"
+    ],
+    "software_names": [
+      "Gmsh"
+    ]
+  },
+  {
+    "url": "https://github.com/scikit-image/scikit-image",
+    "label": "API / project documentation",
+    "kind": "code",
+    "software_ids": [
+      "scikitimage"
+    ],
+    "software_names": [
+      "scikit-image"
+    ]
+  },
+  {
+    "url": "https://raw.githubusercontent.com/scikit-image/scikit-image/HEAD/LICENSE.txt",
+    "label": "License / usage terms",
+    "kind": "license",
+    "software_ids": [
+      "scikitimage"
+    ],
+    "software_names": [
+      "scikit-image"
+    ]
+  },
+  {
+    "url": "https://github.com/napari/napari",
+    "label": "API / project documentation",
+    "kind": "code",
+    "software_ids": [
+      "napari"
+    ],
+    "software_names": [
+      "napari"
+    ]
+  },
+  {
+    "url": "https://raw.githubusercontent.com/napari/napari/HEAD/LICENSE",
+    "label": "License / usage terms",
+    "kind": "license",
+    "software_ids": [
+      "napari"
+    ],
+    "software_names": [
+      "napari"
+    ]
+  },
+  {
+    "url": "https://github.com/polyanskiy/refractiveindex.info-database",
+    "label": "Maintainer repository",
+    "kind": "code",
+    "software_ids": [
+      "refractiveindex"
+    ],
+    "software_names": [
+      "refractiveindex.info database"
+    ]
+  },
+  {
+    "url": "https://raw.githubusercontent.com/polyanskiy/refractiveindex.info-database/HEAD/LICENSE",
+    "label": "License / usage terms",
+    "kind": "license",
+    "software_ids": [
+      "refractiveindex"
+    ],
+    "software_names": [
+      "refractiveindex.info database"
+    ]
+  },
+  {
+    "url": "https://refractiveindex.info/",
+    "label": "Official documentation / website",
+    "kind": "docs",
+    "software_ids": [
+      "refractiveindex"
+    ],
+    "software_names": [
+      "refractiveindex.info database"
+    ]
+  },
+  {
+    "url": "https://github.com/FEniCS/dolfinx",
+    "label": "Maintainer repository",
+    "kind": "code",
+    "software_ids": [
+      "fenics"
+    ],
+    "software_names": [
+      "FEniCSx / DOLFINx"
+    ]
+  },
+  {
+    "url": "https://fenicsproject.org/",
+    "label": "Official documentation / website",
+    "kind": "docs",
+    "software_ids": [
+      "fenics"
+    ],
+    "software_names": [
+      "FEniCSx / DOLFINx"
+    ]
+  },
+  {
+    "url": "https://github.com/NGSolve/ngsolve",
+    "label": "Maintainer repository",
+    "kind": "code",
+    "software_ids": [
+      "ngsolve"
+    ],
+    "software_names": [
+      "Netgen / NGSolve"
+    ]
+  },
+  {
+    "url": "https://ngsolve.org/ngsolve/docs/i-tutorials/unit-2.4-Maxwell/Maxwellevp.html",
+    "label": "Maxwell tutorial",
+    "kind": "docs",
+    "software_ids": [
+      "ngsolve"
+    ],
+    "software_names": [
+      "Netgen / NGSolve"
+    ]
+  },
+  {
+    "url": "https://numpy.org/",
+    "label": "Official documentation / website",
+    "kind": "docs",
+    "software_ids": [
+      "scipy"
+    ],
+    "software_names": [
+      "NumPy / SciPy"
+    ]
+  },
+  {
+    "url": "https://scipy.org/",
+    "label": "Official documentation / website",
+    "kind": "docs",
+    "software_ids": [
+      "scipy"
+    ],
+    "software_names": [
+      "NumPy / SciPy"
+    ]
+  },
+  {
+    "url": "https://docs.jax.dev/en/latest/",
+    "label": "Official documentation / website",
+    "kind": "docs",
+    "software_ids": [
+      "jax"
+    ],
+    "software_names": [
+      "JAX"
+    ]
+  },
+  {
+    "url": "https://github.com/jax-ml/jax",
+    "label": "Source repository",
+    "kind": "code",
+    "software_ids": [
+      "jax"
+    ],
+    "software_names": [
+      "JAX"
+    ]
+  },
+  {
+    "url": "https://pytorch.org/",
+    "label": "Official product / platform",
+    "kind": "docs",
+    "software_ids": [
+      "pytorch"
+    ],
+    "software_names": [
+      "PyTorch"
+    ]
+  },
+  {
+    "url": "https://github.com/pytorch/pytorch",
+    "label": "Source repository",
+    "kind": "code",
+    "software_ids": [
+      "pytorch"
+    ],
+    "software_names": [
+      "PyTorch"
+    ]
+  }
+]

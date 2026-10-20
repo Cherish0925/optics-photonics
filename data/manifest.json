@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0",
+  "reviewed": "2026-10-20",
+  "project": "https://github.com/Cherish0925/optics-photonics",
+  "description_license": "MIT",
+  "languages": [
+    "en",
+    "zh"
+  ],
+  "entries": 96,
+  "domains": 14,
+  "groups": {
+    "paid": 29,
+    "limited": 3,
+    "open": 64
+  },
+  "primary_source_urls": 196,
+  "resource_urls_including_connectors": 200,
+  "catalogues": {
+    "en": "https://raw.githubusercontent.com/Cherish0925/optics-photonics/main/data/catalogue.en.json",
+    "zh": "https://raw.githubusercontent.com/Cherish0925/optics-photonics/main/data/catalogue.zh.json"
+  }
+}

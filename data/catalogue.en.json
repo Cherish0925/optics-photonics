@@ -1,0 +1,3485 @@
+[
+  {
+    "id": "opticstudio",
+    "name": "Ansys Zemax OpticStudio",
+    "group": "paid",
+    "cats": [
+      "ray",
+      "wave"
+    ],
+    "method": "Sequential / nonsequential ray tracing; physical optics propagation",
+    "summary": "Lens design, aberrations, tolerancing, stray light and selected coherent propagation workflows.",
+    "api": "ZOS-API .NET with Python, C#, C++ and MATLAB; ZPL macros; standalone and interactive connections.",
+    "license": "Commercial; academic terms, modules and concurrent execution depend on the contract",
+    "compute": "Windows application; background instances still require a valid license.",
+    "usage": "Vendor engineering applications and automation examples cover imaging, lenses and illumination.",
+    "limit": "Sequential optics, nonsequential optics and POP expose different models and results. A community MCP does not cover the entire ZOS-API.",
+    "sources": [
+      {
+        "label": "API / project documentation",
+        "url": "https://optics.ansys.com/hc/en-us/articles/42661773562899-Sample-code-for-ZOS-API-users"
+      },
+      {
+        "label": "Official documentation / website",
+        "url": "https://optics.ansys.com/hc/en-us/articles/42661790380179-ZOS-API-NET-An-Overview"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "community",
+      "text": "Community OpticStudioMCPServer using ZOS-API",
+      "url": "https://github.com/jaruiz6363/OpticStudioMCPServer"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "codev",
+    "name": "Keysight CODE V",
+    "group": "paid",
+    "cats": [
+      "ray",
+      "wave"
+    ],
+    "method": "Imaging optics design and optimization",
+    "summary": "Lens starting points, aberration optimization, tolerance analysis and image quality evaluation.",
+    "api": "Macro-PLUS scripts, commands and batch design workflows. Consult the installed version for external automation details.",
+    "license": "Commercial; academic terms, modules and concurrent execution depend on the contract",
+    "compute": "Licensed local application with macro-driven execution.",
+    "usage": "Keysight imaging optics product with lens and mobile-camera design workflows.",
+    "limit": "Older resources use the Synopsys CODE V name; use the current Keysight product and documentation.",
+    "sources": [
+      {
+        "label": "Official product / platform",
+        "url": "https://www.keysight.com.cn/cn/zh/products/software/optical-solutions-software/optical-design-solutions/codev.html"
+      }
+    ],
+    "route": "script",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "lighttools",
+    "name": "Keysight LightTools",
+    "group": "paid",
+    "cats": [
+      "ray"
+    ],
+    "method": "Nonsequential ray tracing / illumination",
+    "summary": "Illumination, light guides, displays and stray light, with source, material and scattering models.",
+    "api": "Built-in macros and LTAPI automation; third-party Python wrappers are available.",
+    "license": "Commercial; academic terms, modules and concurrent execution depend on the contract",
+    "compute": "Primarily a licensed desktop application.",
+    "usage": "Official illumination product with CODE V to LightTools design workflows.",
+    "limit": "Python wrappers and the application have separate maintenance cycles. Source and BSDF data strongly affect results.",
+    "sources": [
+      {
+        "label": "Official product / platform",
+        "url": "https://www.keysight.com/es/en/products/software/optical-solutions-software/optical-design-solutions/lighttools.html"
+      },
+      {
+        "label": "Community integration",
+        "url": "https://github.com/Mestas/Lighttools"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "fred",
+    "name": "FRED",
+    "group": "paid",
+    "cats": [
+      "ray",
+      "wave"
+    ],
+    "method": "Nonsequential tracing; coherent and incoherent optics",
+    "summary": "Propagation through complex optomechanical systems, scattering, stray light and laser systems.",
+    "api": "Built-in scripting and .frs workflows; official examples include trace-and-analysis loops.",
+    "license": "Commercial; conditional university gratis licenses require application",
+    "compute": "Windows; multithreading, distributed execution or FREDmpc GPU computing depend on the edition.",
+    "usage": "Photon Engineering supplies engineering applications, executable scripting examples and academic programs.",
+    "limit": "Built-in scripting is documented; a complete native Python API has not been established here.",
+    "sources": [
+      {
+        "label": "Scripting / programming reference",
+        "url": "https://support.photonengr.com/article/176-raytrace-and-analysis-loop"
+      },
+      {
+        "label": "Official product / platform",
+        "url": "https://photonengr.com/"
+      },
+      {
+        "label": "Free / paid feature boundaries",
+        "url": "https://photonengr.com/academic-licenses"
+      }
+    ],
+    "route": "script",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "tracepro",
+    "name": "TracePro",
+    "group": "paid",
+    "cats": [
+      "ray"
+    ],
+    "method": "Monte Carlo ray tracing",
+    "summary": "Illumination, stray light, optical flux and optomechanical geometry analysis and optimization.",
+    "api": "Scheme macros; the manual documents DDE and macro automation.",
+    "license": "Commercial; academic terms, modules and concurrent execution depend on the contract",
+    "compute": "Desktop application with macro / DDE integration.",
+    "usage": "Lambda Research engineering product with a 2026 user manual.",
+    "limit": "Desktop sessions need lifecycle management. A macro interface is not itself an MCP server.",
+    "sources": [
+      {
+        "label": "Official manual",
+        "url": "https://lambdares.com/hubfs/TracePro_Users_Manual_2026.pdf"
+      },
+      {
+        "label": "Official documentation / website",
+        "url": "https://lambdares.com/tracepro-2"
+      }
+    ],
+    "route": "script",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "oslo",
+    "name": "OSLO",
+    "group": "paid",
+    "cats": [
+      "ray"
+    ],
+    "method": "Sequential optics / lens design",
+    "summary": "Optical layouts, aberrations, optimization and tolerance calculations.",
+    "api": "CCL programming and command system; features depend on the edition.",
+    "license": "Commercial; academic terms, modules and concurrent execution depend on the contract",
+    "compute": "Windows; CCL scripting.",
+    "usage": "Lambda Research lens design product with a separately listed free EDU edition.",
+    "limit": "Commercial and EDU editions expose different capabilities; the free edition has its own entry.",
+    "sources": [
+      {
+        "label": "Official product / platform",
+        "url": "https://lambdares.com/oslo"
+      },
+      {
+        "label": "Official documentation / website",
+        "url": "https://lambdares.com/edu"
+      },
+      {
+        "label": "Scripting / programming reference",
+        "url": "https://lambdares.com/hubfs/Support/support/oslo/oslo_releases/OSLOProgramReference.pdf"
+      }
+    ],
+    "route": "script",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "asap",
+    "name": "ASAP",
+    "group": "paid",
+    "cats": [
+      "ray",
+      "wave"
+    ],
+    "method": "Nonsequential optics / physical optics",
+    "summary": "Complex optical systems, illumination, scattering and stray light analysis.",
+    "api": "Official integrated Python, VBScript and other scripting support for automated analyses.",
+    "license": "Commercial; academic terms, modules and concurrent execution depend on the contract",
+    "compute": "Licensed desktop and solver environment.",
+    "usage": "Breault Research Organization optical analysis product.",
+    "limit": "Match the scripting host, object model and license configuration to the installed release.",
+    "sources": [
+      {
+        "label": "Scripting / programming reference",
+        "url": "https://breault.com/asap/"
+      }
+    ],
+    "route": "script",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "virtuallab",
+    "name": "VirtualLab Fusion",
+    "group": "paid",
+    "cats": [
+      "wave",
+      "ray",
+      "periodic"
+    ],
+    "method": "Field tracing / hybrid optical modeling",
+    "summary": "Joint modeling of diffraction, polarization, gratings, free-space systems and complex optical elements.",
+    "api": "Official Programming API, programmable elements and scripts; documented extensions to Python / MATLAB workflows.",
+    "license": "Commercial; academic terms, modules and concurrent execution depend on the contract",
+    "compute": "Windows; in-product programming and external workflows.",
+    "usage": "LightTrans wave-optics platform with optical element and application libraries.",
+    "limit": "Hybrid solvers exchange particular field representations; a hybrid workflow is not necessarily one full-wave Maxwell solution.",
+    "sources": [
+      {
+        "label": "API / project documentation",
+        "url": "https://programmingreference.lighttrans.com/2026.2/api/VirtualLab.Programming.html"
+      },
+      {
+        "label": "Official documentation / website",
+        "url": "https://www.lighttrans.com/product/virtuallab-fusion/frequently-asked-questions/general-faqs.html"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "speos",
+    "name": "Ansys Speos",
+    "group": "paid",
+    "cats": [
+      "ray",
+      "imaging"
+    ],
+    "method": "Light transport / photometry / visual simulation",
+    "summary": "Illumination, automotive lighting, displays, sensors and human-vision-related optomechanical design.",
+    "api": "Speos scripts; Ansys optical-automation supplies public Python automation and interoperability code.",
+    "license": "Commercial; academic terms, modules and concurrent execution depend on the contract",
+    "compute": "Runs with the relevant Ansys / CAD host environment.",
+    "usage": "Ansys engineering product with an officially maintained optical automation library.",
+    "limit": "The automation library is MIT-licensed; the Speos solver is not. Hosts may use different Python runtimes.",
+    "sources": [
+      {
+        "label": "Official documentation / website",
+        "url": "https://optics.ansys.com/hc/en-us/articles/24752772596371-Optical-Automation-library-introduction"
+      },
+      {
+        "label": "Source repository",
+        "url": "https://github.com/ansys/optical-automation"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "lumerical",
+    "name": "Ansys Lumerical",
+    "group": "paid",
+    "cats": [
+      "em",
+      "pic",
+      "periodic"
+    ],
+    "method": "FDTD / modes / multiphysics / photonic circuits",
+    "summary": "FDTD, MODE, Multiphysics and INTERCONNECT form a device-to-circuit product family.",
+    "api": "lumapi Python; LSF scripts; lumopt inverse design; lumslurm scheduling.",
+    "license": "Commercial; academic terms, modules and concurrent execution depend on the contract",
+    "compute": "Local and cluster execution; product and HPC licenses are configured separately.",
+    "usage": "Official applications cover nanophotonics, silicon photonics and optical transceiver links.",
+    "limit": "Python clients and MCP do not replace solver licenses. Each product has distinct physical models and output formats.",
+    "sources": [
+      {
+        "label": "Python interface",
+        "url": "https://optics.ansys.com/hc/en-us/articles/360037824513-Python-API-overview"
+      },
+      {
+        "label": "MCP implementation / documentation",
+        "url": "https://github.com/ansys/pylumerical-mcp"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "official",
+      "text": "PyLumerical MCP published by the official Ansys organization",
+      "url": "https://github.com/ansys/pylumerical-mcp"
+    },
+    "skill": {
+      "kind": "community",
+      "text": "Community Lumerical_MCP_Skill",
+      "url": "https://github.com/zxqcreations/Lumerical_MCP_Skill"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "comsol",
+    "name": "COMSOL Multiphysics",
+    "group": "paid",
+    "cats": [
+      "em",
+      "ray",
+      "laser"
+    ],
+    "method": "FEM / rays / multiphysics",
+    "summary": "Wave optics and ray optics coupled to thermal, structural and charge-transport models.",
+    "api": "Official Java API and batch execution; LiveLink for MATLAB; third-party Python bridges.",
+    "license": "Commercial; academic terms, modules and concurrent execution depend on the contract",
+    "compute": "Windows / Linux / macOS; batch and server execution depend on licensing.",
+    "usage": "Official multiphysics platform and API; optical capabilities require the corresponding modules.",
+    "limit": "Third-party Python packages are not official Python APIs. Match optical, thermal, CAD and parallel licenses to the task.",
+    "sources": [
+      {
+        "label": "API / project documentation",
+        "url": "https://www.comsol.com/support/learning-center/article/overview-of-the-comsol-api-107912"
+      },
+      {
+        "label": "Official documentation / website",
+        "url": "https://www.comsol.com/livelink-for-matlab"
+      },
+      {
+        "label": "MCP implementation / documentation",
+        "url": "https://github.com/Ching-Chiang/comsol-mcp"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "community",
+      "text": "Community comsol-mcp implementation",
+      "url": "https://github.com/Ching-Chiang/comsol-mcp"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "cst",
+    "name": "CST Studio Suite",
+    "group": "paid",
+    "cats": [
+      "em",
+      "periodic"
+    ],
+    "method": "Time-domain / frequency-domain electromagnetics",
+    "summary": "Electromagnetics from RF and terahertz to selected optical problems, including structural response and coupling.",
+    "api": "Official Python automation, VBA macros and batch solver workflows.",
+    "license": "Commercial; academic terms, modules and concurrent execution depend on the contract",
+    "compute": "Desktop modeling and licensed compute environment.",
+    "usage": "SIMULIA engineering electromagnetics software with official Python workflows.",
+    "limit": "Use dispersion and mesh settings appropriate to the wavelength. The Learning Edition is not equivalent to the complete solver.",
+    "sources": [
+      {
+        "label": "Python interface",
+        "url": "https://www.3ds.com/products/simulia/cst-studio-suite"
+      },
+      {
+        "label": "Python interface",
+        "url": "https://blog.3ds.com/brands/simulia/cst-studio-suite-release-2021x-highlights/"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "rsoft",
+    "name": "Keysight RSoft Photonic Device Tools",
+    "group": "paid",
+    "cats": [
+      "em",
+      "periodic",
+      "pic",
+      "laser"
+    ],
+    "method": "FDTD / BPM / RCWA / FEM / EME / semiconductor lasers",
+    "summary": "Device tools include FullWAVE, BeamPROP, DiffractMOD, FemSIM, ModePROP and LaserMOD.",
+    "api": "Parametric CAD, MOST scans and optimization; confirm scripting and external integration for each component.",
+    "license": "Commercial; academic terms, modules and concurrent execution depend on the contract",
+    "compute": "Module-dependent; selected solvers support GPUs or clusters.",
+    "usage": "Keysight photonic-device product family with links to CODE V, LightTools and ADS workflows.",
+    "limit": "Counted as one product family. Its component solvers implement different physical approximations.",
+    "sources": [
+      {
+        "label": "API / project documentation",
+        "url": "https://www.keysight.com/zz/en/products/software/optical-solutions-software/photonic-design-solutions.html"
+      }
+    ],
+    "route": "script",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "jcm",
+    "name": "JCMsuite",
+    "group": "paid",
+    "cats": [
+      "em",
+      "periodic",
+      "pic"
+    ],
+    "method": "High-order FEM / electromagnetic inverse problems",
+    "summary": "Nanophotonics, waveguides, scattering, lithography and parameter reconstruction.",
+    "api": "Official jcmwave Python; MATLAB / Octave and C interfaces; optimization and batch tasks.",
+    "license": "Commercial; academic terms, modules and concurrent execution depend on the contract",
+    "compute": "Local or cluster execution driven by Python.",
+    "usage": "JCMwave photonics simulation product with dedicated interface documentation.",
+    "limit": "Geometry, meshes and boundary conditions must be modeled; an optimization API does not ensure parameter identifiability.",
+    "sources": [
+      {
+        "label": "API / project documentation",
+        "url": "https://www.jcmwave.com/jcmsuite/interface/"
+      },
+      {
+        "label": "Python interface",
+        "url": "https://docs.jcmwave.com/JCMsuite/html/PythonInterface/bf647454e36069fd16f1a7a35cf6a865.html"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "photond",
+    "name": "Photon Design FIMMWAVE / FIMMPROP",
+    "group": "paid",
+    "cats": [
+      "em",
+      "pic",
+      "fiber"
+    ],
+    "method": "Mode solving / eigenmode expansion",
+    "summary": "Waveguide and fiber modes, photonic-device propagation and mode conversion.",
+    "api": "Official command-line, Python and MATLAB scripting; community pyFIMM is a wrapper reference.",
+    "license": "Commercial; academic terms, modules and concurrent execution depend on the contract",
+    "compute": "Licensed local solvers with scripting.",
+    "usage": "Photon Design waveguide and photonic-device design tools.",
+    "limit": "Converge mode truncation and propagation segmentation. Other Photon Design products have different modeling boundaries.",
+    "sources": [
+      {
+        "label": "Scripting / programming reference",
+        "url": "https://photond.com/fimmwave/features/scripting-optimisation"
+      },
+      {
+        "label": "Official documentation / website",
+        "url": "https://photond.com/fimmwave/options/feature-option-table"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "tidy3d",
+    "name": "Flexcompute Tidy3D",
+    "group": "paid",
+    "cats": [
+      "em",
+      "pic",
+      "periodic"
+    ],
+    "method": "Cloud FDTD / photonic device simulation",
+    "summary": "Define devices and simulations in Python, then submit cloud solves and analyze results.",
+    "api": "Official Python API, web.run and batch execution; official MCP / agent plugins.",
+    "license": "Client: LGPL-2.1; cloud solving uses FlexCredits / commercial plans",
+    "compute": "Local modeling and analysis; Flexcompute cloud solver.",
+    "usage": "Public case studies, publications and vendor research / industrial applications.",
+    "limit": "An open-source client is not a free local solver. Distinguish documentation tools from execution capabilities enabled by a bridge.",
+    "sources": [
+      {
+        "label": "Free / paid feature boundaries",
+        "url": "https://docs.flexcompute.com/projects/tidy3d/en/stable/faq/docs/faq/How-is-using-Tidy3D-billed.html"
+      },
+      {
+        "label": "Python interface",
+        "url": "https://github.com/flexcompute/tidy3d"
+      },
+      {
+        "label": "Agent plugins / Skills",
+        "url": "https://github.com/flexcompute/plugin-marketplace"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "official",
+      "text": "Official tidy3d-mcp / FlexAgent: documentation and bridge tools",
+      "url": "https://github.com/flexcompute/plugin-marketplace"
+    },
+    "skill": {
+      "kind": "official",
+      "text": "Official flexagent simulation, analysis and documentation Skills",
+      "url": "https://github.com/flexcompute/plugin-marketplace"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "ipkiss",
+    "name": "Luceda IPKISS",
+    "group": "paid",
+    "cats": [
+      "pic"
+    ],
+    "method": "Parametric cells / circuits / PDKs",
+    "summary": "Reusable PIC design combines geometry, ports, compact models, layout and verification.",
+    "api": "Native Python framework, PDK packages, device-simulation drivers and Canvas integration.",
+    "license": "Commercial; academic terms, modules and concurrent execution depend on the contract",
+    "compute": "Python with local licensing and PDK environment.",
+    "usage": "Luceda provides foundry PDK support and fabrication-oriented design workflows.",
+    "limit": "An open PDK does not make IPKISS free. Evaluate PDK licensing, process constraints and model coverage separately.",
+    "sources": [
+      {
+        "label": "Official product / platform",
+        "url": "https://www.lucedaphotonics.com/luceda-photonics-design-platform"
+      },
+      {
+        "label": "API / project documentation",
+        "url": "https://academy.lucedaphotonics.com/tutorials/device_sim/"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "vpi",
+    "name": "VPIphotonics Design Suite",
+    "group": "paid",
+    "cats": [
+      "fiber",
+      "pic",
+      "laser"
+    ],
+    "method": "Optical communications / photonic circuits and systems",
+    "summary": "Joint simulation of transmitters, fiber links, amplifiers, receiver DSP and integrated photonics.",
+    "api": "Official external simulation API; Python, MATLAB, C++ and COM co-simulation and custom modules.",
+    "license": "Commercial; academic terms, modules and concurrent execution depend on the contract",
+    "compute": "Licensed system-simulation environment with external code integration.",
+    "usage": "Vendor applications cover optical communication and photonic-device engineering.",
+    "limit": "System-level models are not device-level Maxwell solvers. Define sampling, noise and signal normalization explicitly.",
+    "sources": [
+      {
+        "label": "API / project documentation",
+        "url": "https://www.vpiphotonics.com/Tools/DesignSuite/Features/"
+      },
+      {
+        "label": "Official product / platform",
+        "url": "https://www.vpiphotonics.com/Tools/DesignSuite/"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "optisystem",
+    "name": "Optiwave OptiSystem",
+    "group": "paid",
+    "cats": [
+      "fiber",
+      "pic"
+    ],
+    "method": "Optical communication links / signal systems",
+    "summary": "Modulation, fiber transmission, amplification, detection and bit-error performance.",
+    "api": "Python / MATLAB co-simulation components; official examples for external execution and result access.",
+    "license": "Commercial; academic terms, modules and concurrent execution depend on the contract",
+    "compute": "Desktop system-simulation projects.",
+    "usage": "Optiwave provides optical-link and co-simulation examples.",
+    "limit": "A Python algorithm component does not establish a headless API for every GUI capability.",
+    "sources": [
+      {
+        "label": "Python interface",
+        "url": "https://optiwave.com/forums/topic/co-simulation-using-python/"
+      },
+      {
+        "label": "Official manual",
+        "url": "https://cdn.optiwave.com/wp-content/uploads/2017/11/OptiSystem_15_New_Features.pdf"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "macleod",
+    "name": "Essential Macleod",
+    "group": "paid",
+    "cats": [
+      "film"
+    ],
+    "method": "Thin-film transfer / optimization / process analysis",
+    "summary": "Multilayer coatings, reflection and transmission, color, group delay and manufacturing analysis.",
+    "api": "The Function extension offers BASIC-like scripts and object access; spreadsheet macros.",
+    "license": "Commercial; Function and other extensions depend on the configuration",
+    "compute": "Local desktop and built-in scripting.",
+    "usage": "Thin Film Center coating design and manufacturing-analysis software.",
+    "limit": "Scripting depends on the purchased extensions; it is not presented here as a remote Python API.",
+    "sources": [
+      {
+        "label": "Official product / platform",
+        "url": "https://www.thinfilmcenter.com/essential.php"
+      },
+      {
+        "label": "Scripting / programming reference",
+        "url": "https://www.thinfilmcenter.com/function.php"
+      }
+    ],
+    "route": "script",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "optilayer",
+    "name": "OptiLayer / OptiRE / OptiChar",
+    "group": "paid",
+    "cats": [
+      "film"
+    ],
+    "method": "Thin-film design / characterization / manufacturing inversion",
+    "summary": "Multilayer optimization, spectral inversion and in-process manufacturing correction.",
+    "api": "Official COM Automation with Python examples; OptiReOpt for production integration.",
+    "license": "Commercial; academic terms, modules and concurrent execution depend on the contract",
+    "compute": "Pro editions support multiple platforms; COM automation is platform-dependent.",
+    "usage": "Vendor documentation explicitly covers integration with production control and online characterization.",
+    "limit": "Cross-platform GUI support does not imply cross-platform COM. Check the API of the specific Pro release.",
+    "sources": [
+      {
+        "label": "Official documentation / website",
+        "url": "https://optilayer.com/com-automation/"
+      },
+      {
+        "label": "Python interface",
+        "url": "https://optilayer.com/development-history/new-features-in-optilayer-2018-version-12-83/"
+      },
+      {
+        "label": "Official product / platform",
+        "url": "https://optilayer.com/downloads/"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "rpfiber",
+    "name": "RP Fiber Power",
+    "group": "paid",
+    "cats": [
+      "fiber",
+      "laser"
+    ],
+    "method": "Fiber modes / gain / pulse propagation",
+    "summary": "Fiber lasers and amplifiers: pump, signal, ASE, dynamics and ultrashort pulses.",
+    "api": "Built-in scripting language, generated scripts and custom forms.",
+    "license": "Commercial",
+    "compute": "Local product; scripts define models and loops.",
+    "usage": "RP Photonics specialized fiber-design software.",
+    "limit": "The documented interface is a physics scripting environment; a general external API was not established in this review.",
+    "sources": [
+      {
+        "label": "API / project documentation",
+        "url": "https://www.rp-photonics.com/rp_fiber_power_interface.html"
+      },
+      {
+        "label": "Scripting / programming reference",
+        "url": "https://www.rp-photonics.com/software_script_language.html"
+      }
+    ],
+    "route": "script",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "rpresonator",
+    "name": "RP Resonator / RP ProPulse",
+    "group": "paid",
+    "cats": [
+      "laser",
+      "fiber"
+    ],
+    "method": "Resonators / pulse dynamics",
+    "summary": "Laser cavity modes and stability, and ultrashort-pulse round trips; choose between the two products by task.",
+    "api": "Built-in scripting, interactive forms that generate models, and iteration loops.",
+    "license": "Commercial; the two products are licensed separately",
+    "compute": "Local scripted simulation.",
+    "usage": "RP Photonics specialized laser and ultrafast software.",
+    "limit": "Cavity-mode design and nonlinear pulse simulation use different assumptions and are not interchangeable.",
+    "sources": [
+      {
+        "label": "Official product / platform",
+        "url": "https://www.rp-photonics.com/software_overview.html"
+      },
+      {
+        "label": "Scripting / programming reference",
+        "url": "https://www.rp-photonics.com/rp_propulse_interface.html"
+      }
+    ],
+    "route": "script",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "crosslight",
+    "name": "Crosslight APSYS / PICS3D",
+    "group": "paid",
+    "cats": [
+      "laser",
+      "em"
+    ],
+    "method": "Optoelectronic semiconductor TCAD",
+    "summary": "Coupled electrical, optical and thermal modeling of LEDs, semiconductor lasers and related devices.",
+    "api": "Official product and application scope confirmed; a general public API or MCP remains unverified.",
+    "license": "Commercial; configured by TCAD module",
+    "compute": "Specialized semiconductor-device simulation environment.",
+    "usage": "Crosslight lists PICS3D, semiconductor industry applications and research publications.",
+    "limit": "Useful for coupled carriers, gain and temperature; obtain version-specific documentation for external automation.",
+    "sources": [
+      {
+        "label": "Official product / platform",
+        "url": "https://crosslight.com/"
+      }
+    ],
+    "route": "gui",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "synopsys-osd",
+    "name": "SYNOPSYS Lens Design(OSD)",
+    "group": "paid",
+    "cats": [
+      "ray"
+    ],
+    "method": "Lens design / optimization",
+    "summary": "Lens design software from Optical Systems Design, separate from the former Synopsys optical software business.",
+    "api": "Command / macro-driven workflows; complete external API not verified.",
+    "license": "Commercial; official trial has time and surface-count limits",
+    "compute": "Desktop design application.",
+    "usage": "OSD maintains official product, trial and macro documentation.",
+    "limit": "Do not confuse this product with the former vendor of CODE V and RSoft. A 30-day trial is not permanently free software.",
+    "sources": [
+      {
+        "label": "Official documentation / website",
+        "url": "https://osdoptics.com/accessinstallation/"
+      },
+      {
+        "label": "Scripting / programming reference",
+        "url": "https://osdoptics.com/wp-content/uploads/2024/09/SYNOPSYSTM-Lens-Design-Software-Starting-Guide-Ui-Plus.pdf"
+      }
+    ],
+    "route": "script",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "tfcalc",
+    "name": "TFCalc",
+    "group": "paid",
+    "cats": [
+      "film"
+    ],
+    "method": "Thin-film design / spectral optimization",
+    "summary": "Spectral performance, design and optimization of multilayer thin films.",
+    "api": "Stable public API not verified; evaluate it primarily as a desktop product.",
+    "license": "Commercial; currently operated by Hulinks",
+    "compute": "Desktop application.",
+    "usage": "The original developer states that Hulinks took over the business in 2022.",
+    "limit": "Use the current vendor for licensing; automation remains an item to confirm.",
+    "sources": [
+      {
+        "label": "Official documentation / website",
+        "url": "https://www.sspectra.com/"
+      },
+      {
+        "label": "Official documentation / website",
+        "url": "https://www.hulinks.co.jp/en/"
+      }
+    ],
+    "route": "gui",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "matlab",
+    "name": "MATLAB / Simulink",
+    "group": "paid",
+    "cats": [
+      "foundation",
+      "imaging",
+      "fiber"
+    ],
+    "method": "Numerical computing / signals / control systems",
+    "summary": "Optical algorithms, signal processing, parameter estimation, controls and system models, with task-specific toolboxes.",
+    "api": "MATLAB Engine API, batch execution, Simulink API and the official MATLAB MCP Server.",
+    "license": "Commercial / academic; toolboxes licensed separately",
+    "compute": "Local or server; GPU and parallel features depend on toolboxes and hardware.",
+    "usage": "MathWorks scientific engineering environment with official agent integration.",
+    "limit": "Open-source MATLAB scripts do not imply free execution. Only compatible code can run without MATLAB through Octave.",
+    "sources": [
+      {
+        "label": "MCP implementation / documentation",
+        "url": "https://github.com/matlab/matlab-mcp-server"
+      },
+      {
+        "label": "Official documentation / website",
+        "url": "https://www.mathworks.com/help/cloudcenter/ug/run-matlab-with-ai-agentic-and-ai-assistant-applications.html"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "official",
+      "text": "Official MathWorks MATLAB MCP Server",
+      "url": "https://github.com/matlab/matlab-mcp-server"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "mathematica",
+    "name": "Wolfram Mathematica",
+    "group": "paid",
+    "cats": [
+      "foundation",
+      "quantum"
+    ],
+    "method": "Symbolic derivation / numerical computing",
+    "summary": "Wave equations, asymptotic expansions, integrals, matrices and mixed symbolic-numerical derivation.",
+    "api": "Wolfram Language, wolframscript, official Python Client and official Wolfram MCP.",
+    "license": "Commercial Mathematica; local MCP requires an appropriately licensed kernel",
+    "compute": "Local or cloud computational kernel.",
+    "usage": "Wolfram computational platform and AgentTools.",
+    "limit": "Analytical results depend on parameter domains and assumptions; this is not a substitute for a specialized optical field solver.",
+    "sources": [
+      {
+        "label": "MCP implementation / documentation",
+        "url": "https://www.wolfram.com/ai/mcp/"
+      },
+      {
+        "label": "MCP implementation / documentation",
+        "url": "https://www.wolfram.com/artificial-intelligence/mcp/local/wolfram-mcp-local/"
+      },
+      {
+        "label": "Maintainer repository",
+        "url": "https://github.com/WolframResearch/AgentTools"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "official",
+      "text": "Official Wolfram Local / Cloud MCP",
+      "url": "https://www.wolfram.com/ai/mcp/"
+    },
+    "skill": {
+      "kind": "official",
+      "text": "Official WolframResearch AgentSkills",
+      "url": "https://github.com/WolframResearch/AgentTools"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "maple",
+    "name": "Maple",
+    "group": "paid",
+    "cats": [
+      "foundation"
+    ],
+    "method": "Computer algebra / numerics / code generation",
+    "summary": "Analytical modeling, symbolic derivation, differential equations and executable formula generation.",
+    "api": "OpenMaple Python / C / Java API; command-line kernel.",
+    "license": "Commercial / academic",
+    "compute": "Local computational kernel and APIs.",
+    "usage": "Maplesoft mathematical computing platform with OpenMaple documentation.",
+    "limit": "Provides derivation and model reduction, rather than a complete library of optical materials, boundaries and detector models.",
+    "sources": [
+      {
+        "label": "Python interface",
+        "url": "https://jp.maplesoft.com/support/help/maple/view.aspx?path=OpenMaple%2FPython%2FAPI"
+      },
+      {
+        "label": "Official manual",
+        "url": "https://www.maplesoft.com/documentation_center/maple2024/ProgrammingGuide.pdf"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "photonforge",
+    "name": "PhotonForge Community",
+    "group": "limited",
+    "cats": [
+      "pic"
+    ],
+    "method": "PIC design / circuits / layout verification",
+    "summary": "Local layout, schematics, routing and circuit simulation, with links to Tidy3D device models.",
+    "api": "Native Python; official agent plugins and PCell, routing and verification Skills.",
+    "license": "Community local features are free, including commercial use; this does not establish an open-source platform; cloud device solves are paid",
+    "compute": "Local Python; DRC / LVS use KLayout; device solvers run in the cloud.",
+    "usage": "Official Flexcompute 2.0 documentation separates free local features from paid cloud computation.",
+    "limit": "The official MCP includes documentation retrieval. Actual model execution often uses Python run by the agent.",
+    "sources": [
+      {
+        "label": "Free / paid feature boundaries",
+        "url": "https://docs.flexcompute.com/projects/photonforge/en/latest/getting_started.html"
+      },
+      {
+        "label": "Agent plugins / Skills",
+        "url": "https://github.com/flexcompute/plugin-marketplace"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "official",
+      "text": "Official PhotonForge documentation MCP, used alongside Python execution",
+      "url": "https://github.com/flexcompute/plugin-marketplace"
+    },
+    "skill": {
+      "kind": "official",
+      "text": "Official PCell, verification, circuit, version and serialization Skills",
+      "url": "https://github.com/flexcompute/plugin-marketplace"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "osloedu",
+    "name": "OSLO EDU",
+    "group": "limited",
+    "cats": [
+      "ray"
+    ],
+    "method": "Educational lens design",
+    "summary": "Free learning environment for lens layouts, ray tracing and basic analysis.",
+    "api": "Commands / macros within EDU limits; do not assume all commercial-edition interfaces are available.",
+    "license": "Free proprietary educational edition; limited features; no course enrollment required according to the vendor",
+    "compute": "Windows desktop.",
+    "usage": "Lambda Research official free edition.",
+    "limit": "Suited to teaching and small models; not an equivalent replacement for a complete industrial lens-design environment.",
+    "sources": [
+      {
+        "label": "Free / paid feature boundaries",
+        "url": "https://lambdares.com/edu"
+      }
+    ],
+    "route": "script",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "ptypy",
+    "name": "PtyPy",
+    "group": "limited",
+    "cats": [
+      "imaging",
+      "xray"
+    ],
+    "method": "Ptychographic phase retrieval",
+    "summary": "Iterative reconstruction and experimental data processing for scanning coherent diffraction imaging.",
+    "api": "Python, MPI and CUDA / CuPy acceleration engines.",
+    "license": "Academic License: academic and noncommercial use only; source-available, with field-of-use restrictions",
+    "compute": "Local / MPI / GPU, depending on the selected engine.",
+    "usage": "The project includes publications, experimental reconstruction templates and parallel implementations.",
+    "limit": "Commercial R&D, commissioned work and service use cannot simply be treated like ordinary MIT / BSD software.",
+    "sources": [
+      {
+        "label": "API / project documentation",
+        "url": "https://github.com/ptycho/ptypy"
+      },
+      {
+        "label": "License / usage terms",
+        "url": "https://raw.githubusercontent.com/ptycho/ptypy/HEAD/LICENSE"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "meep",
+    "name": "Meep",
+    "group": "open",
+    "cats": [
+      "em",
+      "periodic",
+      "pic"
+    ],
+    "method": "FDTD / adjoint optimization",
+    "summary": "Full-wave propagation, resonances, scattering and nanophotonic devices.",
+    "api": "Python, Scheme and C++; scripted execution, HDF5 outputs and adjoint optimization.",
+    "license": "GPL-2.0 family",
+    "compute": "CPU / MPI; the standard release is not assumed to be a GPU solver.",
+    "usage": "MIT / NanoComp research software with methods papers and examples.",
+    "limit": "Spatial and temporal resolution, PML and dispersion control numerical error; whole macroscopic optical benches are usually impractical for FDTD.",
+    "sources": [
+      {
+        "label": "API / project documentation",
+        "url": "https://github.com/NanoComp/meep"
+      },
+      {
+        "label": "License / usage terms",
+        "url": "https://raw.githubusercontent.com/NanoComp/meep/HEAD/LICENSE"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "mpb",
+    "name": "MPB",
+    "group": "open",
+    "cats": [
+      "em",
+      "periodic"
+    ],
+    "method": "Frequency-domain eigenmodes / plane waves",
+    "summary": "Photonic-crystal bands, modes and periodic-medium eigenproblems.",
+    "api": "Python / Scheme; programmable parameter sweeps and mode-data analysis.",
+    "license": "GPL-2.0 family",
+    "compute": "CPU / MPI.",
+    "usage": "MIT Photonic Bands includes methods papers and tutorials.",
+    "limit": "Eigenmode calculation is distinct from arbitrary time-domain propagation; respect periodicity, material and boundary assumptions.",
+    "sources": [
+      {
+        "label": "API / project documentation",
+        "url": "https://github.com/NanoComp/mpb"
+      },
+      {
+        "label": "License / usage terms",
+        "url": "https://raw.githubusercontent.com/NanoComp/mpb/HEAD/COPYING"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "fdtdx",
+    "name": "FDTDX",
+    "group": "open",
+    "cats": [
+      "em",
+      "pic"
+    ],
+    "method": "Differentiable FDTD",
+    "summary": "Three-dimensional photonic structures and gradient-based inverse design.",
+    "api": "Native Python / JAX, automatic differentiation and programmable geometry.",
+    "license": "MIT",
+    "compute": "GPU with the appropriate JAX backend.",
+    "usage": "Public implementation and research methods for differentiable simulation.",
+    "limit": "An emerging framework: check current material support, model coverage and memory requirements.",
+    "sources": [
+      {
+        "label": "API / project documentation",
+        "url": "https://github.com/ymahlau/fdtdx"
+      },
+      {
+        "label": "License / usage terms",
+        "url": "https://raw.githubusercontent.com/ymahlau/fdtdx/HEAD/LICENSE"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Emerging research tool"
+  },
+  {
+    "id": "openems",
+    "name": "openEMS",
+    "group": "open",
+    "cats": [
+      "em"
+    ],
+    "method": "EC-FDTD",
+    "summary": "Electromagnetics, RF and terahertz structures and related wave propagation.",
+    "api": "Python and Octave / MATLAB interfaces; command-line solver.",
+    "license": "GPL-3.0",
+    "compute": "CPU; parallel support depends on the build.",
+    "usage": "Open electromagnetic solver with public tutorials.",
+    "limit": "At optical frequencies, check dispersion, meshing and interface support instead of reusing RF defaults.",
+    "sources": [
+      {
+        "label": "API / project documentation",
+        "url": "https://github.com/thliebig/openEMS"
+      },
+      {
+        "label": "License / usage terms",
+        "url": "https://raw.githubusercontent.com/thliebig/openEMS/HEAD/COPYING"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "s4",
+    "name": "S⁴ / S4",
+    "group": "open",
+    "cats": [
+      "periodic",
+      "film"
+    ],
+    "method": "RCWA / Fourier modal method",
+    "summary": "Reflection, transmission and diffraction orders in periodic layered structures and gratings.",
+    "api": "Lua scripting; Python interface depends on the build.",
+    "license": "GPL-2.0 family",
+    "compute": "Local CPU; batch execution.",
+    "usage": "Stanford Fan group solver for layered periodic structures.",
+    "limit": "Finite-size edges and isolated nonperiodic objects are outside the standard periodic-cell model.",
+    "sources": [
+      {
+        "label": "API / project documentation",
+        "url": "https://github.com/victorliu/S4"
+      },
+      {
+        "label": "License / usage terms",
+        "url": "https://raw.githubusercontent.com/victorliu/S4/HEAD/COPYING"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "torcwa",
+    "name": "torcwa",
+    "group": "open",
+    "cats": [
+      "periodic",
+      "film"
+    ],
+    "method": "Differentiable RCWA",
+    "summary": "Gradient optimization of periodic nanostructures, metasurface cells and gratings.",
+    "api": "Native Python / PyTorch and automatic differentiation.",
+    "license": "LGPL-3.0",
+    "compute": "CPU / CUDA GPU.",
+    "usage": "TORCWA methods paper and simulation examples accompany the code.",
+    "limit": "Fourier order and material discontinuities affect convergence; a periodic cell is not a complete finite metalens.",
+    "sources": [
+      {
+        "label": "API / project documentation",
+        "url": "https://github.com/kch3782/torcwa"
+      },
+      {
+        "label": "License / usage terms",
+        "url": "https://raw.githubusercontent.com/kch3782/torcwa/HEAD/LICENSE"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "grcwa",
+    "name": "grcwa",
+    "group": "open",
+    "cats": [
+      "periodic",
+      "film"
+    ],
+    "method": "Differentiable RCWA",
+    "summary": "Multilayer periodic structures, diffraction and topology optimization research.",
+    "api": "Python with an Autograd backend.",
+    "license": "GPL-3.0",
+    "compute": "CPU; backend-dependent configuration.",
+    "usage": "Public paper, interfaces and reflection / transmission optimization examples.",
+    "limit": "Autograd does not automatically imply GPU support. Match materials and periodicity to the model.",
+    "sources": [
+      {
+        "label": "API / project documentation",
+        "url": "https://github.com/weiliangjinca/grcwa"
+      },
+      {
+        "label": "License / usage terms",
+        "url": "https://raw.githubusercontent.com/weiliangjinca/grcwa/HEAD/LICENSE"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "legume",
+    "name": "legume",
+    "group": "open",
+    "cats": [
+      "periodic",
+      "em"
+    ],
+    "method": "GME / PWE / differentiable eigenproblems",
+    "summary": "Photonic-crystal slabs, modes and radiative-loss analysis.",
+    "api": "Python; automatic differentiation and optimization workflows.",
+    "license": "MIT",
+    "compute": "Local numerical computing.",
+    "usage": "Fan group research software with methodological publications.",
+    "limit": "Specific expansions and truncations define the model; this is not a general 3D time-domain engine.",
+    "sources": [
+      {
+        "label": "API / project documentation",
+        "url": "https://github.com/fancompute/legume"
+      },
+      {
+        "label": "License / usage terms",
+        "url": "https://raw.githubusercontent.com/fancompute/legume/HEAD/LICENSE"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "ceviche",
+    "name": "Ceviche",
+    "group": "open",
+    "cats": [
+      "em",
+      "pic"
+    ],
+    "method": "Differentiable FDFD / FDTD",
+    "summary": "Small-scale electromagnetic inverse design and automatic-differentiation research.",
+    "api": "Python / Autograd; examples compose the solver with optimizers.",
+    "license": "MIT",
+    "compute": "Local CPU numerical computation.",
+    "usage": "Research implementation accompanying automatic differentiation of Maxwell solvers.",
+    "limit": "Useful for prototypes and methods research, rather than a complete industrial 3D design environment.",
+    "sources": [
+      {
+        "label": "API / project documentation",
+        "url": "https://github.com/fancompute/ceviche"
+      },
+      {
+        "label": "License / usage terms",
+        "url": "https://raw.githubusercontent.com/fancompute/ceviche/HEAD/LICENSE"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Research implementation"
+  },
+  {
+    "id": "tmm",
+    "name": "tmm",
+    "group": "open",
+    "cats": [
+      "film"
+    ],
+    "method": "Transfer-matrix method",
+    "summary": "Planar multilayer reflection, transmission and absorption, including coherent and incoherent layer combinations.",
+    "api": "Native Python / NumPy; coh_tmm, inc_tmm and related functions.",
+    "license": "MIT",
+    "compute": "CPU; straightforward parameter sweeps and optimization.",
+    "usage": "Author-provided theory manual and thin-film absorption implementation.",
+    "limit": "The planar-layer model does not describe arbitrary lateral patterning, rough scattering or all finite-beam effects.",
+    "sources": [
+      {
+        "label": "API / project documentation",
+        "url": "https://github.com/sbyrnes321/tmm"
+      },
+      {
+        "label": "License / usage terms",
+        "url": "https://raw.githubusercontent.com/sbyrnes321/tmm/HEAD/LICENSE.txt"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "solcore",
+    "name": "Solcore",
+    "group": "open",
+    "cats": [
+      "film",
+      "em"
+    ],
+    "method": "Solar-cell / semiconductor optoelectronic modeling",
+    "summary": "Material parameters, optical absorption and solar-cell device calculations.",
+    "api": "Python API; composes transfer-matrix and other optical / electrical models.",
+    "license": "LGPL-3.0 family",
+    "compute": "Local numerical computation; optional components may have separate dependencies.",
+    "usage": "Open research framework for solar-cell modeling with publications and examples.",
+    "limit": "Choose the optical and carrier-transport model appropriate to the device; optional external solvers have independent requirements.",
+    "sources": [
+      {
+        "label": "Maintainer repository",
+        "url": "https://github.com/qpv-research-group/solcore5"
+      },
+      {
+        "label": "Official documentation / website",
+        "url": "https://docs.solcore.solar/en/latest/Optics/optics.html"
+      },
+      {
+        "label": "License / usage terms",
+        "url": "https://raw.githubusercontent.com/qpv-research-group/solcore5/HEAD/LICENSE.txt"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "rayoptics",
+    "name": "RayOptics",
+    "group": "open",
+    "cats": [
+      "ray"
+    ],
+    "method": "Sequential ray tracing / imaging optics",
+    "summary": "Lens layouts, paraxial calculations, aberrations and optical-system analysis in Python.",
+    "api": "Native Python; scripts, notebooks and optical-model objects.",
+    "license": "BSD-3-Clause",
+    "compute": "Local CPU.",
+    "usage": "Public optical-design library with tutorials and lens examples.",
+    "limit": "Open access and programmability do not imply feature parity with every commercial tolerance or optimization tool.",
+    "sources": [
+      {
+        "label": "API / project documentation",
+        "url": "https://github.com/mjhoptics/ray-optics"
+      },
+      {
+        "label": "License / usage terms",
+        "url": "https://raw.githubusercontent.com/mjhoptics/ray-optics/HEAD/LICENSE"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "optiland",
+    "name": "Optiland",
+    "group": "open",
+    "cats": [
+      "ray",
+      "wave"
+    ],
+    "method": "Differentiable ray tracing / optical design",
+    "summary": "Lenses, freeform surfaces, polarization, coatings and differentiable imaging systems.",
+    "api": "Native Python; NumPy / PyTorch backends; JSON and selected commercial-format interoperability.",
+    "license": "MIT",
+    "compute": "CPU / CUDA GPU; automatic differentiation.",
+    "usage": "Actively developed optical-design platform with research and engineering examples.",
+    "limit": "Capabilities evolve quickly. File import or a familiar interface does not establish full commercial-product equivalence.",
+    "sources": [
+      {
+        "label": "API / project documentation",
+        "url": "https://github.com/optiland/optiland"
+      },
+      {
+        "label": "License / usage terms",
+        "url": "https://raw.githubusercontent.com/optiland/optiland/HEAD/LICENSE"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Actively developed platform"
+  },
+  {
+    "id": "raysect",
+    "name": "Raysect",
+    "group": "open",
+    "cats": [
+      "ray",
+      "scatter"
+    ],
+    "method": "Physically based ray tracing / spectroscopy",
+    "summary": "Spectral light transport, optical geometry and synthetic diagnostics.",
+    "api": "Python API with compiled numerical components; programmable scenes and observers.",
+    "license": "BSD-3-Clause",
+    "compute": "CPU; parallel sampling according to configuration.",
+    "usage": "Research framework used for synthetic optical diagnostics, including fusion-related workflows.",
+    "limit": "A ray transport framework requires appropriate emission, material and detector models; coherent wave effects need separate treatment.",
+    "sources": [
+      {
+        "label": "API / project documentation",
+        "url": "https://github.com/raysect/source"
+      },
+      {
+        "label": "License / usage terms",
+        "url": "https://raw.githubusercontent.com/raysect/source/HEAD/LICENSE.txt"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "raytracing",
+    "name": "DCC-Lab RayTracing",
+    "group": "open",
+    "cats": [
+      "ray",
+      "laser"
+    ],
+    "method": "Paraxial ABCD / Gaussian optics",
+    "summary": "Teaching, first-order optical systems, ray bundles and Gaussian-beam propagation.",
+    "api": "Python objects for matrices, elements, paths and analysis.",
+    "license": "MIT",
+    "compute": "Local CPU.",
+    "usage": "DCC-Lab package with documented optical-system examples.",
+    "limit": "Paraxial optics cannot replace high-NA, strongly aberrated or full nonsequential models.",
+    "sources": [
+      {
+        "label": "API / project documentation",
+        "url": "https://github.com/DCC-Lab/RayTracing"
+      },
+      {
+        "label": "License / usage terms",
+        "url": "https://raw.githubusercontent.com/DCC-Lab/RayTracing/HEAD/LICENSE"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "lightpipes",
+    "name": "LightPipes",
+    "group": "open",
+    "cats": [
+      "wave",
+      "laser"
+    ],
+    "method": "Scalar wave propagation",
+    "summary": "Diffraction, interference, apertures and laser-beam propagation.",
+    "api": "Native Python functions for field construction and propagation.",
+    "license": "BSD-3-Clause",
+    "compute": "Local CPU numerical arrays.",
+    "usage": "Established wave-optics package with examples and reference documentation.",
+    "limit": "Respect scalar / paraxial assumptions and field-grid sampling; it is not a general vector Maxwell solver.",
+    "sources": [
+      {
+        "label": "API / project documentation",
+        "url": "https://github.com/opticspy/lightpipes"
+      },
+      {
+        "label": "License / usage terms",
+        "url": "https://raw.githubusercontent.com/opticspy/lightpipes/HEAD/LICENSE.txt"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "poppy",
+    "name": "POPPY",
+    "group": "open",
+    "cats": [
+      "wave",
+      "imaging"
+    ],
+    "method": "Physical optics propagation / PSFs",
+    "summary": "Fourier and Fresnel propagation through pupils and optical surfaces, especially astronomical imaging.",
+    "api": "Python API and reusable optical elements; integrates with scientific Python.",
+    "license": "BSD-3-Clause",
+    "compute": "CPU; acceleration depends on optional array / FFT backends.",
+    "usage": "Space Telescope Science Institute-associated physical-optics software with telescope applications.",
+    "limit": "Pupil sampling, propagation conventions and wavelength dependence must match the instrument model.",
+    "sources": [
+      {
+        "label": "API / project documentation",
+        "url": "https://github.com/spacetelescope/poppy"
+      },
+      {
+        "label": "License / usage terms",
+        "url": "https://raw.githubusercontent.com/spacetelescope/poppy/HEAD/LICENSE.md"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "hcipy",
+    "name": "HCIPy",
+    "group": "open",
+    "cats": [
+      "wave",
+      "imaging"
+    ],
+    "method": "High-contrast imaging / adaptive optics",
+    "summary": "Wavefront propagation, coronagraphy, turbulence, wavefront sensing and adaptive-optics modeling.",
+    "api": "Native Python; composable fields, optical elements and estimators.",
+    "license": "MIT",
+    "compute": "Local numerical computing.",
+    "usage": "Research framework with methods literature and high-contrast imaging examples.",
+    "limit": "A simulation does not provide a complete real-time instrument controller; model detector response and control timing explicitly.",
+    "sources": [
+      {
+        "label": "API / project documentation",
+        "url": "https://github.com/ehpor/hcipy"
+      },
+      {
+        "label": "License / usage terms",
+        "url": "https://raw.githubusercontent.com/ehpor/hcipy/HEAD/LICENSE"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "prysm",
+    "name": "prysm",
+    "group": "open",
+    "cats": [
+      "wave",
+      "ray",
+      "imaging"
+    ],
+    "method": "Imaging optics / wavefronts / metrology",
+    "summary": "PSFs, MTFs, wavefront analysis and optical metrology calculations.",
+    "api": "Native Python and numerical array interfaces.",
+    "license": "MIT",
+    "compute": "Local CPU; selected backends and features may support acceleration.",
+    "usage": "Open optics library with engineering-oriented examples and documentation.",
+    "limit": "Define pupil coordinates, units and normalization before comparing data from different software.",
+    "sources": [
+      {
+        "label": "API / project documentation",
+        "url": "https://github.com/brandondube/prysm"
+      },
+      {
+        "label": "License / usage terms",
+        "url": "https://raw.githubusercontent.com/brandondube/prysm/HEAD/LICENSE.md"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "diffractio",
+    "name": "Diffractio",
+    "group": "open",
+    "cats": [
+      "wave",
+      "imaging"
+    ],
+    "method": "Scalar and vector diffraction",
+    "summary": "Diffraction, polarization and free-space propagation with multiple numerical methods.",
+    "api": "Python API for scalar / vector sources, masks and fields.",
+    "license": "GPL-3.0",
+    "compute": "Local CPU; method-dependent multiprocessing.",
+    "usage": "Research software with method documentation and examples.",
+    "limit": "Each propagation algorithm has its own approximation and sampling requirements; vector support alone is not full-wave device modeling.",
+    "sources": [
+      {
+        "label": "API / project documentation",
+        "url": "https://github.com/optbrea/diffractio"
+      },
+      {
+        "label": "License / usage terms",
+        "url": "https://raw.githubusercontent.com/optbrea/diffractio/HEAD/LICENSE"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "torchoptics",
+    "name": "TorchOptics",
+    "group": "open",
+    "cats": [
+      "wave",
+      "imaging"
+    ],
+    "method": "Differentiable wave optics",
+    "summary": "Optimize optical fields and systems jointly with numerical or learned reconstruction.",
+    "api": "Native Python / PyTorch with automatic differentiation.",
+    "license": "MIT",
+    "compute": "CPU / GPU.",
+    "usage": "Open differentiable-optics research framework.",
+    "limit": "Sampling and propagation assumptions still apply; a valid gradient does not guarantee a physically adequate forward model.",
+    "sources": [
+      {
+        "label": "API / project documentation",
+        "url": "https://github.com/MatthewFilipovich/torchoptics"
+      },
+      {
+        "label": "License / usage terms",
+        "url": "https://raw.githubusercontent.com/MatthewFilipovich/torchoptics/HEAD/LICENSE"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Emerging research tool"
+  },
+  {
+    "id": "waveprop",
+    "name": "waveprop",
+    "group": "open",
+    "cats": [
+      "wave",
+      "imaging"
+    ],
+    "method": "Numerical diffraction propagation",
+    "summary": "Fresnel, Fraunhofer and angular-spectrum propagation for imaging and holography experiments.",
+    "api": "Python; selected PyTorch differentiable implementations.",
+    "license": "MIT",
+    "compute": "CPU / GPU depending on method and backend.",
+    "usage": "Open wave-propagation package with research examples.",
+    "limit": "Check band limits, aliasing and the assumptions of the selected propagation approximation.",
+    "sources": [
+      {
+        "label": "API / project documentation",
+        "url": "https://github.com/ebezzam/waveprop"
+      },
+      {
+        "label": "License / usage terms",
+        "url": "https://raw.githubusercontent.com/ebezzam/waveprop/HEAD/LICENSE"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "gdsfactory",
+    "name": "gdsfactory",
+    "group": "open",
+    "cats": [
+      "pic"
+    ],
+    "method": "Parametric layout / PDK / photonic design",
+    "summary": "Build reusable photonic components, routing, layouts and simulation connections.",
+    "api": "Native Python, PCells, PDKs, netlists and solver adapters; official component-designer Skill.",
+    "license": "MIT core; commercial services, external PDKs and solvers licensed separately",
+    "compute": "Local layout; external solvers and commercial services have separate execution environments.",
+    "usage": "Open PIC design ecosystem with fabrication and foundry-related workflows.",
+    "limit": "The open core does not license external PDKs or proprietary solvers; geometry alone does not establish device performance.",
+    "sources": [
+      {
+        "label": "API / project documentation",
+        "url": "https://github.com/gdsfactory/gdsfactory"
+      },
+      {
+        "label": "License / usage terms",
+        "url": "https://raw.githubusercontent.com/gdsfactory/gdsfactory/HEAD/LICENSE"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "official",
+      "text": "Official gdsfactory component-designer Skill",
+      "url": "https://github.com/gdsfactory/gdsfactory/blob/main/.agents/skills/gdsfactory-component-designer/SKILL.md"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "klayout",
+    "name": "KLayout",
+    "group": "open",
+    "cats": [
+      "pic"
+    ],
+    "method": "Layout editing / DRC / LVS",
+    "summary": "Inspect and process chip layouts and run geometric / connectivity verification.",
+    "api": "Python / Ruby APIs, macros, batch mode and the Python module.",
+    "license": "GPL-3.0",
+    "compute": "Local CPU; GUI or headless workflows.",
+    "usage": "Established layout and verification software used in semiconductor and photonic design.",
+    "limit": "DRC / LVS check layout rules and connectivity, not the optical performance of a device.",
+    "sources": [
+      {
+        "label": "API / project documentation",
+        "url": "https://github.com/KLayout/klayout"
+      },
+      {
+        "label": "License / usage terms",
+        "url": "https://raw.githubusercontent.com/KLayout/klayout/HEAD/LICENSE"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "community",
+      "text": "Community klayout-draw-mcp; Python-module layout operations",
+      "url": "https://github.com/geniuskey/klayout-draw-mcp"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "sax",
+    "name": "SAX",
+    "group": "open",
+    "cats": [
+      "pic"
+    ],
+    "method": "Differentiable photonic circuits",
+    "summary": "Compose frequency-dependent scattering models and optimize photonic circuits.",
+    "api": "Python / JAX; callable component models and netlists.",
+    "license": "Apache-2.0",
+    "compute": "CPU / GPU through JAX.",
+    "usage": "Open photonic circuit-modeling library used in the gdsfactory ecosystem.",
+    "limit": "Port conventions, reference planes, phase and normalization must agree across compact models.",
+    "sources": [
+      {
+        "label": "API / project documentation",
+        "url": "https://github.com/flaport/sax"
+      },
+      {
+        "label": "License / usage terms",
+        "url": "https://raw.githubusercontent.com/flaport/sax/HEAD/LICENSE"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "siepic",
+    "name": "SiEPIC-Tools",
+    "group": "open",
+    "cats": [
+      "pic"
+    ],
+    "method": "Silicon photonics design tools",
+    "summary": "KLayout-based photonic layout, routing, verification and design workflows.",
+    "api": "Python macros and KLayout extensions; integrates with PDKs and simulation tools.",
+    "license": "MIT; PDKs licensed separately",
+    "compute": "Local KLayout / Python environment.",
+    "usage": "SiEPIC research and education ecosystem for silicon photonics.",
+    "limit": "Core tooling, PDKs and linked commercial circuit solvers have separate licenses and model coverage.",
+    "sources": [
+      {
+        "label": "API / project documentation",
+        "url": "https://github.com/SiEPIC/SiEPIC-Tools"
+      },
+      {
+        "label": "License / usage terms",
+        "url": "https://raw.githubusercontent.com/SiEPIC/SiEPIC-Tools/HEAD/LICENSE.md"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "nazca",
+    "name": "Nazca Design",
+    "group": "open",
+    "cats": [
+      "pic"
+    ],
+    "method": "Parametric photonic layout",
+    "summary": "Python-defined photonic components, routing and mask layouts.",
+    "api": "Native Python; reusable building blocks and PDK interfaces.",
+    "license": "AGPL-3.0-or-later; commercial services and PDKs are separate",
+    "compute": "Local layout generation.",
+    "usage": "Open photonic design framework with documented PDK and design workflows.",
+    "limit": "The core is AGPL-licensed; commercial services and external PDKs are separate. Layout generation is not an optical solve.",
+    "sources": [
+      {
+        "label": "License / usage terms",
+        "url": "https://nazca-design.org/about/"
+      },
+      {
+        "label": "Official documentation / website",
+        "url": "https://nazca-design.org/manual/introduction.html"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "adda",
+    "name": "ADDA",
+    "group": "open",
+    "cats": [
+      "scatter",
+      "em"
+    ],
+    "method": "Discrete dipole approximation",
+    "summary": "Scattering and absorption by particles with complex shape or material distributions.",
+    "api": "Command-line solver, input geometry and material files; scripts can drive sweeps and parse results.",
+    "license": "GPL-3.0",
+    "compute": "CPU / MPI; OpenCL acceleration in supported builds.",
+    "usage": "Established DDA research code with methods publications.",
+    "limit": "Converge the dipole discretization and solver tolerance; large refractive contrast and size can increase computational cost.",
+    "sources": [
+      {
+        "label": "API / project documentation",
+        "url": "https://github.com/adda-team/adda"
+      },
+      {
+        "label": "License / usage terms",
+        "url": "https://raw.githubusercontent.com/adda-team/adda/HEAD/LICENSE"
+      }
+    ],
+    "route": "script",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "miepython",
+    "name": "miepython",
+    "group": "open",
+    "cats": [
+      "scatter"
+    ],
+    "method": "Mie scattering",
+    "summary": "Scattering, absorption and angular patterns of spherical particles.",
+    "api": "Native Python functions and array-oriented calculations.",
+    "license": "MIT",
+    "compute": "Local CPU.",
+    "usage": "Open Mie-scattering implementation with theory and examples.",
+    "limit": "The standard model assumes spheres and its stated material / embedding-medium conditions.",
+    "sources": [
+      {
+        "label": "API / project documentation",
+        "url": "https://github.com/scottprahl/miepython"
+      },
+      {
+        "label": "License / usage terms",
+        "url": "https://raw.githubusercontent.com/scottprahl/miepython/HEAD/LICENSE.txt"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "treams",
+    "name": "treams",
+    "group": "open",
+    "cats": [
+      "scatter",
+      "periodic"
+    ],
+    "method": "T-matrix / multipole scattering",
+    "summary": "Electromagnetic scattering, translations and periodic arrangements using multipole expansions.",
+    "api": "Python API for bases, translation operators and scattering matrices.",
+    "license": "MIT",
+    "compute": "Local CPU numerical linear algebra.",
+    "usage": "Research implementation with T-matrix methods documentation.",
+    "limit": "Basis truncation, particle models and translation conventions control accuracy and applicability.",
+    "sources": [
+      {
+        "label": "API / project documentation",
+        "url": "https://github.com/tfp-photonics/treams"
+      },
+      {
+        "label": "License / usage terms",
+        "url": "https://raw.githubusercontent.com/tfp-photonics/treams/HEAD/LICENSE"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "smuthi",
+    "name": "SMUTHI",
+    "group": "open",
+    "cats": [
+      "scatter",
+      "film"
+    ],
+    "method": "Multiple scattering near layered media",
+    "summary": "Scattering by particles interacting with planar layered environments.",
+    "api": "Python API for particles, layers, illumination and simulations.",
+    "license": "MIT",
+    "compute": "CPU; optional acceleration depends on dependencies.",
+    "usage": "Research software for scattering by complex particles near interfaces.",
+    "limit": "Respect the supported particle models, planar-layer assumptions and multipole convergence conditions.",
+    "sources": [
+      {
+        "label": "License / usage terms",
+        "url": "https://smuthi.readthedocs.io/en/latest/_source/01%20about/about_smuthi.html"
+      },
+      {
+        "label": "Maintainer repository",
+        "url": "https://github.com/KMCzajkowski/smuthi"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "pygdm",
+    "name": "pyGDM",
+    "group": "open",
+    "cats": [
+      "em",
+      "scatter"
+    ],
+    "method": "Green dyadic method",
+    "summary": "Nanophotonic scattering, near fields and inverse-design research.",
+    "api": "Python API, programmable geometries, materials and optimization workflows.",
+    "license": "GPL-3.0 family",
+    "compute": "CPU; acceleration and parallelism depend on numerical configuration.",
+    "usage": "Open research toolbox with methods publications and tutorials.",
+    "limit": "Discretization and the Green-function environment define the physical model; confirm convergence and material assumptions.",
+    "sources": [
+      {
+        "label": "Methods publication",
+        "url": "https://wiechapeter.gitlab.io/"
+      },
+      {
+        "label": "API / project documentation",
+        "url": "https://homepages.laas.fr/pwiecha/pygdm_doc/apidoc.html"
+      },
+      {
+        "label": "Official documentation / website",
+        "url": "https://gitlab.com/wiechapeter/pyGDM2"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "qutip",
+    "name": "QuTiP",
+    "group": "open",
+    "cats": [
+      "quantum",
+      "laser"
+    ],
+    "method": "Open quantum systems",
+    "summary": "Quantum states, density matrices, master equations, dynamics and quantum-optics observables.",
+    "api": "Native Python; quantum objects, solvers and numerical interfaces.",
+    "license": "BSD-3-Clause",
+    "compute": "CPU; optional solver backends and parallel workflows.",
+    "usage": "Established open quantum-dynamics ecosystem with research publications.",
+    "limit": "Hilbert-space truncation and the validity of the chosen Hamiltonian / dissipators must be justified.",
+    "sources": [
+      {
+        "label": "API / project documentation",
+        "url": "https://github.com/qutip/qutip"
+      },
+      {
+        "label": "License / usage terms",
+        "url": "https://raw.githubusercontent.com/qutip/qutip/HEAD/LICENSE.txt"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "quantumoptics",
+    "name": "QuantumOptics.jl",
+    "group": "open",
+    "cats": [
+      "quantum"
+    ],
+    "method": "Quantum optics / open-system dynamics",
+    "summary": "Quantum operators, states, dissipation and time evolution in Julia.",
+    "api": "Native Julia API; composable bases, operators and solvers.",
+    "license": "MIT",
+    "compute": "Local numerical computing; Julia ecosystem integration.",
+    "usage": "QuantumOptics.jl research framework with documented quantum-optics examples.",
+    "limit": "Specify the physical Hamiltonian, dissipation and basis truncation; classical fields do not directly replace quantum states.",
+    "sources": [
+      {
+        "label": "API / project documentation",
+        "url": "https://github.com/qojulia/QuantumOptics.jl"
+      },
+      {
+        "label": "License / usage terms",
+        "url": "https://raw.githubusercontent.com/qojulia/QuantumOptics.jl/HEAD/LICENSE.md"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "perceval",
+    "name": "Perceval",
+    "group": "open",
+    "cats": [
+      "quantum",
+      "pic"
+    ],
+    "method": "Discrete-variable photonic quantum circuits",
+    "summary": "Linear-optical circuits, photon-counting states and photonic quantum algorithms.",
+    "api": "Python API; local backends and separately configured remote services.",
+    "license": "MIT local software; remote services have separate terms",
+    "compute": "Local simulators; remote hardware / services have separate terms.",
+    "usage": "Quandela open photonic quantum-computing framework.",
+    "limit": "The simulator and a physical quantum processor are different resources; noise and device models require explicit configuration.",
+    "sources": [
+      {
+        "label": "API / project documentation",
+        "url": "https://github.com/Quandela/Perceval"
+      },
+      {
+        "label": "License / usage terms",
+        "url": "https://raw.githubusercontent.com/Quandela/Perceval/HEAD/LICENSE"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "strawberry",
+    "name": "Strawberry Fields",
+    "group": "open",
+    "cats": [
+      "quantum",
+      "pic"
+    ],
+    "method": "Continuous-variable quantum photonics",
+    "summary": "Gaussian and non-Gaussian photonic quantum circuits and algorithms.",
+    "api": "Python API, circuit programs and simulation backends.",
+    "license": "Apache-2.0",
+    "compute": "Local computation; backend-dependent acceleration.",
+    "usage": "Xanadu open continuous-variable quantum-photonics framework.",
+    "limit": "Check supported Python / dependency versions. Fock cutoffs and backend assumptions affect accuracy and scale.",
+    "sources": [
+      {
+        "label": "API / project documentation",
+        "url": "https://github.com/XanaduAI/strawberryfields"
+      },
+      {
+        "label": "License / usage terms",
+        "url": "https://raw.githubusercontent.com/XanaduAI/strawberryfields/HEAD/LICENSE"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "luna",
+    "name": "Luna.jl",
+    "group": "open",
+    "cats": [
+      "fiber",
+      "laser"
+    ],
+    "method": "Nonlinear ultrafast pulse propagation",
+    "summary": "Broadband pulse propagation, nonlinear fibers and related ultrafast dynamics.",
+    "api": "Native Julia API and scripted models.",
+    "license": "MIT",
+    "compute": "CPU; parallel calculations according to configuration.",
+    "usage": "Ultrafast research package with documented propagation models and publications.",
+    "limit": "Choose envelope or field-resolved formulations consistently with bandwidth, dispersion and nonlinearity.",
+    "sources": [
+      {
+        "label": "API / project documentation",
+        "url": "https://github.com/LupoLab/Luna.jl"
+      },
+      {
+        "label": "License / usage terms",
+        "url": "https://raw.githubusercontent.com/LupoLab/Luna.jl/HEAD/LICENSE"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "pyfmas",
+    "name": "py-fmas",
+    "group": "open",
+    "cats": [
+      "fiber",
+      "laser"
+    ],
+    "method": "Forward-model pulse propagation",
+    "summary": "Research on nonlinear pulse propagation in dispersive waveguides.",
+    "api": "Python classes for propagation models, grids and solvers.",
+    "license": "MIT",
+    "compute": "Local CPU numerical computation.",
+    "usage": "Open research implementation with analytic-signal-based propagation methods.",
+    "limit": "The forward-propagation assumption and chosen material model delimit the physical regime.",
+    "sources": [
+      {
+        "label": "API / project documentation",
+        "url": "https://github.com/omelchert/py-fmas"
+      },
+      {
+        "label": "License / usage terms",
+        "url": "https://raw.githubusercontent.com/omelchert/py-fmas/HEAD/LICENSE.md"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "laserfun",
+    "name": "laserfun",
+    "group": "open",
+    "cats": [
+      "fiber",
+      "laser"
+    ],
+    "method": "Nonlinear fiber pulse propagation",
+    "summary": "Numerical pulse evolution and supercontinuum-related modeling.",
+    "api": "Python interface for pulses, fibers and nonlinear propagation.",
+    "license": "MIT",
+    "compute": "Local CPU.",
+    "usage": "Open pulse-propagation package with examples.",
+    "limit": "Use measured dispersion and nonlinear parameters; verify temporal resolution and applicability of the propagation model.",
+    "sources": [
+      {
+        "label": "API / project documentation",
+        "url": "https://github.com/laserfun/laserfun"
+      },
+      {
+        "label": "License / usage terms",
+        "url": "https://raw.githubusercontent.com/laserfun/laserfun/HEAD/LICENSE"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "opticomm",
+    "name": "OptiCommPy",
+    "group": "open",
+    "cats": [
+      "fiber"
+    ],
+    "method": "Optical communications / DSP",
+    "summary": "Coherent transmission, channel models, modulation, receivers and digital signal processing.",
+    "api": "Native Python with modular transmitter, channel and DSP functions.",
+    "license": "GPL-3.0",
+    "compute": "CPU; selected numerical acceleration depends on dependencies.",
+    "usage": "Research and education software for optical communication systems.",
+    "limit": "System models require consistent units, sample rates and noise conventions; they do not resolve every device electromagnetically.",
+    "sources": [
+      {
+        "label": "API / project documentation",
+        "url": "https://github.com/edsonportosilva/OptiCommPy"
+      },
+      {
+        "label": "License / usage terms",
+        "url": "https://raw.githubusercontent.com/edsonportosilva/OptiCommPy/HEAD/LICENSE"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "finesse",
+    "name": "Finesse 3",
+    "group": "open",
+    "cats": [
+      "laser",
+      "wave",
+      "quantum"
+    ],
+    "method": "Frequency-domain interferometers / Gaussian modes",
+    "summary": "Laser interferometers, cavities, mode mismatch and noise-related optical responses.",
+    "api": "Python API and KatScript model language; programmable analyses.",
+    "license": "GPL-3.0 family",
+    "compute": "Local numerical computing.",
+    "usage": "Research software developed around precision interferometry and gravitational-wave instrumentation.",
+    "limit": "Frequency-domain / modal assumptions and truncation differ from general transient full-wave modeling.",
+    "sources": [
+      {
+        "label": "Official documentation / website",
+        "url": "https://finesse.ifosim.org/docs/latest/"
+      },
+      {
+        "label": "Official documentation / website",
+        "url": "https://finesse.docs.ligo.org/finesse-ligo/index.html"
+      },
+      {
+        "label": "Official documentation / website",
+        "url": "https://git.ligo.org/finesse/finesse3"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "rezonator",
+    "name": "reZonator 2",
+    "group": "open",
+    "cats": [
+      "laser",
+      "ray"
+    ],
+    "method": "Gaussian-beam / laser-resonator design",
+    "summary": "Resonator stability, Gaussian beams and first-order optical systems.",
+    "api": "Desktop GUI and project files; a complete stable headless API was not verified.",
+    "license": "GPL-3.0",
+    "compute": "Local desktop application.",
+    "usage": "Open laser-resonator analysis software with documentation.",
+    "limit": "Paraxial models do not resolve arbitrary aberrations or nonlinear pulse dynamics.",
+    "sources": [
+      {
+        "label": "Maintainer repository",
+        "url": "https://github.com/orion-project/rezonator2"
+      },
+      {
+        "label": "License / usage terms",
+        "url": "https://raw.githubusercontent.com/orion-project/rezonator2/HEAD/LICENSE"
+      }
+    ],
+    "route": "gui",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "mcx",
+    "name": "MCX",
+    "group": "open",
+    "cats": [
+      "bio",
+      "scatter"
+    ],
+    "method": "GPU Monte Carlo photon transport",
+    "summary": "Light propagation, fluence and time-resolved transport in scattering tissue.",
+    "api": "Command-line / JSON configurations and language bindings; programmable batch simulations.",
+    "license": "GPL-3.0",
+    "compute": "GPU transport; supported hardware and backends depend on the build.",
+    "usage": "Established biomedical photon-transport research software.",
+    "limit": "Standard photon packets track transport statistics rather than coherent optical phase; do not use them directly for interference.",
+    "sources": [
+      {
+        "label": "API / project documentation",
+        "url": "https://github.com/fangq/mcx"
+      },
+      {
+        "label": "License / usage terms",
+        "url": "https://raw.githubusercontent.com/fangq/mcx/HEAD/LICENSE.txt"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "mmc",
+    "name": "MMC",
+    "group": "open",
+    "cats": [
+      "bio",
+      "scatter"
+    ],
+    "method": "Mesh-based Monte Carlo photon transport",
+    "summary": "Photon transport through tissue represented by tetrahedral meshes.",
+    "api": "Command-line / configuration files and language bindings.",
+    "license": "GPL-3.0",
+    "compute": "CPU; acceleration depends on the selected implementation.",
+    "usage": "Research code for mesh-based biomedical optical transport.",
+    "limit": "Mesh quality, boundary models and tissue parameters determine validity; standard transport does not preserve coherent phase.",
+    "sources": [
+      {
+        "label": "API / project documentation",
+        "url": "https://github.com/fangq/mmc"
+      },
+      {
+        "label": "License / usage terms",
+        "url": "https://raw.githubusercontent.com/fangq/mmc/HEAD/LICENSE.txt"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "holopy",
+    "name": "HoloPy",
+    "group": "open",
+    "cats": [
+      "imaging",
+      "scatter"
+    ],
+    "method": "Computational holography / scattering inference",
+    "summary": "Model holograms and infer particle or sample parameters from measured images.",
+    "api": "Python API connecting scattering calculations, image handling and inference.",
+    "license": "GPL-3.0",
+    "compute": "Local CPU; dependencies and scattering backend determine parallel support.",
+    "usage": "Research software for digital holography and particle characterization.",
+    "limit": "Match the scattering model, illumination, imaging geometry and noise to the measured hologram.",
+    "sources": [
+      {
+        "label": "API / project documentation",
+        "url": "https://github.com/manoharan-lab/holopy"
+      },
+      {
+        "label": "License / usage terms",
+        "url": "https://raw.githubusercontent.com/manoharan-lab/holopy/HEAD/LICENSE"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "pydhm",
+    "name": "pyDHM",
+    "group": "open",
+    "cats": [
+      "imaging",
+      "wave"
+    ],
+    "method": "Digital holographic microscopy",
+    "summary": "Numerical reconstruction, propagation, phase shifting and aberration compensation.",
+    "api": "Native Python functions for holographic processing.",
+    "license": "MIT",
+    "compute": "Local CPU.",
+    "usage": "Research package and accompanying digital-holographic-microscopy publication.",
+    "limit": "Reconstruction choices depend on acquisition geometry, sampling and reference-wave configuration.",
+    "sources": [
+      {
+        "label": "Maintainer repository",
+        "url": "https://github.com/catrujilla/pyDHM"
+      },
+      {
+        "label": "Official documentation / website",
+        "url": "https://catrujilla.github.io/pyDHM/"
+      },
+      {
+        "label": "Methods publication",
+        "url": "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0275818"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "pynx",
+    "name": "PyNX",
+    "group": "open",
+    "cats": [
+      "imaging",
+      "xray"
+    ],
+    "method": "Coherent diffraction / ptychography reconstruction",
+    "summary": "GPU reconstruction and processing of coherent diffraction imaging experiments.",
+    "api": "Python API and command-line reconstruction tools.",
+    "license": "CeCILL-B",
+    "compute": "GPU through supported CUDA / OpenCL environments.",
+    "usage": "ESRF coherent-imaging research software.",
+    "limit": "Match the observation model, detector geometry, coherence assumptions and experimental metadata to the reconstruction.",
+    "sources": [
+      {
+        "label": "License / usage terms",
+        "url": "https://pynx.esrf.fr/en/stable/"
+      },
+      {
+        "label": "Official documentation / website",
+        "url": "https://pynx.esrf.fr/en/stable/scripts/"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "mitsuba",
+    "name": "Mitsuba 3",
+    "group": "open",
+    "cats": [
+      "ray",
+      "imaging"
+    ],
+    "method": "Physically based / differentiable rendering",
+    "summary": "Radiometric light transport, inverse rendering and programmable materials / sensors.",
+    "api": "Python / C++ API; differentiable variants through Dr.Jit.",
+    "license": "BSD-3-Clause",
+    "compute": "CPU / GPU depending on the selected variant.",
+    "usage": "Open rendering research framework with methods publications.",
+    "limit": "Path tracing and differentiability do not imply a complete coherent wave-optics model.",
+    "sources": [
+      {
+        "label": "API / project documentation",
+        "url": "https://github.com/mitsuba-renderer/mitsuba3"
+      },
+      {
+        "label": "License / usage terms",
+        "url": "https://raw.githubusercontent.com/mitsuba-renderer/mitsuba3/HEAD/LICENSE"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "pbrt",
+    "name": "PBRT v4",
+    "group": "open",
+    "cats": [
+      "ray",
+      "imaging"
+    ],
+    "method": "Physically based spectral rendering",
+    "summary": "Research-grade scene rendering with physical light transport, materials and cameras.",
+    "api": "C++ source, scene descriptions and command-line execution.",
+    "license": "Apache-2.0",
+    "compute": "CPU / GPU depending on build and scene support.",
+    "usage": "Reference implementation accompanying Physically Based Rendering.",
+    "limit": "A scene description is not a general lens-design or coherent-wave solver; match camera and material models to the experiment.",
+    "sources": [
+      {
+        "label": "API / project documentation",
+        "url": "https://github.com/mmp/pbrt-v4"
+      },
+      {
+        "label": "License / usage terms",
+        "url": "https://raw.githubusercontent.com/mmp/pbrt-v4/HEAD/LICENSE.txt"
+      }
+    ],
+    "route": "script",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "srw",
+    "name": "SRW",
+    "group": "open",
+    "cats": [
+      "xray",
+      "wave"
+    ],
+    "method": "Synchrotron radiation / wavefront propagation",
+    "summary": "Radiation from synchrotron sources and propagation through X-ray beamlines.",
+    "api": "Python interface and scripted radiation / propagation models.",
+    "license": "BSD-3-Clause; Python execution does not require IGOR Pro",
+    "compute": "CPU; parallel workflows depend on configuration.",
+    "usage": "Established synchrotron-radiation research software.",
+    "limit": "Select source, coherence and propagation approximations appropriate to the beamline; Python use does not require IGOR Pro.",
+    "sources": [
+      {
+        "label": "API / project documentation",
+        "url": "https://github.com/ochubar/SRW"
+      },
+      {
+        "label": "License / usage terms",
+        "url": "https://pypi.org/project/oasys-srwpy/1.0.3/"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "shadow",
+    "name": "SHADOW4 / OASYS",
+    "group": "open",
+    "cats": [
+      "xray",
+      "ray"
+    ],
+    "method": "X-ray ray tracing / beamline workflows",
+    "summary": "Mirrors, crystals, gratings and beam transport in synchrotron beamlines; OASYS supplies graphical workflows.",
+    "api": "Native SHADOW4 Python; OASYS plugins; batch simulations can be scripted.",
+    "license": "SHADOW4: MIT; OASYS and plugins have their own licenses",
+    "compute": "Local Python; graphical workflow is optional.",
+    "usage": "Synchrotron optics tools maintained by the OASYS project organization.",
+    "limit": "OASYS is an integration environment, not a single solver; wave effects need the corresponding models or hybrid methods.",
+    "sources": [
+      {
+        "label": "Maintainer repository",
+        "url": "https://github.com/oasys-kit/shadow4"
+      },
+      {
+        "label": "License / usage terms",
+        "url": "https://github.com/oasys-kit/shadow4/blob/master/LICENSE"
+      },
+      {
+        "label": "Maintainer repository",
+        "url": "https://github.com/oasys-kit/OASYS1-shadow4"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "xrt",
+    "name": "xrt",
+    "group": "open",
+    "cats": [
+      "xray",
+      "ray",
+      "wave"
+    ],
+    "method": "X-ray ray and wave tracing",
+    "summary": "Synchrotron sources, crystals, mirrors and beamline calculations.",
+    "api": "Python; programmable beamlines and batch analysis.",
+    "license": "MIT",
+    "compute": "CPU; selected calculations use OpenCL.",
+    "usage": "Public X-ray optics research software and documentation.",
+    "limit": "Crystal diffraction, source models and statistical sampling have distinct validity limits; this is not a general full-wave grid solver.",
+    "sources": [
+      {
+        "label": "API / project documentation",
+        "url": "https://github.com/kklmn/xrt"
+      },
+      {
+        "label": "License / usage terms",
+        "url": "https://raw.githubusercontent.com/kklmn/xrt/HEAD/LICENSE.txt"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "sympy",
+    "name": "SymPy",
+    "group": "open",
+    "cats": [
+      "foundation"
+    ],
+    "method": "Symbolic algebra",
+    "summary": "Derive Jones / ABCD matrices, dispersion relations, derivatives, integrals and approximations.",
+    "api": "Python; numerical-function and code generation.",
+    "license": "BSD-3-Clause",
+    "compute": "CPU.",
+    "usage": "General symbolic-computing library with a software publication.",
+    "limit": "Make domains, branches and approximation conditions explicit; the library does not automatically provide a complete optical model.",
+    "sources": [
+      {
+        "label": "API / project documentation",
+        "url": "https://github.com/sympy/sympy"
+      },
+      {
+        "label": "License / usage terms",
+        "url": "https://raw.githubusercontent.com/sympy/sympy/HEAD/LICENSE"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "sage",
+    "name": "SageMath",
+    "group": "open",
+    "cats": [
+      "foundation"
+    ],
+    "method": "Mathematical computing system",
+    "summary": "Algebra, equations, symbolic and numerical research for more complex theoretical derivations.",
+    "api": "Python-style interface, CLI and notebooks.",
+    "license": "GPL family; bundled components retain their respective licenses",
+    "compute": "Local mathematical computing environment.",
+    "usage": "Long-maintained open mathematical software.",
+    "limit": "Theoretical computing infrastructure rather than a ready-made optical design application.",
+    "sources": [
+      {
+        "label": "Official documentation / website",
+        "url": "https://www.sagemath.org/"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "freecad",
+    "name": "FreeCAD",
+    "group": "open",
+    "cats": [
+      "foundation",
+      "ray"
+    ],
+    "method": "Parametric mechanical CAD",
+    "summary": "Optomechanical supports, packaging, assemblies and manufacturable geometry for simulation.",
+    "api": "Python API, macros and plugins.",
+    "license": "LGPL-2.1 family; components may have additional licenses",
+    "compute": "Local CAD with scripted modeling.",
+    "usage": "Established open engineering CAD project.",
+    "limit": "CAD geometry does not automatically specify optical surfaces, materials or boundary conditions; semantic conversion is required.",
+    "sources": [
+      {
+        "label": "API / project documentation",
+        "url": "https://github.com/FreeCAD/FreeCAD"
+      },
+      {
+        "label": "License / usage terms",
+        "url": "https://raw.githubusercontent.com/FreeCAD/FreeCAD/HEAD/LICENSE"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "gmsh",
+    "name": "Gmsh",
+    "group": "open",
+    "cats": [
+      "foundation",
+      "em"
+    ],
+    "method": "Geometry / finite-element meshing",
+    "summary": "Controlled meshes for optical FEM, thermal and structural models.",
+    "api": "Python, C, C++ and Julia APIs; CLI and .geo scripts.",
+    "license": "GPL; commercial relicensing available separately",
+    "compute": "Local CPU.",
+    "usage": "Established research meshing software.",
+    "limit": "Mesh generation still requires a field / thermal solver and explicit physical boundary conditions.",
+    "sources": [
+      {
+        "label": "License / usage terms",
+        "url": "https://gmsh.info/"
+      },
+      {
+        "label": "Official manual",
+        "url": "https://gmsh.info/doc/texinfo/"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "scikitimage",
+    "name": "scikit-image",
+    "group": "open",
+    "cats": [
+      "imaging",
+      "foundation"
+    ],
+    "method": "Image processing / reconstruction algorithms",
+    "summary": "Filter, segment, register, transform and quantify experimental images.",
+    "api": "Native Python API.",
+    "license": "Primarily BSD-3-Clause; see the license inventory for individual files",
+    "compute": "Local CPU.",
+    "usage": "Scientific image-processing ecosystem with software publications.",
+    "limit": "Image enhancement is not proof of recovered physical information; connect processing to imaging and noise models.",
+    "sources": [
+      {
+        "label": "API / project documentation",
+        "url": "https://github.com/scikit-image/scikit-image"
+      },
+      {
+        "label": "License / usage terms",
+        "url": "https://raw.githubusercontent.com/scikit-image/scikit-image/HEAD/LICENSE.txt"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "napari",
+    "name": "napari",
+    "group": "open",
+    "cats": [
+      "imaging",
+      "foundation"
+    ],
+    "method": "Multidimensional image visualization / plugins",
+    "summary": "Inspect images, volumes, labels and reconstruction results; develop analysis plugins.",
+    "api": "Python API, CLI and plugin system.",
+    "license": "BSD-3-Clause",
+    "compute": "Qt / GPU visualization; analysis depends on plugins.",
+    "usage": "Open scientific imaging ecosystem.",
+    "limit": "An application plugin is not automatically an agent Skill. Call analysis libraries directly for batch computation.",
+    "sources": [
+      {
+        "label": "API / project documentation",
+        "url": "https://github.com/napari/napari"
+      },
+      {
+        "label": "License / usage terms",
+        "url": "https://raw.githubusercontent.com/napari/napari/HEAD/LICENSE"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "refractiveindex",
+    "name": "refractiveindex.info database",
+    "group": "open",
+    "cats": [
+      "foundation",
+      "film",
+      "em"
+    ],
+    "method": "Optical constants database",
+    "summary": "Refractive index, extinction coefficient and source literature for optical material models.",
+    "api": "Machine-readable YAML, accessible from Python and other languages; a database rather than a solver.",
+    "license": "CC0 database; source publications retain their own rights",
+    "compute": "Local data or website lookup.",
+    "usage": "Public optical constants database with literature provenance.",
+    "limit": "Match wavelength, temperature, sample and measurement conditions; the same material name does not guarantee interchangeable n and k.",
+    "sources": [
+      {
+        "label": "Maintainer repository",
+        "url": "https://github.com/polyanskiy/refractiveindex.info-database"
+      },
+      {
+        "label": "License / usage terms",
+        "url": "https://raw.githubusercontent.com/polyanskiy/refractiveindex.info-database/HEAD/LICENSE"
+      },
+      {
+        "label": "Official documentation / website",
+        "url": "https://refractiveindex.info/"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "fenics",
+    "name": "FEniCSx / DOLFINx",
+    "group": "open",
+    "cats": [
+      "em",
+      "foundation"
+    ],
+    "method": "Custom FEM / partial differential equations",
+    "summary": "Implement Helmholtz, Maxwell and thermal research models using variational formulations.",
+    "api": "Python / C++; UFL weak forms; MPI and numerical backends.",
+    "license": "DOLFINx: LGPL-3.0-or-later; components licensed separately",
+    "compute": "CPU / MPI; complex-number support depends on the build.",
+    "usage": "Official FEniCS open finite-element environment and methods documentation.",
+    "limit": "Choose correct function spaces, weak forms and boundaries; it is not a turnkey replacement for an application-specific multiphysics product.",
+    "sources": [
+      {
+        "label": "Maintainer repository",
+        "url": "https://github.com/FEniCS/dolfinx"
+      },
+      {
+        "label": "Official documentation / website",
+        "url": "https://fenicsproject.org/"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "ngsolve",
+    "name": "Netgen / NGSolve",
+    "group": "open",
+    "cats": [
+      "em",
+      "foundation"
+    ],
+    "method": "High-order FEM / electromagnetics / multiphysics",
+    "summary": "Electromagnetic modes and custom coupled equations, with Netgen meshing.",
+    "api": "Python / C++; official Maxwell and eigenmode tutorials.",
+    "license": "LGPL-2.1; consult individual component licenses",
+    "compute": "Local / parallel computation.",
+    "usage": "Official electromagnetic and multiphysics tutorials and research implementations.",
+    "limit": "Requires explicit spaces, materials and boundaries; its strength is control over equations and numerical methods.",
+    "sources": [
+      {
+        "label": "Maintainer repository",
+        "url": "https://github.com/NGSolve/ngsolve"
+      },
+      {
+        "label": "Maxwell tutorial",
+        "url": "https://ngsolve.org/ngsolve/docs/i-tutorials/unit-2.4-Maxwell/Maxwellevp.html"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "scipy",
+    "name": "NumPy / SciPy",
+    "group": "open",
+    "cats": [
+      "foundation",
+      "imaging"
+    ],
+    "method": "Arrays / optimization / fitting / signals",
+    "summary": "Optical data processing, fitting, ODEs, FFTs, optimization and statistics underpin many specialized libraries.",
+    "api": "Native Python; NumPy arrays and scipy.optimize, integrate, signal and other modules.",
+    "license": "BSD family; dependencies and components retain their own licenses",
+    "compute": "Local CPU; selected functionality supports other array backends.",
+    "usage": "Long-maintained scientific Python infrastructure.",
+    "limit": "Numerical algorithms do not define an instrument or its optical physics; construct objectives from the relevant physical models.",
+    "sources": [
+      {
+        "label": "Official documentation / website",
+        "url": "https://numpy.org/"
+      },
+      {
+        "label": "Official documentation / website",
+        "url": "https://scipy.org/"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "jax",
+    "name": "JAX",
+    "group": "open",
+    "cats": [
+      "foundation"
+    ],
+    "method": "Automatic differentiation / JIT / numerics",
+    "summary": "Develop differentiable optical solvers, optimizers and surrogates; used by FDTDX and SAX.",
+    "api": "Python; jit, grad, vmap and related transformations.",
+    "license": "Apache-2.0",
+    "compute": "CPU / GPU / TPU depending on the installation.",
+    "usage": "Open numerical and machine-learning infrastructure.",
+    "limit": "Automatic differentiation does not remove discretization or model error; match complex derivatives, precision and memory to the physics.",
+    "sources": [
+      {
+        "label": "Official documentation / website",
+        "url": "https://docs.jax.dev/en/latest/"
+      },
+      {
+        "label": "Source repository",
+        "url": "https://github.com/jax-ml/jax"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  },
+  {
+    "id": "pytorch",
+    "name": "PyTorch",
+    "group": "open",
+    "cats": [
+      "foundation",
+      "imaging"
+    ],
+    "method": "Tensors / automatic differentiation / surrogates",
+    "summary": "Develop joint optics-algorithm models, inverse networks and fast surrogates; used by torcwa and TorchOptics.",
+    "api": "Python / C++; Autograd and GPU tensor interfaces.",
+    "license": "BSD family; see the license inventory for third-party components",
+    "compute": "CPU / GPU depending on hardware and backend.",
+    "usage": "Established machine-learning and scientific-computing infrastructure.",
+    "limit": "Establish surrogate error and valid parameter ranges independently; a network output is not automatically a physical solution.",
+    "sources": [
+      {
+        "label": "Official product / platform",
+        "url": "https://pytorch.org/"
+      },
+      {
+        "label": "Source repository",
+        "url": "https://github.com/pytorch/pytorch"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "Dedicated MCP not verified in this review"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "Dedicated agent Skill not verified in this review"
+    },
+    "stage": "Published implementation"
+  }
+]

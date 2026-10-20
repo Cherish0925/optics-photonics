@@ -1,0 +1,72 @@
+[
+  [
+    "ray",
+    "Geometrical optics & lighting",
+    "Lenses / stray light / radiometry"
+  ],
+  [
+    "wave",
+    "Wave optics & propagation",
+    "Diffraction / polarization / wavefronts"
+  ],
+  [
+    "em",
+    "Electromagnetics & devices",
+    "FDTD / FEM / modes"
+  ],
+  [
+    "periodic",
+    "Periodic structures & metasurfaces",
+    "RCWA / crystals / gratings"
+  ],
+  [
+    "film",
+    "Thin films & materials",
+    "Coatings / spectra / optical constants"
+  ],
+  [
+    "pic",
+    "Integrated photonics & layout",
+    "PDKs / circuits / fabrication"
+  ],
+  [
+    "fiber",
+    "Fibers & communications",
+    "Nonlinearity / DSP / links"
+  ],
+  [
+    "laser",
+    "Lasers & precision interferometry",
+    "Resonators / ultrafast / noise"
+  ],
+  [
+    "scatter",
+    "Scattering & particles",
+    "Mie / DDA / T-matrix"
+  ],
+  [
+    "quantum",
+    "Quantum optics",
+    "Master equations / Fock / circuits"
+  ],
+  [
+    "bio",
+    "Biomedical photon transport",
+    "Tissue / Monte Carlo"
+  ],
+  [
+    "xray",
+    "X-rays & beamlines",
+    "Synchrotrons / coherent imaging"
+  ],
+  [
+    "imaging",
+    "Computational imaging",
+    "PSFs / holography / phase retrieval"
+  ],
+  [
+    "foundation",
+    "Derivation & digital foundations",
+    "Algebra / CAD / data / imaging"
+  ]
+]

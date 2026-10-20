@@ -1,0 +1,3485 @@
+[
+  {
+    "id": "opticstudio",
+    "name": "Ansys Zemax OpticStudio",
+    "group": "paid",
+    "cats": [
+      "ray",
+      "wave"
+    ],
+    "method": "顺序 / 非顺序光线追迹；物理光学传播",
+    "summary": "镜头、成像像差、公差、杂散光和部分相干传播的综合设计环境。",
+    "api": "ZOS-API .NET；Python、C#、C++、MATLAB；ZPL 宏；支持 Standalone 与交互连接。",
+    "license": "商业授权；学术许可、模块与并发求解按合同配置",
+    "compute": "以 Windows 主程序为中心；后台实例仍需有效许可",
+    "usage": "厂商提供镜头、成像与照明工程应用及自动化示例。",
+    "limit": "顺序光学、非顺序光学和 POP 的模型与数据接口不同；社区 MCP 的覆盖范围不能等同于全部 ZOS-API。",
+    "sources": [
+      {
+        "label": "官方 API 与示例",
+        "url": "https://optics.ansys.com/hc/en-us/articles/42661773562899-Sample-code-for-ZOS-API-users"
+      },
+      {
+        "label": "官方连接模式",
+        "url": "https://optics.ansys.com/hc/en-us/articles/42661790380179-ZOS-API-NET-An-Overview"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "community",
+      "text": "OpticStudioMCPServer；通过 ZOS-API 控制，社区实现",
+      "url": "https://github.com/jaruiz6363/OpticStudioMCPServer"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "codev",
+    "name": "Keysight CODE V",
+    "group": "paid",
+    "cats": [
+      "ray",
+      "wave"
+    ],
+    "method": "成像光学设计与优化",
+    "summary": "镜头初始设计、像差优化、公差分析和成像性能评估。",
+    "api": "Macro-PLUS 脚本、命令与批量设计流程；具体外部自动化接口以安装版文档为准。",
+    "license": "商业授权；学术许可、模块与并发求解按合同配置",
+    "compute": "本地授权软件；宏脚本驱动",
+    "usage": "Keysight 官方成像光学产品，提供镜头及手机相机设计工作流。",
+    "limit": "旧资料多标为 Synopsys CODE V；应按当前 Keysight 产品与文档查找。",
+    "sources": [
+      {
+        "label": "产品与 Macro-PLUS",
+        "url": "https://www.keysight.com.cn/cn/zh/products/software/optical-solutions-software/optical-design-solutions/codev.html"
+      }
+    ],
+    "route": "script",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "lighttools",
+    "name": "Keysight LightTools",
+    "group": "paid",
+    "cats": [
+      "ray"
+    ],
+    "method": "非顺序光线追迹 / 照明",
+    "summary": "照明、导光、显示与杂散光；包含材料、散射和光源建模。",
+    "api": "内置宏与 LTAPI 自动化；有第三方 Python 封装。",
+    "license": "商业授权；学术许可、模块与并发求解按合同配置",
+    "compute": "以桌面授权实例为中心",
+    "usage": "官方照明产品；有 CODE V → LightTools 的联合设计工作流。",
+    "limit": "Python 封装与主程序分别维护；光源和 BSDF 数据质量直接影响结果。",
+    "sources": [
+      {
+        "label": "官方产品",
+        "url": "https://www.keysight.com/es/en/products/software/optical-solutions-software/optical-design-solutions/lighttools.html"
+      },
+      {
+        "label": "社区 Python 接口",
+        "url": "https://github.com/Mestas/Lighttools"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "fred",
+    "name": "FRED",
+    "group": "paid",
+    "cats": [
+      "ray",
+      "wave"
+    ],
+    "method": "非顺序追迹；相干与非相干光学",
+    "summary": "复杂光机系统、散射、杂散光和激光系统的传播分析。",
+    "api": "内置脚本与 .frs 工作流；官方给出追迹—分析循环示例。",
+    "license": "商业授权；另有需申请的大学免费许可，适用条件见官方页面",
+    "compute": "Windows；按版本支持多线程、分布式或 FREDmpc GPU 计算",
+    "usage": "Photon Engineering 的工程产品，公开提供可执行脚本案例。",
+    "limit": "已核实内置脚本；本表不把它标成完整、原生的 Python API。",
+    "sources": [
+      {
+        "label": "官方脚本循环",
+        "url": "https://support.photonengr.com/article/176-raytrace-and-analysis-loop"
+      },
+      {
+        "label": "官方产品概览",
+        "url": "https://photonengr.com/"
+      },
+      {
+        "label": "学术使用与免费申请条件",
+        "url": "https://photonengr.com/academic-licenses"
+      }
+    ],
+    "route": "script",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "tracepro",
+    "name": "TracePro",
+    "group": "paid",
+    "cats": [
+      "ray"
+    ],
+    "method": "蒙特卡洛光线追迹",
+    "summary": "照明、杂散光、光通量与光机几何的分析和优化。",
+    "api": "Scheme 宏；手册提供 DDE 与宏自动化说明。",
+    "license": "商业授权；学术许可、模块与并发求解按合同配置",
+    "compute": "桌面程序；宏 / DDE 桥接",
+    "usage": "Lambda Research 官方工程产品和 2026 用户手册。",
+    "limit": "复杂桌面会话的生命周期需要额外管理；脚本接口不是 MCP。",
+    "sources": [
+      {
+        "label": "2026 官方用户手册",
+        "url": "https://lambdares.com/hubfs/TracePro_Users_Manual_2026.pdf"
+      },
+      {
+        "label": "官方支持",
+        "url": "https://lambdares.com/tracepro-2"
+      }
+    ],
+    "route": "script",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "oslo",
+    "name": "OSLO",
+    "group": "paid",
+    "cats": [
+      "ray"
+    ],
+    "method": "顺序光学 / 镜头设计",
+    "summary": "光学系统布局、像差、优化和公差计算。",
+    "api": "CCL 编程与命令体系；具体功能取决于版本。",
+    "license": "商业授权；学术许可、模块与并发求解按合同配置",
+    "compute": "Windows；CCL 脚本",
+    "usage": "Lambda Research 的镜头设计产品；另有独立 EDU 免费版本。",
+    "limit": "商业版与 EDU 不能混为同一功能集合；免费版单列。",
+    "sources": [
+      {
+        "label": "官方产品",
+        "url": "https://lambdares.com/oslo"
+      },
+      {
+        "label": "教育版说明",
+        "url": "https://lambdares.com/edu"
+      },
+      {
+        "label": "官方 CCL 编程手册",
+        "url": "https://lambdares.com/hubfs/Support/support/oslo/oslo_releases/OSLOProgramReference.pdf"
+      }
+    ],
+    "route": "script",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "asap",
+    "name": "ASAP",
+    "group": "paid",
+    "cats": [
+      "ray",
+      "wave"
+    ],
+    "method": "非顺序光学 / 物理光学",
+    "summary": "复杂光学系统、照明、散射与杂散光分析。",
+    "api": "官方集成 Python、VBScript 等脚本支持；可编写自动化分析流程。",
+    "license": "商业授权；学术许可、模块与并发求解按合同配置",
+    "compute": "授权桌面 / 求解环境",
+    "usage": "Breault Research Organization 官方光学分析产品。",
+    "limit": "脚本宿主、对象模型和授权配置要与实际版本匹配。",
+    "sources": [
+      {
+        "label": "官方功能与脚本",
+        "url": "https://breault.com/asap/"
+      }
+    ],
+    "route": "script",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "virtuallab",
+    "name": "VirtualLab Fusion",
+    "group": "paid",
+    "cats": [
+      "wave",
+      "ray",
+      "periodic"
+    ],
+    "method": "场追迹 / 混合光学建模",
+    "summary": "衍射、偏振、光栅、自由空间系统和复杂光学元件的联合建模。",
+    "api": "官方 Programming API、可编程元件与脚本；官方说明可扩展 Python / MATLAB 工作流。",
+    "license": "商业授权；学术许可、模块与并发求解按合同配置",
+    "compute": "Windows；产品内编程与外部工作流",
+    "usage": "LightTrans 官方波动光学平台；提供数字光学元件与应用库。",
+    "limit": "不同求解器之间传递的是特定场表示；不能把所有混合计算视为一次全波 Maxwell 求解。",
+    "sources": [
+      {
+        "label": "编程 API",
+        "url": "https://programmingreference.lighttrans.com/2026.2/api/VirtualLab.Programming.html"
+      },
+      {
+        "label": "官方说明",
+        "url": "https://www.lighttrans.com/product/virtuallab-fusion/frequently-asked-questions/general-faqs.html"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "speos",
+    "name": "Ansys Speos",
+    "group": "paid",
+    "cats": [
+      "ray",
+      "imaging"
+    ],
+    "method": "光线输运 / 光度与视觉仿真",
+    "summary": "照明、车灯、显示、传感器与人眼视觉相关的光机设计。",
+    "api": "Speos 脚本；Ansys optical-automation 提供公开 Python 自动化与互操作代码。",
+    "license": "商业授权；学术许可、模块与并发求解按合同配置",
+    "compute": "与 Ansys / CAD 产品环境配合",
+    "usage": "Ansys 工程产品；官方维护光学自动化代码。",
+    "limit": "MIT 许可的是自动化库，不是 Speos 求解器；不同宿主可能使用 IronPython 或 CPython。",
+    "sources": [
+      {
+        "label": "官方自动化说明",
+        "url": "https://optics.ansys.com/hc/en-us/articles/24752772596371-Optical-Automation-library-introduction"
+      },
+      {
+        "label": "自动化源码",
+        "url": "https://github.com/ansys/optical-automation"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "lumerical",
+    "name": "Ansys Lumerical",
+    "group": "paid",
+    "cats": [
+      "em",
+      "pic",
+      "periodic"
+    ],
+    "method": "FDTD / 模态 / 多物理场 / 光子电路",
+    "summary": "FDTD、MODE、Multiphysics 与 INTERCONNECT 组成器件到电路的产品族。",
+    "api": "lumapi Python；LSF 脚本；lumopt 逆向设计；lumslurm 调度。",
+    "license": "商业授权；学术许可、模块与并发求解按合同配置",
+    "compute": "本地 / 集群；产品与 HPC 授权分别配置",
+    "usage": "官方应用库涵盖纳米光学、硅光器件和光收发链路。",
+    "limit": "Python 客户端和 MCP 不能替代求解器授权；不同产品的物理模型与输出不同。",
+    "sources": [
+      {
+        "label": "官方 Python API",
+        "url": "https://optics.ansys.com/hc/en-us/articles/360037824513-Python-API-overview"
+      },
+      {
+        "label": "Ansys 官方 MCP 源码",
+        "url": "https://github.com/ansys/pylumerical-mcp"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "official",
+      "text": "Ansys 官方组织发布 PyLumerical MCP",
+      "url": "https://github.com/ansys/pylumerical-mcp"
+    },
+    "skill": {
+      "kind": "community",
+      "text": "Lumerical_MCP_Skill；社区技能与连接器",
+      "url": "https://github.com/zxqcreations/Lumerical_MCP_Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "comsol",
+    "name": "COMSOL Multiphysics",
+    "group": "paid",
+    "cats": [
+      "em",
+      "ray",
+      "laser"
+    ],
+    "method": "FEM / 射线 / 多物理场",
+    "summary": "波动光学、射线光学与热、结构、电荷等耦合；适合热光和应力光学模型。",
+    "api": "官方 Java API、批处理；LiveLink for MATLAB；Python 可通过第三方桥接。",
+    "license": "商业授权；学术许可、模块与并发求解按合同配置",
+    "compute": "Windows / Linux / macOS；批处理与服务器按许可",
+    "usage": "官方 API 与多物理场建模平台；光学功能需要对应模块。",
+    "limit": "不要将第三方 Python 包说成官方 Python API；光学、热学、CAD 与并行许可需具体匹配。",
+    "sources": [
+      {
+        "label": "官方 API 总览",
+        "url": "https://www.comsol.com/support/learning-center/article/overview-of-the-comsol-api-107912"
+      },
+      {
+        "label": "LiveLink",
+        "url": "https://www.comsol.com/livelink-for-matlab"
+      },
+      {
+        "label": "社区 MCP",
+        "url": "https://github.com/Ching-Chiang/comsol-mcp"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "community",
+      "text": "comsol-mcp；社区实现",
+      "url": "https://github.com/Ching-Chiang/comsol-mcp"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "cst",
+    "name": "CST Studio Suite",
+    "group": "paid",
+    "cats": [
+      "em",
+      "periodic"
+    ],
+    "method": "时域 / 频域电磁 / 多物理场",
+    "summary": "从射频、太赫兹到部分光学电磁问题；适合结构电磁响应与耦合。",
+    "api": "官方 Python 自动化；VBA 宏与批量求解流程。",
+    "license": "商业授权；学术许可、模块与并发求解按合同配置",
+    "compute": "桌面建模 + 授权计算环境",
+    "usage": "SIMULIA 工程电磁软件，官方提供 Python 工作流。",
+    "limit": "必须按波段设置材料色散与网格；免费 Learning Edition 不等于完整科研求解版。",
+    "sources": [
+      {
+        "label": "官方产品与 Python 工作流",
+        "url": "https://www.3ds.com/products/simulia/cst-studio-suite"
+      },
+      {
+        "label": "官方 Python API 说明",
+        "url": "https://blog.3ds.com/brands/simulia/cst-studio-suite-release-2021x-highlights/"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "rsoft",
+    "name": "Keysight RSoft Photonic Device Tools",
+    "group": "paid",
+    "cats": [
+      "em",
+      "periodic",
+      "pic",
+      "laser"
+    ],
+    "method": "FDTD / BPM / RCWA / FEM / EME / 半导体激光",
+    "summary": "FullWAVE、BeamPROP、DiffractMOD、FemSIM、ModePROP、LaserMOD 等器件级工具。",
+    "api": "参数化 CAD、MOST 扫描与优化；脚本与外部集成能力按子产品确认。",
+    "license": "商业授权；学术许可、模块与并发求解按合同配置",
+    "compute": "按模块配置；部分求解器支持 GPU / 集群",
+    "usage": "Keysight 官方器件设计产品族；与 CODE V、LightTools、ADS 有工作流衔接。",
+    "limit": "本表按产品族计一项；子模块不能被当作完全可互换的求解器。",
+    "sources": [
+      {
+        "label": "官方模块与接口生态",
+        "url": "https://www.keysight.com/zz/en/products/software/optical-solutions-software/photonic-design-solutions.html"
+      }
+    ],
+    "route": "script",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "jcm",
+    "name": "JCMsuite",
+    "group": "paid",
+    "cats": [
+      "em",
+      "periodic",
+      "pic"
+    ],
+    "method": "高阶 FEM / 电磁逆问题",
+    "summary": "纳米光学、波导、散射、光刻与参数重建。",
+    "api": "官方 jcmwave Python；MATLAB / Octave、C 接口；优化与批量任务。",
+    "license": "商业授权；学术许可、模块与并发求解按合同配置",
+    "compute": "本地 / 计算集群；Python 驱动",
+    "usage": "JCMwave 官方光子学仿真产品，提供完整接口文档。",
+    "limit": "需要几何、网格和边界条件建模；优化接口不自动保证逆问题可辨识。",
+    "sources": [
+      {
+        "label": "官方接口",
+        "url": "https://www.jcmwave.com/jcmsuite/interface/"
+      },
+      {
+        "label": "Python 入门",
+        "url": "https://docs.jcmwave.com/JCMsuite/html/PythonInterface/bf647454e36069fd16f1a7a35cf6a865.html"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "photond",
+    "name": "Photon Design FIMMWAVE / FIMMPROP",
+    "group": "paid",
+    "cats": [
+      "em",
+      "pic",
+      "fiber"
+    ],
+    "method": "模态分析 / EME",
+    "summary": "波导与光纤模态、光子器件传播和模式转换。",
+    "api": "官方命令行、Python 与 MATLAB 脚本；社区 pyFIMM 可作封装参考。",
+    "license": "商业授权；学术许可、模块与并发求解按合同配置",
+    "compute": "本地授权求解器；脚本驱动",
+    "usage": "Photon Design 官方波导和器件设计工具。",
+    "limit": "模态截断与传播分段需要收敛检查；其他 Photon Design 产品另有模型边界。",
+    "sources": [
+      {
+        "label": "官方脚本与优化",
+        "url": "https://photond.com/fimmwave/features/scripting-optimisation"
+      },
+      {
+        "label": "功能表",
+        "url": "https://photond.com/fimmwave/options/feature-option-table"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "tidy3d",
+    "name": "Flexcompute Tidy3D",
+    "group": "paid",
+    "cats": [
+      "em",
+      "pic",
+      "periodic"
+    ],
+    "method": "云端 FDTD 与器件仿真",
+    "summary": "以 Python 定义器件和仿真，调用云端求解与结果分析。",
+    "api": "官方 Python API、web.run 与批处理；官方 MCP / Agent 插件。",
+    "license": "客户端 LGPL-2.1；云求解采用 FlexCredits / 商业计划",
+    "compute": "本地建模与分析；求解运行在 Flexcompute 云端",
+    "usage": "公开案例、论文库与官方工业 / 科研客户应用。",
+    "limit": "免费开源客户端不等于免费的本地求解器；MCP 的文档工具与执行能力需按桥接配置区分。",
+    "sources": [
+      {
+        "label": "官方计费说明",
+        "url": "https://docs.flexcompute.com/projects/tidy3d/en/stable/faq/docs/faq/How-is-using-Tidy3D-billed.html"
+      },
+      {
+        "label": "Python 客户端",
+        "url": "https://github.com/flexcompute/tidy3d"
+      },
+      {
+        "label": "官方插件目录",
+        "url": "https://github.com/flexcompute/plugin-marketplace"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "official",
+      "text": "tidy3d-mcp / FlexAgent；文档及桥接工具",
+      "url": "https://github.com/flexcompute/plugin-marketplace"
+    },
+    "skill": {
+      "kind": "official",
+      "text": "flexagent；仿真编写、分析与文档使用",
+      "url": "https://github.com/flexcompute/plugin-marketplace"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "ipkiss",
+    "name": "Luceda IPKISS",
+    "group": "paid",
+    "cats": [
+      "pic"
+    ],
+    "method": "参数化 PCell / 电路 / PDK",
+    "summary": "把器件几何、端口、紧凑模型、版图和验证组织为可复用 PIC 设计。",
+    "api": "原生 Python 框架；PDK 包、器件仿真驱动与 Canvas 集成。",
+    "license": "商业授权；学术许可、模块与并发求解按合同配置",
+    "compute": "Python；本地授权与 PDK 环境",
+    "usage": "官方提供多家代工平台的 PDK 与流片设计流程。",
+    "limit": "开源 PDK 不意味着 IPKISS 平台免费；PDK 的授权、工艺与模型覆盖独立判断。",
+    "sources": [
+      {
+        "label": "官方平台",
+        "url": "https://www.lucedaphotonics.com/luceda-photonics-design-platform"
+      },
+      {
+        "label": "官方器件仿真接口",
+        "url": "https://academy.lucedaphotonics.com/tutorials/device_sim/"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "vpi",
+    "name": "VPIphotonics Design Suite",
+    "group": "paid",
+    "cats": [
+      "fiber",
+      "pic",
+      "laser"
+    ],
+    "method": "光通信 / 光子电路与系统",
+    "summary": "发射机、光纤链路、放大器、接收 DSP 与集成光子系统的联合仿真。",
+    "api": "官方外部仿真 API；Python、MATLAB、C++、COM 联合仿真与自定义模块。",
+    "license": "商业授权；学术许可、模块与并发求解按合同配置",
+    "compute": "授权系统仿真环境；可与外部代码联合运行",
+    "usage": "厂商公开提供光通信与器件工程应用。",
+    "limit": "系统级模型不等于器件级 Maxwell 求解；需明确采样率、噪声与信号归一化。",
+    "sources": [
+      {
+        "label": "官方接口功能",
+        "url": "https://www.vpiphotonics.com/Tools/DesignSuite/Features/"
+      },
+      {
+        "label": "官方产品族",
+        "url": "https://www.vpiphotonics.com/Tools/DesignSuite/"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "optisystem",
+    "name": "Optiwave OptiSystem",
+    "group": "paid",
+    "cats": [
+      "fiber",
+      "pic"
+    ],
+    "method": "光通信链路与信号系统",
+    "summary": "调制、光纤传输、放大、探测和误码性能计算。",
+    "api": "Python / MATLAB 联合仿真组件；官方提供外部运行和结果访问示例。",
+    "license": "商业授权；学术许可、模块与并发求解按合同配置",
+    "compute": "以桌面系统仿真工程为中心",
+    "usage": "Optiwave 官方工具，附带通信链路与协同仿真案例。",
+    "limit": "Python 组件用于嵌入算法，不应直接推断全部 GUI 功能都有无头 API。",
+    "sources": [
+      {
+        "label": "官方 Python 组件说明",
+        "url": "https://optiwave.com/forums/topic/co-simulation-using-python/"
+      },
+      {
+        "label": "官方外部自动化说明",
+        "url": "https://cdn.optiwave.com/wp-content/uploads/2017/11/OptiSystem_15_New_Features.pdf"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "macleod",
+    "name": "Essential Macleod",
+    "group": "paid",
+    "cats": [
+      "film"
+    ],
+    "method": "薄膜传输 / 优化 / 工艺分析",
+    "summary": "多层镀膜、反射透射、色彩、群延迟及制造过程相关设计。",
+    "api": "Function 扩展提供 BASIC 类脚本与对象访问；表格宏。",
+    "license": "商业授权；Function 等扩展按产品配置",
+    "compute": "本地桌面与内置脚本",
+    "usage": "Thin Film Center 的镀膜设计和制造分析软件。",
+    "limit": "脚本能力与所购扩展相关；没有把内置脚本冒充远程 Python API。",
+    "sources": [
+      {
+        "label": "官方产品",
+        "url": "https://www.thinfilmcenter.com/essential.php"
+      },
+      {
+        "label": "Function 脚本",
+        "url": "https://www.thinfilmcenter.com/function.php"
+      }
+    ],
+    "route": "script",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "optilayer",
+    "name": "OptiLayer / OptiRE / OptiChar",
+    "group": "paid",
+    "cats": [
+      "film"
+    ],
+    "method": "薄膜设计 / 表征 / 制造反演",
+    "summary": "从多层膜优化到光谱反演与在线制造修正。",
+    "api": "官方 COM Automation；提供 Python 示例；OptiReOpt 面向生产集成。",
+    "license": "商业授权；学术许可、模块与并发求解按合同配置",
+    "compute": "Pro 有多平台版本；COM 自动化路径依赖平台",
+    "usage": "官方明确提供生产控制软件集成与在线表征接口。",
+    "limit": "跨平台 GUI 可用性不能推导 COM 跨平台可用；具体 Pro 接口需匹配版本。",
+    "sources": [
+      {
+        "label": "COM Automation",
+        "url": "https://optilayer.com/com-automation/"
+      },
+      {
+        "label": "Python 示例说明",
+        "url": "https://optilayer.com/development-history/new-features-in-optilayer-2018-version-12-83/"
+      },
+      {
+        "label": "平台下载",
+        "url": "https://optilayer.com/downloads/"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "rpfiber",
+    "name": "RP Fiber Power",
+    "group": "paid",
+    "cats": [
+      "fiber",
+      "laser"
+    ],
+    "method": "光纤模态 / 增益 / 脉冲传播",
+    "summary": "光纤激光器和放大器的泵浦、信号、ASE、动态与超短脉冲建模。",
+    "api": "内置脚本语言、自动生成脚本与自定义表单。",
+    "license": "商业授权",
+    "compute": "本地产品；脚本定义模型与循环",
+    "usage": "RP Photonics 官方专用光纤设计产品。",
+    "limit": "这是物理模型和脚本环境；外部通用 API 的覆盖本次未核实。",
+    "sources": [
+      {
+        "label": "官方接口",
+        "url": "https://www.rp-photonics.com/rp_fiber_power_interface.html"
+      },
+      {
+        "label": "脚本语言",
+        "url": "https://www.rp-photonics.com/software_script_language.html"
+      }
+    ],
+    "route": "script",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "rpresonator",
+    "name": "RP Resonator / RP ProPulse",
+    "group": "paid",
+    "cats": [
+      "laser",
+      "fiber"
+    ],
+    "method": "谐振腔 / 脉冲动力学",
+    "summary": "激光腔模、稳定性与超短脉冲循环；两个产品按任务选用。",
+    "api": "内置脚本、交互表单生成模型、迭代循环。",
+    "license": "商业授权；两个产品分别配置",
+    "compute": "本地脚本化求解",
+    "usage": "RP Photonics 官方激光与超快光学专用软件。",
+    "limit": "腔模设计与非线性脉冲求解的假设不同，不能仅按“激光软件”互换。",
+    "sources": [
+      {
+        "label": "官方产品族",
+        "url": "https://www.rp-photonics.com/software_overview.html"
+      },
+      {
+        "label": "ProPulse 脚本",
+        "url": "https://www.rp-photonics.com/rp_propulse_interface.html"
+      }
+    ],
+    "route": "script",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "crosslight",
+    "name": "Crosslight APSYS / PICS3D",
+    "group": "paid",
+    "cats": [
+      "laser",
+      "em"
+    ],
+    "method": "光电半导体 TCAD",
+    "summary": "LED、半导体激光器及器件的电学、光学和热学联合建模。",
+    "api": "本次确认官方产品与仿真用途；公开通用 API / MCP 覆盖尚未核实。",
+    "license": "商业授权；按 TCAD 模块配置",
+    "compute": "专用半导体器件仿真环境",
+    "usage": "Crosslight 官方列出 PICS3D 与半导体行业应用及科研发表。",
+    "limit": "适合载流子—增益—温度相关器件问题；外部自动化需取得对应版本技术文档。",
+    "sources": [
+      {
+        "label": "官方产品与应用",
+        "url": "https://crosslight.com/"
+      }
+    ],
+    "route": "gui",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "synopsys-osd",
+    "name": "SYNOPSYS Lens Design（OSD）",
+    "group": "paid",
+    "cats": [
+      "ray"
+    ],
+    "method": "镜头设计 / 优化",
+    "summary": "Optical Systems Design 的镜头设计软件，独立于原 Synopsys 光学软件业务。",
+    "api": "命令 / 宏驱动工作流；完整外部 API 本次未核实。",
+    "license": "商业授权；官方试用为限时、限面数版本",
+    "compute": "桌面设计软件",
+    "usage": "OSD 官方仍提供产品与试用申请。",
+    "limit": "不要与 CODE V、RSoft 原厂商 Synopsys 混淆；30 天试用不属于永久免费软件。",
+    "sources": [
+      {
+        "label": "官方获取与试用边界",
+        "url": "https://osdoptics.com/accessinstallation/"
+      },
+      {
+        "label": "官方宏与操作指南",
+        "url": "https://osdoptics.com/wp-content/uploads/2024/09/SYNOPSYSTM-Lens-Design-Software-Starting-Guide-Ui-Plus.pdf"
+      }
+    ],
+    "route": "script",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "tfcalc",
+    "name": "TFCalc",
+    "group": "paid",
+    "cats": [
+      "film"
+    ],
+    "method": "薄膜设计 / 光谱优化",
+    "summary": "多层薄膜的光谱性能、设计和优化。",
+    "api": "本次未核实稳定公开 API；优先按桌面软件评估。",
+    "license": "商业授权；现由 Hulinks 经营",
+    "compute": "桌面产品",
+    "usage": "原作者网站明确说明 2022 年转由 Hulinks 经营。",
+    "limit": "不沿用旧厂商与旧下载页作现行授权依据；自动化接口列为待确认。",
+    "sources": [
+      {
+        "label": "原作者的归属说明",
+        "url": "https://www.sspectra.com/"
+      },
+      {
+        "label": "现厂商",
+        "url": "https://www.hulinks.co.jp/en/"
+      }
+    ],
+    "route": "gui",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "matlab",
+    "name": "MATLAB / Simulink",
+    "group": "paid",
+    "cats": [
+      "foundation",
+      "imaging",
+      "fiber"
+    ],
+    "method": "数值计算 / 信号 / 控制系统",
+    "summary": "光学算法开发、信号处理、参数估计、控制和系统级建模；工具箱按任务选择。",
+    "api": "MATLAB Engine API、批处理、Simulink API；官方 MATLAB MCP Server。",
+    "license": "商业 / 学术授权；工具箱单独授权",
+    "compute": "本地 / 服务器；GPU 与并行依赖工具箱和硬件",
+    "usage": "MathWorks 官方科学工程开发环境，官方已支持 Agent 接入。",
+    "limit": "开源 MATLAB 脚本不等于免费运行；仅兼容 Octave 的代码才能免 MATLAB 执行。",
+    "sources": [
+      {
+        "label": "官方 MCP",
+        "url": "https://github.com/matlab/matlab-mcp-server"
+      },
+      {
+        "label": "官方 Agent 使用说明",
+        "url": "https://www.mathworks.com/help/cloudcenter/ug/run-matlab-with-ai-agentic-and-ai-assistant-applications.html"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "official",
+      "text": "MathWorks 官方 MATLAB MCP Server",
+      "url": "https://github.com/matlab/matlab-mcp-server"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "mathematica",
+    "name": "Wolfram Mathematica",
+    "group": "paid",
+    "cats": [
+      "foundation",
+      "quantum"
+    ],
+    "method": "符号推导 / 数值计算",
+    "summary": "波动方程、近似展开、积分、矩阵及解析—数值联合推导。",
+    "api": "Wolfram Language、wolframscript、官方 Python Client；官方 Wolfram MCP。",
+    "license": "Mathematica 商业授权；本地 MCP 需要相应授权内核",
+    "compute": "本地或云端计算内核",
+    "usage": "Wolfram 官方计算平台与 AgentTools。",
+    "limit": "符号系统给出的解析式仍依赖参数域与假设；它不是光学场求解器的替代品。",
+    "sources": [
+      {
+        "label": "官方 MCP",
+        "url": "https://www.wolfram.com/ai/mcp/"
+      },
+      {
+        "label": "本地 MCP 文档",
+        "url": "https://www.wolfram.com/artificial-intelligence/mcp/local/wolfram-mcp-local/"
+      },
+      {
+        "label": "官方 AgentTools",
+        "url": "https://github.com/WolframResearch/AgentTools"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "official",
+      "text": "Wolfram Local / Cloud MCP",
+      "url": "https://www.wolfram.com/ai/mcp/"
+    },
+    "skill": {
+      "kind": "official",
+      "text": "WolframResearch AgentSkills",
+      "url": "https://github.com/WolframResearch/AgentTools"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "maple",
+    "name": "Maple",
+    "group": "paid",
+    "cats": [
+      "foundation"
+    ],
+    "method": "计算机代数 / 数值与代码生成",
+    "summary": "解析建模、符号推导、微分方程和可执行公式生成。",
+    "api": "OpenMaple Python / C / Java API；命令行内核。",
+    "license": "商业 / 学术授权",
+    "compute": "本地计算内核与 API",
+    "usage": "Maplesoft 官方数学计算平台与 OpenMaple 文档。",
+    "limit": "适合推导与模型化简；不会自动提供完整的光学材料、边界与探测器模型。",
+    "sources": [
+      {
+        "label": "官方 Python API",
+        "url": "https://jp.maplesoft.com/support/help/maple/view.aspx?path=OpenMaple%2FPython%2FAPI"
+      },
+      {
+        "label": "官方编程手册",
+        "url": "https://www.maplesoft.com/documentation_center/maple2024/ProgrammingGuide.pdf"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "photonforge",
+    "name": "PhotonForge Community",
+    "group": "limited",
+    "cats": [
+      "pic"
+    ],
+    "method": "PIC 设计 / 电路 / 版图验证",
+    "summary": "本地版图、原理图、布线与电路仿真；可连接 Tidy3D 器件模型。",
+    "api": "原生 Python；官方 Agent 插件与多项 PCell、布线、验证 Skills。",
+    "license": "Community 本地功能免费含商业用途；不据此认定全部源码开源；云器件求解计费",
+    "compute": "本地 Python；DRC / LVS 依赖 KLayout；器件求解在云端",
+    "usage": "Flexcompute 官方 2.0 文档明确区分本地免费与云求解收费。",
+    "limit": "官方 MCP 当前包含文档检索等工具；实际建模执行常由 Agent 运行 Python 完成。",
+    "sources": [
+      {
+        "label": "官方免费与收费边界",
+        "url": "https://docs.flexcompute.com/projects/photonforge/en/latest/getting_started.html"
+      },
+      {
+        "label": "官方插件目录",
+        "url": "https://github.com/flexcompute/plugin-marketplace"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "official",
+      "text": "PhotonForge 文档 MCP；与 Python 执行配合",
+      "url": "https://github.com/flexcompute/plugin-marketplace"
+    },
+    "skill": {
+      "kind": "official",
+      "text": "官方 PCell、验证、电路、版本与序列化 Skills",
+      "url": "https://github.com/flexcompute/plugin-marketplace"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "osloedu",
+    "name": "OSLO EDU",
+    "group": "limited",
+    "cats": [
+      "ray"
+    ],
+    "method": "教育版镜头设计",
+    "summary": "免费学习镜头布局、光线追迹和基本分析。",
+    "api": "命令 / 宏能力按 EDU 版范围；不能沿用商业版全部接口能力。",
+    "license": "免费闭源教育版；功能受限，官网称无需课程注册",
+    "compute": "Windows 桌面",
+    "usage": "Lambda Research 官方免费版本。",
+    "limit": "适合教学和小模型；不作为完整工业镜头设计环境的等价替代。",
+    "sources": [
+      {
+        "label": "官方免费版本",
+        "url": "https://lambdares.com/edu"
+      }
+    ],
+    "route": "script",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "ptypy",
+    "name": "PtyPy",
+    "group": "limited",
+    "cats": [
+      "imaging",
+      "xray"
+    ],
+    "method": "Ptychography 相位恢复",
+    "summary": "相干衍射扫描成像的迭代重建与实验数据处理。",
+    "api": "Python；MPI；CUDA / CuPy 等加速引擎。",
+    "license": "Academic License：仅学术、非商业；源码公开但不是无使用领域限制的开源许可",
+    "compute": "本地 / MPI / GPU，依引擎配置",
+    "usage": "项目附有论文、实验重建模板与并行实现。",
+    "limit": "公司研发、商业委托或服务使用不能直接按普通 MIT / BSD 项目处理。",
+    "sources": [
+      {
+        "label": "项目与重建接口",
+        "url": "https://github.com/ptycho/ptypy"
+      },
+      {
+        "label": "明确的学术许可",
+        "url": "https://raw.githubusercontent.com/ptycho/ptypy/HEAD/LICENSE"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "meep",
+    "name": "Meep",
+    "group": "open",
+    "cats": [
+      "em",
+      "periodic",
+      "pic"
+    ],
+    "method": "FDTD / 伴随优化",
+    "summary": "全波电磁传播、共振、散射与纳米光子器件。",
+    "api": "Python、Scheme、C++；可脚本运行、输出 HDF5 和执行伴随优化。",
+    "license": "GPL-2.0 系列",
+    "compute": "CPU / MPI；不把标准版本默认标为 GPU 求解器",
+    "usage": "MIT / NanoComp 开源科研工具，项目给出方法论文与示例。",
+    "limit": "空间、时间、PML 和材料色散决定数值误差；大尺寸光机系统通常不适合整体 FDTD。",
+    "sources": [
+      {
+        "label": "项目与接口",
+        "url": "https://github.com/NanoComp/meep"
+      },
+      {
+        "label": "源码许可",
+        "url": "https://raw.githubusercontent.com/NanoComp/meep/HEAD/LICENSE"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "mpb",
+    "name": "MPB",
+    "group": "open",
+    "cats": [
+      "em",
+      "periodic"
+    ],
+    "method": "频域本征模 / 平面波",
+    "summary": "光子晶体能带、模式和周期介质本征问题。",
+    "api": "Python / Scheme；参数扫描和模式数据可程序化处理。",
+    "license": "GPL-2.0 系列",
+    "compute": "CPU / MPI",
+    "usage": "MIT Photonic Bands，项目提供方法论文与教程。",
+    "limit": "本征模求解不等于任意时域传播；需符合周期性、材料与边界假设。",
+    "sources": [
+      {
+        "label": "项目与接口",
+        "url": "https://github.com/NanoComp/mpb"
+      },
+      {
+        "label": "源码许可",
+        "url": "https://raw.githubusercontent.com/NanoComp/mpb/HEAD/COPYING"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "fdtdx",
+    "name": "FDTDX",
+    "group": "open",
+    "cats": [
+      "em",
+      "pic"
+    ],
+    "method": "可微 FDTD",
+    "summary": "三维光子结构仿真与梯度驱动逆向设计。",
+    "api": "原生 Python / JAX；自动微分与程序化几何。",
+    "license": "MIT",
+    "compute": "GPU；JAX 后端",
+    "usage": "有公开实现与研究方法；适合可微仿真研究。",
+    "limit": "新兴框架；模型覆盖、显存和材料支持应按当前 API 考察。",
+    "sources": [
+      {
+        "label": "项目与接口",
+        "url": "https://github.com/ymahlau/fdtdx"
+      },
+      {
+        "label": "源码许可",
+        "url": "https://raw.githubusercontent.com/ymahlau/fdtdx/HEAD/LICENSE"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "新兴研究工具"
+  },
+  {
+    "id": "openems",
+    "name": "openEMS",
+    "group": "open",
+    "cats": [
+      "em"
+    ],
+    "method": "EC-FDTD",
+    "summary": "电磁、射频、太赫兹结构及相关波传播问题。",
+    "api": "Python、Octave / MATLAB 接口；命令行求解。",
+    "license": "GPL-3.0",
+    "compute": "CPU；并行能力按构建",
+    "usage": "开源电磁求解器与公开教程。",
+    "limit": "光频使用需检查材料色散、网格与接口支持，不能沿用射频默认模型。",
+    "sources": [
+      {
+        "label": "项目与接口",
+        "url": "https://github.com/thliebig/openEMS"
+      },
+      {
+        "label": "源码许可",
+        "url": "https://raw.githubusercontent.com/thliebig/openEMS/HEAD/COPYING"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "s4",
+    "name": "S⁴ / S4",
+    "group": "open",
+    "cats": [
+      "periodic",
+      "film"
+    ],
+    "method": "RCWA / Fourier modal",
+    "summary": "周期层状结构、光栅和衍射级次的反射透射。",
+    "api": "Lua 脚本；Python 接口依构建。",
+    "license": "GPL-2.0 系列",
+    "compute": "本地 CPU；可批量调用",
+    "usage": "Stanford Fan group 的分层周期结构求解器。",
+    "limit": "有限尺寸边缘与孤立非周期物体不属于标准周期单胞模型。",
+    "sources": [
+      {
+        "label": "项目与接口",
+        "url": "https://github.com/victorliu/S4"
+      },
+      {
+        "label": "源码许可",
+        "url": "https://raw.githubusercontent.com/victorliu/S4/HEAD/COPYING"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "torcwa",
+    "name": "torcwa",
+    "group": "open",
+    "cats": [
+      "periodic",
+      "film"
+    ],
+    "method": "可微 RCWA",
+    "summary": "周期纳米结构、超表面单胞和光栅的梯度优化。",
+    "api": "原生 Python / PyTorch；自动微分。",
+    "license": "LGPL-3.0",
+    "compute": "CPU / CUDA GPU",
+    "usage": "项目有 TORCWA 方法论文与多个仿真示例。",
+    "limit": "傅里叶阶数与材料不连续性影响收敛；周期边界不等于整片有限超透镜。",
+    "sources": [
+      {
+        "label": "项目与接口",
+        "url": "https://github.com/kch3782/torcwa"
+      },
+      {
+        "label": "源码许可",
+        "url": "https://raw.githubusercontent.com/kch3782/torcwa/HEAD/LICENSE"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "grcwa",
+    "name": "grcwa",
+    "group": "open",
+    "cats": [
+      "periodic",
+      "film"
+    ],
+    "method": "可微 RCWA",
+    "summary": "多层周期结构、衍射和拓扑优化研究。",
+    "api": "Python；Autograd 后端。",
+    "license": "GPL-3.0",
+    "compute": "CPU；按后端配置",
+    "usage": "公开论文、接口和反射透射优化案例。",
+    "limit": "不要将 Autograd 自动等同于 GPU；材料和周期模型需适配。",
+    "sources": [
+      {
+        "label": "项目与接口",
+        "url": "https://github.com/weiliangjinca/grcwa"
+      },
+      {
+        "label": "源码许可",
+        "url": "https://raw.githubusercontent.com/weiliangjinca/grcwa/HEAD/LICENSE"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "legume",
+    "name": "legume",
+    "group": "open",
+    "cats": [
+      "periodic",
+      "em"
+    ],
+    "method": "GME / PWE / 可微本征问题",
+    "summary": "光子晶体薄板、模态与辐射损耗相关分析。",
+    "api": "Python；自动微分与优化工作流。",
+    "license": "MIT",
+    "compute": "本地数值计算",
+    "usage": "Fan group 的开源研究软件，具有方法文献。",
+    "limit": "基于特定展开和截断；不是任意三维器件的通用时域引擎。",
+    "sources": [
+      {
+        "label": "项目与接口",
+        "url": "https://github.com/fancompute/legume"
+      },
+      {
+        "label": "源码许可",
+        "url": "https://raw.githubusercontent.com/fancompute/legume/HEAD/LICENSE"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "ceviche",
+    "name": "Ceviche",
+    "group": "open",
+    "cats": [
+      "em",
+      "pic"
+    ],
+    "method": "可微 FDFD / FDTD",
+    "summary": "小规模电磁逆向设计和自动微分方法研究。",
+    "api": "Python / Autograd；示例直接组合优化器。",
+    "license": "MIT",
+    "compute": "本地 CPU 数值求解",
+    "usage": "对应 Maxwell 方程自动微分研究代码。",
+    "limit": "适合研究原型与方法验证；不将其视为工业三维全流程平台。",
+    "sources": [
+      {
+        "label": "项目与接口",
+        "url": "https://github.com/fancompute/ceviche"
+      },
+      {
+        "label": "源码许可",
+        "url": "https://raw.githubusercontent.com/fancompute/ceviche/HEAD/LICENSE"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "研究实现"
+  },
+  {
+    "id": "tmm",
+    "name": "tmm",
+    "group": "open",
+    "cats": [
+      "film"
+    ],
+    "method": "传输矩阵 TMM",
+    "summary": "平面多层膜反射、透射、吸收，以及相干与非相干层组合。",
+    "api": "原生 Python / NumPy；coh_tmm、inc_tmm 等函数。",
+    "license": "MIT",
+    "compute": "CPU；容易批量扫描与优化",
+    "usage": "作者提供理论手册与薄膜吸收计算实现。",
+    "limit": "标准平面分层模型；不描述任意横向图案、粗糙散射或有限光斑全部效应。",
+    "sources": [
+      {
+        "label": "项目与接口",
+        "url": "https://github.com/sbyrnes321/tmm"
+      },
+      {
+        "label": "源码许可",
+        "url": "https://raw.githubusercontent.com/sbyrnes321/tmm/HEAD/LICENSE.txt"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "solcore",
+    "name": "Solcore",
+    "group": "open",
+    "cats": [
+      "film",
+      "em"
+    ],
+    "method": "光学 / 半导体 / 光伏模型",
+    "summary": "将材料、薄膜吸收与太阳电池电学模型连接起来。",
+    "api": "Python；TMM 等光学模块；与外部求解器的可选集成。",
+    "license": "LGPL-3.0 系列",
+    "compute": "本地 Python；外部模块另配",
+    "usage": "Imperial / QPV 研究生态的多尺度太阳电池工具。",
+    "limit": "不是所有模型和外部依赖都随基础包安装；应按所选光学模型判断适用性。",
+    "sources": [
+      {
+        "label": "官方仓库",
+        "url": "https://github.com/qpv-research-group/solcore5"
+      },
+      {
+        "label": "光学模型文档",
+        "url": "https://docs.solcore.solar/en/latest/Optics/optics.html"
+      },
+      {
+        "label": "源码许可",
+        "url": "https://raw.githubusercontent.com/qpv-research-group/solcore5/HEAD/LICENSE.txt"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "rayoptics",
+    "name": "RayOptics",
+    "group": "open",
+    "cats": [
+      "ray"
+    ],
+    "method": "几何光学 / 成像分析",
+    "summary": "镜头建模、光线和波像差、近轴布局；可导入部分 Zemax / CODE V 格式。",
+    "api": "Python 类与脚本；Jupyter 交互。",
+    "license": "BSD-3-Clause",
+    "compute": "本地 CPU",
+    "usage": "公开光学设计软件与教程。",
+    "limit": "文件导入不保证全部专有面型、涂层和优化操作数无损转换。",
+    "sources": [
+      {
+        "label": "项目与接口",
+        "url": "https://github.com/mjhoptics/ray-optics"
+      },
+      {
+        "label": "源码许可",
+        "url": "https://raw.githubusercontent.com/mjhoptics/ray-optics/HEAD/LICENSE"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "optiland",
+    "name": "Optiland",
+    "group": "open",
+    "cats": [
+      "ray",
+      "wave"
+    ],
+    "method": "可微光线追迹 / 光学设计",
+    "summary": "镜头、自由曲面、偏振、涂层和可微成像系统的设计分析。",
+    "api": "原生 Python；NumPy / PyTorch 后端；JSON 与部分商业格式互操作。",
+    "license": "MIT",
+    "compute": "CPU / CUDA GPU；自动微分",
+    "usage": "持续开发的开源光学设计平台，有研究和工程示例。",
+    "limit": "功能发展较快；不能仅凭格式导入或界面相似认定与商业产品完全等价。",
+    "sources": [
+      {
+        "label": "项目与接口",
+        "url": "https://github.com/optiland/optiland"
+      },
+      {
+        "label": "源码许可",
+        "url": "https://raw.githubusercontent.com/optiland/optiland/HEAD/LICENSE"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "活跃新平台"
+  },
+  {
+    "id": "raysect",
+    "name": "Raysect",
+    "group": "open",
+    "cats": [
+      "ray",
+      "scatter"
+    ],
+    "method": "光谱光线追迹 / 辐射度学",
+    "summary": "复杂场景和光谱辐射输运；支持定制材料、发射和探测模型。",
+    "api": "Python / Cython API。",
+    "license": "BSD-3-Clause",
+    "compute": "CPU；程序化场景",
+    "usage": "用于科学光谱和辐射诊断建模的开源框架。",
+    "limit": "主要跟踪辐射输运，不能直接替代相干波前干涉求解。",
+    "sources": [
+      {
+        "label": "项目与接口",
+        "url": "https://github.com/raysect/source"
+      },
+      {
+        "label": "源码许可",
+        "url": "https://raw.githubusercontent.com/raysect/source/HEAD/LICENSE.txt"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "raytracing",
+    "name": "DCC-Lab RayTracing",
+    "group": "open",
+    "cats": [
+      "ray",
+      "laser"
+    ],
+    "method": "近轴 ABCD / 高斯光束",
+    "summary": "快速搭建显微、望远和光束传输系统的近轴模型。",
+    "api": "Python；光线矩阵、光束和光学系统对象。",
+    "license": "MIT",
+    "compute": "本地 Python",
+    "usage": "DCC-Lab 的公开工具与教程论文。",
+    "limit": "近轴模型适合初步设计和解释，不替代高 NA、自由曲面或精密像差分析。",
+    "sources": [
+      {
+        "label": "项目与接口",
+        "url": "https://github.com/DCC-Lab/RayTracing"
+      },
+      {
+        "label": "源码许可",
+        "url": "https://raw.githubusercontent.com/DCC-Lab/RayTracing/HEAD/LICENSE"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "lightpipes",
+    "name": "LightPipes",
+    "group": "open",
+    "cats": [
+      "wave",
+      "laser"
+    ],
+    "method": "标量衍射 / 光束传播",
+    "summary": "自由空间衍射、透镜、孔径、干涉及相干光束演化。",
+    "api": "Python 函数式接口；NumPy / SciPy / FFT。",
+    "license": "BSD-3-Clause",
+    "compute": "本地 CPU；可使用 FFT 加速库",
+    "usage": "公开光学教学和科研软件，文档包含大量光学实验示例。",
+    "limit": "采用的标量 / 近轴传播模型需要与数值孔径和传播距离相符。",
+    "sources": [
+      {
+        "label": "项目与接口",
+        "url": "https://github.com/opticspy/lightpipes"
+      },
+      {
+        "label": "源码许可",
+        "url": "https://raw.githubusercontent.com/opticspy/lightpipes/HEAD/LICENSE.txt"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "poppy",
+    "name": "POPPY",
+    "group": "open",
+    "cats": [
+      "wave",
+      "imaging"
+    ],
+    "method": "Fraunhofer / Fresnel / PSF",
+    "summary": "望远镜、孔径、波前误差和点扩散函数仿真。",
+    "api": "Python；光学平面与传播系统对象。",
+    "license": "BSD-3-Clause",
+    "compute": "本地；加速路径按版本与依赖",
+    "usage": "STScI 维护；被 JWST / Roman 相关 PSF 软件使用。",
+    "limit": "PSF 依赖正确的瞳面、采样和光谱权重；不是全波纳米结构求解器。",
+    "sources": [
+      {
+        "label": "项目与接口",
+        "url": "https://github.com/spacetelescope/poppy"
+      },
+      {
+        "label": "源码许可",
+        "url": "https://raw.githubusercontent.com/spacetelescope/poppy/HEAD/LICENSE.md"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "hcipy",
+    "name": "HCIPy",
+    "group": "open",
+    "cats": [
+      "wave",
+      "imaging"
+    ],
+    "method": "高对比成像 / 自适应光学",
+    "summary": "日冕仪、波前传感、湍流与 AO 反馈系统联合仿真。",
+    "api": "Python；可组合传播器、探测器和控制模型。",
+    "license": "MIT",
+    "compute": "本地科学计算",
+    "usage": "用于天文高对比成像仪器的端到端研究。",
+    "limit": "控制环和大气模型需由使用者明确；不能由光学元件清单自动推导真实系统。",
+    "sources": [
+      {
+        "label": "项目与接口",
+        "url": "https://github.com/ehpor/hcipy"
+      },
+      {
+        "label": "源码许可",
+        "url": "https://raw.githubusercontent.com/ehpor/hcipy/HEAD/LICENSE"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "prysm",
+    "name": "prysm",
+    "group": "open",
+    "cats": [
+      "wave",
+      "ray",
+      "imaging"
+    ],
+    "method": "物理光学 / 计量 / 波前拟合",
+    "summary": "PSF、MTF、波前与多项式拟合，以及成像系统建模。",
+    "api": "Python；数组计算；支持不同数值后端。",
+    "license": "MIT",
+    "compute": "CPU；可选 GPU 数组后端",
+    "usage": "具有 JOSS 软件论文与公开光学建模接口。",
+    "limit": "不同算法的归一化与采样条件要统一，尤其是接入实验图像时。",
+    "sources": [
+      {
+        "label": "项目与接口",
+        "url": "https://github.com/brandondube/prysm"
+      },
+      {
+        "label": "源码许可",
+        "url": "https://raw.githubusercontent.com/brandondube/prysm/HEAD/LICENSE.md"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "diffractio",
+    "name": "Diffractio",
+    "group": "open",
+    "cats": [
+      "wave",
+      "imaging"
+    ],
+    "method": "标量与矢量衍射",
+    "summary": "波前、掩模、偏振以及多种传播算法的仿真。",
+    "api": "Python；XY / XZ 等网格和矢量场对象。",
+    "license": "GPL-3.0",
+    "compute": "本地数值计算；部分流程并行",
+    "usage": "公开方法论文与光学教程。",
+    "limit": "不同传播算法精度和适用范围不同；不能把所有算法的“矢量”支持视为全波求解。",
+    "sources": [
+      {
+        "label": "项目与接口",
+        "url": "https://github.com/optbrea/diffractio"
+      },
+      {
+        "label": "源码许可",
+        "url": "https://raw.githubusercontent.com/optbrea/diffractio/HEAD/LICENSE"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "torchoptics",
+    "name": "TorchOptics",
+    "group": "open",
+    "cats": [
+      "wave",
+      "imaging"
+    ],
+    "method": "可微 Fourier 光学",
+    "summary": "衍射元件、光学神经网络和光学—数字处理联合优化。",
+    "api": "Python / PyTorch；torch.autograd。",
+    "license": "MIT",
+    "compute": "CPU / GPU",
+    "usage": "有公开软件论文与逆向设计示例。",
+    "limit": "梯度可计算不等于模型适用；标量采样传播的近似仍存在。",
+    "sources": [
+      {
+        "label": "项目与接口",
+        "url": "https://github.com/MatthewFilipovich/torchoptics"
+      },
+      {
+        "label": "源码许可",
+        "url": "https://raw.githubusercontent.com/MatthewFilipovich/torchoptics/HEAD/LICENSE"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "新兴研究工具"
+  },
+  {
+    "id": "waveprop",
+    "name": "waveprop",
+    "group": "open",
+    "cats": [
+      "wave",
+      "imaging"
+    ],
+    "method": "标量衍射 / 可微传播",
+    "summary": "Fresnel、Fraunhofer、角谱传播及全息相关计算。",
+    "api": "Python；可选 PyTorch 后端。",
+    "license": "MIT",
+    "compute": "CPU / GPU，依后端",
+    "usage": "项目包含全息与传播示例。",
+    "limit": "频域采样、带限和零填充影响混叠；不是任意介质 Maxwell 求解。",
+    "sources": [
+      {
+        "label": "项目与接口",
+        "url": "https://github.com/ebezzam/waveprop"
+      },
+      {
+        "label": "源码许可",
+        "url": "https://raw.githubusercontent.com/ebezzam/waveprop/HEAD/LICENSE"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "gdsfactory",
+    "name": "gdsfactory",
+    "group": "open",
+    "cats": [
+      "pic"
+    ],
+    "method": "参数化版图 / PDK / 设计自动化",
+    "summary": "用代码生成器件、端口、布线、网表和制造版图。",
+    "api": "原生 Python；YAML；输出 GDSII、OASIS 等。",
+    "license": "MIT 核心；商业服务、外部 PDK 与求解器独立授权",
+    "compute": "本地 Python；与 KLayout 及求解器协作",
+    "usage": "项目有流片用户案例与公开 PDK 生态。",
+    "limit": "版图生成器不是电磁求解器；制造规则、紧凑模型和 PDK 条款需另行匹配。",
+    "sources": [
+      {
+        "label": "项目与接口",
+        "url": "https://github.com/gdsfactory/gdsfactory"
+      },
+      {
+        "label": "源码许可",
+        "url": "https://raw.githubusercontent.com/gdsfactory/gdsfactory/HEAD/LICENSE"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "official",
+      "text": "项目仓库内 gdsfactory-component-designer Skill",
+      "url": "https://github.com/gdsfactory/gdsfactory/blob/main/.agents/skills/gdsfactory-component-designer/SKILL.md"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "klayout",
+    "name": "KLayout",
+    "group": "open",
+    "cats": [
+      "pic"
+    ],
+    "method": "版图 / DRC / LVS",
+    "summary": "GDS / OASIS 编辑、参数化单元、版图规则与连通性检查。",
+    "api": "Python pya / klayout.db、Ruby、批处理 CLI、宏插件。",
+    "license": "GPL-3.0",
+    "compute": "本地桌面或无 GUI 批处理",
+    "usage": "广泛的开源版图和 PDK 工具生态；提供完整编程接口。",
+    "limit": "几何与规则验证不会证明器件光学性能；DRC 需要有效规则集。",
+    "sources": [
+      {
+        "label": "项目与接口",
+        "url": "https://github.com/KLayout/klayout"
+      },
+      {
+        "label": "源码许可",
+        "url": "https://raw.githubusercontent.com/KLayout/klayout/HEAD/LICENSE"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "community",
+      "text": "klayout-draw-mcp；可基于独立 Python 模块无 GUI 运行",
+      "url": "https://github.com/geniuskey/klayout-draw-mcp"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "sax",
+    "name": "SAX",
+    "group": "open",
+    "cats": [
+      "pic"
+    ],
+    "method": "S 参数光子电路 / 可微仿真",
+    "summary": "以器件散射矩阵组装光子电路，进行快速扫描与优化。",
+    "api": "Python / JAX；函数式模型与网表。",
+    "license": "Apache-2.0",
+    "compute": "CPU / GPU，依 JAX 后端",
+    "usage": "开源 PIC 电路建模与 gdsfactory 相关生态。",
+    "limit": "结果取决于器件紧凑模型；S 参数端口、相位、频率网格和参考平面必须一致。",
+    "sources": [
+      {
+        "label": "项目与接口",
+        "url": "https://github.com/flaport/sax"
+      },
+      {
+        "label": "源码许可",
+        "url": "https://raw.githubusercontent.com/flaport/sax/HEAD/LICENSE"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "siepic",
+    "name": "SiEPIC-Tools",
+    "group": "open",
+    "cats": [
+      "pic"
+    ],
+    "method": "KLayout 插件 / PIC 设计验证",
+    "summary": "波导、端口、连通性、版图与工艺设计流程。",
+    "api": "KLayout Python 插件；支持脚本式版图与 GUI 混合使用。",
+    "license": "MIT；PDK 各自授权",
+    "compute": "本地 KLayout / Python",
+    "usage": "SiEPIC 硅光教学、科研与制造设计生态。",
+    "limit": "插件与 PDK、仿真后端是不同层；不能把插件许可扩大到代工工艺数据。",
+    "sources": [
+      {
+        "label": "项目与接口",
+        "url": "https://github.com/SiEPIC/SiEPIC-Tools"
+      },
+      {
+        "label": "源码许可",
+        "url": "https://raw.githubusercontent.com/SiEPIC/SiEPIC-Tools/HEAD/LICENSE.md"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "nazca",
+    "name": "Nazca Design",
+    "group": "open",
+    "cats": [
+      "pic"
+    ],
+    "method": "参数化光子版图",
+    "summary": "用 Python 表达光子单元、连接与专业掩模版图。",
+    "api": "原生 Python；程序化单元和 GDS 输出。",
+    "license": "AGPL-3.0-or-later；商业服务与 PDK 独立",
+    "compute": "本地 Python",
+    "usage": "作者明确面向商业与科研 PIC 设计工作。",
+    "limit": "AGPL 与 MIT 的分发和网络服务义务不同；外部工艺包另有条款。",
+    "sources": [
+      {
+        "label": "作者与许可",
+        "url": "https://nazca-design.org/about/"
+      },
+      {
+        "label": "官方文档",
+        "url": "https://nazca-design.org/manual/introduction.html"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "adda",
+    "name": "ADDA",
+    "group": "open",
+    "cats": [
+      "scatter",
+      "em"
+    ],
+    "method": "离散偶极近似 DDA",
+    "summary": "任意形状粒子的散射、吸收及部分基底附近的电磁问题。",
+    "api": "命令行输入；文本 / 文件输出；适合参数扫描包装。",
+    "license": "GPL-3.0",
+    "compute": "CPU / MPI；支持 GPU 路径",
+    "usage": "公开电磁散射方法与研究软件。",
+    "limit": "需对偶极离散尺度和迭代收敛负责；体积规模增大会显著增加计算。",
+    "sources": [
+      {
+        "label": "项目与接口",
+        "url": "https://github.com/adda-team/adda"
+      },
+      {
+        "label": "源码许可",
+        "url": "https://raw.githubusercontent.com/adda-team/adda/HEAD/LICENSE"
+      }
+    ],
+    "route": "script",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "miepython",
+    "name": "miepython",
+    "group": "open",
+    "cats": [
+      "scatter"
+    ],
+    "method": "Mie 球散射",
+    "summary": "球形粒子的散射效率、相函数和相关光学量。",
+    "api": "原生 Python；数组化计算。",
+    "license": "MIT",
+    "compute": "CPU；可选 JIT",
+    "usage": "作者提供方法说明、文献与可复用实现。",
+    "limit": "球形、均匀介质等模型假设不可直接推广到任意形貌颗粒。",
+    "sources": [
+      {
+        "label": "项目与接口",
+        "url": "https://github.com/scottprahl/miepython"
+      },
+      {
+        "label": "源码许可",
+        "url": "https://raw.githubusercontent.com/scottprahl/miepython/HEAD/LICENSE.txt"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "treams",
+    "name": "treams",
+    "group": "open",
+    "cats": [
+      "scatter",
+      "periodic"
+    ],
+    "method": "T-matrix / 多重散射",
+    "summary": "粒子簇、散射基底展开和相关光子结构的电磁计算。",
+    "api": "Python；T 矩阵和基函数的程序化操作。",
+    "license": "MIT",
+    "compute": "本地数值计算",
+    "usage": "具有方法文献的科学散射工具。",
+    "limit": "需要适当的基组、阶数和粒子模型；并非自动网格化任意几何的软件。",
+    "sources": [
+      {
+        "label": "项目与接口",
+        "url": "https://github.com/tfp-photonics/treams"
+      },
+      {
+        "label": "源码许可",
+        "url": "https://raw.githubusercontent.com/tfp-photonics/treams/HEAD/LICENSE"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "smuthi",
+    "name": "SMUTHI",
+    "group": "open",
+    "cats": [
+      "scatter",
+      "film"
+    ],
+    "method": "T-matrix + 层状介质散射",
+    "summary": "多个粒子位于薄膜系统中或附近时的电磁散射。",
+    "api": "Python；粒子、层结构与入射场对象。",
+    "license": "MIT",
+    "compute": "本地；加速能力按构建",
+    "usage": "官方方法文档明确其多粒子—薄膜应用范围。",
+    "limit": "单粒子 T 矩阵和多重散射展开均有适用与截断条件。",
+    "sources": [
+      {
+        "label": "官方模型与许可",
+        "url": "https://smuthi.readthedocs.io/en/latest/_source/01%20about/about_smuthi.html"
+      },
+      {
+        "label": "项目代码",
+        "url": "https://github.com/KMCzajkowski/smuthi"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "pygdm",
+    "name": "pyGDM",
+    "group": "open",
+    "cats": [
+      "em",
+      "scatter"
+    ],
+    "method": "Green dyadic / 体积分方法",
+    "summary": "纳米结构近场、散射、发光与部分多物理光学分析。",
+    "api": "pyGDM2 Python API；结构、激励、求解和后处理模块。",
+    "license": "GPL-3.0 系列",
+    "compute": "Python + 编译数值组件",
+    "usage": "Peter Wiecha 团队的 CPC 方法论文与文档。",
+    "limit": "离散体积与 Green 函数的环境假设要匹配；复杂几何的规模成本需评估。",
+    "sources": [
+      {
+        "label": "作者与论文",
+        "url": "https://wiechapeter.gitlab.io/"
+      },
+      {
+        "label": "官方 API",
+        "url": "https://homepages.laas.fr/pwiecha/pygdm_doc/apidoc.html"
+      },
+      {
+        "label": "原始仓库",
+        "url": "https://gitlab.com/wiechapeter/pyGDM2"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "qutip",
+    "name": "QuTiP",
+    "group": "open",
+    "cats": [
+      "quantum",
+      "laser"
+    ],
+    "method": "开放量子系统 / 主方程",
+    "summary": "量子光学、腔 QED、耗散动力学、关联函数和控制。",
+    "api": "Python；算符、态、求解器和扩展包。",
+    "license": "BSD-3-Clause",
+    "compute": "CPU；扩展后端依模块",
+    "usage": "长期维护的量子工具箱，原始与更新论文可查。",
+    "limit": "Hilbert 空间维度增长很快；标准模型不自动包含三维光学场和实际器件几何。",
+    "sources": [
+      {
+        "label": "项目与接口",
+        "url": "https://github.com/qutip/qutip"
+      },
+      {
+        "label": "源码许可",
+        "url": "https://raw.githubusercontent.com/qutip/qutip/HEAD/LICENSE.txt"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "quantumoptics",
+    "name": "QuantumOptics.jl",
+    "group": "open",
+    "cats": [
+      "quantum"
+    ],
+    "method": "量子动力学 / 主方程",
+    "summary": "量子光学与多体小系统的算符、态和开放动力学。",
+    "api": "Julia 原生 API。",
+    "license": "MIT",
+    "compute": "Julia 数值环境",
+    "usage": "公开科学软件与方法文档。",
+    "limit": "适合显式物理模型；Agent 需要 Julia 执行环境而非只提供 Python。",
+    "sources": [
+      {
+        "label": "项目与接口",
+        "url": "https://github.com/qojulia/QuantumOptics.jl"
+      },
+      {
+        "label": "源码许可",
+        "url": "https://raw.githubusercontent.com/qojulia/QuantumOptics.jl/HEAD/LICENSE.md"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "perceval",
+    "name": "Perceval",
+    "group": "open",
+    "cats": [
+      "quantum",
+      "pic"
+    ],
+    "method": "光子量子电路",
+    "summary": "单光子源、线性光学器件、Fock 态及测量的电路模拟。",
+    "api": "Python；本地模拟与远程处理器接口。",
+    "license": "MIT 本地软件；远程服务另有条件",
+    "compute": "本地 CPU；远程平台为可选服务",
+    "usage": "Quandela 官方开源量子光子计算软件。",
+    "limit": "本地开源模拟器不意味着真实量子硬件服务免费；不替代器件 Maxwell 仿真。",
+    "sources": [
+      {
+        "label": "项目与接口",
+        "url": "https://github.com/Quandela/Perceval"
+      },
+      {
+        "label": "源码许可",
+        "url": "https://raw.githubusercontent.com/Quandela/Perceval/HEAD/LICENSE"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "strawberry",
+    "name": "Strawberry Fields",
+    "group": "open",
+    "cats": [
+      "quantum",
+      "pic"
+    ],
+    "method": "连续变量量子光学",
+    "summary": "Gaussian / Fock 表示的光子量子电路和连续变量计算。",
+    "api": "Python；电路语言与后端 API。",
+    "license": "Apache-2.0",
+    "compute": "本地数值后端",
+    "usage": "Xanadu 的公开研究工具与方法论文。",
+    "limit": "仓库文档的 Python 依赖较旧；新环境选型需先检查兼容性，不能按最新框架无条件部署。",
+    "sources": [
+      {
+        "label": "项目与接口",
+        "url": "https://github.com/XanaduAI/strawberryfields"
+      },
+      {
+        "label": "源码许可",
+        "url": "https://raw.githubusercontent.com/XanaduAI/strawberryfields/HEAD/LICENSE"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "经典研究工具"
+  },
+  {
+    "id": "luna",
+    "name": "Luna.jl",
+    "group": "open",
+    "cats": [
+      "fiber",
+      "laser"
+    ],
+    "method": "超快非线性传播 / UPPE / GNLSE",
+    "summary": "超短脉冲、空芯光纤和非线性光学中的宽带传播。",
+    "api": "Julia；高层传播接口和可扩展数值模块。",
+    "license": "MIT",
+    "compute": "本地 / 多核 Julia",
+    "usage": "LupoLab 超快光学研究软件，提供研究模型与示例。",
+    "limit": "使用何种传播方程、模态和气体模型会改变适用范围；输入脉冲需含正确相位。",
+    "sources": [
+      {
+        "label": "项目与接口",
+        "url": "https://github.com/LupoLab/Luna.jl"
+      },
+      {
+        "label": "源码许可",
+        "url": "https://raw.githubusercontent.com/LupoLab/Luna.jl/HEAD/LICENSE"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "pyfmas",
+    "name": "py-fmas",
+    "group": "open",
+    "cats": [
+      "fiber",
+      "laser"
+    ],
+    "method": "解析信号传播模型",
+    "summary": "宽带脉冲、非线性光纤与超连续谱相关数值研究。",
+    "api": "Python；模型、积分器与输出模块可组合。",
+    "license": "MIT",
+    "compute": "本地 CPU",
+    "usage": "公开方法软件与例子库。",
+    "limit": "不同模型的频谱、非线性与色散约定要一致；不是通用三维 Maxwell 平台。",
+    "sources": [
+      {
+        "label": "项目与接口",
+        "url": "https://github.com/omelchert/py-fmas"
+      },
+      {
+        "label": "源码许可",
+        "url": "https://raw.githubusercontent.com/omelchert/py-fmas/HEAD/LICENSE.md"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "laserfun",
+    "name": "laserfun",
+    "group": "open",
+    "cats": [
+      "fiber",
+      "laser"
+    ],
+    "method": "GNLSE / 非线性光纤",
+    "summary": "以脉冲和光纤对象实现非线性脉冲传播与参数研究。",
+    "api": "Python；Pulse、Fiber 与传播接口。",
+    "license": "MIT",
+    "compute": "本地 CPU",
+    "usage": "公开非线性光学软件；从既有 PyNLO 生态发展。",
+    "limit": "适合包络模型成立的光纤问题；版本与依赖需独立固定。",
+    "sources": [
+      {
+        "label": "项目与接口",
+        "url": "https://github.com/laserfun/laserfun"
+      },
+      {
+        "label": "源码许可",
+        "url": "https://raw.githubusercontent.com/laserfun/laserfun/HEAD/LICENSE"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "opticomm",
+    "name": "OptiCommPy",
+    "group": "open",
+    "cats": [
+      "fiber"
+    ],
+    "method": "光纤链路 / DSP / 信号统计",
+    "summary": "从发送比特、器件、线性或非线性传输到相干接收与性能指标。",
+    "api": "原生 Python；器件模型、传播、DSP、FEC 与指标模块。",
+    "license": "GPL-3.0",
+    "compute": "CPU；部分模型有 GPU 路径",
+    "usage": "公开光通信研究框架与链路示例。",
+    "limit": "链路级模型需明确采样、偏振、噪声及参数约定；器件结构设计要接其他求解器。",
+    "sources": [
+      {
+        "label": "项目与接口",
+        "url": "https://github.com/edsonportosilva/OptiCommPy"
+      },
+      {
+        "label": "源码许可",
+        "url": "https://raw.githubusercontent.com/edsonportosilva/OptiCommPy/HEAD/LICENSE"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "finesse",
+    "name": "Finesse 3",
+    "group": "open",
+    "cats": [
+      "laser",
+      "wave",
+      "quantum"
+    ],
+    "method": "频域干涉仪 / 模态耦合",
+    "summary": "复杂激光干涉仪、谐振腔、误差信号、噪声与控制相关建模。",
+    "api": "Python；文本模型语法与程序化仿真。",
+    "license": "GPL-3.0 系列",
+    "compute": "本地 Python / 编译核心",
+    "usage": "LIGO 生态明确使用 Finesse 进行探测器建模。",
+    "limit": "适合准静态频域与模态模型；大幅非线性瞬态需选择相应动力学工具。",
+    "sources": [
+      {
+        "label": "官方文档",
+        "url": "https://finesse.ifosim.org/docs/latest/"
+      },
+      {
+        "label": "LIGO 实际建模包",
+        "url": "https://finesse.docs.ligo.org/finesse-ligo/index.html"
+      },
+      {
+        "label": "源代码",
+        "url": "https://git.ligo.org/finesse/finesse3"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "rezonator",
+    "name": "reZonator 2",
+    "group": "open",
+    "cats": [
+      "laser",
+      "ray"
+    ],
+    "method": "ABCD / 高斯光束 / 腔稳定性",
+    "summary": "驻波腔、环形腔、单程光路和光束变换的快速计算。",
+    "api": "桌面 GUI 与工程文件；本次未核实完整、稳定的无头控制 API。",
+    "license": "GPL-3.0",
+    "compute": "Windows / Linux / macOS 桌面",
+    "usage": "作者提供公开源码、二进制与光学腔模型说明。",
+    "limit": "对 LLM 的直接集成便利性低于 Python 库；模型以近轴矩阵为主。",
+    "sources": [
+      {
+        "label": "官方项目",
+        "url": "https://github.com/orion-project/rezonator2"
+      },
+      {
+        "label": "许可",
+        "url": "https://raw.githubusercontent.com/orion-project/rezonator2/HEAD/LICENSE"
+      }
+    ],
+    "route": "gui",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "mcx",
+    "name": "MCX",
+    "group": "open",
+    "cats": [
+      "bio",
+      "scatter"
+    ],
+    "method": "GPU 蒙特卡洛光子输运",
+    "summary": "组织与复杂体素介质内的散射、吸收和时间相关光传播。",
+    "api": "CLI / JSON；Python pmcx；MATLAB / Octave 接口。",
+    "license": "GPL-3.0",
+    "compute": "CUDA GPU；具体后端按版本",
+    "usage": "项目有方法论文和生物光子学研究应用。",
+    "limit": "模拟辐射输运，不保留光学相位；不能直接描述散斑干涉或相干波前。",
+    "sources": [
+      {
+        "label": "项目与接口",
+        "url": "https://github.com/fangq/mcx"
+      },
+      {
+        "label": "源码许可",
+        "url": "https://raw.githubusercontent.com/fangq/mcx/HEAD/LICENSE.txt"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "mmc",
+    "name": "MMC",
+    "group": "open",
+    "cats": [
+      "bio",
+      "scatter"
+    ],
+    "method": "网格蒙特卡洛输运",
+    "summary": "四面体网格中的组织光传播，处理曲面和异质组织几何。",
+    "api": "CLI；Python pmmc；MATLAB / Octave 接口。",
+    "license": "GPL-3.0",
+    "compute": "CPU / CUDA / OpenCL，依构建",
+    "usage": "公开生物光子输运方法与研究实现。",
+    "limit": "网格与光学参数必须来自可靠的组织模型；与 MCX 的体素表示不同。",
+    "sources": [
+      {
+        "label": "项目与接口",
+        "url": "https://github.com/fangq/mmc"
+      },
+      {
+        "label": "源码许可",
+        "url": "https://raw.githubusercontent.com/fangq/mmc/HEAD/LICENSE.txt"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "holopy",
+    "name": "HoloPy",
+    "group": "open",
+    "cats": [
+      "imaging",
+      "scatter"
+    ],
+    "method": "全息前向模型 / 参数推断",
+    "summary": "用光散射模型生成全息图并拟合粒子等物理参数。",
+    "api": "Python；散射、全息计算与推断接口。",
+    "license": "GPL-3.0",
+    "compute": "CPU；依赖对应散射后端",
+    "usage": "Manoharan Lab 的全息与散射研究工具。",
+    "limit": "可拟合参数取决于选定的散射模型；不是任意场景的通用三维重建。",
+    "sources": [
+      {
+        "label": "项目与接口",
+        "url": "https://github.com/manoharan-lab/holopy"
+      },
+      {
+        "label": "源码许可",
+        "url": "https://raw.githubusercontent.com/manoharan-lab/holopy/HEAD/LICENSE"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "pydhm",
+    "name": "pyDHM",
+    "group": "open",
+    "cats": [
+      "imaging",
+      "wave"
+    ],
+    "method": "数字全息显微重建",
+    "summary": "相移、离轴相位补偿、数值传播和复波场恢复。",
+    "api": "Python 函数与示例。",
+    "license": "MIT",
+    "compute": "本地 Python",
+    "usage": "PLOS ONE 2022 软件论文及原作者仓库。",
+    "limit": "算法适用于特定 DHM 架构；载频、采样与像差补偿需要与实验匹配。",
+    "sources": [
+      {
+        "label": "原作者项目",
+        "url": "https://github.com/catrujilla/pyDHM"
+      },
+      {
+        "label": "算法文档",
+        "url": "https://catrujilla.github.io/pyDHM/"
+      },
+      {
+        "label": "论文",
+        "url": "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0275818"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "pynx",
+    "name": "PyNX",
+    "group": "open",
+    "cats": [
+      "imaging",
+      "xray"
+    ],
+    "method": "CDI / Ptychography / 全息层析",
+    "summary": "相干衍射和扫描衍射数据的 GPU 重建及晶体散射计算。",
+    "api": "Python；官方命令行重建脚本。",
+    "license": "CeCILL-B",
+    "compute": "CUDA / OpenCL GPU，依模块",
+    "usage": "ESRF 官方科研软件，提供束线数据处理脚本。",
+    "limit": "面向相干 X 射线等实验；各重建算法的几何、数据格式与假设不同。",
+    "sources": [
+      {
+        "label": "官方文档与许可",
+        "url": "https://pynx.esrf.fr/en/stable/"
+      },
+      {
+        "label": "CLI 文档",
+        "url": "https://pynx.esrf.fr/en/stable/scripts/"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "mitsuba",
+    "name": "Mitsuba 3",
+    "group": "open",
+    "cats": [
+      "ray",
+      "imaging"
+    ],
+    "method": "可微光谱渲染 / 逆渲染",
+    "summary": "光谱、偏振和几何场景的光输运；优化材质、形状与相机参数。",
+    "api": "Python-first API；Dr.Jit 自动微分；场景描述。",
+    "license": "BSD-3-Clause",
+    "compute": "CPU / CUDA / OptiX，依变体",
+    "usage": "EPFL 研究渲染框架，服务计算成像与逆问题。",
+    "limit": "渲染的辐射输运模型通常不等于相干衍射或 Maxwell 求解。",
+    "sources": [
+      {
+        "label": "项目与接口",
+        "url": "https://github.com/mitsuba-renderer/mitsuba3"
+      },
+      {
+        "label": "源码许可",
+        "url": "https://raw.githubusercontent.com/mitsuba-renderer/mitsuba3/HEAD/LICENSE"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "pbrt",
+    "name": "PBRT v4",
+    "group": "open",
+    "cats": [
+      "ray",
+      "imaging"
+    ],
+    "method": "物理光线输运 / 渲染",
+    "summary": "复杂场景、材质、相机与照明的可控图像生成。",
+    "api": "C++；CLI 与文本场景；可由 Agent 生成并运行场景。",
+    "license": "Apache-2.0",
+    "compute": "CPU / GPU（CUDA、OptiX）",
+    "usage": "《Physically Based Rendering》配套公开实现和研究生态。",
+    "limit": "用于辐射度图像形成；不要用“物理渲染”替代偏振干涉、衍射和光学计量模型。",
+    "sources": [
+      {
+        "label": "项目与接口",
+        "url": "https://github.com/mmp/pbrt-v4"
+      },
+      {
+        "label": "源码许可",
+        "url": "https://raw.githubusercontent.com/mmp/pbrt-v4/HEAD/LICENSE.txt"
+      }
+    ],
+    "route": "script",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "srw",
+    "name": "SRW",
+    "group": "open",
+    "cats": [
+      "xray",
+      "wave"
+    ],
+    "method": "同步辐射 / 相干波前传播",
+    "summary": "从电子轨迹和辐射源到束线光学的频域场与传播。",
+    "api": "Python、C API；可选 IGOR Pro 前端。",
+    "license": "BSD-3-Clause；选择 Python 路径无需 IGOR Pro",
+    "compute": "CPU；并行工作流按实现",
+    "usage": "用于同步辐射源和束线设计的科研软件。",
+    "limit": "同步辐射源、部分相干统计与传播要联合定义；通用相机仿真并非其主要目标。",
+    "sources": [
+      {
+        "label": "官方项目与 API",
+        "url": "https://github.com/ochubar/SRW"
+      },
+      {
+        "label": "发行许可说明",
+        "url": "https://pypi.org/project/oasys-srwpy/1.0.3/"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "shadow",
+    "name": "SHADOW4 / OASYS",
+    "group": "open",
+    "cats": [
+      "xray",
+      "ray"
+    ],
+    "method": "X 射线光线追迹 / 工作流",
+    "summary": "同步辐射束线的镜、晶体、光栅与光束输运；OASYS 提供图形工作流。",
+    "api": "SHADOW4 原生 Python；OASYS 插件；可编写批量模拟。",
+    "license": "SHADOW4 MIT；OASYS 与插件以各自许可证为准",
+    "compute": "本地 Python；GUI 为可选工作流",
+    "usage": "OASYS 项目组织维护的同步辐射光学工具。",
+    "limit": "OASYS 是集成环境，不是单一求解器；波动效应需相应模型或混合方法。",
+    "sources": [
+      {
+        "label": "官方 SHADOW4",
+        "url": "https://github.com/oasys-kit/shadow4"
+      },
+      {
+        "label": "SHADOW4 MIT 许可",
+        "url": "https://github.com/oasys-kit/shadow4/blob/master/LICENSE"
+      },
+      {
+        "label": "官方 OASYS 界面",
+        "url": "https://github.com/oasys-kit/OASYS1-shadow4"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "xrt",
+    "name": "xrt",
+    "group": "open",
+    "cats": [
+      "xray",
+      "ray",
+      "wave"
+    ],
+    "method": "X 射线光线 / 波动追迹",
+    "summary": "同步辐射光源、晶体、镜面与束线光学计算。",
+    "api": "Python；程序化束线与批量分析。",
+    "license": "MIT",
+    "compute": "CPU；部分计算可用 OpenCL",
+    "usage": "公开 X 射线光学科研软件与文档。",
+    "limit": "晶体衍射、源模型和统计采样各有适用范围；并非全波通用网格求解器。",
+    "sources": [
+      {
+        "label": "项目与接口",
+        "url": "https://github.com/kklmn/xrt"
+      },
+      {
+        "label": "源码许可",
+        "url": "https://raw.githubusercontent.com/kklmn/xrt/HEAD/LICENSE.txt"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "sympy",
+    "name": "SymPy",
+    "group": "open",
+    "cats": [
+      "foundation"
+    ],
+    "method": "符号代数",
+    "summary": "推导 Jones / ABCD 矩阵、色散关系、导数、积分与近似表达式。",
+    "api": "Python；可生成数值函数和代码。",
+    "license": "BSD-3-Clause",
+    "compute": "CPU",
+    "usage": "具有软件论文的通用符号计算库。",
+    "limit": "假设域、分支和近似条件需显式定义；不包含自动完备的光学物理模型。",
+    "sources": [
+      {
+        "label": "项目与接口",
+        "url": "https://github.com/sympy/sympy"
+      },
+      {
+        "label": "源码许可",
+        "url": "https://raw.githubusercontent.com/sympy/sympy/HEAD/LICENSE"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "sage",
+    "name": "SageMath",
+    "group": "open",
+    "cats": [
+      "foundation"
+    ],
+    "method": "数学计算系统",
+    "summary": "代数、方程、符号与数值研究；适合更复杂的理论推导。",
+    "api": "Python 风格接口；CLI / Notebook。",
+    "license": "GPL 系列；组合组件各自许可",
+    "compute": "本地数学计算环境",
+    "usage": "长期维护的开放数学软件。",
+    "limit": "是理论计算基础设施，不是开箱即用的光学设计系统。",
+    "sources": [
+      {
+        "label": "官方主页与文档",
+        "url": "https://www.sagemath.org/"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "freecad",
+    "name": "FreeCAD",
+    "group": "open",
+    "cats": [
+      "foundation",
+      "ray"
+    ],
+    "method": "参数化机械 CAD",
+    "summary": "光机支架、封装、几何装配与可制造结构；为仿真提供几何。",
+    "api": "Python API；宏；插件。",
+    "license": "LGPL-2.1 系列；组件另有许可",
+    "compute": "本地 CAD；可脚本建模",
+    "usage": "成熟开源工程 CAD 项目。",
+    "limit": "CAD 几何不会自动成为光学面、材料或边界条件；需语义转换。",
+    "sources": [
+      {
+        "label": "项目与接口",
+        "url": "https://github.com/FreeCAD/FreeCAD"
+      },
+      {
+        "label": "源码许可",
+        "url": "https://raw.githubusercontent.com/FreeCAD/FreeCAD/HEAD/LICENSE"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "gmsh",
+    "name": "Gmsh",
+    "group": "open",
+    "cats": [
+      "foundation",
+      "em"
+    ],
+    "method": "几何 / 有限元网格",
+    "summary": "为光学 FEM、热学和结构模型生成可控网格。",
+    "api": "Python、C、C++、Julia API；CLI 与 .geo 脚本。",
+    "license": "GPL；商业再许可另行提供",
+    "compute": "本地 CPU",
+    "usage": "成熟的科研有限元网格工具。",
+    "limit": "Gmsh 主要生成网格；还需要电磁 / 热学求解器和明确的物理边界。",
+    "sources": [
+      {
+        "label": "官方功能与许可",
+        "url": "https://gmsh.info/"
+      },
+      {
+        "label": "官方手册",
+        "url": "https://gmsh.info/doc/texinfo/"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "scikitimage",
+    "name": "scikit-image",
+    "group": "open",
+    "cats": [
+      "imaging",
+      "foundation"
+    ],
+    "method": "图像处理 / 重建算法",
+    "summary": "实验图像的滤波、分割、配准、变换和定量分析。",
+    "api": "原生 Python API。",
+    "license": "BSD-3-Clause 为主；个别文件见许可清单",
+    "compute": "本地 CPU",
+    "usage": "具有软件论文的科学图像处理生态。",
+    "limit": "图像增强不等于恢复了真实光学信息；应与成像模型和噪声模型连接。",
+    "sources": [
+      {
+        "label": "项目与接口",
+        "url": "https://github.com/scikit-image/scikit-image"
+      },
+      {
+        "label": "源码许可",
+        "url": "https://raw.githubusercontent.com/scikit-image/scikit-image/HEAD/LICENSE.txt"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "napari",
+    "name": "napari",
+    "group": "open",
+    "cats": [
+      "imaging",
+      "foundation"
+    ],
+    "method": "多维图像 / 插件可视化",
+    "summary": "观察图像、体数据、标签和实验重建结果；支持开发分析插件。",
+    "api": "Python API、命令行、插件系统。",
+    "license": "BSD-3-Clause",
+    "compute": "Qt / GPU 可视化；分析依插件",
+    "usage": "开源科学成像生态。",
+    "limit": "插件不是 LLM Skill；批量数值分析优先直接调用分析库，GUI 用于检查。",
+    "sources": [
+      {
+        "label": "项目与接口",
+        "url": "https://github.com/napari/napari"
+      },
+      {
+        "label": "源码许可",
+        "url": "https://raw.githubusercontent.com/napari/napari/HEAD/LICENSE"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "refractiveindex",
+    "name": "refractiveindex.info database",
+    "group": "open",
+    "cats": [
+      "foundation",
+      "film",
+      "em"
+    ],
+    "method": "光学常数数据库",
+    "summary": "提供材料折射率、消光系数及其文献来源，支撑各类光学模型。",
+    "api": "机器可读 YAML 数据；可由 Python 等读取；数据库本身不是求解器。",
+    "license": "CC0 数据库；原始文献单独归属",
+    "compute": "本地数据或网站检索",
+    "usage": "公开光学常数数据库及数据来源。",
+    "limit": "必须选对波长、温度、样品和测量条件；同名材料不能无条件共用一个 n、k。",
+    "sources": [
+      {
+        "label": "原始数据库",
+        "url": "https://github.com/polyanskiy/refractiveindex.info-database"
+      },
+      {
+        "label": "CC0 许可",
+        "url": "https://raw.githubusercontent.com/polyanskiy/refractiveindex.info-database/HEAD/LICENSE"
+      },
+      {
+        "label": "网站",
+        "url": "https://refractiveindex.info/"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "fenics",
+    "name": "FEniCSx / DOLFINx",
+    "group": "open",
+    "cats": [
+      "em",
+      "foundation"
+    ],
+    "method": "自定义 FEM / 偏微分方程",
+    "summary": "用变分形式实现 Helmholtz、Maxwell、热学等研究模型，适合需要修改方程的场景。",
+    "api": "Python / C++；UFL 定义弱形式；MPI 与数值后端。",
+    "license": "DOLFINx LGPL-3.0-or-later；组件分别授权",
+    "compute": "CPU / MPI；复数与后端依构建",
+    "usage": "FEniCS 官方开源有限元环境与方法文档。",
+    "limit": "需要自行构造正确的函数空间、弱形式和边界；不是配置少量参数即可替代 COMSOL 的成套光学产品。",
+    "sources": [
+      {
+        "label": "官方项目",
+        "url": "https://github.com/FEniCS/dolfinx"
+      },
+      {
+        "label": "官方网站",
+        "url": "https://fenicsproject.org/"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "ngsolve",
+    "name": "Netgen / NGSolve",
+    "group": "open",
+    "cats": [
+      "em",
+      "foundation"
+    ],
+    "method": "高阶 FEM / 电磁与多物理场",
+    "summary": "电磁模态和自定义耦合方程；Netgen 提供相关网格能力。",
+    "api": "Python / C++；官方 Maxwell 方程与本征模教程。",
+    "license": "LGPL-2.1；组件以具体许可为准",
+    "compute": "本地 / 并行计算环境",
+    "usage": "官方给出电磁与多物理场教程和研究实现。",
+    "limit": "需要自行定义离散空间、材料和边界；优势在于可修改方程与数值方法。",
+    "sources": [
+      {
+        "label": "官方项目",
+        "url": "https://github.com/NGSolve/ngsolve"
+      },
+      {
+        "label": "Maxwell 教程",
+        "url": "https://ngsolve.org/ngsolve/docs/i-tutorials/unit-2.4-Maxwell/Maxwellevp.html"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "scipy",
+    "name": "NumPy / SciPy",
+    "group": "open",
+    "cats": [
+      "foundation",
+      "imaging"
+    ],
+    "method": "数组 / 优化 / 拟合 / 信号计算",
+    "summary": "承载光学数据处理、参数拟合、ODE、FFT、优化与统计，是多种专业库的底层。",
+    "api": "原生 Python；NumPy 数组、scipy.optimize、integrate、signal 等。",
+    "license": "BSD 系列；依赖和组件分别授权",
+    "compute": "本地 CPU；部分功能支持其他数组后端",
+    "usage": "长期维护的科学 Python 基础生态。",
+    "limit": "它们提供数值算法，不自动定义仪器或光学物理；应通过专业模型构建目标函数。",
+    "sources": [
+      {
+        "label": "NumPy",
+        "url": "https://numpy.org/"
+      },
+      {
+        "label": "SciPy",
+        "url": "https://scipy.org/"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "jax",
+    "name": "JAX",
+    "group": "open",
+    "cats": [
+      "foundation"
+    ],
+    "method": "自动微分 / JIT / 数值计算",
+    "summary": "开发可微光学求解器、优化器和代理模型；FDTDX、SAX 等建立在其上。",
+    "api": "Python；jit、grad、vmap 等变换。",
+    "license": "Apache-2.0",
+    "compute": "CPU / GPU / TPU，依后端与安装",
+    "usage": "开源数值与机器学习基础设施。",
+    "limit": "自动微分不能消除离散误差或模型偏差；复数导数、精度和显存需与物理问题匹配。",
+    "sources": [
+      {
+        "label": "官方文档",
+        "url": "https://docs.jax.dev/en/latest/"
+      },
+      {
+        "label": "官方源码",
+        "url": "https://github.com/jax-ml/jax"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  },
+  {
+    "id": "pytorch",
+    "name": "PyTorch",
+    "group": "open",
+    "cats": [
+      "foundation",
+      "imaging"
+    ],
+    "method": "张量 / 自动微分 / 代理模型",
+    "summary": "开发光学—算法联合模型、反演网络与快速代理；torcwa、TorchOptics 等使用其后端。",
+    "api": "Python / C++；Autograd 与 GPU 张量接口。",
+    "license": "BSD 系列；第三方组件见许可清单",
+    "compute": "CPU / GPU，依硬件与后端",
+    "usage": "成熟机器学习与科学计算基础设施。",
+    "limit": "代理网络的误差和适用参数域需要单独建立；网络输出不自动等于物理解。",
+    "sources": [
+      {
+        "label": "官方平台",
+        "url": "https://pytorch.org/"
+      },
+      {
+        "label": "官方源码",
+        "url": "https://github.com/pytorch/pytorch"
+      }
+    ],
+    "route": "api",
+    "mcp": {
+      "kind": "unverified",
+      "text": "本次未核实专用 MCP"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "本次未核实专用 Agent Skill"
+    },
+    "stage": "成熟工具"
+  }
+]

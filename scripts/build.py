@@ -71,6 +71,8 @@ Start from the physical task and representation, then filter by licensing, compu
 '''
     (ROOT/'llms.txt').write_text(llms,encoding='utf-8')
     (ROOT/'llms-full.txt').write_text((ROOT/'docs/catalogue.en.md').read_text(encoding='utf-8'),encoding='utf-8')
+    for filename in ('llms.txt','llms-full.txt'):
+        (ROOT/'docs'/filename).write_text((ROOT/filename).read_text(encoding='utf-8'),encoding='utf-8')
     print(f'Built two HTML editions, two Markdown catalogues, resource indexes and agent entry points: {len(sets["en"])} entries.')
 
 if __name__=='__main__':main()

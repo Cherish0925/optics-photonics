@@ -1,0 +1,29 @@
+/* Shared osmanthus identity: warm paper, forest green and muted gold. */
+:root{--paper:#f8f7f2;--ink:#193f35;--muted:#657168;--line:#dce0d4;--green:#285d44;--mint:#eff2e7;--navy:#163d33;--shadow:0 5px 20px #173b2405}
+.rail{background:#f0f0e7}.rail nav a:hover{background:#e5e9dc}.brand-icon{border-color:#d4c8a8;background:#faf7ee}
+.rail .en{font-size:9px;letter-spacing:.09em}.rail-bottom{font-size:11px}
+.hero{display:block;min-height:0;padding:0;border-radius:0;background:transparent;color:var(--ink);overflow:visible}
+.brand-banner{display:block;width:100%;height:auto;border:1px solid #edeadf;border-radius:4px}
+.hero-copy,html[lang=en] .hero-copy{max-width:none;padding:25px 0 7px}
+.hero h1,html[lang=en] .hero h1{font:600 28px/1.4 OpticsSans,"Segoe UI","Microsoft YaHei",sans-serif;letter-spacing:0;color:var(--ink);margin:0 0 10px}
+.hero p{color:var(--muted);font-size:14px;max-width:900px;margin:0 0 19px;line-height:1.8}
+.hero-actions a{color:var(--green);border-color:#cdd5c4;background:#fffdf7;padding:9px 17px}
+.hero-actions .primary{color:white;background:var(--green);border-color:var(--green)}
+.topline{font-size:10px;letter-spacing:.06em}.top-actions a,.top-actions button{font-size:11px}
+.statline{margin-top:24px;background:#fffefa}.stat span{font-size:12px}.stat b{font-family:Georgia,serif;font-weight:400;font-size:34px}
+.insight,.software,.workflow,.agent-explain>div,.scope-box,.example,.filters,.table-wrap{background:#fffefa}
+.insight:first-child{border-color:#d5dcc7}.section-no{color:#bdc5b2}.section-kicker{letter-spacing:.12em}
+.insight p,.section-intro,.agent-explain p,.scope-box p{font-size:13px}
+.domain-tile{background:#fdfcf7}.domain-tile>span:last-of-type{font-size:11px}.domain-tile small{font-size:10px}
+.card-meta,html[lang=en] .card-meta{font-size:10px;letter-spacing:0}.card-summary{font-size:13px;color:#55655c}
+.card-domain,.tag,.software summary,.sources>span{font-size:11px}.detail-field dt{font-size:11px}.detail-field dd{font-size:13px;color:#385445}
+.status{font-size:10px}.sources{font-size:12px;background:#f3f4eb}.software details[open] summary{background:#f4f6ed}
+.note{font-size:12px}.category-chips button{font-size:11px}.resource-table td small{font-size:11px}
+.table-wrap table{font-size:12px}.agent-table td{font-size:12px}thead th{font-size:11px;background:#edf0e4}
+.resource-table thead{background:#edf0e4}.banner-note,.agent-recipe{background:#eff2e7}
+.flow-steps>div{background:#f0f3e7}.flow-steps b{font-size:11px}.flow-steps span{font-size:11px}.workflow>p{font-size:12px}.workflow>p strong{font-size:11px}
+.twin{background:#23483b}.twin .eyebrow{color:#c6cfac}.twin p,.twin li{color:#d3dfd3}pre{background:#1c3b32}
+.footer{font-size:11px}.small-button,input[type=search],select{background:#fffefa}
+@media(max-width:800px){.hero-copy,html[lang=en] .hero-copy{padding-top:20px}.hero h1,html[lang=en] .hero h1{font-size:24px}.hero p{font-size:13px}.brand-banner{border-radius:2px}.topline>span{max-width:none}.domain-tile strong,html[lang=en] .domain-tile strong{font-size:12px}.domain-tile>span:last-of-type,html[lang=en] .domain-tile>span:last-of-type{font-size:11px}.stat span{font-size:11px}.section-intro{font-size:13px}.software-grid{grid-template-columns:1fr}.card-summary{min-height:0}.stat b{font-size:29px}.hero-actions a{font-size:12px}.group-tabs button{font-size:11px}}
+@media(max-width:470px){.hero h1,html[lang=en] .hero h1{font-size:22px}.top-actions{gap:6px}.top-actions a,.top-actions button{font-size:10px;padding:6px 8px}.stat{gap:12px}.stat span{font-size:11px}.domain-tile{padding:15px 13px}.domain-tile strong{max-width:135px}.section-kicker{font-size:9px}}
+@media print{.brand-banner{max-height:70mm;width:auto;max-width:100%;margin:auto}.hero-copy,html[lang=en] .hero-copy{padding-top:14px}.hero h1,html[lang=en] .hero h1{font-size:24px}.hero{padding:0}.twin{background:#edf3ee;color:#244735}.twin p,.twin li{color:#244735}}

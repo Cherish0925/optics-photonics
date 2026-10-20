@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate the bilingual atlas and machine-readable resource views (stdlib)."""
+"""Generate the bilingual catalogue and machine-readable resource views (stdlib)."""
 from pathlib import Path
 import collections,json,subprocess,sys
 
@@ -15,7 +15,7 @@ def write_json(path,value):
 def markdown(entries,domains,lang):
     en=lang=='en';names={d[0]:d[1] for d in domains}
     groups={'paid':'Commercial / paid' if en else '商业付费','open':'Free & open source' if en else '免费与开源','limited':'Free / restricted' if en else '免费或授权受限'}
-    lines=['# Optics · Photonics — '+('software catalogue' if en else '软件目录'),'',f'{"Reviewed" if en else "核查日期"}: {REVIEWED} | {len(entries)} '+('tools and product families' if en else '个工具与产品族'),'',('Original descriptions and code: MIT. Linked products retain their own licenses.' if en else '原创目录说明与代码采用 MIT；被收录软件遵循各自许可。'),'',('This is a source-based selection study, not installation testing of every solver. Unverified does not mean absent.' if en else '目录基于原始资料进行选型与接口研究，不代表已实机测评所有求解器。未核实不等于不存在。'),'']
+    lines=['# Optics · Photonics — '+('software catalogue' if en else '软件目录'),'',f'{"Reviewed" if en else "核查日期"}: {REVIEWED} | {len(entries)} '+('tools and product families' if en else '个工具与产品族'),'',('Original descriptions and code: MIT. Linked products retain their own licenses.' if en else '原创目录说明与代码采用 MIT；被收录软件遵循各自许可。'),'',('Select by physical method, licensing and native interface. Primary sources accompany each entry.' if en else '按物理方法、许可和原生接口选择工具；原始资料随条目列出。'),'']
     fields=[('method','Physical method','物理方法'),('summary','Purpose','用途'),('api','Programmable interface','编程入口'),('compute','Compute','计算环境'),('license','License','许可'),('usage','Application basis','应用依据'),('limit','Limitations','适用边界')]
     for group in ('paid','open','limited'):
         lines.extend(['## '+groups[group],''])
@@ -53,8 +53,8 @@ Reviewed: 2026-10-20. Schema version: 1.0. 96 tools / product families in 14 tas
 
 - [Complete English catalogue](https://raw.githubusercontent.com/Cherish0925/optics-photonics/main/llms-full.txt): all entries, interfaces, limits and sources.
 - [中文完整目录](https://raw.githubusercontent.com/Cherish0925/optics-photonics/main/docs/catalogue.zh.md): Chinese equivalent.
-- [English interactive atlas](https://cherish0925.github.io/optics-photonics/): models, workflows, examples and resource search.
-- [中文交互图谱](https://cherish0925.github.io/optics-photonics/index.zh.html): full Chinese edition.
+- [English interactive catalogue](https://cherish0925.github.io/optics-photonics/): models, workflows, examples and resource search.
+- [中文交互目录](https://cherish0925.github.io/optics-photonics/index.zh.html): full Chinese edition.
 
 ## Integrate
 
@@ -67,7 +67,7 @@ Reviewed: 2026-10-20. Schema version: 1.0. 96 tools / product families in 14 tas
 
 ## Interpretation
 
-Start from the physical task and representation, then filter by licensing, compute and native interfaces. Follow primary sources for current installation and API details. The catalogue is not an execution server. MCP may provide documentation only; Skills are not solver licenses. `unverified` does not mean absent. No claim is made that every listed solver or connector has been installed or benchmarked by this project. Third-party products retain their own licenses.
+Start from the physical task and representation, then filter by licensing, compute and native interfaces. Follow primary sources for current installation and API details. Each entry records the scope of MCP and Skills, their provenance status, and the software license. Execute through the linked native interfaces in the required environment.
 '''
     (ROOT/'llms.txt').write_text(llms,encoding='utf-8')
     (ROOT/'llms-full.txt').write_text((ROOT/'docs/catalogue.en.md').read_text(encoding='utf-8'),encoding='utf-8')

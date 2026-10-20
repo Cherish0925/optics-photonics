@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://raw.githubusercontent.com/Cherish0925/optics-photonics/main/data/schema.json",
   "title": "Optics Photonics Catalogue v1",
-  "description": "Each locale is an array. IDs, classifications and source URLs are shared across locales. unverified does not mean absent.",
+  "description": "Each locale is an array. IDs, classifications and source URLs are shared across locales. Integration status records the provenance of a located connector.",
   "type": "array",
   "items": {
     "type": "object",

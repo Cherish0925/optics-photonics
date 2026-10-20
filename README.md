@@ -1,12 +1,12 @@
 <p align="right"><a href="README.zh-CN.md">中文</a> · <b>English</b></p>
 
-![Optics · Photonics — software, physics, programmable access](docs/assets/banner.svg)
+![Optics · Photonics — software, physics, programmable access](docs/assets/readme-header.webp)
 
 # Optics · Photonics
 
-A bilingual software atlas for optical science and engineering: **what each tool models, how it is licensed, and how people and AI agents can use it.**
+A bilingual software catalogue for optical science and engineering: **what each tool models, how it is licensed, and how people and AI agents can use it.**
 
-**96 tools and product families · 14 domains · 196 primary-source links**
+**96 tools and product families · 14 domains · 200 documentation and integration links**
 
 | Read | Explore the data | Build on it |
 | --- | --- | --- |
@@ -26,7 +26,7 @@ Download [English HTML](https://raw.githubusercontent.com/Cherish0925/optics-pho
 
 ## Start with the physical representation
 
-| Task | What passes between models | Examples in the atlas |
+| Task | What passes between models | Examples in the catalogue |
 | --- | --- | --- |
 | Lens → image → inference | Pupil field, aberrations, PSF, sampling, detector response | OpticStudio, CODE V, Optiland, prysm, POPPY |
 | Unit cell → metasurface → system | Complex transmission / reflection, polarization, angle, wavelength | torcwa, grcwa, Meep, Lumerical, Tidy3D, Diffractio |
@@ -35,7 +35,7 @@ Download [English HTML](https://raw.githubusercontent.com/Cherish0925/optics-pho
 | Thermomechanics → cavity → readout | Deformation, index changes, operating point, noise spectra | COMSOL, Finesse, HCIPy |
 | Sample → propagation → reconstruction | The actual measured observable and its forward operator | MCX, MMC, PyNX, pyDHM, HoloPy |
 
-These are modeling combinations, not claims of installed end-to-end integrations. Consistent units, reference frames, conventions and approximations make the connections meaningful.
+Each workflow identifies the physical quantities to exchange. Match units, reference frames, field conventions and model assumptions across tools.
 
 ## Use with an agent
 
@@ -55,7 +55,7 @@ for tool in candidates:
     print(tool["id"], tool["api"], tool["sources"])
 ```
 
-The atlas is a research index, not an execution server. Follow the linked documentation, prepare the required environment and use the native interface. `unverified` means that a dedicated integration was not established by this review; it does not mean none exists.
+Follow the linked documentation to prepare the environment and call the native interface. Connector records identify their scope and provenance: official, community or unverified.
 
 ## Develop
 
@@ -85,8 +85,8 @@ Open `http://localhost:8000/` for English or `/index.zh.html` for Chinese. Edit 
 
 ## Scope and contributions
 
-Reviewed **2026-10-20**. This is broad coverage, not an exhaustive list of all optical software. Commercial products, established scientific packages and emerging research implementations have different maturity and adoption. Interface claims come from linked documentation; every solver and connector has not been installed or benchmarked by this project.
+Reviewed **2026-10-20** against vendor documentation, maintainer repositories, licenses and author materials. Each entry records its application basis and model conditions.
 
-Useful contributions include missing tools, primary-source corrections, license changes, new interfaces, reproducible examples and translation improvements. See [CONTRIBUTING.md](CONTRIBUTING.md). There are no paid placements or star-count rankings.
+Useful contributions include missing tools, primary-source corrections, license changes, new interfaces, reproducible examples and translation improvements. See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 **License:** original project code and catalogue descriptions are [MIT](LICENSE). Referenced software, documentation, PDKs and data retain their own licenses. The embedded Noto-derived font subset is [SIL OFL 1.1](docs/assets/FONT_LICENSE.txt). See [NOTICE](NOTICE).

@@ -8,8 +8,8 @@ Reviewed: 2026-10-20. Schema version: 1.0. 96 tools / product families in 14 tas
 
 - [Complete English catalogue](https://raw.githubusercontent.com/Cherish0925/optics-photonics/main/llms-full.txt): all entries, interfaces, limits and sources.
 - [中文完整目录](https://raw.githubusercontent.com/Cherish0925/optics-photonics/main/docs/catalogue.zh.md): Chinese equivalent.
-- [English interactive atlas](https://cherish0925.github.io/optics-photonics/): models, workflows, examples and resource search.
-- [中文交互图谱](https://cherish0925.github.io/optics-photonics/index.zh.html): full Chinese edition.
+- [English interactive catalogue](https://cherish0925.github.io/optics-photonics/): models, workflows, examples and resource search.
+- [中文交互目录](https://cherish0925.github.io/optics-photonics/index.zh.html): full Chinese edition.
 
 ## Integrate
 
@@ -22,4 +22,4 @@ Reviewed: 2026-10-20. Schema version: 1.0. 96 tools / product families in 14 tas
 
 ## Interpretation
 
-Start from the physical task and representation, then filter by licensing, compute and native interfaces. Follow primary sources for current installation and API details. The catalogue is not an execution server. MCP may provide documentation only; Skills are not solver licenses. `unverified` does not mean absent. No claim is made that every listed solver or connector has been installed or benchmarked by this project. Third-party products retain their own licenses.
+Start from the physical task and representation, then filter by licensing, compute and native interfaces. Follow primary sources for current installation and API details. Each entry records the scope of MCP and Skills, their provenance status, and the software license. Execute through the linked native interfaces in the required environment.

@@ -4,7 +4,7 @@ Reviewed: 2026-10-20 | 96 tools and product families
 
 Original descriptions and code: MIT. Linked products retain their own licenses.
 
-This is a source-based selection study, not installation testing of every solver. Unverified does not mean absent.
+Select by physical method, licensing and native interface. Primary sources accompany each entry.
 
 ## Commercial / paid
 

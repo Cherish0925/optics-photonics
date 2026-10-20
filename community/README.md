@@ -1,8 +1,11 @@
-# Community introductions / 社区介绍
+# Community / 社区
 
 - [English introduction](announcement.en.md)
 - [中文介绍](announcement.zh.md)
+- [Community submissions / 社区收录](submissions/README.md)
 
-These are reusable introduction texts, not a record of messages already sent. Adapt them to a community's scope and contribution rules, disclose your relationship to the project, and submit once through the appropriate resource-submission channel.
+Share the directory with researchers and engineers who work on optical design,
+simulation and instrument software. Contributions can add tools, correct sources
+or document a working interface example.
 
-以上是可复用的介绍文案，不代表已经发出的消息。分享时请遵循对应社区的主题和贡献规则，说明与项目的关系，通过合适的资源投稿渠道提交，避免重复发布。
+欢迎向光学设计、仿真和仪器软件社区分享，补充工具、修正资料或贡献接口示例。

@@ -49,6 +49,12 @@ def main():
 
 Reviewed: 2026-10-20. Schema version: 1.0. 96 tools / product families in 14 task domains.
 
+## Foundations
+
+- [Field · Matter · Interaction](https://cherish0925.github.io/optics-photonics/foundations.html): unified physical framework across classical and quantum optics.
+- [场 · 物质 · 相互作用](https://cherish0925.github.io/optics-photonics/foundations.zh.html): 中文统一物理基础。
+- [Foundation Markdown](https://github.com/Cherish0925/optics-photonics/blob/main/foundations/README.md): maintainable English source.
+
 ## Read
 
 - [Complete English catalogue](https://raw.githubusercontent.com/Cherish0925/optics-photonics/main/llms-full.txt): all entries, interfaces, limits and sources.

@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="光学与光子学统一基础框架：场、物质与相互作用，贯穿经典与量子、科学与工程、所有相关尺度和电磁波段。">
+<title>基础框架 · 场、物质、相互作用 — 光学 · 光子学</title>
+<style>
+:root{--bg:#f7f6f2;--panel:#fff;--ink:#151817;--muted:#5f6763;--line:#d8ddd9;--accent:#165d57;--soft:#eaf1ee;--max:1180px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.72 ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans CJK SC","Microsoft YaHei",Arial,sans-serif}
+a{color:var(--accent);text-decoration-thickness:1px;text-underline-offset:3px}header{border-bottom:1px solid var(--line);background:rgba(247,246,242,.96)}
+.top{max-width:var(--max);margin:auto;padding:18px 28px;display:flex;justify-content:space-between;gap:20px;align-items:center}.brand{font-weight:700;letter-spacing:.02em}.langs{white-space:nowrap}
+.hero{max-width:var(--max);margin:auto;padding:74px 28px 48px}.kicker{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:700}.hero h1{font:700 clamp(42px,7vw,82px)/1.02 Georgia,"Noto Serif CJK SC","Songti SC",serif;margin:12px 0 24px;letter-spacing:-.035em;max-width:920px}
+.lede{font-size:21px;line-height:1.62;max-width:900px;color:#313735}.equation{margin:34px 0 0;padding:25px 28px;border:1px solid #b9cbc5;background:var(--soft);font:700 clamp(22px,4vw,38px)/1.3 Georgia,"Noto Serif CJK SC","Songti SC",serif}
+.shell{max-width:var(--max);margin:auto;padding:0 28px 80px;display:grid;grid-template-columns:250px minmax(0,1fr);gap:44px}.toc{position:sticky;top:18px;align-self:start;border-top:2px solid var(--ink);padding-top:14px}.toc a{display:block;color:#3f4744;text-decoration:none;padding:6px 0;font-size:14px}.toc a:hover{color:var(--accent)}
+main section{padding:44px 0;border-top:1px solid var(--line)}h2{font:700 34px/1.2 Georgia,"Noto Serif CJK SC","Songti SC",serif;margin:0 0 18px;letter-spacing:-.02em}h3{font-size:18px;margin:28px 0 8px}.intro{font-size:18px;color:#303633}
+.triad{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:28px 0}.card{border:1px solid var(--line);background:var(--panel);padding:24px}.card b{display:block;font:700 25px Georgia,"Noto Serif CJK SC","Songti SC",serif;margin-bottom:8px}.tag{display:inline-block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+.formula{margin:22px 0;padding:18px 20px;border-left:3px solid var(--accent);background:#fff;font:600 18px/1.55 ui-monospace,SFMono-Regular,Consolas,monospace;overflow:auto}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}.mini{padding:19px 20px;background:#fff;border:1px solid var(--line)}.mini strong{display:block;margin-bottom:5px}
+table{width:100%;border-collapse:collapse;background:#fff;margin:20px 0}th,td{text-align:left;vertical-align:top;padding:13px 14px;border-bottom:1px solid var(--line)}th{font-size:13px;letter-spacing:.04em;background:#f0f2ef}
+.chain{display:flex;gap:8px;flex-wrap:wrap;margin:24px 0}.chain span{border:1px solid var(--line);background:#fff;padding:10px 13px}.arrow{border:0!important;background:transparent!important;padding:10px 0!important;color:var(--muted)}
+.note{padding:20px 22px;border:1px solid #b9cbc5;background:var(--soft);margin:22px 0}.note strong{color:var(--accent)}
+blockquote{margin:24px 0;padding:0 0 0 20px;border-left:3px solid var(--ink);font:22px/1.6 Georgia,"Noto Serif CJK SC","Songti SC",serif}
+ul,ol{padding-left:22px}.checklist{counter-reset:item;list-style:none;padding:0}.checklist li{position:relative;padding:14px 12px 14px 52px;border-bottom:1px solid var(--line)}.checklist li:before{counter-increment:item;content:counter(item);position:absolute;left:8px;top:12px;width:28px;height:28px;border:1px solid #9fb5ae;border-radius:50%;display:grid;place-items:center;color:var(--accent);font-weight:700;font-size:13px}
+footer{border-top:1px solid var(--line);padding:34px 28px;color:var(--muted)}footer div{max-width:var(--max);margin:auto}
+@media(max-width:850px){.shell{grid-template-columns:1fr}.toc{position:static;display:none}.triad,.grid{grid-template-columns:1fr}.hero{padding-top:48px}.top{padding:15px 20px}.hero,.shell{padding-left:20px;padding-right:20px}}
+@media print{.toc,.langs{display:none}.shell{grid-template-columns:1fr}.hero{padding-top:30px}body{background:#fff}}
+</style>
+</head>
+<body>
+<header><div class="top"><div class="brand">Optics · Photonics / Foundations</div><div class="langs"><a href="foundations.html">EN</a> · <b>中文</b> · <a href="index.zh.html">软件目录</a></div></div></header>
+
+<div class="hero">
+<div class="kicker">统一物理框架</div>
+<h1>场 · 物质 · 相互作用</h1>
+<p class="lede">一个贯穿经典与量子、所有光学自由度、所有相关尺度与波段、科学实验、工程器件、计算建模以及日常光学系统的统一理解框架。</p>
+<div class="equation">光学 / 光子学 = 场 + 物质 + 相互作用</div>
+</div>
+
+<div class="shell">
+<nav class="toc">
+<a href="#meaning">1 · 这句话真正是什么意思</a><a href="#field">2 · 场</a><a href="#matter">3 · 物质</a><a href="#interaction">4 · 相互作用</a><a href="#levels">5 · 理论层级</a><a href="#scales">6 · 尺度与波段</a><a href="#devices">7 · 器件</a><a href="#experiments">8 · 实验</a><a href="#information">9 · 信息与测量</a><a href="#boundaries">10 · 框架边界</a><a href="#checklist">11 · 建模检查表</a>
+</nav>
+
+<main>
+<section id="meaning">
+<h2>这句话真正是什么意思</h2>
+<p class="intro">“场 + 物质 + 相互作用”不是用一句话替代所有光学理论，而是给所有理论和工程问题提供一个共同的物理骨架：什么在传播，什么在响应，以及它们怎样彼此改变。</p>
+<div class="triad">
+<div class="card"><span class="tag">Field</span><b>场：光本身在做什么</b>状态、传播、模式、相位、偏振、相干、光子、相关函数和量子统计。</div>
+<div class="card"><span class="tag">Matter</span><b>物质：光遇到了什么</b>原子、电子、晶格、半导体、生物组织、增益介质、探测器以及所有结构化光学器件。</div>
+<div class="card"><span class="tag">Interaction</span><b>相互作用：二者怎样改变彼此</b>吸收、发射、折射、散射、非线性、增益、探测、力、热和强耦合混成。</div>
+</div>
+<div class="formula">H = H_field + H_matter + H_int + H_drive + H_env</div>
+<p>自由空间传播属于场自身的动力学。光源、样品、调制器、增益介质与探测器都属于与场耦合的物质系统。几何通常通过材料布局、界面、边界和端口进入问题；只有当引力效应不可忽略时，时空几何才需要作为额外背景自由度显式写出。</p>
+</section>
+
+<section id="field">
+<h2>场</h2>
+<p>在经典层面，光是电磁场：<b>E(r,t)</b>、<b>B(r,t)</b>、<b>D(r,t)</b>、<b>H(r,t)</b>。在量子层面，仍然是同一个电磁场，只是场被量子化，场量成为算符，模式用产生与湮灭算符描述。</p>
+<div class="note"><strong>光子不是电磁场的替代品。</strong> 光子是量子化电磁场的激发。量子光学并没有“没有电磁场”，而是使用更大的状态空间和更严格的量子可观测量、测量与统计描述。</div>
+<div class="grid">
+<div class="mini"><strong>光谱自由度</strong>频率、波长、带宽、频率梳结构。</div>
+<div class="mini"><strong>空间自由度</strong>波矢、波前、横向模式、近场与远场。</div>
+<div class="mini"><strong>矢量自由度</strong>偏振、helicity、自旋角动量。</div>
+<div class="mini"><strong>时间自由度</strong>脉冲包络、延迟、相位、重复频率结构。</div>
+<div class="mini"><strong>模式自由度</strong>导模、腔模、轨道角动量等。</div>
+<div class="mini"><strong>量子自由度</strong>光子数、压缩、相干、相关性、纠缠。</div>
+</div>
+</section>
+
+<section id="matter">
+<h2>物质</h2>
+<p>“物质”包含所有能够产生、引导、变换、吸收、散射、放大或探测光的微观或有效自由度：电子、空穴、原子能级、分子、声子、自旋、激子、载流子等离子体，以及各种集体态。</p>
+<p>在经典器件层面，这些复杂自由度往往被压缩为 ε(r,ω)、μ(r,ω)、σ(r,ω)、χ⁽¹⁾、χ⁽²⁾、χ⁽³⁾ 等响应函数；在微观层面，这些响应又来自物质自身的 Hamiltonian 及其与电磁场的耦合。</p>
+<blockquote>光学器件，本质上就是被设计来实现某种变换的结构化物质。</blockquote>
+<table><thead><tr><th>对象</th><th>统一物理解读</th></tr></thead><tbody>
+<tr><td>透镜</td><td>材料几何 + 折射响应，用来变换波前。</td></tr>
+<tr><td>波导 / 光纤</td><td>支持特定电磁本征模的结构化介质。</td></tr>
+<tr><td>超表面</td><td>亚波长尺度设计过的电磁响应分布。</td></tr>
+<tr><td>激光增益介质</td><td>受驱动物质把储存能量相干地转移到光学模式。</td></tr>
+<tr><td>探测器</td><td>把场态转化为稳定电子、热、化学或机械记录的物质系统。</td></tr>
+</tbody></table>
+</section>
+
+<section id="interaction">
+<h2>相互作用</h2>
+<p>绝大多数熟悉的光学现象，都可以被重新理解为场与物质之间的能量、动量、相位或量子态交换。</p>
+<table><thead><tr><th>现象</th><th>统一解释</th></tr></thead><tbody>
+<tr><td>反射 / 折射</td><td>边界与材料响应重新组织电磁场。</td></tr>
+<tr><td>吸收 / 发射</td><td>能量在场与物质自由度之间转移。</td></tr>
+<tr><td>受激辐射</td><td>入射场驱动增益物质产生相干辐射。</td></tr>
+<tr><td>散射</td><td>物质改变场的动量、相位、偏振或频率。</td></tr>
+<tr><td>色散 / 双折射</td><td>物质响应依赖频率、方向或偏振。</td></tr>
+<tr><td>非线性光学</td><td>物质响应对场幅不再线性。</td></tr>
+<tr><td>Raman / Brillouin</td><td>光与分子、振动或声学自由度耦合。</td></tr>
+<tr><td>等离激元 / 极化激元</td><td>场与电荷或物质激发强耦合，产生混合本征模式。</td></tr>
+<tr><td>光力学</td><td>光学模式与机械模式交换能量和动量。</td></tr>
+<tr><td>探测</td><td>场—物质耦合产生可以读取的记录。</td></tr>
+</tbody></table>
+<p>干涉和衍射主要属于场本身的叠加与传播动力学，因此不需要假设“任何光学现象都必须在每一点发生场—物质作用”。统一框架允许有纯场动力学，也允许有真正的场—物质耦合。</p>
+</section>
+
+<section id="levels">
+<h2>同一结构，多个理论层级</h2>
+<div class="chain"><span>QED</span><span class="arrow">→</span><span>有效光—物质 Hamiltonian</span><span class="arrow">→</span><span>Maxwell + 材料响应</span><span class="arrow">→</span><span>波动光学</span><span class="arrow">→</span><span>几何光学</span></div>
+<p>这些不是互相竞争的理论，而是一套有效理论层级。越往左越微观、保留的自由度越多；越往右越简洁，但适用条件越强。</p>
+<div class="grid">
+<div class="mini"><strong>量子场论</strong>电磁规范场 + 带电物质量子场 + 相互作用。</div>
+<div class="mini"><strong>量子光学</strong>选定光学模式 + 发射体 / 声子 / 自旋 + 有效耦合。</div>
+<div class="mini"><strong>经典电磁学</strong>Maxwell 方程 + 本构关系 + 源与边界。</div>
+<div class="mini"><strong>波动光学</strong>Helmholtz、Fresnel、Fourier、傍轴、耦合模等近似。</div>
+<div class="mini"><strong>几何光学</strong>当波长远小于结构变化尺度时得到 eikonal / 光线极限。</div>
+<div class="mini"><strong>系统级光学</strong>传递函数、S 参数、成像算符和简化器件模型。</div>
+</div>
+</section>
+
+<section id="scales">
+<h2>所有尺度与所有电磁波段</h2>
+<p>这个框架同时覆盖量子光学、纳米光子学、集成光子学、光纤光学、激光、成像、光谱、几何光学与天文光学。</p>
+<table><thead><tr><th>波段</th><th>典型主导物质响应</th></tr></thead><tbody>
+<tr><td>Microwave</td><td>转动、自旋、电路和集体电子响应。</td></tr>
+<tr><td>THz</td><td>声子、低能激发、载流子动力学。</td></tr>
+<tr><td>红外</td><td>分子振动、声子、热辐射。</td></tr>
+<tr><td>可见 / 近红外</td><td>电子跃迁、介电响应、半导体跃迁。</td></tr>
+<tr><td>紫外</td><td>更高能电子跃迁与电离。</td></tr>
+<tr><td>X-ray</td><td>内层电子和高动量散射。</td></tr>
+<tr><td>Gamma</td><td>核过程和相对论粒子过程。</td></tr>
+</tbody></table>
+<p>不同学科对“光学”和“光子学”的传统波段边界并不一致，但底层的电磁场—物质框架不受这些学科命名限制。</p>
+</section>
+
+<section id="devices">
+<h2>器件就是变换</h2>
+<div class="formula">输入场态 → 结构化物质 + 相互作用 → 输出场态 / 物质态</div>
+<p>任何器件都可以用五个问题来理解：输入什么场？存在什么材料与几何？适用什么耦合规律？输出或储存了什么状态？最后测量什么量？</p>
+<p>这样就可以在同一个概念层面比较透镜、波片、光栅、光纤、微腔、SLM、相机和超表面，而不被它们完全不同的具体实现形式割裂。</p>
+</section>
+
+<section id="experiments">
+<h2>实验就是状态变换链</h2>
+<div class="chain"><span>光源</span><span class="arrow">→</span><span>状态制备</span><span class="arrow">→</span><span>传播</span><span class="arrow">→</span><span>样品 / 器件</span><span class="arrow">→</span><span>探测</span><span class="arrow">→</span><span>推断 / 控制</span></div>
+<p>这条链从台式实验一直适用于自动化实验室：光源通过物质—场相互作用制备场态；传播让场演化；样品改变场和物质状态；探测器留下记录；数据分析提取科学量；反馈再修改光源、器件或样品控制。</p>
+<h3>正问题与逆问题</h3>
+<div class="formula">(场, 物质, 耦合) → 可观测量</div>
+<div class="formula">目标观测量 / 目标变换 → 场态制备 + 材料几何 + 控制</div>
+<p>镜头设计、超表面综合、逆向纳米光子学、脉冲整形、计算成像和自动实验设计，都是逆问题的不同形式。</p>
+</section>
+
+<section id="information">
+<h2>信息与测量仍然在同一套物理里</h2>
+<p>探测器仍然是与场耦合的物质系统。它之所以成为“测量装置”，只是因为这种相互作用被设计成能够形成稳定记录。量子光学中的 observable 和 POVM 描述测量统计，而真正的物理记录仍来自具体耦合。</p>
+<p>信息编码在可区分的场态或场—物质联合态中：振幅、相位、频率、偏振、空间模式、时间模式、光子数、相干、相关性和纠缠。通信、传感和成像的主要差别，是制备什么状态、经过什么信道，以及最后如何推断。</p>
+</section>
+
+<section id="boundaries">
+<h2>这个简洁公式需要哪些边界说明</h2>
+<div class="grid">
+<div class="mini"><strong>不是每个问题都从 QED 开始。</strong> 应使用仍然保留决定性物理的最简理论层级。</div>
+<div class="mini"><strong>物质可以是主动的。</strong> 增益、泵浦、非平衡载流子和非线性介质都属于物质动力学。</div>
+<div class="mini"><strong>强耦合会产生混合态。</strong> 极化激元等本征态同时含场和物质成分；三元框架标记的是其父自由度和耦合来源。</div>
+<div class="mini"><strong>几何通常是实现方式，不是第四种本体。</strong> 实验室光学中的几何主要体现为材料布局、界面与边界。</div>
+<div class="mini"><strong>引力问题需要加入时空。</strong> 引力透镜和弯曲时空 QFT 中，背景几何应显式进入模型。</div>
+<div class="mini"><strong>学科名称比物理本身更窄。</strong> 有些电磁现象传统上不叫“光学”，但仍使用同一框架。</div>
+</div>
+<blockquote>光学与光子学研究电磁场的状态与动力学、物质的状态与响应，以及二者之间产生、变换、引导、探测和控制光的相互作用。</blockquote>
+</section>
+
+<section id="checklist">
+<h2>任意光学问题的建模检查表</h2>
+<ol class="checklist">
+<li><b>场。</b> 经典还是量子？波长、带宽、模式、偏振、相干性、功率或光子统计是什么？</li>
+<li><b>物质。</b> 哪些微观或有效自由度真正决定现象？</li>
+<li><b>相互作用。</b> 线性、非线性、共振、耗散、散射、增益、力还是测量？</li>
+<li><b>几何。</b> 维度、界面、边界、周期性、无序和端口如何定义？</li>
+<li><b>物理区间。</b> 近场/远场、弱/强耦合、平衡/驱动、线性/非线性？</li>
+<li><b>近似层级。</b> QED、有效 Hamiltonian、Maxwell、Helmholtz、傍轴、耦合模还是光线？</li>
+<li><b>观测量。</b> 场、光谱、图像、力、温度、电流、计数、相关函数还是态保真度？</li>
+<li><b>验证。</b> 守恒律、极限情形、数值收敛、标定和实验不确定度是否闭合？</li>
+</ol>
+<div class="note"><strong>与本仓库的关系。</strong> 软件目录回答“这个问题用什么工具建模”；这个页面回答“这些工具共同在描述什么物理对象，以及不同子领域为什么能放进同一套框架”。</div>
+</section>
+</main>
+</div>
+
+<footer><div>Optics · Photonics · Foundations — 与双语软件目录共同维护。<a href="../foundations/README.zh-CN.md">Markdown 源文件</a>。</div></footer>
+</body>
+</html>

@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="A unified conceptual framework for optics and photonics: field, matter, and interaction across classical, quantum, scientific, engineering and everyday optical systems.">
+<title>Foundations · Field, Matter, Interaction — Optics · Photonics</title>
+<style>
+:root{--bg:#f7f6f2;--panel:#fff;--ink:#151817;--muted:#5f6763;--line:#d8ddd9;--accent:#165d57;--soft:#eaf1ee;--max:1180px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.68 ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
+a{color:var(--accent);text-decoration-thickness:1px;text-underline-offset:3px}header{border-bottom:1px solid var(--line);background:rgba(247,246,242,.96)}
+.top{max-width:var(--max);margin:auto;padding:18px 28px;display:flex;justify-content:space-between;gap:20px;align-items:center}.brand{font-weight:700;letter-spacing:.02em}.langs{white-space:nowrap}
+.hero{max-width:var(--max);margin:auto;padding:74px 28px 48px}.kicker{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:700}.hero h1{font:700 clamp(42px,7vw,82px)/.98 Georgia,serif;margin:12px 0 24px;letter-spacing:-.035em;max-width:920px}
+.lede{font-size:21px;line-height:1.55;max-width:900px;color:#313735}.equation{margin:34px 0 0;padding:25px 28px;border:1px solid #b9cbc5;background:var(--soft);font:700 clamp(22px,4vw,38px)/1.25 Georgia,serif}
+.shell{max-width:var(--max);margin:auto;padding:0 28px 80px;display:grid;grid-template-columns:250px minmax(0,1fr);gap:44px}.toc{position:sticky;top:18px;align-self:start;border-top:2px solid var(--ink);padding-top:14px}.toc a{display:block;color:#3f4744;text-decoration:none;padding:6px 0;font-size:14px}.toc a:hover{color:var(--accent)}
+main section{padding:44px 0;border-top:1px solid var(--line)}h2{font:700 34px/1.1 Georgia,serif;margin:0 0 18px;letter-spacing:-.02em}h3{font-size:18px;margin:28px 0 8px}.intro{font-size:18px;color:#303633}
+.triad{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:28px 0}.card{border:1px solid var(--line);background:var(--panel);padding:24px}.card b{display:block;font:700 25px Georgia,serif;margin-bottom:8px}.tag{display:inline-block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+.formula{margin:22px 0;padding:18px 20px;border-left:3px solid var(--accent);background:#fff;font:600 18px/1.55 ui-monospace,SFMono-Regular,Consolas,monospace;overflow:auto}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}.mini{padding:19px 20px;background:#fff;border:1px solid var(--line)}.mini strong{display:block;margin-bottom:5px}
+table{width:100%;border-collapse:collapse;background:#fff;margin:20px 0}th,td{text-align:left;vertical-align:top;padding:13px 14px;border-bottom:1px solid var(--line)}th{font-size:13px;text-transform:uppercase;letter-spacing:.06em;background:#f0f2ef}
+.chain{display:flex;gap:8px;flex-wrap:wrap;margin:24px 0}.chain span{border:1px solid var(--line);background:#fff;padding:10px 13px}.arrow{border:0!important;background:transparent!important;padding:10px 0!important;color:var(--muted)}
+.note{padding:20px 22px;border:1px solid #b9cbc5;background:var(--soft);margin:22px 0}.note strong{color:var(--accent)}
+blockquote{margin:24px 0;padding:0 0 0 20px;border-left:3px solid var(--ink);font:22px/1.5 Georgia,serif}
+ul,ol{padding-left:22px}.checklist{counter-reset:item;list-style:none;padding:0}.checklist li{position:relative;padding:14px 12px 14px 52px;border-bottom:1px solid var(--line)}.checklist li:before{counter-increment:item;content:counter(item);position:absolute;left:8px;top:12px;width:28px;height:28px;border:1px solid #9fb5ae;border-radius:50%;display:grid;place-items:center;color:var(--accent);font-weight:700;font-size:13px}
+footer{border-top:1px solid var(--line);padding:34px 28px;color:var(--muted)}footer div{max-width:var(--max);margin:auto}
+@media(max-width:850px){.shell{grid-template-columns:1fr}.toc{position:static;display:none}.triad,.grid{grid-template-columns:1fr}.hero{padding-top:48px}.top{padding:15px 20px}.hero,.shell{padding-left:20px;padding-right:20px}}
+@media print{.toc,.langs{display:none}.shell{grid-template-columns:1fr}.hero{padding-top:30px}body{background:#fff}}
+</style>
+</head>
+<body>
+<header><div class="top"><div class="brand">Optics · Photonics / Foundations</div><div class="langs"><b>EN</b> · <a href="foundations.zh.html">中文</a> · <a href="index.html">Catalogue</a></div></div></header>
+
+<div class="hero">
+<div class="kicker">A unifying physical model</div>
+<h1>Field. Matter. Interaction.</h1>
+<p class="lede">A compact framework for understanding optics and photonics across classical and quantum theory, every optical degree of freedom, every relevant scale, scientific experiments, devices, computation and everyday optical systems.</p>
+<div class="equation">Optics / Photonics = Field + Matter + Interaction</div>
+</div>
+
+<div class="shell">
+<nav class="toc">
+<a href="#meaning">1 · What the model means</a><a href="#field">2 · Field</a><a href="#matter">3 · Matter</a><a href="#interaction">4 · Interaction</a><a href="#levels">5 · Theory levels</a><a href="#scales">6 · Scales & spectrum</a><a href="#devices">7 · Devices</a><a href="#experiments">8 · Experiments</a><a href="#information">9 · Information & measurement</a><a href="#boundaries">10 · Boundaries</a><a href="#checklist">11 · Modelling checklist</a>
+</nav>
+
+<main>
+<section id="meaning">
+<h2>What the model means</h2>
+<p class="intro">The formula is an ontology and modelling discipline, not a substitute for the theories underneath it. It tells us what every optical problem is built from and where each approximation enters.</p>
+<div class="triad">
+<div class="card"><span class="tag">Field</span><b>What light is doing</b>State, propagation, modes, phase, polarization, coherence, photons, correlations and quantum statistics.</div>
+<div class="card"><span class="tag">Matter</span><b>What light meets</b>Atoms, electrons, lattices, semiconductors, biological tissue, gain media, detectors and all structured optical components.</div>
+<div class="card"><span class="tag">Interaction</span><b>How they change each other</b>Absorption, emission, refraction, scattering, nonlinearity, gain, detection, force, heating and hybridization.</div>
+</div>
+<div class="formula">H = H_field + H_matter + H_int + H_drive + H_env</div>
+<p>Free-space propagation is field self-dynamics. Sources, samples and detectors are matter systems coupled to the field. Geometry usually enters through material layout, interfaces, boundaries and ports. Spacetime geometry becomes an additional background degree of freedom when gravitational effects matter.</p>
+</section>
+
+<section id="field">
+<h2>Field</h2>
+<p>Classically, light is the electromagnetic field: <b>E(r,t)</b>, <b>B(r,t)</b>, <b>D(r,t)</b> and <b>H(r,t)</b>. Quantum mechanically, the same field is quantized; field observables become operators and modes are described by creation and annihilation operators.</p>
+<div class="note"><strong>Photon ≠ replacement for the field.</strong> A photon is an excitation of the quantized electromagnetic field. Quantum optics does not remove the electromagnetic field; it enlarges the state space and changes how observables and measurements are represented.</div>
+<div class="grid">
+<div class="mini"><strong>Spectral freedom</strong>Frequency, wavelength, bandwidth, comb structure.</div>
+<div class="mini"><strong>Spatial freedom</strong>Wave vector, wavefront, transverse mode, near/far field.</div>
+<div class="mini"><strong>Vector freedom</strong>Polarization, helicity, spin angular momentum.</div>
+<div class="mini"><strong>Temporal freedom</strong>Pulse envelope, delay, phase, repetition structure.</div>
+<div class="mini"><strong>Modal freedom</strong>Guided modes, cavity modes, orbital angular momentum.</div>
+<div class="mini"><strong>Quantum freedom</strong>Photon number, squeezing, coherence, correlations, entanglement.</div>
+</div>
+</section>
+
+<section id="matter">
+<h2>Matter</h2>
+<p>Matter is every microscopic or effective degree of freedom that can generate, guide, transform, absorb, scatter, amplify or detect light. The relevant variables may be electrons, holes, atomic levels, molecules, phonons, spins, excitons, carrier plasmas or collective states.</p>
+<p>At the classical device level, much of this microscopic physics is compressed into response functions such as ε(r,ω), μ(r,ω), σ(r,ω), χ⁽¹⁾, χ⁽²⁾ and χ⁽³⁾. At the microscopic level, those quantities are consequences of a matter Hamiltonian coupled to the electromagnetic field.</p>
+<blockquote>An optical device is structured matter engineered to implement a transformation.</blockquote>
+<table><thead><tr><th>Object</th><th>Physical reading</th></tr></thead><tbody>
+<tr><td>Lens</td><td>Material geometry + refractive response that transforms wavefronts.</td></tr>
+<tr><td>Waveguide / fiber</td><td>Structured dielectric matter that supports selected EM eigenmodes.</td></tr>
+<tr><td>Metasurface</td><td>Subwavelength spatial distribution of designed electromagnetic response.</td></tr>
+<tr><td>Laser medium</td><td>Driven matter that transfers stored energy coherently into optical modes.</td></tr>
+<tr><td>Detector</td><td>Matter engineered to convert a field state into a stable electronic, thermal, chemical or mechanical record.</td></tr>
+</tbody></table>
+</section>
+
+<section id="interaction">
+<h2>Interaction</h2>
+<p>Interaction is the bridge that produces most familiar optical phenomena.</p>
+<table><thead><tr><th>Phenomenon</th><th>Unified interpretation</th></tr></thead><tbody>
+<tr><td>Reflection / refraction</td><td>Boundary and material response reorganize the field.</td></tr>
+<tr><td>Absorption / emission</td><td>Energy moves between field and matter sectors.</td></tr>
+<tr><td>Stimulated emission</td><td>An incident field drives coherent radiation from gain matter.</td></tr>
+<tr><td>Scattering</td><td>Matter changes momentum, phase, polarization or frequency of the field.</td></tr>
+<tr><td>Dispersion / birefringence</td><td>Material response depends on frequency, direction or polarization.</td></tr>
+<tr><td>Nonlinear optics</td><td>Matter response depends nonlinearly on field amplitude.</td></tr>
+<tr><td>Raman / Brillouin</td><td>Light couples to molecular, vibrational or acoustic degrees of freedom.</td></tr>
+<tr><td>Plasmonics / polaritons</td><td>Field couples strongly to charge or material excitations; hybrid modes emerge.</td></tr>
+<tr><td>Optomechanics</td><td>Optical and mechanical modes exchange energy and momentum.</td></tr>
+<tr><td>Detection</td><td>Field–matter coupling creates a readable record.</td></tr>
+</tbody></table>
+<p>Interference and diffraction are mainly field dynamics: superposition plus propagation. They fit naturally without pretending that matter must be present at every point.</p>
+</section>
+
+<section id="levels">
+<h2>One structure, many theory levels</h2>
+<div class="chain"><span>QED</span><span class="arrow">→</span><span>Effective light–matter Hamiltonians</span><span class="arrow">→</span><span>Maxwell + response</span><span class="arrow">→</span><span>Wave optics</span><span class="arrow">→</span><span>Ray optics</span></div>
+<p>These are not competing descriptions. They are a hierarchy of effective theories. Moving left retains more microscopic degrees of freedom. Moving right discards detail in exchange for simpler equations and a narrower validity domain.</p>
+<div class="grid">
+<div class="mini"><strong>Quantum field theory</strong>Electromagnetic gauge field + charged matter fields + interaction.</div>
+<div class="mini"><strong>Quantum optics</strong>Selected optical modes + emitters / phonons / spins + effective coupling.</div>
+<div class="mini"><strong>Classical electromagnetism</strong>Maxwell equations + constitutive relations + sources and boundaries.</div>
+<div class="mini"><strong>Wave optics</strong>Helmholtz, Fresnel, Fourier, paraxial and coupled-mode approximations.</div>
+<div class="mini"><strong>Geometrical optics</strong>Eikonal and ray limit when wavelength is much smaller than structural variation.</div>
+<div class="mini"><strong>System optics</strong>Transfer functions, S-parameters, imaging operators and reduced device models.</div>
+</div>
+</section>
+
+<section id="scales">
+<h2>All scales and all electromagnetic bands</h2>
+<p>The same decomposition covers quantum optics, nanophotonics, integrated photonics, fiber optics, laser physics, imaging, spectroscopy, geometrical optics and astronomical optics.</p>
+<table><thead><tr><th>Band</th><th>Representative matter response</th></tr></thead><tbody>
+<tr><td>Microwave</td><td>Rotations, spins, circuits, collective electronic response.</td></tr>
+<tr><td>THz</td><td>Phonons, low-energy excitations, carrier dynamics.</td></tr>
+<tr><td>Infrared</td><td>Molecular vibrations, phonons, thermal radiation.</td></tr>
+<tr><td>Visible / near-IR</td><td>Electronic transitions, dielectric response, semiconductor transitions.</td></tr>
+<tr><td>UV</td><td>Higher electronic transitions and ionization.</td></tr>
+<tr><td>X-ray</td><td>Inner-shell electrons and high-momentum scattering.</td></tr>
+<tr><td>Gamma</td><td>Nuclear and relativistic particle processes.</td></tr>
+</tbody></table>
+<p>Disciplinary use of “optics” and “photonics” does not cover all of these bands equally, but the underlying electromagnetic field–matter framework does.</p>
+</section>
+
+<section id="devices">
+<h2>Devices are transformations</h2>
+<div class="formula">input field state → structured matter + interaction → output field / matter state</div>
+<p>Every device can be interrogated with five questions: What enters? What matter and geometry are present? What coupling law applies? What state exits or is stored? What observable is read out?</p>
+<p>This abstraction lets lenses, waveplates, gratings, fibers, cavities, SLMs, cameras and metasurfaces be compared at the same conceptual level even though their microscopic implementations differ.</p>
+</section>
+
+<section id="experiments">
+<h2>Experiments are state-transformation chains</h2>
+<div class="chain"><span>Source</span><span class="arrow">→</span><span>State preparation</span><span class="arrow">→</span><span>Propagation</span><span class="arrow">→</span><span>Sample / device</span><span class="arrow">→</span><span>Detection</span><span class="arrow">→</span><span>Inference / control</span></div>
+<p>This chain is useful from table-top optics to autonomous laboratories. A source prepares a field through matter–field interaction; propagation evolves it; a sample transforms field and matter states; detection creates a record; inference extracts the quantity of interest; feedback changes controls and closes the loop.</p>
+<h3>Forward and inverse views</h3>
+<div class="formula">(field, matter, coupling) → observable</div>
+<div class="formula">desired observable / transformation → field preparation + matter geometry + control</div>
+<p>Lens design, metasurface synthesis, inverse nanophotonics, pulse shaping, computational imaging and automated experiment design are variations of the inverse form.</p>
+</section>
+
+<section id="information">
+<h2>Measurement and information stay inside the same physics</h2>
+<p>A detector is another matter system coupled to the field. What makes it a measurement apparatus is that the interaction creates a stable record. In quantum optics, observables and POVMs describe the statistics of that process; the physical record still comes from an interaction.</p>
+<p>Information is encoded in distinguishable states and correlations: amplitude, phase, frequency, polarization, spatial and temporal mode, photon number, coherence and entanglement. Communication, sensing and imaging mainly differ in the prepared state, the channel acting on it and the inference performed at the output.</p>
+</section>
+
+<section id="boundaries">
+<h2>Where the compact formula needs care</h2>
+<div class="grid">
+<div class="mini"><strong>Do not start every problem from QED.</strong> Use the simplest model that still contains the decisive physics.</div>
+<div class="mini"><strong>Matter can be active.</strong> Gain, pumping, non-equilibrium carriers and nonlinear media are matter dynamics, not exceptions.</div>
+<div class="mini"><strong>Strong coupling creates hybrids.</strong> Polaritons and related excitations mix field and matter; the decomposition identifies their parent sectors rather than forcing the eigenstates to separate.</div>
+<div class="mini"><strong>Geometry is usually implementation, not ontology.</strong> Interfaces and layout enter through structured matter and boundaries.</div>
+<div class="mini"><strong>Gravity adds spacetime.</strong> In gravitational lensing or curved-spacetime QFT, background geometry should be written explicitly.</div>
+<div class="mini"><strong>Discipline names are narrower than physics.</strong> Not every EM phenomenon is conventionally called optics, even though the same framework applies.</div>
+</div>
+<blockquote>Optics and photonics study electromagnetic-field states and dynamics, matter states and responses, and the interactions that generate, transform, guide, detect and control them.</blockquote>
+</section>
+
+<section id="checklist">
+<h2>A practical modelling checklist</h2>
+<ol class="checklist">
+<li><b>Field.</b> Classical or quantum? Wavelength, bandwidth, modes, polarization, coherence, power or photon statistics?</li>
+<li><b>Matter.</b> Which microscopic or effective degrees of freedom actually matter?</li>
+<li><b>Interaction.</b> Linear, nonlinear, resonant, dissipative, scattering, gain, force or measurement?</li>
+<li><b>Geometry.</b> Dimensions, interfaces, boundaries, periodicity, disorder and ports?</li>
+<li><b>Regime.</b> Near/far field, weak/strong coupling, equilibrium/driven, linear/nonlinear?</li>
+<li><b>Approximation.</b> QED, effective Hamiltonian, Maxwell, Helmholtz, paraxial, coupled mode or rays?</li>
+<li><b>Observable.</b> Field, spectrum, image, force, temperature, current, counts, correlation or state fidelity?</li>
+<li><b>Validation.</b> Conservation laws, limiting cases, numerical convergence, calibration and experimental uncertainty?</li>
+</ol>
+<div class="note"><strong>Why this matters for the repository.</strong> The software catalogue answers “which tool can model this problem?” This page answers “what physical object is being modelled, at a level that survives across tools, subfields and scales?”</div>
+</section>
+</main>
+</div>
+
+<footer><div>Optics · Photonics · Foundations — maintained alongside the bilingual software catalogue. <a href="../foundations/README.md">Markdown source</a>.</div></footer>
+</body>
+</html>

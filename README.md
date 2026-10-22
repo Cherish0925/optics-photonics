@@ -4,7 +4,7 @@
 
 # Optics · Photonics
 
-A bilingual software catalogue for optical science and engineering: **what each tool models, how it is licensed, and how people and AI agents can use it.**
+A bilingual software catalogue for optical science and engineering, with a compact physical foundation: **Field + Matter + Interaction**.
 
 **96 tools and product families · 14 domains · 200 documentation and integration links**
 
@@ -12,8 +12,19 @@ A bilingual software catalogue for optical science and engineering: **what each 
 | --- | --- | --- |
 | [English HTML](https://cherish0925.github.io/optics-photonics/) · [中文 HTML](https://cherish0925.github.io/optics-photonics/index.zh.html) | [English JSON](data/catalogue.en.json) · [中文 JSON](data/catalogue.zh.json) | [Agent entry point](llms.txt) · [Contributing](CONTRIBUTING.md) |
 | [English Markdown](docs/catalogue.en.md) · [中文 Markdown](docs/catalogue.zh.md) | [Source index](data/resources.en.json) · [Schema](data/schema.json) | [Examples](examples/) · [Build instructions](#develop) |
+| [Foundations](docs/foundations.html) · [基础框架](docs/foundations.zh.html) | [Foundation source](foundations/README.md) | **Field · Matter · Interaction** |
 
 Download [English HTML](https://raw.githubusercontent.com/Cherish0925/optics-photonics/main/docs/index.html) or [Chinese HTML](https://raw.githubusercontent.com/Cherish0925/optics-photonics/main/docs/index.zh.html) and open either in a browser. Each file contains its own styles, scripts, font subset, catalogue and source index. Browsing, filtering, comparison and exports work offline; opening external documentation requires internet access.
+
+## Physical foundation
+
+The repository uses one compact model to connect the catalogue across subfields and scales:
+
+> **Optics / Photonics = Field + Matter + Interaction**
+
+Here **field** means the classical or quantized electromagnetic field and its states; **matter** includes microscopic degrees of freedom, materials, devices and detectors; **interaction** covers the mechanisms by which field and matter exchange energy, momentum and information. Free propagation is field dynamics; optical components are structured matter; measurement is a controlled field–matter interaction. The framework spans quantum optics, nanophotonics, lasers, fibers, imaging, spectroscopy, wave optics and geometrical optics while preserving the limits of each effective theory.
+
+Read the complete [English foundation](docs/foundations.html) or [中文基础框架](docs/foundations.zh.html). Maintainable Markdown sources live in [`foundations/`](foundations/).
 
 ## What is inside
 

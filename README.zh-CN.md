@@ -4,7 +4,7 @@
 
 # 光学与光子学软件目录
 
-面向光学科研、工程开发与 AI Agent 的双语工具目录：**每个工具能描述什么物理问题，如何授权，以及如何通过程序使用。**
+面向光学科研、工程开发与 AI Agent 的双语工具目录，并加入贯穿全部子领域的统一物理基础：**场 + 物质 + 相互作用**。
 
 **96 个工具与产品族 · 14 个领域 · 200 个文档与接口资料入口**
 
@@ -12,8 +12,19 @@
 | --- | --- | --- |
 | [中文 HTML](https://cherish0925.github.io/optics-photonics/index.zh.html) · [English HTML](https://cherish0925.github.io/optics-photonics/) | [中文 JSON](data/catalogue.zh.json) · [English JSON](data/catalogue.en.json) | [Agent 入口](llms.txt) · [贡献说明](CONTRIBUTING.md) |
 | [中文 Markdown](docs/catalogue.zh.md) · [English Markdown](docs/catalogue.en.md) | [资料索引](data/resources.zh.json) · [数据结构](data/schema.json) | [代码示例](examples/) · [本地开发](#本地开发) |
+| [基础框架](docs/foundations.zh.html) · [Foundations](docs/foundations.html) | [中文源文件](foundations/README.zh-CN.md) | **场 · 物质 · 相互作用** |
 
 也可以下载[中文 HTML](https://raw.githubusercontent.com/Cherish0925/optics-photonics/main/docs/index.zh.html)或[英文 HTML](https://raw.githubusercontent.com/Cherish0925/optics-photonics/main/docs/index.html)，直接用浏览器打开。两个文件分别内嵌完整数据、样式、脚本和中文字体子集，搜索、筛选、比较与导出均可离线使用；原始网站与文档链接需要联网。
+
+## 统一物理基础
+
+本仓库使用一个简洁但可以贯穿不同尺度与理论层级的物理框架：
+
+> **光学 / 光子学 = 场 + 物质 + 相互作用**
+
+这里的**场**包括经典与量子化电磁场及其状态；**物质**包括微观自由度、材料、器件与探测器；**相互作用**描述二者之间的能量、动量与信息交换。自由传播属于场动力学；光学器件是结构化物质；测量本质上是被设计好的场—物质相互作用。这个框架同时覆盖量子光学、纳米光子学、激光、光纤、成像、光谱、波动光学与几何光学，同时保留各有效理论的适用边界。
+
+完整内容见[中文基础框架](docs/foundations.zh.html)与 [English Foundations](docs/foundations.html)，可维护的 Markdown 源文件位于 [`foundations/`](foundations/)。
 
 ## 包含什么
 

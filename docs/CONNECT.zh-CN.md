@@ -40,7 +40,7 @@ optics-photonics connect agentic-research-os --output optics-plugin
 
 | 系统 | 生成内容 | 使用方式 |
 | --- | --- | --- |
-| Agentic Research OS | `plugin.json`、完整程序、Skills | 安装目录或 ZIP，激活已安装的修订；使用宿主的 `${RESEARCH_PYTHON}`。 |
+| Agentic Research OS | `plugin.json`、完整程序、Skills | 解压 ZIP，安装含 `plugin.json` 的目录，再激活已安装的修订；使用宿主的 `${RESEARCH_PYTHON}`。 |
 | Codex | `.codex-plugin/plugin.json`、`.mcp.json`、Skills | 原生插件，或生成的 `INSTALL.md` 中的 MCP 注册命令。 |
 | Claude Code | `.claude-plugin/plugin.json`、`.mcp.json`、Skills | `claude --plugin-dir PATH`，或 MCP 注册命令。 |
 | DeepSeek Harness | `optics.cordis.yml` | `dsh web --patch PATH/optics.cordis.yml`，使用其原生 MCP 客户端。 |

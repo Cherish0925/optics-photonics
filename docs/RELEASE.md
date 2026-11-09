@@ -6,7 +6,7 @@ Installable optical software connections with a shared CLI, MCP server and resea
 - IOP integration for durable runs, parallel/dependent steps, request reuse and result download.
 - Self-contained Chinese and English guides with navigation and software filtering.
 
-The wheel runs with Python 3.10+. Research OS can install its ZIP directly using the host Python. The Connect ZIP generates local host packages with `python server.py connect HOST --output DIR`.
+The wheel runs with Python 3.10+. Extract the Research OS ZIP and install its plugin directory; execution uses the host Python. The Connect ZIP generates local host packages with `python server.py connect HOST --output DIR`.
 
 Scientific solvers keep their own platform, dependency and license requirements. Catalogue coverage does not mean every vendor product has been installed and exercised. Windows, macOS and Linux checks run the 13 scientific calculations, installed wheel, generated plugin, and a real MCP-to-IOP native calculation before publication.
 

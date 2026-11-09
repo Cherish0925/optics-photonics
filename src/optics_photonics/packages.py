@@ -45,7 +45,7 @@ def package(destination, host='mcp', python=None):
         descriptor['mcpServers'] = {'optics':{'transport':'stdio','command':'${RESEARCH_PYTHON}',
             'args':['-B','${PACKAGE_ROOT}/server.py','mcp'], 'protocol_version':'2025-11-25'}}
         write(target/'plugin.json',descriptor)
-        instructions = 'Install this directory or its ZIP as an Agentic Research OS plugin. Activate its returned revision in the current workspace. The package uses the host Python and carries all connector code, catalogue data and Skills. Configure scientific software on the IOP computer.'
+        instructions = 'Extract the release ZIP if needed, then install the directory containing plugin.json as an Agentic Research OS plugin. Activate its returned revision in the current workspace. The package uses the host Python and carries all connector code, catalogue data and Skills. Configure scientific software on the IOP computer.'
     elif host in ('codex','claude'):
         folder = '.codex-plugin' if host == 'codex' else '.claude-plugin'
         # Both native plugin formats support a shared .mcp.json and discovered skills/ directory.

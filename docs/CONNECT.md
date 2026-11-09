@@ -33,7 +33,7 @@ optics-photonics connect agentic-research-os --output optics-plugin
 
 | Host | Generated connection | Use |
 | --- | --- | --- |
-| Agentic Research OS | `plugin.json`, bundled Python code and Skills | Install the directory/ZIP and activate its installed revision. Uses `${RESEARCH_PYTHON}`. |
+| Agentic Research OS | `plugin.json`, bundled Python code and Skills | Extract the ZIP, install the directory containing `plugin.json`, then activate its installed revision. Uses `${RESEARCH_PYTHON}`. |
 | Codex | `.codex-plugin/plugin.json`, `.mcp.json`, Skills | Native plugin or the `codex mcp add` command in `INSTALL.md`. |
 | Claude Code | `.claude-plugin/plugin.json`, `.mcp.json`, Skills | `claude --plugin-dir PATH` or the MCP registration command in `INSTALL.md`. |
 | DeepSeek Harness | `optics.cordis.yml` | `dsh web --patch PATH/optics.cordis.yml`; uses `@deepseek-ai/dsh-mcp-client`. |

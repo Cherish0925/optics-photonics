@@ -27,7 +27,7 @@
 仓库现提供可安装的连接器、完整原生程序执行、MCP 和研究 Skills。[接入说明](docs/CONNECT.zh-CN.md) · [交互指南](https://cherish0925.github.io/optics-photonics/connect.zh.html) · [下载发布包](https://github.com/Cherish0925/optics-photonics/releases)。
 
 ```sh
-python -m pip install "git+https://github.com/Cherish0925/optics-photonics.git@optics-v0.3.0"
+python -m pip install "git+https://github.com/Cherish0925/optics-photonics.git@optics-v0.3.1"
 optics-photonics prepare tmm
 optics-photonics connect agentic-research-os --output optics-plugin
 ```

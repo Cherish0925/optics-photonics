@@ -1,5 +1,7 @@
 Independent digital optics and photonics research, from software selection to running calculations and retrieving results.
 
+Version 0.3.1 fixes clean-environment installation of the TMM solver: the connection recipe now installs and verifies NumPy alongside TMM. The Research OS plugin and Connect packages include the corrected recipe.
+
 - Native session adapters for installed Lumerical, COMSOL, OpticStudio and CST: SDK discovery and binding, owned sessions, project load/save, full native programs and scientific data export. Commercial adapter lifecycle tests use SDK doubles; licensed solver execution requires the target workstation.
 - Background calculations run independently of the Agent process. Parallel and dependent steps share a CPU budget and per-software concurrency settings.
 - SQLite stores research runs, source programs, inputs, environment settings and results. Reconnecting uses the same run ID; request IDs prevent duplicate submissions. Resume retains completed steps and starts a new attempt for unfinished steps.

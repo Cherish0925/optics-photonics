@@ -28,7 +28,7 @@ installation is needed. [Other hosts and updates](docs/CONNECT.md#install-from-a
 The repository now includes an installable connector, native-program execution, MCP and research Skills. [Connection guide](docs/CONNECT.md) · [Interactive guide](https://cherish0925.github.io/optics-photonics/connect.html) · [Release packages](https://github.com/Cherish0925/optics-photonics/releases).
 
 ```sh
-python -m pip install "git+https://github.com/Cherish0925/optics-photonics.git@optics-v0.3.0"
+python -m pip install "git+https://github.com/Cherish0925/optics-photonics.git@optics-v0.3.1"
 optics-photonics prepare tmm
 optics-photonics connect agentic-research-os --output optics-plugin
 ```

@@ -21,7 +21,7 @@ class ConnectionTests(unittest.TestCase):
         self.assertIn('numpy', record['modules'])
         self.assertIn('numpy', record['distributions'])
         generated = Path(__file__).resolve().parents[1] / 'connect/agentic-research-os/lib/optics_photonics/resources/data/connections.json'
-        self.assertEqual(json.loads(generated.read_text())['tmm'], record)
+        self.assertEqual(json.loads(generated.read_text(encoding='utf-8'))['tmm'], record)
 
     def test_every_catalogued_tool_has_a_source_and_connection(self):
         entries = catalogue.catalogue()

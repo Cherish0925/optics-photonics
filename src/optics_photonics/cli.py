@@ -29,7 +29,7 @@ def main(argv=None):
         if name == 'run': run.add_argument('--output'); run.add_argument('--timeout',type=float)
         else: run.add_argument('--name',default='Optical research'); run.add_argument('--request-id'); run.add_argument('--timeout',type=float)
     resources=commands.add_parser('resources'); resources.add_argument('--cpu',type=int)
-    workflow=commands.add_parser('submit-workflow'); workflow.add_argument('file',type=Path); workflow.add_argument('--name',default='Optics research'); workflow.add_argument('--request-id'); workflow.add_argument('--run-id')
+    workflow=commands.add_parser('submit-workflow'); workflow.add_argument('file',type=Path,help='JSON file containing a top-level array of steps; each step needs id and tool'); workflow.add_argument('--name',default='Optics research'); workflow.add_argument('--request-id'); workflow.add_argument('--run-id')
     for name in ('status','files','cancel','resume'):
         item=commands.add_parser(name); item.add_argument('run_id')
         if name in ('status','files'):

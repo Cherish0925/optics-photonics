@@ -79,6 +79,8 @@ MCP provides software search, environment preparation/binding, resource settings
 
 Computations run on the MCP host. SSH can launch the stdio server on a workstation with the scientific software: `ssh -T USER@HOST /path/to/python -m optics_photonics mcp`. `read_result` returns bounded text/binary contents. `download_result` copies to a path on the MCP host; use SSH/SFTP for large remote files.
 
+Use a persistent computing host for long research runs. A detached worker survives the submitting process, but a host that disposes of the entire container or process group also stops its workers. For such Agent environments, connect to the scientific workstation over SSH rather than starting the calculation inside a disposable tool execution.
+
 Install a new wheel or tag and generate a new plugin directory to update. Configuration, scientific environments and research records remain under `OPTICS_HOME` or `~/.optics-photonics`.
 
 ## Software and extension model

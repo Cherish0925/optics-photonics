@@ -7,6 +7,8 @@ description: "Connect optical software environments, model and simulate optical 
 
 Use a complete program for the scientific task. The connector and each solver may have different Python environments. Computation, background jobs and result access are provided by this package.
 
+Long research runs need a persistent computing host. When the Agent disposes of entire tool containers or process groups, launch MCP over SSH on the scientific workstation; detaching a worker cannot outlive removal of its computing environment.
+
 1. Read `software_details(tool)` and `environments`. Connect an existing interpreter with `bind_environment(tool, python=...)`. For a listed install recipe, call `prepare_environment` and wait for its run to succeed. From a shell use `optics-photonics prepare TOOL`; a different Python can be selected with `--python PATH`. For Meep use its documented electromagnetic-solver distribution, not the unrelated PyPI package.
    For installed Lumerical, COMSOL, OpticStudio or CST, use `discover_native_software` and `bind_native_software`. Read [native software sessions](references/native-software.md) for SDK selection, project operations and complete native programs.
 2. Use a packaged `action` when its physical model matches the task. Otherwise submit a complete Python `source` using the software's full native API. It receives `INPUTS` and `OUTPUT_DIR`, and sets `RESULT` to compact JSON. Save arrays, meshes, models and plots in OUTPUT_DIR, with units and sampling conventions. Keep tightly coupled loops or a live software session in one program.

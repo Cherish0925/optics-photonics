@@ -52,7 +52,7 @@ class NativeTests(unittest.TestCase):
             sdk.mkdir(parents=True)
             (sdk/'lumapi.py').write_text(LUMAPI)
             found = native.discover([str(root)])['installations']
-            self.assertTrue(any(row.get('sdk_path') == str(sdk) for row in found))
+            self.assertTrue(any(row.get('sdk_path') == str(sdk.resolve()) for row in found))
             with patch.object(native.platform, 'system', return_value='Linux'):
                 bound = native.bind('lumerical', python=sys.executable, sdk_path=str(sdk), path=root/'home')
                 self.assertTrue(bound['sdk']['importable'])

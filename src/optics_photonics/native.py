@@ -54,7 +54,7 @@ def discover(roots=None):
     patterns = {
         'lumerical': ['api/python/lumapi.py', '*/api/python/lumapi.py', '*/*/api/python/lumapi.py', 'Lumerical/*/api/python/lumapi.py'],
         'cst': ['AMD64/python_cst_libraries/cst/__init__.py', '*/AMD64/python_cst_libraries/cst/__init__.py', '*/python_cst_libraries/cst/__init__.py'],
-        'comsol': ['bin/comsol', '*/bin/comsol', '*/*/bin/comsol', '*/Multiphysics/bin/win64/comsolbatch.exe', '*/*/bin/win64/comsolbatch.exe'],
+        'comsol': ['bin/comsol', '*/bin/comsol', '*/*/bin/comsol', '*/Multiphysics/bin/win64/comsolbatch.exe', '*/*/bin/win64/comsolbatch.exe', '*/*/*/bin/win64/comsolbatch.exe'],
         'opticstudio': ['ZOSAPI.dll', '*/ZOSAPI.dll', '*/*/ZOSAPI.dll'],
     }
     found = {}

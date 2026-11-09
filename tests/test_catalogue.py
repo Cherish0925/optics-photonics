@@ -45,7 +45,7 @@ class CatalogueTest(unittest.TestCase):
                     if d[key]['kind']!='unverified':self.assertTrue(d[key]['url'].startswith('https://'))
     def test_english_and_embedded_data(self):
         self.assertFalse(re.search(r'[\u4e00-\u9fff]',json.dumps(self.data['en'],ensure_ascii=False)))
-        for lang,file in [('en','index.html'),('zh','index.zh.html')]:
+        for lang,file in [('en','catalogue.html'),('zh','catalogue.zh.html')]:
             page=(ROOT/'docs'/file).read_text(encoding='utf-8')
             for id in ('catalogue-data','resource-data','domain-data'):
                 raw=re.search(r'<script type="application/json" id="'+id+r'">(.*?)</script>',page,re.S).group(1)

@@ -14,6 +14,8 @@ TOOLS = [
     ('software_search', 'Find optical software by physical problem, domain and license; paginated results. Does not imply installation.', schema({'query':STRING,'domain':STRING,'license_group':{'enum':['open','paid','limited']},'offset':{'type':'integer','minimum':0},'limit':{'type':'integer','minimum':1,'maximum':100},'language':{'enum':['zh','en']}})),
     ('software_details', 'Read native interfaces, installation source, upstream MCP/Skills and executable operation inputs for one software.', schema({'tool':STRING,'language':{'enum':['zh','en']}},['tool'])),
     ('environments', 'List configured local scientific interpreters and executable availability.', schema()),
+    ('discover_native_software', 'Find local Lumerical, COMSOL, OpticStudio and CST installation paths; inspect adapter requirements and native program examples. Does not launch a licensed solver.', schema({'roots':{'type':'array','items':STRING}})),
+    ('bind_native_software', 'Connect an installed commercial solver SDK to its own Python environment. Each calculation owns a software session with full native API, project load/save and data export.', schema({'tool':STRING,'python':STRING,'sdk_path':STRING,'options':{'type':'object'},'threads':{'type':'integer','minimum':1},'concurrency':{'type':'integer','minimum':1}},['tool'])),
     ('prepare_environment', 'Install a documented software recipe into its isolated Python environment in the background; returns a run ID. Existing environments can be bound directly.', schema({'tool':STRING,'python':STRING,'request_id':STRING},['tool'])),
     ('bind_environment', 'Connect an existing scientific Python environment or explicit native executable; does not install a solver.', schema({'tool':STRING,'python':STRING,'command':{'type':'array','items':STRING,'minItems':1},'threads':{'type':'integer','minimum':1},'concurrency':{'type':'integer','minimum':1},'cwd':STRING},['tool'])),
     ('compute_resources', 'Read or set the total CPU thread capacity shared by background calculations on this computer.', schema({'cpu':{'type':'integer','minimum':1}})),
@@ -34,6 +36,9 @@ def invoke(name, args):
     if name == 'software_details':
         return {**catalogue.software(**args), 'execution':operations.details(args['tool'])}
     if name == 'environments': return {'environments':environments.available()}
+    if name in ('discover_native_software','bind_native_software'):
+        from . import native
+        return native.discover(**args) if name == 'discover_native_software' else native.bind(**args)
     if name == 'bind_environment': return environments.bind(**args)
     if name == 'prepare_environment': return jobs.prepare(**args)
     if name == 'compute_resources': return jobs.resources(**args)

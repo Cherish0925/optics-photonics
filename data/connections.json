@@ -25,7 +25,8 @@
     },
     "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support.",
-    "installation_note": "Bind a program that uses the vendor API on its supported operating system; installation and licensing are provided by the vendor."
+    "installation_note": "Use discover and bind-native for the installed SDK. Each task owns a session and saves its working project under its output directory. Adapter lifecycle checks use SDK doubles; licensed solver execution remains workstation-dependent.",
+    "session_adapter": "opticstudio"
   },
   "codev": {
     "kind": "native",
@@ -265,7 +266,8 @@
     },
     "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support.",
-    "installation_note": "Use the lumapi module shipped with your licensed Ansys installation and configure its supported Python path."
+    "installation_note": "Use discover and bind-native for the installed SDK. Each task owns a session and saves its working project under its output directory. Adapter lifecycle checks use SDK doubles; licensed solver execution remains workstation-dependent.",
+    "session_adapter": "lumerical"
   },
   "comsol": {
     "kind": "native",
@@ -293,7 +295,9 @@
       }
     },
     "execution": "local-or-background",
-    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support.",
+    "session_adapter": "comsol",
+    "installation_note": "Use discover and bind-native for the installed SDK. Each task owns a session and saves its working project under its output directory. Adapter lifecycle checks use SDK doubles; licensed solver execution remains workstation-dependent."
   },
   "cst": {
     "kind": "native",
@@ -319,7 +323,9 @@
       }
     },
     "execution": "local-or-background",
-    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support.",
+    "session_adapter": "cst",
+    "installation_note": "Use discover and bind-native for the installed SDK. Each task owns a session and saves its working project under its output directory. Adapter lifecycle checks use SDK doubles; licensed solver execution remains workstation-dependent."
   },
   "rsoft": {
     "kind": "native",

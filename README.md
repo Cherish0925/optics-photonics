@@ -6,7 +6,7 @@
 
 An independent digital research toolkit for optics and photonics: scientific software, native programs, background calculations, MCP, plugins and research Skills. Its physical foundation is **Field + Matter + Interaction**.
 
-**97 tools and product families · 14 domains · 202 documentation and integration links**
+**Native programs · Background computation · MCP · Skills · Agent plugins**
 
 | Read | Explore the data | Build on it |
 | --- | --- | --- |
@@ -14,19 +14,19 @@ An independent digital research toolkit for optics and photonics: scientific sof
 | [English Markdown](docs/catalogue.en.md) · [中文 Markdown](docs/catalogue.zh.md) | [Source index](data/resources.en.json) · [Schema](data/schema.json) | [Examples](examples/) · [Build instructions](#develop) |
 | [Foundations](docs/foundations.html) · [基础框架](docs/foundations.zh.html) | [Foundation source](foundations/README.md) | **Field · Matter · Interaction** |
 
-Download [English HTML](https://raw.githubusercontent.com/Cherish0925/optics-photonics/main/docs/index.html) or [Chinese HTML](https://raw.githubusercontent.com/Cherish0925/optics-photonics/main/docs/index.zh.html) and open either in a browser. Each file contains its own styles, scripts, font subset, catalogue and source index. Browsing, filtering, comparison and exports work offline; opening external documentation requires internet access.
+Download [English HTML](https://raw.githubusercontent.com/Cherish0925/optics-photonics/main/docs/index.html) or [Chinese HTML](https://raw.githubusercontent.com/Cherish0925/optics-photonics/main/docs/index.zh.html) and open either in a browser. The self-contained pages cover installation, Agent connections, software, research methods and results. The [full software catalogue](https://cherish0925.github.io/optics-photonics/catalogue.html) retains comparisons and source exports. External documentation opens online.
 
 ## Install and run
 
 The repository now includes an installable connector, native-program execution, MCP and research Skills. [Connection guide](docs/CONNECT.md) · [Interactive guide](https://cherish0925.github.io/optics-photonics/connect.html) · [Release packages](https://github.com/Cherish0925/optics-photonics/releases).
 
 ```sh
-python -m pip install "git+https://github.com/Cherish0925/optics-photonics.git@optics-v0.2.0"
+python -m pip install "git+https://github.com/Cherish0925/optics-photonics.git@optics-v0.3.0"
 optics-photonics prepare tmm
 optics-photonics connect agentic-research-os --output optics-plugin
 ```
 
-16 libraries have executable calculations; all 97 catalogue entries have connection descriptions and primary sources. Native programs retain each solver's full API. Independent background workers execute parallel and dependent calculations, coordinate CPU resources, preserve completed steps and return scientific files. Closing the Agent does not stop submitted jobs.
+Native session adapters connect installed COMSOL, Lumerical, OpticStudio and CST; [setup and operations](docs/NATIVE.md). 16 libraries have executed scientific calculations; all 97 catalogue entries have connection descriptions and primary sources. Native programs retain each solver's full API. Independent background workers execute parallel and dependent calculations, coordinate CPU resources, preserve completed steps and return scientific files. Closing the Agent does not stop submitted jobs.
 
 Host packages cover Agentic Research OS, Codex, Claude Code, DeepSeek Harness, Qiushi and generic MCP. The connector runs on Windows, macOS and Linux; each scientific solver keeps its own supported platforms and license.
 

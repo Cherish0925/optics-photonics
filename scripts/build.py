@@ -46,7 +46,7 @@ def main():
     write_json(ROOT/'data/manifest.json',{'schema_version':'1.0','reviewed':REVIEWED,'project':'https://github.com/Cherish0925/optics-photonics','description_license':'MIT','languages':['en','zh'],'entries':len(sets['en']),'domains':14,'groups':counts,'primary_source_urls':source_count,'resource_urls_including_connectors':len(collect_resources(sets['en'])),'catalogues':{lang:RAW+f'data/catalogue.{lang}.json' for lang in ('en','zh')}})
     llms=f'''# Optics · Photonics
 
-> Bilingual catalogue of optical and photonic software: physical models, licenses, programmable interfaces, sources, MCP and agent Skills.
+> Independent optical and photonic research software: native programs, background calculations, simulation sessions, MCP, Skills and Agent plugins.
 
 Reviewed: 2026-10-20. Schema version: 1.0. {len(sets['en'])} tools / product families in 14 task domains.
 
@@ -60,8 +60,8 @@ Reviewed: 2026-10-20. Schema version: 1.0. {len(sets['en'])} tools / product fam
 
 - [Complete English catalogue](https://raw.githubusercontent.com/Cherish0925/optics-photonics/main/llms-full.txt): all entries, interfaces, limits and sources.
 - [中文完整目录](https://raw.githubusercontent.com/Cherish0925/optics-photonics/main/docs/catalogue.zh.md): Chinese equivalent.
-- [English interactive catalogue](https://cherish0925.github.io/optics-photonics/): models, workflows, examples and resource search.
-- [中文交互目录](https://cherish0925.github.io/optics-photonics/index.zh.html): full Chinese edition.
+- [English interactive catalogue](https://cherish0925.github.io/optics-photonics/catalogue.html): models, workflows, examples and resource search.
+- [中文交互目录](https://cherish0925.github.io/optics-photonics/catalogue.zh.html): full Chinese catalogue.
 
 ## Integrate
 

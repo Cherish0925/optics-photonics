@@ -7,7 +7,7 @@ An independent package for optical software, native research programs, backgroun
 The connector supports Python 3.10+ on Windows, macOS and Linux. Each solver uses its own supported Python version, operating system and license. Different tools may use different environments.
 
 ```sh
-python -m pip install "git+https://github.com/Cherish0925/optics-photonics.git@optics-v0.2.0"
+python -m pip install "git+https://github.com/Cherish0925/optics-photonics.git@optics-v0.3.0"
 optics-photonics info tmm
 optics-photonics prepare tmm
 optics-photonics run tmm spectrum --inputs "@inputs.json"
@@ -99,3 +99,5 @@ python scripts/check_standalone_connection.py
 PowerShell: set `$env:OPTICS_SCIENCE_TESTS="1"` before running the tests. Native Windows/macOS/Linux jobs run scientific calculations, background scheduling, cancellation, installed-wheel/plugin checks and real MCP disconnection/reconnection.
 
 Host format sources: [Codex](https://developers.openai.com/plugins/build/plugins), [Claude Code](https://code.claude.com/docs/en/plugins-reference), [DeepSeek Harness](https://deepseek-harness.github.io/deepseek-harness/en/guide/mcp-memory).
+
+[Local commercial software: discovery, sessions, projects and results](NATIVE.md).

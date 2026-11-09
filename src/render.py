@@ -206,8 +206,8 @@ html_text=html_text.replace('</style>',resource_css+'</style>')
 resource_json=json.dumps(resource_data,ensure_ascii=False).replace('</','<\\/')
 html_text=html_text.replace('<script type="application/json" id="domain-data">','<script type="application/json" id="resource-data">'+resource_json+'</script><script type="application/json" id="domain-data">')
 html_text=html_text.replace('</script></body>',resource_js+'</script></body>')
-file_name='index.html'  if LANG=='en' else 'index.zh.html'
-other='index.zh.html' if LANG=='en' else 'index.html'
+file_name='catalogue.html'  if LANG=='en' else 'catalogue.zh.html'
+other='catalogue.zh.html' if LANG=='en' else 'catalogue.html'
 label='中文' if LANG=='en' else 'English'
 links=f'<a class="small-button" href="{other}" lang="{"zh" if LANG=="en" else "en"}">{label}</a><a class="small-button" href="https://github.com/Cherish0925/optics-photonics" target="_blank" rel="noopener noreferrer">GitHub ↗</a>'
 html_text=html_text.replace('<div class="top-actions">','<div class="top-actions">'+links)

@@ -6,6 +6,7 @@ from pathlib import Path
 import platform
 import sys
 import time
+from contextlib import nullcontext
 
 if __package__ in (None, ''):
     sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
@@ -23,15 +24,24 @@ def execute(tool, request, output):
     (output/'inputs.json').write_text(json.dumps(request, ensure_ascii=False, indent=2, allow_nan=False)+'\n', encoding='utf-8')
     started = time.time()
     source = request.get('source', '')
-    if source:
-        (output/'program.py').write_text(source, encoding='utf-8')
-        namespace = {'__name__': '__main__', '__file__': str(output/'program.py'), 'INPUTS': inputs, 'OUTPUT_DIR': output, 'RESULT': None}
-        exec(compile(source, str(output/'program.py'), 'exec'), namespace)
-        result = namespace['RESULT']
-        if result is None:
-            raise ValueError('Set RESULT to the compact JSON result; write arrays and models under OUTPUT_DIR')
+    native_path = os.environ.get('OPTICS_NATIVE_CONNECTION')
+    if native_path:
+        from optics_photonics import native
+        context = native.session(json.loads(Path(native_path).read_text(encoding='utf-8')), inputs, output)
     else:
-        result = calculate(tool, request.get('action', ''), inputs, output)
+        context = nullcontext({})
+    with context as session:
+        namespace = {'__name__': '__main__', '__file__': str(output/'program.py'), 'INPUTS': inputs, 'OUTPUT_DIR': output, 'RESULT': None, **session}
+        if source:
+            (output/'program.py').write_text(source, encoding='utf-8')
+            exec(compile(source, str(output/'program.py'), 'exec'), namespace)
+            result = namespace['RESULT']
+            if result is None:
+                raise ValueError('Set RESULT to the compact JSON result; write arrays and models under OUTPUT_DIR')
+        elif native_path:
+            result = native.calculate(tool, request.get('action', ''), inputs, namespace)
+        else:
+            result = calculate(tool, request.get('action', ''), inputs, output)
     # Distribution names are taken from the active interpreter, including native-program dependencies.
     versions = {}
     package_map = importlib.metadata.packages_distributions()

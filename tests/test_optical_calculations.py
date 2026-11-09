@@ -14,6 +14,19 @@ from optics_photonics.execution import run
 
 @unittest.skipUnless(os.environ.get('OPTICS_SCIENCE_TESTS')=='1','Set OPTICS_SCIENCE_TESTS=1 in the scientific environment')
 class ScienceTests(unittest.TestCase):
+    def test_native_export_preserves_complex_fields_and_structure(self):
+        import numpy as np
+        from optics_photonics.native import export
+        field = np.arange(24).reshape(2,3,4) * (1 + 2j)
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            result = export({'field':field,'wavelength_m':np.float64(1.55e-6),'unit':'V/m'},'monitor',root)
+            metadata = json.loads((root/result['metadata']).read_text())
+            with np.load(root/result['data'],allow_pickle=False) as arrays:
+                np.testing.assert_array_equal(arrays[metadata['field']['array']],field)
+                self.assertEqual(arrays[metadata['wavelength_m']['array']].item(),1.55e-6)
+            self.assertEqual(metadata['unit'],'V/m')
+
     def test_skills_have_readable_yaml_metadata(self):
         import yaml
         for path in (Path(__file__).resolve().parents[1]/'skills').glob('*/SKILL.md'):

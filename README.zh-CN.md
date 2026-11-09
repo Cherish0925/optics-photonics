@@ -6,7 +6,7 @@
 
 独立的光学与光子学数字研究工具：科学软件、原生研究程序、后台计算、MCP、插件与研究 Skills。统一物理基础：**场 + 物质 + 相互作用**。
 
-**97 个工具与产品族 · 14 个领域 · 202 个文档与接口资料入口**
+**原生研究程序 · 后台计算 · MCP · Skills · Agent 插件**
 
 | 阅读与浏览 | 数据与资料 | 参与开发 |
 | --- | --- | --- |
@@ -14,19 +14,19 @@
 | [中文 Markdown](docs/catalogue.zh.md) · [English Markdown](docs/catalogue.en.md) | [资料索引](data/resources.zh.json) · [数据结构](data/schema.json) | [代码示例](examples/) · [本地开发](#本地开发) |
 | [基础框架](docs/foundations.zh.html) · [Foundations](docs/foundations.html) | [中文源文件](foundations/README.zh-CN.md) | **场 · 物质 · 相互作用** |
 
-也可以下载[中文 HTML](https://raw.githubusercontent.com/Cherish0925/optics-photonics/main/docs/index.zh.html)或[英文 HTML](https://raw.githubusercontent.com/Cherish0925/optics-photonics/main/docs/index.html)，直接用浏览器打开。两个文件分别内嵌完整数据、样式、脚本和中文字体子集，搜索、筛选、比较与导出均可离线使用；原始网站与文档链接需要联网。
+也可以下载[中文 HTML](https://raw.githubusercontent.com/Cherish0925/optics-photonics/main/docs/index.zh.html)或[英文 HTML](https://raw.githubusercontent.com/Cherish0925/optics-photonics/main/docs/index.html)，直接用浏览器打开。两个独立文件包含安装、Agent 接入、软件、研究方法与结果六个栏目，可离线浏览。[完整软件目录](https://cherish0925.github.io/optics-photonics/catalogue.zh.html)继续提供比较与资料导出；外部文档需要联网。
 
 ## 安装与使用
 
 仓库现提供可安装的连接器、完整原生程序执行、MCP 和研究 Skills。[接入说明](docs/CONNECT.zh-CN.md) · [交互指南](https://cherish0925.github.io/optics-photonics/connect.zh.html) · [下载发布包](https://github.com/Cherish0925/optics-photonics/releases)。
 
 ```sh
-python -m pip install "git+https://github.com/Cherish0925/optics-photonics.git@optics-v0.2.0"
+python -m pip install "git+https://github.com/Cherish0925/optics-photonics.git@optics-v0.3.0"
 optics-photonics prepare tmm
 optics-photonics connect agentic-research-os --output optics-plugin
 ```
 
-16 个软件已有可执行计算，97 项目录均有连接说明与原始资料。Agent 可使用各软件完整的原生 API。独立后台进程执行并行与依赖计算、协调 CPU 资源、保留已完成步骤并返回科学数据文件；关闭 Agent 不会停止已提交的计算。
+原生会话连接器接入本机 COMSOL、Lumerical、OpticStudio 与 CST，[查看配置与操作](docs/NATIVE.zh-CN.md)。16 个科学软件库已实际运行计算，97 项目录均有连接说明与原始资料。Agent 可使用各软件完整的原生 API。独立后台进程执行并行与依赖计算、协调 CPU 资源、保留已完成步骤并返回科学数据文件；关闭 Agent 不会停止已提交的计算。
 
 提供 Agentic Research OS、Codex、Claude Code、DeepSeek Harness、Qiushi 和通用 MCP 接入包。连接器运行于 Windows、macOS 和 Linux；各科学软件保留自身支持的平台与许可。
 

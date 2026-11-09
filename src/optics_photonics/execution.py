@@ -44,13 +44,17 @@ def run(tool, request, *, output=None, path=None, timeout=None, cancel=None, con
         raise ValueError('Use an empty output directory for each calculation')
     request_file = directory/'request.json'
     request_file.write_text(json.dumps(request, ensure_ascii=False, allow_nan=False), encoding='utf-8')
-    if selected['kind'] == 'python':
+    if selected['kind'] in ('python', 'native'):
         command = [selected['python'], '-B', str(Path(__file__).with_name('worker.py')), tool, str(request_file), str(directory)]
+        if selected['kind'] == 'native':
+            (directory/'native-connection.json').write_text(json.dumps(selected, ensure_ascii=False), encoding='utf-8')
     else:
         replacements = {'{request}': str(request_file), '{output}': str(directory), '{result}': str(directory/'result.json')}
         command = [replacements.get(arg, arg) for arg in selected['command']]
     env = {**os.environ, **{name: str(selected['threads']) for name in ('OMP_NUM_THREADS','OPENBLAS_NUM_THREADS','MKL_NUM_THREADS','NUMEXPR_NUM_THREADS')},
            'OPTICS_REQUEST_FILE': str(request_file), 'OPTICS_OUTPUT_DIR': str(directory), 'OPTICS_RESULT_FILE': str(directory/'result.json')}
+    env.pop('OPTICS_NATIVE_CONNECTION', None)
+    if selected['kind'] == 'native': env['OPTICS_NATIVE_CONNECTION'] = str(directory/'native-connection.json')
     options = {'creationflags': subprocess.CREATE_NEW_PROCESS_GROUP} if os.name == 'nt' else {'start_new_session': True}
     started = time.monotonic()
     with request_file.open('rb') as incoming, (directory/'stdout.txt').open('wb') as stdout, (directory/'stderr.txt').open('wb') as stderr:

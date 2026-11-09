@@ -44,7 +44,9 @@ NOTES = {
 
 def details(tool):
     if tool not in EXAMPLES:
-        return {'operations': [], 'native_program': True}
+        from . import native
+        adapter = native.details(tool)
+        return {'operations': [], 'native_program': True, **({'session_adapter': adapter} if adapter else {})}
     action, inputs = EXAMPLES[tool]
     return {'operations': [{'name': action, 'inputs_example': inputs, 'description': NOTES[tool]}], 'native_program': True}
 

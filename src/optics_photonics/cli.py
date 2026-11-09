@@ -20,6 +20,8 @@ def main(argv=None):
     search = commands.add_parser('search'); search.add_argument('query', nargs='?', default=''); search.add_argument('--domain'); search.add_argument('--license-group', choices=('open','paid','limited')); search.add_argument('--limit',type=int,default=20); search.add_argument('--offset',type=int,default=0); search.add_argument('--language',choices=('zh','en'),default='en')
     info = commands.add_parser('info'); info.add_argument('tool'); info.add_argument('--language',choices=('zh','en'),default='en')
     env = commands.add_parser('environments')
+    discovery = commands.add_parser('discover'); discovery.add_argument('--root', dest='roots', action='append')
+    native_bind = commands.add_parser('bind-native'); native_bind.add_argument('tool'); native_bind.add_argument('--python'); native_bind.add_argument('--sdk-path'); native_bind.add_argument('--options', type=object_argument, default={}); native_bind.add_argument('--threads', type=int, default=1); native_bind.add_argument('--concurrency', type=int, default=1)
     bind = commands.add_parser('bind'); bind.add_argument('tool'); choice=bind.add_mutually_exclusive_group(required=True); choice.add_argument('--python'); choice.add_argument('--command-json',type=object_argument); bind.add_argument('--threads',type=int,default=1); bind.add_argument('--concurrency',type=int,default=1); bind.add_argument('--cwd')
     prep = commands.add_parser('prepare'); prep.add_argument('tool'); prep.add_argument('--python')
     for name in ('run','submit'):
@@ -45,6 +47,9 @@ def main(argv=None):
         if command == 'search': result=catalogue.search(**a)
         elif command == 'info': result={**catalogue.software(**a),'execution':operations.details(a['tool'])}
         elif command == 'environments': result={'environments':environments.available()}
+        elif command in ('discover', 'bind-native'):
+            from . import native
+            result = native.discover(**a) if command == 'discover' else native.bind(**a)
         elif command == 'bind': a['command']=a.pop('command_json'); result=environments.bind(**a)
         elif command == 'prepare': result=environments.prepare(**a)
         elif command in ('run','submit'):

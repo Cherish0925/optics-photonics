@@ -3481,5 +3481,41 @@
       "text": "本次未核实专用 Agent Skill"
     },
     "stage": "成熟工具"
+  },
+  {
+    "id": "py-pol",
+    "name": "py-pol",
+    "group": "open",
+    "cats": [
+      "wave",
+      "foundation"
+    ],
+    "license": "MIT",
+    "route": "api",
+    "sources": [
+      {
+        "label": "Documentation",
+        "url": "https://py-pol.readthedocs.io/en/master/"
+      },
+      {
+        "label": "Source and license",
+        "url": "https://github.com/JesusDelHoyo/py_pol"
+      }
+    ],
+    "method": "Jones / Mueller 偏振光学",
+    "summary": "使用 Jones 向量、Stokes 向量、Jones 矩阵与 Mueller 矩阵计算偏振态及光学元件。",
+    "api": "Python：Jones_vector、Jones_matrix、Stokes、Mueller；支持数组计算及偏振参数提取。",
+    "compute": "Python；Windows、macOS、Linux；依赖 NumPy、SciPy、Matplotlib。",
+    "usage": "维护者提供偏振分析、光学元件与参数重建教程。",
+    "limit": "Jones 描述完全偏振光；部分偏振及退偏使用 Stokes/Mueller 表示。",
+    "stage": "计算库",
+    "mcp": {
+      "kind": "unverified",
+      "text": "未确认上游专用 MCP。"
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "未确认上游专用 Skill。"
+    }
   }
 ]

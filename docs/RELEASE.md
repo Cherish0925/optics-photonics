@@ -1,13 +1,13 @@
-Installable optical software connections with a shared CLI, MCP server and research Skills.
+Independent digital optics and photonics research, from software selection to running calculations and retrieving results.
 
-- 96 software connection descriptions in 14 domains, with primary documentation and upstream MCP/Skill sources.
-- 13 executable scientific calculations and complete native-program access to configured environments.
-- Host packages for Agentic Research OS, Codex, Claude Code, DeepSeek Harness, Qiushi and generic MCP.
-- IOP integration for durable runs, parallel/dependent steps, request reuse and result download.
-- Self-contained Chinese and English guides with navigation and software filtering.
+- Background calculations run independently of the Agent process. Parallel and dependent steps share a CPU budget and per-software concurrency settings.
+- SQLite stores research runs, source programs, inputs, environment settings and results. Reconnecting uses the same run ID; request IDs prevent duplicate submissions. Resume retains completed steps and starts a new attempt for unfinished steps.
+- MCP supports background environment preparation, calculation submission, progress, cancellation, result browsing and chunked file reading. Plugins use the same independent implementation.
+- 16 executable scientific libraries, including new Optiland real-ray tracing, gdsfactory layout and py-pol polarization calculations. Native programs retain the complete upstream APIs.
+- 97 software descriptions, 14 research domains and 202 original documentation and integration links, with Chinese and English interactive guides.
 
-The wheel runs with Python 3.10+. Extract the Research OS ZIP and install its plugin directory; execution uses the host Python. The Connect ZIP generates local host packages with `python server.py connect HOST --output DIR`.
+Install with Python 3.10+ or the release wheel. The Research OS ZIP contains an installable plugin; the Connect ZIP generates packages for Codex, Claude Code, DeepSeek Harness, Qiushi and generic MCP. Software environments are independent of plugin updates.
 
-Scientific solvers keep their own platform, dependency and license requirements. Catalogue coverage does not mean every vendor product has been installed and exercised. Windows, macOS and Linux checks run the 13 scientific calculations, installed wheel, generated plugin, and a real MCP-to-IOP native calculation before publication.
+Windows, macOS and Linux CI runs the scientific calculations, background scheduling, cancellation, installed wheel, generated plugin and real MCP disconnect/reconnect workflow. Scientific solvers retain their supported platforms, dependencies and licenses.
 
-[English installation guide](https://github.com/Cherish0925/optics-photonics/blob/main/docs/CONNECT.md) · [中文安装说明](https://github.com/Cherish0925/optics-photonics/blob/main/docs/CONNECT.zh-CN.md)
+[中文指南](https://cherish0925.github.io/optics-photonics/connect.zh.html) · [English guide](https://cherish0925.github.io/optics-photonics/connect.html)

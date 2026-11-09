@@ -24,6 +24,8 @@ class ConnectionTests(unittest.TestCase):
             self.assertIn(record['kind'], ('python','native','manual','data'))
             if record['pip']:
                 self.assertTrue(record['modules'])
+                self.assertTrue(record['distributions'])
+            if record['operations']:
                 self.assertIn(row['id'], operations.EXAMPLES)
 
     def test_catalogue_pagination_and_domain_selection(self):
@@ -32,6 +34,12 @@ class ConnectionTests(unittest.TestCase):
         self.assertEqual(len(a['items'])+len(b['items']),a['total'])
         self.assertEqual(set(x['id'] for x in a['items']) & set(x['id'] for x in b['items']),set())
         self.assertEqual(catalogue.search('tmm')['items'][0]['id'],'tmm')
+
+    def test_search_uses_bilingual_domain_names_and_normalized_terms(self):
+        for query in ('thin film','thin-film','ＴＨＩＮ　ＦＩＬＭ','薄膜'):
+            items = catalogue.search(query,license_group='open',limit=100)['items']
+            self.assertTrue({'tmm','grcwa'} <= {row['id'] for row in items},query)
+        self.assertIn('py-pol',{r['id'] for r in catalogue.search('py pol')['items']})
 
     def test_mcp_initialization_and_tool_call(self):
         requests = [
@@ -75,11 +83,20 @@ class ConnectionTests(unittest.TestCase):
     def test_native_process_request_and_files(self):
         with tempfile.TemporaryDirectory() as tmp:
             wrapper=Path(tmp)/'solver.py'
-            wrapper.write_text('import json,os\nfrom pathlib import Path\np=json.loads(Path(os.environ["IOP_REQUEST_FILE"]).read_text())\nPath(os.environ["IOP_RESULT_FILE"]).write_text(json.dumps({"value":p["inputs"]["value"]*2}))\n')
+            wrapper.write_text('import json,os\nfrom pathlib import Path\np=json.loads(Path(os.environ["OPTICS_REQUEST_FILE"]).read_text())\nPath(os.environ["OPTICS_RESULT_FILE"]).write_text(json.dumps({"value":p["inputs"]["value"]*2}))\n')
             environments.bind('comsol',command=[sys.executable,str(wrapper)],path=Path(tmp)/'config')
             r=execution.run('comsol',{'inputs':{'value':21}},path=Path(tmp)/'config')
             self.assertEqual(r['record']['value'],42)
             with self.assertRaises(ValueError):execution.run('comsol',{},path=Path(tmp)/'config',output=r['output'])
+
+    def test_concurrent_environment_registration_keeps_every_tool(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            ids = ['tmm','grcwa','scipy','optiland','gdsfactory','py-pol']
+            code = 'from optics_photonics.environments import bind;import sys;bind(sys.argv[1],command=[sys.executable],path=sys.argv[2])'
+            workers = [subprocess.Popen([sys.executable, '-c', code, tool, tmp]) for tool in ids]
+            for process in workers:
+                self.assertEqual(process.wait(timeout=30), 0)
+            self.assertEqual(set(environments.read(tmp)['tools']), set(ids))
 
     def test_invalid_setup_does_not_change_connections(self):
         with tempfile.TemporaryDirectory() as tmp:

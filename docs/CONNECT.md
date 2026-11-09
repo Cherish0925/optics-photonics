@@ -1,103 +1,101 @@
-# Optics & Photonics connections
+# Optics & Photonics research tools
 
-One package supplies software discovery, native-program execution, MCP and research Skills. IOP supplies the persistent service, native process supervision, scheduling and experiment records. Optical solvers retain their own APIs and installation environments.
+An independent package for optical software, native research programs, background calculations, MCP, Skills and plugins. Software selection, model construction, solving, optimization and results share one interface.
 
-## Install
+## Install and calculate
 
-Python 3.10 or newer runs the connector on Windows, macOS and Linux. Solver support follows each solver's own OS, architecture, Python and license requirements.
+The connector supports Python 3.10+ on Windows, macOS and Linux. Each solver uses its own supported Python version, operating system and license. Different tools may use different environments.
 
 ```sh
-python -m pip install "git+https://github.com/Cherish0925/optics-photonics.git@optics-v0.1.0"
-optics-photonics search "thin film" --license-group open
+python -m pip install "git+https://github.com/Cherish0925/optics-photonics.git@optics-v0.2.0"
 optics-photonics info tmm
 optics-photonics prepare tmm
-optics-photonics run tmm spectrum --inputs '{"n":[1,1.45,1.52],"thickness_nm":[100],"wavelength_nm":[450,550,650]}'
+optics-photonics run tmm spectrum --inputs "@inputs.json"
 ```
 
-On shells with different JSON quoting rules, save the JSON in `inputs.json` and use `--inputs @inputs.json`. A release wheel can be installed without Git. `python -m optics_photonics` is equivalent to the CLI entry point.
+Use these inputs:
 
-`prepare` creates an isolated environment for a tested installation recipe. To reuse a solver installation:
+```json
+{"n":[1,1.45,1.52],"thickness_nm":[100],"wavelength_nm":[450,550,650]}
+```
+
+The result includes the output directory, scientific result and software versions; the spectrum is saved as CSV. A release wheel can be installed without Git. Every command also works through `python -m optics_photonics`.
+
+## Environments and complete programs
 
 ```sh
-optics-photonics bind tmm --python /path/to/scientific/python --threads 1 --concurrency 4
+optics-photonics bind tmm --python "/path/to/scientific/python" --threads 1 --concurrency 4
 optics-photonics environments
+optics-photonics resources --cpu 8
+optics-photonics run tmm --program research.py --inputs "@inputs.json"
 ```
 
-`--python` points to the scientific interpreter, including a virtual environment. Each software may have a different interpreter. `OPTICS_HOME` selects the configuration directory; the default is `~/.optics-photonics`.
+`prepare` installs a documented recipe into a separate environment. `bind` reuses an existing one. `threads` sets common numerical-library thread limits; `concurrency` limits simultaneous processes for one software. Total CPU capacity is shared by background runs. Configure MPI, GPUs, vendor licenses and cluster queues in the solver's native launcher.
 
-## Connect a Harness
+A Python program receives `INPUTS` and `OUTPUT_DIR`, and sets `RESULT` to compact JSON. It can use the complete upstream API, retain a live solver session and perform arbitrary optimization or iteration. Save arrays, meshes and models under OUTPUT_DIR. Native program examples are in [examples/programs](../examples/programs).
+
+A native executable reads JSON from `OPTICS_REQUEST_FILE` or stdin, writes files under `OPTICS_OUTPUT_DIR`, and writes its JSON result to `OPTICS_RESULT_FILE`. `bind --command-json` accepts an executable/argument array with optional `{request}`, `{output}`, `{result}` placeholders. C, C++, C#, Java, Julia and commercial batch tools keep their native implementation.
+
+## Background runs and dependencies
+
+```sh
+optics-photonics submit tmm --program research.py --inputs "@inputs.json" --request-id study-001
+optics-photonics runs
+optics-photonics status RUN_ID
+optics-photonics files RUN_ID
+optics-photonics read RUN_ID calculate/attempt-1/result.json
+optics-photonics download RUN_ID calculate/attempt-1/spectrum.csv spectrum.csv
+```
+
+Submission returns immediately. The independent worker continues when the submitting CLI or MCP process exits. Reuse `request-id` for retries of the same submission. Written files can be read while the run is active.
+
+A workflow is an array of steps with `id`, `tool`, `inputs`, `action` or `source`, optional `after`, `bindings` and `timeout`. Independent steps run within resource limits. A binding such as `{"value":{"step":"solve","path":["result","R"]}}` copies a predecessor result into the input named `value` and adds the dependency. `output` in a predecessor result identifies its directory for large-file exchange.
+
+```sh
+optics-photonics submit-workflow workflow.json --request-id study-002
+optics-photonics submit-workflow next-steps.json --run-id RUN_ID
+optics-photonics cancel RUN_ID
+optics-photonics resume RUN_ID
+```
+
+Append preserves the research run. Resume retains successful steps and reruns unfinished steps into separate attempt directories. Provider-specific cloud job IDs and session continuation belong in the native research program. Complete examples appear in the [Chinese guide](CONNECT.zh-CN.md).
+
+## Agent hosts
 
 ```sh
 optics-photonics connect agentic-research-os --output optics-plugin
 ```
 
-| Host | Generated connection | Use |
-| --- | --- | --- |
-| Agentic Research OS | `plugin.json`, bundled Python code and Skills | Extract the ZIP, install the directory containing `plugin.json`, then activate its installed revision. Uses `${RESEARCH_PYTHON}`. |
-| Codex | `.codex-plugin/plugin.json`, `.mcp.json`, Skills | Native plugin or the `codex mcp add` command in `INSTALL.md`. |
-| Claude Code | `.claude-plugin/plugin.json`, `.mcp.json`, Skills | `claude --plugin-dir PATH` or the MCP registration command in `INSTALL.md`. |
-| DeepSeek Harness | `optics.cordis.yml` | `dsh web --patch PATH/optics.cordis.yml`; uses `@deepseek-ai/dsh-mcp-client`. |
-| Qiushi | MCP configuration and shell entry | Agentic Research OS editions use its native package; other editions use MCP or `tools` / `call`. |
-| Other MCP hosts | `mcp.json` | Register the stdio command in that host's configuration format. |
-
-Replace `agentic-research-os` with `codex`, `claude`, `deepseek`, `qiushi` or `mcp`. Generated local configurations use the selected interpreter and absolute directory. Regenerate after moving them. Host packages contain their code and resources; no source checkout is needed at runtime. Existing host settings are not overwritten.
-
-An update replaces the connector/plugin version, retaining `OPTICS_HOME` and scientific environments. Install a new wheel or Git tag, generate a new package directory, and update the host's installed plugin. Research OS revision activation uses its own package manager. A local stdio server requires a host that can launch local programs; cloud-only hosts need an execution environment or their own bridge.
-
-## Native programs and durable calculations
-
-A native Python program receives `INPUTS` (JSON), `OUTPUT_DIR` (Path), and sets `RESULT` to a compact JSON object. It can import the full upstream API, call optimizers, retain a solver session throughout a calculation, and write any scientific file format. Examples live in [`examples/programs`](../examples/programs).
-
-```sh
-optics-photonics run tmm --program research.py --inputs @inputs.json
-```
-
-For work that must continue after an Agent disconnects, install [IOP Runtime](https://github.com/Cherish0925/AI4Instruments/releases) on the computing host. Run the following on that host:
-
-```sh
-optics-photonics attach tmm
-optics-photonics submit tmm --program research.py --inputs @inputs.json --request-id study-001
-optics-photonics status RUN_ID
-optics-photonics files RUN_ID
-optics-photonics download ARTIFACT_ID spectrum.csv
-```
-
-Local IOP configuration supplies the endpoint and token. For a remote IOP service, set `IOP_ENDPOINT` and `IOP_TOKEN`; software registration still runs on the computing host because interpreter and worker paths belong to it. Remote Agents submit source and inputs through MCP/API; the native process executes on the IOP computer.
-
-A workflow is a JSON array of IOP steps: `id`, `device`, `operation`, `arguments`, `after`, and optional `bindings`. Use explicit `after: []` for independent calculations, dependencies for ordering, and `bindings` for result transfer. `submit-workflow --run-id RUN_ID` appends a batch to an existing external experiment. The same IOP experiment can include physical instruments and digital computations. Use one native program where a live vendor session must be preserved.
-
-The first local attach creates a missing CPU pool from the available CPU count and preserves existing capacities. `threads` sets common numerical thread limits; `concurrency` controls simultaneous processes for a software environment. Actual MPI, GPU, license and cluster allocations belong to the solver/launcher. No hardware or license capacity is inferred from a catalogue entry.
-
-IOP 0.8.5 publishes command-generated files when their workflow finishes; explicit IOP artifact uploads can make data available during a continuous experiment. Save third-party remote job IDs and use the provider's own resume mechanism; arbitrary remote solver sessions are not recreated automatically.
-
-## Coverage
-
-All 96 catalogue entries have connection records, including primary documentation and upstream MCP/Skill links. Their execution status is separate:
-
-| Coverage | What is supplied |
+| Host | Package and activation |
 | --- | --- |
-| 13 software libraries | Installation recipes and executed calculations: tmm, miepython, raytracing, LightPipes, POPPY, HCIPy, QuTiP, SymPy, SciPy, scikit-image, KLayout, grcwa, legume. |
-| 58 Python API descriptions, including those 13 | Import discovery, interpreter binding and full native-program route. Remaining libraries require their native installation and have not all been run here. |
-| 33 native software interfaces | A shared executable/argument adapter; vendor-specific launch programs and licenses must be supplied. These are documented routes, not prebuilt complete vendor drivers. |
-| 4 tools with unconfirmed automation | Source records; no automatic execution claim. |
-| 1 material database | Data source and provenance; not a solver. |
-| 14 research domains | Model selection, physical quantities, units and transfer between programs, loaded only when needed. |
+| Agentic Research OS | Extract the release ZIP, install the directory containing `plugin.json`, activate the installed revision. Uses `${RESEARCH_PYTHON}`. |
+| Codex | `connect codex` generates a native plugin and MCP registration command. |
+| Claude Code | `connect claude`; use `claude --plugin-dir PATH` or the generated MCP command. |
+| DeepSeek Harness | `connect deepseek`; use `dsh web --patch PATH/optics.cordis.yml`. |
+| Qiushi | Research OS editions use its native package; other editions use `connect qiushi` for MCP or command access. |
+| Other MCP hosts | `connect mcp`; register the stdio command in the host's format. |
 
-A native executable wrapper reads JSON from `IOP_REQUEST_FILE` (or stdin), saves files in `IOP_OUTPUT_DIR`, and writes compact JSON to `IOP_RESULT_FILE`. Bind it with `--command-json '["executable","argument"]'`. C, C++, C#, Java, Julia and commercial batch programs use this same process interface; there is no need to rewrite them in Python.
+MCP provides software search, environment preparation/binding, resource settings, submission, history, status, cancellation, resumption and result access. `prepare_environment` installs a listed recipe in the background and returns a run ID; successful installation registers the environment. Two Skills and 14 domain references supply scientific methods on demand.
 
-MCP exposes 11 tools covering selection, environments, registration, submission, status, cancellation and files. Large results remain in files. Original official/community MCP entries retain their authorship and stated scope; this package is maintained by this repository, not endorsed by those vendors.
+Computations run on the MCP host. SSH can launch the stdio server on a workstation with the scientific software: `ssh -T USER@HOST /path/to/python -m optics_photonics mcp`. `read_result` returns bounded text/binary contents. `download_result` copies to a path on the MCP host; use SSH/SFTP for large remote files.
+
+Install a new wheel or tag and generate a new plugin directory to update. Configuration, scientific environments and research records remain under `OPTICS_HOME` or `~/.optics-photonics`.
+
+## Software and extension model
+
+The bilingual catalogue separates commercial, open-source and restricted tools. Each connection retains primary interface documentation and upstream MCP/Skill sources. Filter executed calculations in the interactive guide. `software_details` gives native APIs, installation recipes, runnable inputs and physical conventions.
+
+Extend software through a connection record, environment and native program using the same job/file interface. Vendor SDKs, GUI applications, MPI and cloud services retain their own launch/session requirements. Exchange units, coordinates, sampling, normalization and material sources alongside fields, spectra, S-parameters and models.
 
 ## Development
 
 ```sh
-python -m pip install -e .
+python -m pip install -e . build mcp -r requirements-science.txt
 python scripts/build.py
-python -m unittest discover -s tests
-python -m pip install -r requirements-science.txt
-OPTICS_SCIENCE_TESTS=1 python -m unittest discover -s tests
-python -m build
+OPTICS_SCIENCE_TESTS=1 python -m unittest discover -s tests -v
+python scripts/check_standalone_connection.py
 ```
 
-PowerShell: `$env:OPTICS_SCIENCE_TESTS="1"` before the scientific test command. `scripts/check_iop_connection.py` additionally needs the released IOP package with its native executor and the MCP Python SDK. It exercises a real submitted optical program, retry, MCP disconnection, reconnection and file download.
+PowerShell: set `$env:OPTICS_SCIENCE_TESTS="1"` before running the tests. Native Windows/macOS/Linux jobs run scientific calculations, background scheduling, cancellation, installed-wheel/plugin checks and real MCP disconnection/reconnection.
 
-Host format sources: [Codex plugin package](https://developers.openai.com/plugins/build/plugins), [Claude plugin reference](https://code.claude.com/docs/en/plugins-reference), [DeepSeek native MCP configuration](https://deepseek-harness.github.io/deepseek-harness/en/guide/mcp-memory). Solver sources are linked per entry in `data/connections.json`.
+Host format sources: [Codex](https://developers.openai.com/plugins/build/plugins), [Claude Code](https://code.claude.com/docs/en/plugins-reference), [DeepSeek Harness](https://deepseek-harness.github.io/deepseek-harness/en/guide/mcp-memory).

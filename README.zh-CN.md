@@ -2,11 +2,11 @@
 
 ![Optics · Photonics — 软件、物理模型与可编程接口](docs/assets/readme-header.webp)
 
-# 光学与光子学软件目录
+# 光学与光子学研究工具
 
-面向光学科研、工程开发与 AI Agent 的软件连接、研究方法和双语工具目录，并加入贯穿全部子领域的统一物理基础：**场 + 物质 + 相互作用**。
+独立的光学与光子学数字研究工具：科学软件、原生研究程序、后台计算、MCP、插件与研究 Skills。统一物理基础：**场 + 物质 + 相互作用**。
 
-**96 个工具与产品族 · 14 个领域 · 200 个文档与接口资料入口**
+**97 个工具与产品族 · 14 个领域 · 202 个文档与接口资料入口**
 
 | 阅读与浏览 | 数据与资料 | 参与开发 |
 | --- | --- | --- |
@@ -18,15 +18,17 @@
 
 ## 安装与使用
 
-仓库现提供可安装的连接器、完整原生程序执行、MCP 和研究 Skills。[接入说明](docs/CONNECT.zh-CN.md) · [交互指南](docs/connect.zh.html) · [下载发布包](https://github.com/Cherish0925/optics-photonics/releases)。
+仓库现提供可安装的连接器、完整原生程序执行、MCP 和研究 Skills。[接入说明](docs/CONNECT.zh-CN.md) · [交互指南](https://cherish0925.github.io/optics-photonics/connect.zh.html) · [下载发布包](https://github.com/Cherish0925/optics-photonics/releases)。
 
 ```sh
-python -m pip install "git+https://github.com/Cherish0925/optics-photonics.git@optics-v0.1.0"
+python -m pip install "git+https://github.com/Cherish0925/optics-photonics.git@optics-v0.2.0"
 optics-photonics prepare tmm
 optics-photonics connect agentic-research-os --output optics-plugin
 ```
 
-13 个软件已有可执行计算，96 项目录均有连接说明。Agent 可使用软件完整的原生 API；长期计算和并行任务交给 [IOP Runtime](https://github.com/Cherish0925/AI4Instruments)，也可与真实仪器操作组成同一次实验。提供 Agentic Research OS、Codex、Claude Code、DeepSeek Harness、Qiushi 和通用 MCP 接入包。各科学软件保留自身安装环境、平台与许可要求。
+16 个软件已有可执行计算，97 项目录均有连接说明与原始资料。Agent 可使用各软件完整的原生 API。独立后台进程执行并行与依赖计算、协调 CPU 资源、保留已完成步骤并返回科学数据文件；关闭 Agent 不会停止已提交的计算。
+
+提供 Agentic Research OS、Codex、Claude Code、DeepSeek Harness、Qiushi 和通用 MCP 接入包。连接器运行于 Windows、macOS 和 Linux；各科学软件保留自身支持的平台与许可。
 
 ## 统一物理基础
 
@@ -40,7 +42,7 @@ optics-photonics connect agentic-research-os --output optics-plugin
 
 ## 包含什么
 
-- **29 项商业付费、64 项免费开源、3 项免费但授权或功能受限**。开源客户端、收费求解器、学术专用许可和外部 PDK 分别说明。
+- **29 项商业付费、65 项免费开源、3 项免费但授权或功能受限**。开源客户端、收费求解器、学术专用许可和外部 PDK 分别说明。
 - 每项记录物理方法、用途、编程接口、运行环境、许可、应用依据、适用边界与原始资料。
 - API、命令行、宏与 **官方／社区／未核实的 MCP、Agent Skills** 分别标注；文档检索 MCP 不被当成求解器执行接口。
 - 按任务、软件名称和接口检索，按领域与授权筛选，最多四项并排比较，导出 CSV 或 JSON。

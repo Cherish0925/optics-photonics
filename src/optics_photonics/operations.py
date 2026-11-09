@@ -4,6 +4,9 @@ from pathlib import Path
 
 
 EXAMPLES = {
+    'optiland': ('trace', {'surfaces': [{'radius_mm': None, 'thickness_mm': None}, {'radius_mm': 50, 'thickness_mm': 5, 'index': 1.5, 'stop': True}, {'radius_mm': -50, 'thickness_mm': 50}, {'radius_mm': None, 'thickness_mm': 0}], 'aperture_mm': 10, 'field_deg': [0, 0], 'wavelength_um': 0.55, 'pupil_points': [[0, 0], [0, 0.5], [0, -0.5], [0.5, 0], [-0.5, 0]]}),
+    'gdsfactory': ('waveguide', {'length_um': 20, 'width_um': 0.5}),
+    'py-pol': ('polarization', {'azimuth_deg': 0, 'intensity': 1, 'elements': [{'type': 'polarizer', 'azimuth_deg': 45}]}),
     'tmm': ('spectrum', {'n': [1, 1.45, 1.52], 'thickness_nm': [100], 'wavelength_nm': [450, 550, 650], 'polarization': 's', 'angle_deg': 0}),
     'miepython': ('sphere', {'index': [1.5, 0], 'diameter_nm': 200, 'wavelength_nm': [450, 550, 650], 'medium_index': 1}),
     'raytracing': ('abcd', {'elements': [{'space_m': 0.1}, {'focal_length_m': 0.05}, {'space_m': 0.1}], 'ray': [0.001, 0]}),
@@ -20,6 +23,9 @@ EXAMPLES = {
 }
 
 NOTES = {
+    'optiland': 'Sequential real-ray tracing in millimetres, with wavelength in micrometres. A surface index describes the homogeneous medium after that surface. null radius is planar; null thickness is an object at infinity. Field is [x,y] in degrees; pupil_points are normalized entrance-pupil coordinates. Constant indices have no dispersion. Native programs support catalogs, freeforms and optimization.',
+    'gdsfactory': 'Straight strip waveguide from the bundled generic PDK. All lengths in micrometres. Saves GDSII, port names, coordinates, widths and orientations. Fabrication uses the target foundry PDK through a native program.',
+    'py-pol': 'Fully polarized monochromatic Jones field with linear input. Elements appear in propagation order; angles are in degrees from x. Supports ideal linear polarizers, quarter-wave and half-wave plates. Jones amplitudes retain the py-pol phase convention. Native programs provide arbitrary Jones and Mueller models.',
     'tmm': 'Coherent, isotropic planar layers. n may be a real number or [real, imaginary]. Exterior media are semi-infinite. Supply one thickness per internal layer. Indices here are constant across wavelength; use a native program for dispersion or incoherent layers. Returns power R, T and 1-R-T.',
     'miepython': 'Homogeneous spherical particle in a nonabsorbing medium. index is the absolute complex particle index [real, imaginary]; use nonpositive imaginary part for loss in miepython. Diameter and vacuum wavelength in nm. Returns dimensionless efficiencies and asymmetry g.',
     'raytracing': 'Paraxial ray vector [height in m, angle in rad]. Elements appear in propagation order. space_m and focal_length_m use metres. ABCD assumes equal entrance/exit index for the supplied free-space and thin-lens elements.',
@@ -66,6 +72,59 @@ def calculate(tool, action, p, output):
     import numpy as np
     out = Path(output)
     out.mkdir(parents=True, exist_ok=True)
+    if tool == 'optiland':
+        from optiland import optic
+        from optiland.materials import IdealMaterial
+        system = optic.Optic()
+        for i, surface in enumerate(p['surfaces']):
+            radius = surface.get('radius_mm')
+            thickness = surface.get('thickness_mm', 0)
+            system.surfaces.add(index=i, radius=np.inf if radius is None else radius,
+                thickness=np.inf if thickness is None else thickness,
+                material=IdealMaterial(positive(surface.get('index', 1), 'index')),
+                is_stop=surface.get('stop', False))
+        system.set_aperture('EPD', positive(p['aperture_mm'], 'aperture_mm'))
+        system.fields.set_type('angle')
+        fx, fy = p.get('field_deg', [0, 0])
+        system.fields.add(x=fx, y=fy)
+        wavelength = positive(p['wavelength_um'], 'wavelength_um')
+        system.wavelengths.add(value=wavelength, is_primary=True)
+        pupil = np.asarray(p['pupil_points'], dtype=float)
+        if pupil.ndim != 2 or pupil.shape[1] != 2 or np.any(np.sum(pupil**2, axis=1) > 1):
+            raise ValueError('pupil_points must be [x,y] pairs within the unit entrance pupil')
+        system.trace_generic(Hx=1 if fx else 0, Hy=1 if fy else 0, Px=pupil[:,0], Py=pupil[:,1], wavelength=wavelength)
+        x, y = np.asarray(system.surfaces.x), np.asarray(system.surfaces.y)
+        np.savez_compressed(out/'rays.npz', x_mm=x, y_mm=y, pupil_xy=pupil, wavelength_um=wavelength)
+        xy = np.column_stack([x[-1], y[-1]])
+        np.savetxt(out/'image.csv', xy, delimiter=',', header='x_mm,y_mm', comments='')
+        valid = np.isfinite(xy).all(axis=1)
+        if not valid.any():
+            raise ValueError('No finite image-plane intersections; inspect the surface prescription')
+        centroid = xy[valid].mean(axis=0)
+        rms = np.sqrt(np.mean(np.sum((xy[valid]-centroid)**2, axis=1)))
+        return {'rays': len(xy), 'finite_intersections': int(valid.sum()), 'centroid_mm': centroid.tolist(), 'rms_spot_mm': float(rms), 'image_xy_mm': [[float(v) if np.isfinite(v) else None for v in row] for row in xy], 'data': 'rays.npz'}
+    if tool == 'gdsfactory':
+        import gdsfactory as gf
+        from gdsfactory.gpdk import get_generic_pdk
+        get_generic_pdk().activate()
+        component = gf.components.straight(length=positive(p['length_um'], 'length_um'), width=positive(p['width_um'], 'width_um'))
+        component.write_gds(out/'waveguide.gds', with_metadata=False)
+        ports = [{'name': port.name, 'center_um': list(port.center), 'orientation_deg': float(port.orientation), 'width_um': float(port.width)} for port in component.ports]
+        return {'pdk': 'generic', 'ports': ports, 'data': 'waveguide.gds'}
+    if tool == 'py-pol':
+        from py_pol.jones_vector import Jones_vector
+        from py_pol.jones_matrix import Jones_matrix
+        field = Jones_vector('input')
+        field.linear_light(azimuth=math.radians(p.get('azimuth_deg', 0)), intensity=positive(p.get('intensity', 1), 'intensity'))
+        methods = {'polarizer': 'diattenuator_perfect', 'quarter_waveplate': 'quarter_waveplate', 'half_waveplate': 'half_waveplate'}
+        for element in p['elements']:
+            if element['type'] not in methods:
+                raise ValueError('Element type must be polarizer, quarter_waveplate or half_waveplate')
+            matrix = Jones_matrix(element['type'])
+            getattr(matrix, methods[element['type']])(azimuth=math.radians(element.get('azimuth_deg', 0)))
+            field = matrix * field
+        values = np.asarray(field.M).reshape(2)
+        return {'intensity': float(field.parameters.intensity()), 'jones_xy': [[float(v.real), float(v.imag)] for v in values]}
     if tool == 'tmm':
         from tmm import coh_tmm
         n = [complex_number(v) for v in p['n']]

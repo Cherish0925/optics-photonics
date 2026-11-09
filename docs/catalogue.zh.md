@@ -1,6 +1,6 @@
 # Optics · Photonics — 软件目录
 
-核查日期: 2026-10-20 | 96 个工具与产品族
+核查日期: 2026-10-20 | 97 个工具与产品族
 
 原创目录说明与代码采用 MIT；被收录软件遵循各自许可。
 
@@ -1690,6 +1690,24 @@ ID: `pytorch` | 推导与数字基础, 计算成像与重建
 原始资料：
 - [官方平台](https://pytorch.org/)
 - [官方源码](https://github.com/pytorch/pytorch)
+
+### py-pol
+
+ID: `py-pol` | 波动光学与传播, 推导与数字基础
+
+- **物理方法:** Jones / Mueller 偏振光学
+- **用途:** 使用 Jones 向量、Stokes 向量、Jones 矩阵与 Mueller 矩阵计算偏振态及光学元件。
+- **编程入口:** Python：Jones_vector、Jones_matrix、Stokes、Mueller；支持数组计算及偏振参数提取。
+- **计算环境:** Python；Windows、macOS、Linux；依赖 NumPy、SciPy、Matplotlib。
+- **许可:** MIT
+- **应用依据:** 维护者提供偏振分析、光学元件与参数重建教程。
+- **适用边界:** Jones 描述完全偏振光；部分偏振及退偏使用 Stokes/Mueller 表示。
+- **MCP (unverified):** 未确认上游专用 MCP。
+- **Agent Skill (unverified):** 未确认上游专用 Skill。
+
+原始资料：
+- [Documentation](https://py-pol.readthedocs.io/en/master/)
+- [Source and license](https://github.com/JesusDelHoyo/py_pol)
 
 ## 免费或授权受限
 

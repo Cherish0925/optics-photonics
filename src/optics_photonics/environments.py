@@ -1,5 +1,7 @@
 """Use installed scientific environments, or prepare a separate Python environment."""
 import json
+from contextlib import contextmanager
+import time
 import os
 from pathlib import Path
 import shutil
@@ -12,6 +14,34 @@ from .catalogue import software
 
 def home(path=None):
     return Path(path or os.environ.get('OPTICS_HOME') or Path.home() / '.optics-photonics').expanduser().resolve()
+
+
+@contextmanager
+def editing(path=None):
+    directory = home(path)
+    directory.mkdir(parents=True, exist_ok=True)
+    with (directory/'connections.lock').open('a+b') as stream:
+        if stream.tell() == 0:
+            stream.write(b'0'); stream.flush()
+        stream.seek(0)
+        if os.name == 'nt':
+            import msvcrt
+            while True:
+                try:
+                    msvcrt.locking(stream.fileno(), msvcrt.LK_NBLCK, 1)
+                    break
+                except OSError:
+                    time.sleep(.02)
+        else:
+            import fcntl
+            fcntl.flock(stream, fcntl.LOCK_EX)
+        try:
+            yield
+        finally:
+            if os.name == 'nt':
+                stream.seek(0); msvcrt.locking(stream.fileno(), msvcrt.LK_UNLCK, 1)
+            else:
+                fcntl.flock(stream, fcntl.LOCK_UN)
 
 
 def read(path=None):
@@ -79,9 +109,10 @@ def bind(tool, *, python=None, command=None, path=None, threads=1, concurrency=1
         if not Path(cwd).is_dir():
             raise ValueError('Working directory does not exist')
     connection.update(threads=threads, concurrency=concurrency, cwd=cwd)
-    configuration = read(path)
-    configuration['tools'][tool] = connection
-    save(configuration, path)
+    with editing(path):
+        configuration = read(path)
+        configuration['tools'][tool] = connection
+        save(configuration, path)
     return {'tool': tool, **connection}
 
 

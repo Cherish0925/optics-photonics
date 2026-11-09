@@ -3481,5 +3481,41 @@
       "text": "Dedicated agent Skill not verified in this review"
     },
     "stage": "Published implementation"
+  },
+  {
+    "id": "py-pol",
+    "name": "py-pol",
+    "group": "open",
+    "cats": [
+      "wave",
+      "foundation"
+    ],
+    "license": "MIT",
+    "route": "api",
+    "sources": [
+      {
+        "label": "Documentation",
+        "url": "https://py-pol.readthedocs.io/en/master/"
+      },
+      {
+        "label": "Source and license",
+        "url": "https://github.com/JesusDelHoyo/py_pol"
+      }
+    ],
+    "method": "Jones / Mueller polarization optics",
+    "summary": "Polarization states and optical elements using Jones vectors, Stokes vectors, Jones matrices and Mueller matrices.",
+    "api": "Python: Jones_vector, Jones_matrix, Stokes and Mueller; array-valued calculations and polarization parameters.",
+    "compute": "Python; Windows, macOS and Linux with NumPy, SciPy and Matplotlib.",
+    "usage": "Maintainer tutorials cover polarization analysis, optical elements and parameter reconstruction.",
+    "limit": "Jones calculus describes fully polarized light; use Stokes/Mueller representations for partial polarization and depolarization.",
+    "stage": "Library",
+    "mcp": {
+      "kind": "unverified",
+      "text": "No dedicated upstream MCP verified."
+    },
+    "skill": {
+      "kind": "unverified",
+      "text": "No dedicated upstream Skill verified."
+    }
   }
 ]

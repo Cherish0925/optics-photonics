@@ -102,18 +102,19 @@ css=r'''
 '''
 js=r'''
 const DATA=JSON.parse(document.querySelector('#catalogue-data').textContent), DOMAIN=JSON.parse(document.querySelector('#domain-data').textContent);
+const INDEX=JSON.parse(document.querySelector('#search-index').textContent), normalize=s=>s.normalize('NFKC').toLowerCase().replace(/[^\p{L}\p{N}]+/gu,' ').trim();
 const byId=new Map(DATA.map(d=>[d.id,d])), selected=new Set();
 const state={group:'all',domain:'all',q:'',route:'all',connector:'all'};
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 let visible=DATA;
 function render(){
-const q=state.q.toLocaleLowerCase().trim();visible=DATA.filter(d=>
+const q=normalize(state.q).split(' ').filter(Boolean);visible=DATA.filter(d=>
 (state.group==='all'||d.group===state.group)&&(state.domain==='all'||d.cats.includes(state.domain))&&
 (state.route==='all'||d.route===state.route)&&(state.connector==='all'||
 (state.connector==='mcp'&&d.mcp.kind!=='unverified')||(state.connector==='skill'&&d.skill.kind!=='unverified')||
 (state.connector==='official'&&(d.mcp.kind==='official'||d.skill.kind==='official')))&&
-(!q||[d.name,d.method,d.summary,d.api,d.license,d.compute,d.usage,d.limit,...d.cats.map(c=>DOMAIN[c])].join(' ').toLocaleLowerCase().includes(q)));
+q.every(term=>INDEX[d.id].includes(term)));
 const ids=new Set(visible.map(d=>d.id));$$('.software').forEach(c=>c.hidden=!ids.has(c.dataset.id));
 $('#result-count').textContent=visible.length;$('#empty').hidden=visible.length!==0;
 $$('.group-tabs button').forEach(b=>{const on=b.dataset.group===state.group;b.classList.toggle('active',on);b.setAttribute('aria-pressed',on)});
@@ -184,9 +185,14 @@ html_text=f'''<!DOCTYPE html>
 <script type="application/json" id="catalogue-data">{catalogue_json}</script><script type="application/json" id="domain-data">{domain_json}</script><script>{js}</script></body></html>'''
 if LANG=='en':
  translations=json.loads((BASE/'src/strings.en.json').read_text(encoding='utf-8'))
+ translations[f'浏览 {len(D)} 项工具与产品族 ↓']=f'Browse {len(D)} tools and product families ↓'
+ translations[f'全部 {len(D)}']=f'All {len(D)}'
  for original,translated in sorted(translations.items(),key=lambda x:len(x[0]),reverse=True):
   html_text=html_text.replace(original,translated)
  html_text=html_text.replace('lang="zh-CN"','lang="en"')
+from optics_photonics.catalogue import search_index
+search_data=json.dumps(search_index(),ensure_ascii=False).replace('</','<\\/')
+html_text=html_text.replace('<script type="application/json" id="catalogue-data">','<script id="search-index" type="application/json">'+search_data+'</script><script type="application/json" id="catalogue-data">')
 from resources import render_resources
 resource_html,resource_js,resource_css,resource_data=render_resources(D,LANG)
 scope_label='Scope & sources' if LANG=='en' else '范围与资料说明'

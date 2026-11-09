@@ -1,4 +1,4 @@
-"""An isolated scientific program process, also used by IOP's command driver."""
+"""An isolated scientific program process, used by local and background calculations."""
 import importlib.metadata
 import json
 import os
@@ -51,10 +51,10 @@ def execute(tool, request, output):
 def main():
     tool = sys.argv[1]
     software(tool)
-    request_path = os.environ.get('IOP_REQUEST_FILE') or sys.argv[2]
+    request_path = os.environ.get('OPTICS_REQUEST_FILE') or sys.argv[2]
     raw = json.loads(Path(request_path).read_text(encoding='utf-8'))
     request = raw.get('arguments', raw)
-    output = os.environ.get('IOP_OUTPUT_DIR') or sys.argv[3]
+    output = os.environ.get('OPTICS_OUTPUT_DIR') or sys.argv[3]
     execute(tool, request, output)
 
 

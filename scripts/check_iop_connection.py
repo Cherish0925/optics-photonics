@@ -63,6 +63,12 @@ async def exercise(endpoint, token, home):
             result=await session.call_tool('run_status',{'run_id':run_id})
             assert not getattr(result,"is_error",getattr(result,"isError",False)),result
             assert json.loads(result.content[0].text)['state']=='completed'
+            listed_files=await session.call_tool('result_files',{'run_id':run_id})
+            assert not getattr(listed_files,'is_error',getattr(listed_files,'isError',False)),listed_files
+            assert any(f['id']==spectrum['id'] for f in json.loads(listed_files.content[0].text)['files'])
+            copied=await session.call_tool('download_result',{'artifact_id':spectrum['id'],'destination':str(home/'mcp-download.csv')})
+            assert not getattr(copied,'is_error',getattr(copied,'isError',False)),copied
+            assert (home/'mcp-download.csv').read_bytes()==destination.read_bytes()
     print(json.dumps({'mcp_tools':len(listed.tools),'native_calculation':'passed','repeat_submission':'same run','mcp_disconnect':'calculation continued','reconnect':'same result','file_download':destination.stat().st_size}))
 
 

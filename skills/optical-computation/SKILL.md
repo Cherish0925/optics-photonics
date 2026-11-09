@@ -1,6 +1,6 @@
 ---
 name: optical-computation
-description: Install or connect optical software environments, run native optical research programs, configure an MCP host, or submit durable parallel and sequential calculations to IOP.
+description: "Install or connect optical software environments, run native optical research programs, configure an MCP host, or submit durable parallel and sequential calculations to IOP."
 ---
 
 # Optical computation

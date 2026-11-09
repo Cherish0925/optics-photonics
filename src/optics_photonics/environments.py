@@ -44,7 +44,7 @@ versions={}
 for name in distributions:
  try: versions[name]=importlib.metadata.version(name)
  except importlib.metadata.PackageNotFoundError: versions[name]=None
-print(json.dumps({'python':sys.executable,'python_version':sys.version.split()[0], 'modules':found,'versions':versions}))
+print(json.dumps({'python':sys.executable,'python_version':sys.version.split()[0], 'prefix':sys.prefix,'base_prefix':sys.base_prefix,'modules':found,'versions':versions}))
 """
     result = subprocess.run([interpreter, '-c', code, json.dumps(modules), json.dumps(record.get('distributions', []))],
                             capture_output=True, text=True, timeout=20)

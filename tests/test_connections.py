@@ -68,7 +68,9 @@ class ConnectionTests(unittest.TestCase):
             subprocess.run([sys.executable,'-m','venv','--without-pip',tmp],check=True)
             executable=Path(tmp)/('Scripts/python.exe' if os.name=='nt' else 'bin/python')
             result=environments.probe('tmm',executable)
-            self.assertEqual(os.path.normcase(os.path.abspath(result['python'])),os.path.normcase(os.path.abspath(executable)))
+            self.assertEqual(Path(result['prefix']).resolve(),Path(tmp).resolve())
+            self.assertNotEqual(Path(result['prefix']).resolve(),Path(result['base_prefix']).resolve())
+            self.assertEqual(Path(result['python']).parent.resolve(),executable.parent.resolve())
 
     def test_native_process_request_and_files(self):
         with tempfile.TemporaryDirectory() as tmp:

@@ -5,13 +5,22 @@ import platform
 import subprocess
 import sys
 import tempfile
+import time
+from urllib.error import HTTPError, URLError
 from urllib.request import urlopen
 from zipfile import ZipFile
 
 system={'Windows':'windows','Darwin':'macos','Linux':'linux'}[platform.system()]
 arch='arm64' if platform.machine().lower() in ('arm64','aarch64') else 'x86_64'
 url=f'https://github.com/Cherish0925/AI4Instruments/releases/download/iop-v0.8.5/IOP-0.8.5-{system}-{arch}.zip'
-with urlopen(url,timeout=120) as response:content=response.read()
+for attempt in range(3):
+    try:
+        with urlopen(url,timeout=120) as response:content=response.read()
+        break
+    except (HTTPError, URLError, TimeoutError) as error:
+        if isinstance(error,HTTPError) and error.code not in (429,500,502,503,504):raise
+        if attempt==2:raise
+        time.sleep(2**attempt)
 with tempfile.TemporaryDirectory() as tmp, ZipFile(io.BytesIO(content)) as archive:
     name=next(n for n in archive.namelist() if '/dist/ai4instruments-' in n and n.endswith('.whl'))
     file=Path(tmp)/Path(name).name

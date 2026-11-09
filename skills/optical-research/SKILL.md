@@ -1,6 +1,6 @@
 ---
 name: optical-research
-description: Select optical and photonic software and mathematical representations for research: ray, wave, Maxwell, thin films, PICs, fibers, lasers, scattering, quantum optics, tissue optics, X-rays, imaging and materials.
+description: "Select optical and photonic software and mathematical representations for research: ray, wave, Maxwell, thin films, PICs, fibers, lasers, scattering, quantum optics, tissue optics, X-rays, imaging and materials."
 ---
 
 # Optical research

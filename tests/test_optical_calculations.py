@@ -14,6 +14,13 @@ from optics_photonics.execution import run
 
 @unittest.skipUnless(os.environ.get('OPTICS_SCIENCE_TESTS')=='1','Set OPTICS_SCIENCE_TESTS=1 in the scientific environment')
 class ScienceTests(unittest.TestCase):
+    def test_skills_have_readable_yaml_metadata(self):
+        import yaml
+        for path in (Path(__file__).resolve().parents[1]/'skills').glob('*/SKILL.md'):
+            metadata=yaml.safe_load(path.read_text(encoding='utf-8').split('---',2)[1])
+            self.assertEqual(metadata['name'],path.parent.name)
+            self.assertIsInstance(metadata['description'],str)
+
     def test_all_packaged_calculations_execute_in_their_native_libraries(self):
         with tempfile.TemporaryDirectory() as tmp:
             for tool,(action,inputs) in EXAMPLES.items():

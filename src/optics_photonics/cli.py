@@ -3,6 +3,7 @@ import argparse
 import json
 from pathlib import Path
 import sys
+import subprocess
 from . import __version__, catalogue, environments, execution, operations
 from .iop import Client, step
 
@@ -12,6 +13,8 @@ def object_argument(value):
 
 
 def main(argv=None):
+    for stream in (sys.stdin,sys.stdout,sys.stderr):
+        if hasattr(stream,'reconfigure'):stream.reconfigure(encoding='utf-8')
     parser = argparse.ArgumentParser(prog='optics-photonics', description='Optical software and research connections')
     parser.add_argument('--version', action='version', version=__version__)
     commands = parser.add_subparsers(dest='command', required=True)
@@ -62,6 +65,6 @@ def main(argv=None):
             if command=='tools': result={'tools':[{'name':n,'description':d,'inputSchema':s} for n,d,s in TOOLS]}
             else: result=invoke(a['tool'],a['arguments'])
         print(json.dumps(result,ensure_ascii=False,indent=2,allow_nan=False))
-    except (ValueError, KeyError, OSError, RuntimeError) as error:
+    except (ValueError, KeyError, OSError, RuntimeError, subprocess.SubprocessError) as error:
         print(json.dumps({'error':str(error)},ensure_ascii=False),file=sys.stderr)
         raise SystemExit(1) from None

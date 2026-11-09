@@ -40,7 +40,7 @@ def invoke(name, args):
     if name == 'submit_workflow': return client.submit(**args)
     if name == 'run_status': return client.run(**args)
     if name == 'cancel_run': return client.cancel(**args)
-    if name == 'result_files': return client.files(**args)
+    if name == 'result_files': return {'files':client.files(**args)}
     if name == 'download_result': return client.download(**args)
     raise ValueError('Unknown tool: '+name)
 

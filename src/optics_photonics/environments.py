@@ -139,6 +139,9 @@ def available(path=None):
         try:
             if value['kind'] == 'python':
                 item['environment'] = probe(tool, value['python'])
+            elif value['kind'] == 'native':
+                from . import native
+                item['environment'] = native.probe(value)
             else:
                 item['environment'] = {'available': bool(shutil.which(value['command'][0]))}
         except (OSError, ValueError, RuntimeError, subprocess.SubprocessError) as error:

@@ -7,7 +7,7 @@ Optics & Photonics 独立提供光学软件连接、原生研究程序、后台�
 连接程序使用 Python 3.10+，支持 Windows、macOS、Linux。科学软件使用各自支持的 Python、系统与许可；可以为每个软件连接不同的环境。
 
 ```sh
-python -m pip install "git+https://github.com/Cherish0925/optics-photonics.git@optics-v0.2.0"
+python -m pip install "git+https://github.com/Cherish0925/optics-photonics.git@optics-v0.3.0"
 optics-photonics search "thin film" --license-group open
 optics-photonics info tmm
 optics-photonics prepare tmm
@@ -103,3 +103,7 @@ MCP 包含软件检索、环境准备、连接、资源设置、提交、任务�
 软件目录包含商业、开源和受限许可三组，每项保留原始接口文档及已有 MCP、Skill 的来源。可执行计算在交互指南中单独筛选。`software_details` 返回原生 API、安装配方、示例输入和物理约定。
 
 新增软件时补充连接记录、环境说明和原生程序，沿用共同的任务与文件接口。涉及商业 SDK、GUI、远程计算或 MPI 时，把对应启动与会话管理放在软件适配程序中。跨软件传递场、光谱、S 参数和模型时，同时保存单位、坐标、采样、归一化与材料来源。
+
+[本机商业软件：发现、会话、项目与结果](NATIVE.zh-CN.md)。
+
+长时间研究任务应运行在持续存在的计算主机上。独立工作进程可以在提交程序退出后继续计算；如果宿主回收整个容器或进程组，工作进程也会结束。此类 Agent 环境应通过 SSH 连接科学工作站上的 MCP，将计算留在工作站。

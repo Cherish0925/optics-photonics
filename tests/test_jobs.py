@@ -6,6 +6,7 @@ import sys
 import tempfile
 import time
 import unittest
+from unittest.mock import patch
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'src'))
 from optics_photonics import environments, jobs
 
@@ -92,6 +93,16 @@ class JobsTests(unittest.TestCase):
         jobs.resources(cpu=1,path=self.home)
         runs=[self.submit([self.step('s'+str(i),critical=str(self.root/'exclusive')) for i in range(2)])['run_id'] for _ in range(2)]
         for run in runs:self.assertEqual(self.wait(run)['state'],'succeeded')
+
+    def test_appended_steps_respect_existing_software_concurrency(self):
+        environments.bind('scipy',command=[sys.executable,str(self.script)],path=self.home,concurrency=1)
+        with patch.object(jobs,'start_worker'):
+            run=self.submit([self.step('first',critical=str(self.root/'exclusive'))])['run_id']
+            environments.bind('scipy',command=[sys.executable,str(self.script)],path=self.home,concurrency=2)
+            jobs.submit([self.step('second',critical=str(self.root/'exclusive'))],run_id=run,path=self.home)
+        jobs.start_worker(run,path=self.home)
+        result=self.wait(run)
+        self.assertEqual(result['state'],'succeeded',result)
 
     def test_append_and_resume_keep_completed_steps(self):
         r=self.submit([self.step('complete',value=3),{**self.step('retry',fail_once=str(self.root/'flag')),'after':['complete']},

@@ -360,7 +360,7 @@ def work(run_id, path):
                         concurrency = min([config['concurrency']]+[c['concurrency'] for s,c in active if s['tool']==spec['tool']])
                         if used+config['threads']>cpu or counts[spec['tool']]>=concurrency: continue
                         db.execute("UPDATE steps SET state='running',started=? WHERE run_id=? AND id=?",(time.time(),run_id,row['id']))
-                        used+=config['threads']; counts[spec['tool']]+=1; ready.append(dict(row))
+                        used+=config['threads']; counts[spec['tool']]+=1; active.append((spec,config)); ready.append(dict(row))
                 for row in ready: pending[row['id']]=pool.submit(perform,run_id,row,path)
                 time.sleep(.1)
     with database(path) as db:

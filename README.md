@@ -18,7 +18,7 @@ Download [English HTML](https://raw.githubusercontent.com/Cherish0925/optics-pho
 
 ## Install and run
 
-The repository now includes an installable connector, native-program execution, MCP and research Skills. [Connection guide](docs/CONNECT.md) · [Interactive guide](docs/connect.html) · [Release packages](https://github.com/Cherish0925/optics-photonics/releases).
+The repository now includes an installable connector, native-program execution, MCP and research Skills. [Connection guide](docs/CONNECT.md) · [Interactive guide](https://cherish0925.github.io/optics-photonics/connect.html) · [Release packages](https://github.com/Cherish0925/optics-photonics/releases).
 
 ```sh
 python -m pip install "git+https://github.com/Cherish0925/optics-photonics.git@optics-v0.2.0"

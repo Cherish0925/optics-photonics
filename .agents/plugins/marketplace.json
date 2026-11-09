@@ -1,0 +1,10 @@
+{
+  "name": "optics-photonics",
+  "interface": {"displayName": "Optics-Photonics AI Lab"},
+  "plugins": [{
+    "name": "optics-photonics",
+    "source": {"source": "local", "path": "./"},
+    "policy": {"installation": "AVAILABLE", "authentication": "ON_INSTALL"},
+    "category": "Productivity"
+  }]
+}

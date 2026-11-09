@@ -77,6 +77,27 @@ optics-photonics resume RUN_ID
 
 没有依赖的步骤按资源设置并行；后续步骤等待依赖完成。追加步骤保留同一个研究任务。`resume` 保留已完成步骤，重新运行未完成步骤，每次尝试的文件独立保存。云端求解器的任务编号和接续方式由原生程序保存与处理。
 
+## 从插件市场安装
+
+| 宿主 | 添加来源与安装 |
+| --- | --- |
+| Agentic Research OS | **Extensions → Plugins → Add from link**，填写 `https://github.com/Cherish0925/optics-photonics/tree/main/connect/agentic-research-os`，安装 `optics-photonics`，激活返回的修订。 |
+| Codex | `codex plugin marketplace add Cherish0925/optics-photonics`，再执行 `codex plugin add optics-photonics@optics-photonics`。 |
+| Claude Code | `claude plugin marketplace add Cherish0925/optics-photonics`，再执行 `claude plugin install optics-photonics@optics-photonics`。 |
+
+Research OS 包携带连接器、目录与 Skills，使用宿主自带的 Python。
+Codex/Claude 的 GitHub 插件通过工具执行端 PATH 中的 `python`（3.10+）运行包内代码。
+解释器名称或路径不同时，使用该解释器安装连接器，再生成下面的宿主包。
+科学软件通过 `prepare_environment` 准备，或通过 `bind_environment` / `bind_native_software` 接入。
+
+更新时在 Research OS 刷新来源，安装其新修订。Codex 使用
+`codex plugin marketplace upgrade optics-photonics` 刷新来源并安装更新；Claude 使用
+`claude plugin marketplace update optics-photonics`，再执行
+`claude plugin update optics-photonics@optics-photonics`。
+新连接加载新版插件；科学环境与研究记录保留在 `OPTICS_HOME`，已提交的计算继续使用启动时的程序。
+
+这些入口是项目维护的 GitHub 插件市场；OpenAI、Anthropic 审核后的公共目录另有提交与收录流程。
+
 ## Agent、MCP 与插件
 
 ```sh

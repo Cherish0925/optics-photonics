@@ -23,7 +23,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support.",
     "installation_note": "Bind a program that uses the vendor API on its supported operating system; installation and licensing are provided by the vendor."
   },
@@ -49,7 +49,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "lighttools": {
@@ -75,7 +75,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support.",
     "installation_note": "Bind a program that uses the vendor API on its supported operating system; installation and licensing are provided by the vendor."
   },
@@ -103,7 +103,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "tracepro": {
@@ -129,7 +129,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "oslo": {
@@ -156,7 +156,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "asap": {
@@ -181,7 +181,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "virtuallab": {
@@ -207,7 +207,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "speos": {
@@ -233,7 +233,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "lumerical": {
@@ -263,7 +263,7 @@
         "url": "https://github.com/zxqcreations/Lumerical_MCP_Skill"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support.",
     "installation_note": "Use the lumapi module shipped with your licensed Ansys installation and configure its supported Python path."
   },
@@ -292,7 +292,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "cst": {
@@ -318,7 +318,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "rsoft": {
@@ -343,7 +343,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "jcm": {
@@ -371,7 +371,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "photond": {
@@ -397,7 +397,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "tidy3d": {
@@ -428,7 +428,7 @@
         "url": "https://github.com/flexcompute/plugin-marketplace"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "ipkiss": {
@@ -456,7 +456,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "vpi": {
@@ -482,7 +482,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "optisystem": {
@@ -508,7 +508,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "macleod": {
@@ -534,7 +534,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "optilayer": {
@@ -561,7 +561,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support.",
     "installation_note": "Bind a program that uses the vendor API on its supported operating system; installation and licensing are provided by the vendor."
   },
@@ -588,7 +588,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "rpresonator": {
@@ -614,7 +614,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "crosslight": {
@@ -718,7 +718,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "mathematica": {
@@ -747,7 +747,7 @@
         "url": "https://github.com/WolframResearch/AgentTools"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "maple": {
@@ -773,7 +773,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "photonforge": {
@@ -803,7 +803,7 @@
         "url": "https://github.com/flexcompute/plugin-marketplace"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "osloedu": {
@@ -828,7 +828,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "ptypy": {
@@ -856,7 +856,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "meep": {
@@ -884,7 +884,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support.",
     "installation_note": "Install the scientific Meep distribution from its official instructions, not the unrelated PyPI package named meep."
   },
@@ -913,7 +913,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support.",
     "installation_note": "Install the scientific Meep distribution from its official instructions, not the unrelated PyPI package named meep."
   },
@@ -942,7 +942,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "openems": {
@@ -970,7 +970,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "s4": {
@@ -996,7 +996,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "torcwa": {
@@ -1024,7 +1024,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "grcwa": {
@@ -1058,7 +1058,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "legume": {
@@ -1092,7 +1092,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "ceviche": {
@@ -1120,7 +1120,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "tmm": {
@@ -1154,7 +1154,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "solcore": {
@@ -1183,7 +1183,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "rayoptics": {
@@ -1211,7 +1211,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "optiland": {
@@ -1219,9 +1219,15 @@
     "modules": [
       "optiland"
     ],
-    "pip": [],
-    "distributions": [],
-    "operations": [],
+    "pip": [
+      "optiland==0.6.3"
+    ],
+    "distributions": [
+      "optiland"
+    ],
+    "operations": [
+      "trace"
+    ],
     "native_program": true,
     "installation": "https://github.com/optiland/optiland",
     "interface": "Native Python; NumPy / PyTorch backends; JSON and selected commercial-format interoperability.",
@@ -1239,7 +1245,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "raysect": {
@@ -1267,7 +1273,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "raytracing": {
@@ -1301,7 +1307,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "lightpipes": {
@@ -1335,7 +1341,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "poppy": {
@@ -1369,7 +1375,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "hcipy": {
@@ -1403,7 +1409,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "prysm": {
@@ -1431,7 +1437,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support.",
     "installation_note": "prysm 0.21.1 imports pkg_resources; use a compatible setuptools environment, or a newer upstream release that removes this dependency."
   },
@@ -1460,7 +1466,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "torchoptics": {
@@ -1488,7 +1494,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "waveprop": {
@@ -1516,7 +1522,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "gdsfactory": {
@@ -1524,9 +1530,15 @@
     "modules": [
       "gdsfactory"
     ],
-    "pip": [],
-    "distributions": [],
-    "operations": [],
+    "pip": [
+      "gdsfactory==9.51.0"
+    ],
+    "distributions": [
+      "gdsfactory"
+    ],
+    "operations": [
+      "waveguide"
+    ],
     "native_program": true,
     "installation": "https://github.com/gdsfactory/gdsfactory",
     "interface": "Native Python, PCells, PDKs, netlists and solver adapters; official component-designer Skill.",
@@ -1545,7 +1557,7 @@
         "url": "https://github.com/gdsfactory/gdsfactory/blob/main/.agents/skills/gdsfactory-component-designer/SKILL.md"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "klayout": {
@@ -1580,7 +1592,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "sax": {
@@ -1608,7 +1620,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "siepic": {
@@ -1634,7 +1646,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "nazca": {
@@ -1660,7 +1672,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "adda": {
@@ -1686,7 +1698,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "miepython": {
@@ -1720,7 +1732,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "treams": {
@@ -1748,7 +1760,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "smuthi": {
@@ -1776,7 +1788,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "pygdm": {
@@ -1805,7 +1817,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "qutip": {
@@ -1839,7 +1851,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "quantumoptics": {
@@ -1865,7 +1877,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "perceval": {
@@ -1893,7 +1905,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "strawberry": {
@@ -1921,7 +1933,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "luna": {
@@ -1947,7 +1959,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "pyfmas": {
@@ -1975,7 +1987,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "laserfun": {
@@ -2003,7 +2015,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "opticomm": {
@@ -2031,7 +2043,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "finesse": {
@@ -2060,7 +2072,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "rezonator": {
@@ -2112,7 +2124,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "mmc": {
@@ -2138,7 +2150,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "holopy": {
@@ -2166,7 +2178,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "pydhm": {
@@ -2174,8 +2186,14 @@
     "modules": [
       "pyDHM"
     ],
-    "pip": [],
-    "distributions": [],
+    "pip": [
+      "pyDHM==1.0.5",
+      "opencv-python-headless>=4.10,<5"
+    ],
+    "distributions": [
+      "pyDHM",
+      "opencv-python-headless"
+    ],
     "operations": [],
     "native_program": true,
     "installation": "https://github.com/catrujilla/pyDHM",
@@ -2195,7 +2213,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "pynx": {
@@ -2223,7 +2241,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "mitsuba": {
@@ -2251,7 +2269,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "pbrt": {
@@ -2277,7 +2295,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "srw": {
@@ -2303,7 +2321,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "shadow": {
@@ -2332,7 +2350,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "xrt": {
@@ -2360,7 +2378,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "sympy": {
@@ -2394,7 +2412,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "sage": {
@@ -2421,7 +2439,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "freecad": {
@@ -2449,7 +2467,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "gmsh": {
@@ -2477,7 +2495,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "scikitimage": {
@@ -2511,7 +2529,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "napari": {
@@ -2539,7 +2557,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "refractiveindex": {
@@ -2594,7 +2612,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "ngsolve": {
@@ -2622,7 +2640,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "scipy": {
@@ -2656,7 +2674,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "jax": {
@@ -2684,7 +2702,7 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
   },
   "pytorch": {
@@ -2712,7 +2730,41 @@
         "text": "Dedicated agent Skill not verified in this review"
       }
     },
-    "execution": "local-or-iop",
+    "execution": "local-or-background",
     "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "py-pol": {
+    "kind": "python",
+    "modules": [
+      "py_pol"
+    ],
+    "pip": [
+      "py-pol==1.3.0"
+    ],
+    "distributions": [
+      "py-pol"
+    ],
+    "operations": [
+      "polarization"
+    ],
+    "native_program": true,
+    "installation": "https://py-pol.readthedocs.io/en/master/",
+    "interface": "Python Jones, Stokes and Mueller interfaces.",
+    "sources": [
+      "https://py-pol.readthedocs.io/en/master/",
+      "https://github.com/JesusDelHoyo/py_pol"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "No dedicated upstream MCP verified."
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "No dedicated upstream Skill verified."
+      }
+    },
+    "execution": "local-or-background",
+    "environment": "Python with NumPy, SciPy and Matplotlib; separate environment supported."
   }
 }

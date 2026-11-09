@@ -45,14 +45,14 @@ def package(destination, host='mcp', python=None):
         descriptor['mcpServers'] = {'optics':{'transport':'stdio','command':'${RESEARCH_PYTHON}',
             'args':['-B','${PACKAGE_ROOT}/server.py','mcp'], 'protocol_version':'2025-11-25'}}
         write(target/'plugin.json',descriptor)
-        instructions = 'Extract the release ZIP if needed, then install the directory containing plugin.json as an Agentic Research OS plugin. Activate its returned revision in the current workspace. The package uses the host Python and carries all connector code, catalogue data and Skills. Configure scientific software on the IOP computer.'
+        instructions = 'Extract the release ZIP if needed, then install the directory containing plugin.json as an Agentic Research OS plugin. Activate its returned revision in the current workspace. The package uses the host Python and carries all connector code, catalogue data and Skills. Configure scientific software on the computing host.'
     elif host in ('codex','claude'):
         folder = '.codex-plugin' if host == 'codex' else '.claude-plugin'
         # Both native plugin formats support a shared .mcp.json and discovered skills/ directory.
         native = {k:v for k,v in descriptor.items() if k!='skills'}
         if host == 'codex':
             native.update(skills='./skills/', mcpServers='./.mcp.json', requires_local_executor=True,
-                          interface={'displayName':'Optics & Photonics','shortDescription':'Optical software and research calculations','developerName':'AI4Instruments'})
+                          interface={'displayName':'Optics & Photonics','shortDescription':'Optical software and research calculations','developerName':'Optics & Photonics'})
         write(target/folder/'plugin.json', native)
         write(target/'.mcp.json', {'mcpServers':{'optics':server}})
         write(target/'mcp.json', {'mcpServers':{'optics':server}})
@@ -77,5 +77,5 @@ def package(destination, host='mcp', python=None):
     else:
         write(target/'mcp.json', {'mcpServers':{'optics':server}})
         instructions = 'Register the optics stdio server from mcp.json in a compatible MCP host. Use the matching host’s own configuration format. This connector needs Python 3.10 or newer; the scientific environment may use a different interpreter.'
-    (target/'INSTALL.md').write_text(instructions+'\n\nIOP: https://github.com/Cherish0925/AI4Instruments/tree/main/iop\nOptics: https://github.com/Cherish0925/optics-photonics\n', encoding='utf-8')
+    (target/'INSTALL.md').write_text(instructions+'\n\nOptics: https://github.com/Cherish0925/optics-photonics\n', encoding='utf-8')
     return {'directory':str(target),'host':host,'version':__version__,'skills':len(skills)}

@@ -4,9 +4,9 @@
 
 # Optics · Photonics
 
-Software connections, research methods and a bilingual catalogue for optical science and engineering, with a compact physical foundation: **Field + Matter + Interaction**.
+An independent digital research toolkit for optics and photonics: scientific software, native programs, background calculations, MCP, plugins and research Skills. Its physical foundation is **Field + Matter + Interaction**.
 
-**96 tools and product families · 14 domains · 200 documentation and integration links**
+**97 tools and product families · 14 domains · 202 documentation and integration links**
 
 | Read | Explore the data | Build on it |
 | --- | --- | --- |
@@ -21,12 +21,14 @@ Download [English HTML](https://raw.githubusercontent.com/Cherish0925/optics-pho
 The repository now includes an installable connector, native-program execution, MCP and research Skills. [Connection guide](docs/CONNECT.md) · [Interactive guide](docs/connect.html) · [Release packages](https://github.com/Cherish0925/optics-photonics/releases).
 
 ```sh
-python -m pip install "git+https://github.com/Cherish0925/optics-photonics.git@optics-v0.1.0"
+python -m pip install "git+https://github.com/Cherish0925/optics-photonics.git@optics-v0.2.0"
 optics-photonics prepare tmm
 optics-photonics connect agentic-research-os --output optics-plugin
 ```
 
-13 libraries have executable calculations; all 96 catalogue entries have connection descriptions. Full native programs retain each solver's API. Long and parallel calculations use [IOP Runtime](https://github.com/Cherish0925/AI4Instruments), including experiments that mix computation and physical instruments. Host packages cover Agentic Research OS, Codex, Claude Code, DeepSeek Harness, Qiushi and generic MCP. Scientific software retains its own installation, platform and license requirements.
+16 libraries have executable calculations; all 97 catalogue entries have connection descriptions and primary sources. Native programs retain each solver's full API. Independent background workers execute parallel and dependent calculations, coordinate CPU resources, preserve completed steps and return scientific files. Closing the Agent does not stop submitted jobs.
+
+Host packages cover Agentic Research OS, Codex, Claude Code, DeepSeek Harness, Qiushi and generic MCP. The connector runs on Windows, macOS and Linux; each scientific solver keeps its own supported platforms and license.
 
 ## Physical foundation
 
@@ -40,7 +42,7 @@ Read the complete [English foundation](docs/foundations.html) or [中文基础�
 
 ## What is inside
 
-- **29 commercial / paid**, **64 free and open-source**, and **3 free or source-available tools with restrictions**. Free clients, paid solvers, academic-only licenses and external PDKs are distinguished.
+- **29 commercial / paid**, **65 free and open-source**, and **3 free or source-available tools with restrictions**. Free clients, paid solvers, academic-only licenses and external PDKs are distinguished.
 - Each entry includes physical methods, use cases, programming interfaces, compute environment, licensing, application basis, limitations and primary sources.
 - API, CLI and macros are documented independently from **official / community / unverified MCP and agent Skills**. A documentation MCP is not assumed to execute a solver.
 - Search by task or interface, filter by license and domain, compare up to four tools, and export CSV or JSON.

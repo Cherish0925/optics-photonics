@@ -1,6 +1,6 @@
 # Optics · Photonics — software catalogue
 
-Reviewed: 2026-10-20 | 96 tools and product families
+Reviewed: 2026-10-20 | 97 tools and product families
 
 Original descriptions and code: MIT. Linked products retain their own licenses.
 
@@ -1690,6 +1690,24 @@ ID: `pytorch` | Derivation & digital foundations, Computational imaging
 Sources:
 - [Official product / platform](https://pytorch.org/)
 - [Source repository](https://github.com/pytorch/pytorch)
+
+### py-pol
+
+ID: `py-pol` | Wave optics & propagation, Derivation & digital foundations
+
+- **Physical method:** Jones / Mueller polarization optics
+- **Purpose:** Polarization states and optical elements using Jones vectors, Stokes vectors, Jones matrices and Mueller matrices.
+- **Programmable interface:** Python: Jones_vector, Jones_matrix, Stokes and Mueller; array-valued calculations and polarization parameters.
+- **Compute:** Python; Windows, macOS and Linux with NumPy, SciPy and Matplotlib.
+- **License:** MIT
+- **Application basis:** Maintainer tutorials cover polarization analysis, optical elements and parameter reconstruction.
+- **Limitations:** Jones calculus describes fully polarized light; use Stokes/Mueller representations for partial polarization and depolarization.
+- **MCP (unverified):** No dedicated upstream MCP verified.
+- **Agent Skill (unverified):** No dedicated upstream Skill verified.
+
+Sources:
+- [Documentation](https://py-pol.readthedocs.io/en/master/)
+- [Source and license](https://github.com/JesusDelHoyo/py_pol)
 
 ## Free / restricted
 

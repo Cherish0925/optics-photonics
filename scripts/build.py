@@ -44,11 +44,11 @@ def main():
     counts=dict(collections.Counter(x['group'] for x in sets['en']))
     source_count=len({s['url'] for d in sets['en'] for s in d['sources']})
     write_json(ROOT/'data/manifest.json',{'schema_version':'1.0','reviewed':REVIEWED,'project':'https://github.com/Cherish0925/optics-photonics','description_license':'MIT','languages':['en','zh'],'entries':len(sets['en']),'domains':14,'groups':counts,'primary_source_urls':source_count,'resource_urls_including_connectors':len(collect_resources(sets['en'])),'catalogues':{lang:RAW+f'data/catalogue.{lang}.json' for lang in ('en','zh')}})
-    llms='''# Optics · Photonics
+    llms=f'''# Optics · Photonics
 
 > Bilingual catalogue of optical and photonic software: physical models, licenses, programmable interfaces, sources, MCP and agent Skills.
 
-Reviewed: 2026-10-20. Schema version: 1.0. 96 tools / product families in 14 task domains.
+Reviewed: 2026-10-20. Schema version: 1.0. {len(sets['en'])} tools / product families in 14 task domains.
 
 ## Foundations
 
@@ -65,7 +65,7 @@ Reviewed: 2026-10-20. Schema version: 1.0. 96 tools / product families in 14 tas
 
 ## Integrate
 
-- [Install and connect](https://github.com/Cherish0925/optics-photonics/blob/main/docs/CONNECT.md): native programs, MCP, Skills and IOP calculations.
+- [Install and connect](https://github.com/Cherish0925/optics-photonics/blob/main/docs/CONNECT.md): native programs, MCP, Skills and independent background calculations.
 - [Connection data](https://raw.githubusercontent.com/Cherish0925/optics-photonics/main/data/connections.json): all catalogue IDs with execution routes and upstream sources.
 - [Research connections](https://cherish0925.github.io/optics-photonics/connect.html): interactive installation and coverage guide.
 

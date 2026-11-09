@@ -1,13 +1,13 @@
-# 光学与光子学接入
+# 光学与光子学研究工具
 
-这个软件包提供软件检索、原生程序执行、MCP 和研究 Skills。IOP 提供持续运行、进程管理、并行与串行调度、实验记录。光学软件保留自己的完整 API 和安装环境。
+Optics & Photonics 独立提供光学软件连接、原生研究程序、后台计算、MCP、Skills 和插件。选择软件、建立模型、求解、优化、保存与读取结果，都通过这个软件包完成。
 
-## 安装
+## 安装与第一次计算
 
-连接器使用 Python 3.10 或更新版本，可运行于 Windows、macOS、Linux。具体求解器的系统、架构、Python 版本和许可要求，由对应软件决定。
+连接程序使用 Python 3.10+，支持 Windows、macOS、Linux。科学软件使用各自支持的 Python、系统与许可；可以为每个软件连接不同的环境。
 
 ```sh
-python -m pip install "git+https://github.com/Cherish0925/optics-photonics.git@optics-v0.1.0"
+python -m pip install "git+https://github.com/Cherish0925/optics-photonics.git@optics-v0.2.0"
 optics-photonics search "thin film" --license-group open
 optics-photonics info tmm
 optics-photonics prepare tmm
@@ -20,77 +20,86 @@ optics-photonics prepare tmm
 ```
 
 ```sh
-optics-photonics run tmm spectrum --inputs @inputs.json
+optics-photonics run tmm spectrum --inputs "@inputs.json"
 ```
 
-Release 中的 wheel 可以直接安装，无需 Git。也可以用 `python -m optics_photonics` 调用全部命令。`prepare` 为已提供安装配方的软件建立独立环境；已有软件环境可直接连接：
+命令返回输出目录、结果和软件版本。光谱保存在 CSV 文件中。没有 Git 时，下载 Release 中的 wheel，用 `python -m pip install 文件.whl` 安装；也可用 `python -m optics_photonics` 调用全部命令。
+
+## 科学环境与完整程序
+
+`prepare` 按已有配方建立独立环境；已有环境直接连接：
 
 ```sh
-optics-photonics bind tmm --python /path/to/scientific/python --threads 1 --concurrency 4
+optics-photonics bind tmm --python "/path/to/scientific/python" --threads 1 --concurrency 4
 optics-photonics environments
+optics-photonics resources --cpu 8
 ```
 
-不同软件可以使用不同的解释器和虚拟环境。配置默认保存在 `~/.optics-photonics`；`OPTICS_HOME` 可指定其他目录。
+`threads` 设置常见数值库的线程数；`concurrency` 设置同一软件的并行进程数；`resources` 设置这台计算机上所有后台研究任务共享的 CPU 额度。MPI、GPU、商业许可证和集群队列使用求解器自己的启动配置。
 
-## 接入 Agent 系统
+原生 Python 程序接收 `INPUTS`、`OUTPUT_DIR`，并将简洁结果赋给 `RESULT`。程序可以使用完整 API，保留同一软件会话，运行优化、迭代和参数扫描。数组、场、网格和模型写入 `OUTPUT_DIR`。
+
+```sh
+optics-photonics run tmm --program research.py --inputs "@inputs.json"
+```
+
+原生命令也可以连接。程序从 `OPTICS_REQUEST_FILE` 或标准输入读取 JSON，将文件写入 `OPTICS_OUTPUT_DIR`，把 JSON 结果写入 `OPTICS_RESULT_FILE`。`bind --command-json` 接收可执行文件和参数数组，支持 `{request}`、`{output}`、`{result}` 参数。C、C++、C#、Java、Julia 和商业软件批处理均可沿用其原生实现。
+
+## 持续计算与研究工作流
+
+```sh
+optics-photonics submit tmm --program research.py --inputs "@inputs.json" --request-id study-001
+optics-photonics runs
+optics-photonics status RUN_ID
+optics-photonics files RUN_ID
+optics-photonics read RUN_ID calculate/attempt-1/result.json
+optics-photonics download RUN_ID calculate/attempt-1/spectrum.csv spectrum.csv
+```
+
+提交后立即返回任务编号。后台进程继续执行，CLI 或 MCP 关闭不会结束计算。再次提交同一请求时沿用 `request-id`，会返回原任务。运行期间已经写出的文件可以直接读取。
+
+工作流是 JSON 数组。每一步包含 `id`、`tool`、`inputs`，以及 `action` 或 `source`。`after` 指定前置步骤；`bindings` 把前一步结果写入下一步输入，并自动建立依赖。例如：
+
+```json
+[
+  {"id":"a","tool":"tmm","action":"spectrum","inputs":{"n":[1,1.45,1.52],"thickness_nm":[100],"wavelength_nm":[550]}},
+  {"id":"b","tool":"tmm","action":"spectrum","inputs":{"n":[1,1.45,1.52],"thickness_nm":[120],"wavelength_nm":[550]}},
+  {"id":"compare","tool":"tmm","source":"RESULT={'delta_R':INPUTS['b']-INPUTS['a']}","bindings":{"a":{"step":"a","path":["result","first",1]},"b":{"step":"b","path":["result","first",1]}}}
+]
+```
+
+```sh
+optics-photonics submit-workflow workflow.json --request-id comparison-001
+optics-photonics submit-workflow next-steps.json --run-id RUN_ID
+optics-photonics cancel RUN_ID
+optics-photonics resume RUN_ID
+```
+
+没有依赖的步骤按资源设置并行；后续步骤等待依赖完成。追加步骤保留同一个研究任务。`resume` 保留已完成步骤，重新运行未完成步骤，每次尝试的文件独立保存。云端求解器的任务编号和接续方式由原生程序保存与处理。
+
+## Agent、MCP 与插件
 
 ```sh
 optics-photonics connect agentic-research-os --output optics-plugin
 ```
 
-| 系统 | 生成内容 | 使用方式 |
-| --- | --- | --- |
-| Agentic Research OS | `plugin.json`、完整程序、Skills | 解压 ZIP，安装含 `plugin.json` 的目录，再激活已安装的修订；使用宿主的 `${RESEARCH_PYTHON}`。 |
-| Codex | `.codex-plugin/plugin.json`、`.mcp.json`、Skills | 原生插件，或生成的 `INSTALL.md` 中的 MCP 注册命令。 |
-| Claude Code | `.claude-plugin/plugin.json`、`.mcp.json`、Skills | `claude --plugin-dir PATH`，或 MCP 注册命令。 |
-| DeepSeek Harness | `optics.cordis.yml` | `dsh web --patch PATH/optics.cordis.yml`，使用其原生 MCP 客户端。 |
-| Qiushi | MCP 配置和命令入口 | 基于 Agentic Research OS 的版本使用原生包；其他版本通过 MCP 或 `tools` / `call`。 |
-| 其他 MCP 宿主 | `mcp.json` | 按宿主自己的配置格式注册 stdio 命令。 |
-
-命令中的系统名称可以替换为 `codex`、`claude`、`deepseek`、`qiushi`、`mcp`。本地配置记录选定的解释器和绝对路径，移动目录后重新生成。插件包含程序、资料和 Skills，不依赖源码目录；已有宿主设置不会被覆盖。
-
-更新时安装新 wheel 或 Git 标签，生成新的插件目录，再由宿主更新并激活。`OPTICS_HOME` 和科学计算环境保留。云端产品如果不能启动本地进程，需要自己的执行环境或转接服务；本地 stdio 配置不能直接变成云端连接器。
-
-## 完整研究程序与持续计算
-
-原生 Python 程序获得 `INPUTS`、`OUTPUT_DIR`，并将简洁的 JSON 结果赋给 `RESULT`。程序可以使用软件的完整 API、优化算法和持续会话；数组、网格、模型和图像写入输出目录。示例位于 [`examples/programs`](../examples/programs)。
-
-```sh
-optics-photonics run tmm --program research.py --inputs @inputs.json
-```
-
-长期计算在计算机上安装 [IOP Runtime](https://github.com/Cherish0925/AI4Instruments/releases)，然后在同一台计算机上连接软件：
-
-```sh
-optics-photonics attach tmm
-optics-photonics submit tmm --program research.py --inputs @inputs.json --request-id study-001
-optics-photonics status RUN_ID
-optics-photonics files RUN_ID
-optics-photonics download ARTIFACT_ID spectrum.csv
-```
-
-Agent 断开后任务仍由 IOP 执行。重试同一次提交时沿用 `request-id`。本地使用 IOP 已保存的地址和凭据；远程连接使用 `IOP_ENDPOINT`、`IOP_TOKEN`。环境注册必须在计算机一侧完成，因为解释器和程序路径属于该机器。
-
-工作流的每一步包含 `id`、`device`、`operation`、`arguments`、`after`，需要传递结果时增加 `bindings`。明确写 `after: []` 可并行；依赖关系决定先后，`bindings` 决定数据传递。`submit-workflow --run-id RUN_ID` 可向已有的持续实验追加一批操作。同一次实验可以同时包含真实仪器和数字计算。必须维持同一软件会话的迭代放在一个原生程序中执行。
-
-首次本地连接会按可用 CPU 数量建立缺失的 CPU 额度，保留已有设置。`threads` 控制常见数值库线程，`concurrency` 控制某软件同时执行的进程数。MPI、GPU、商业许可证和集群队列由实际求解器及其启动程序配置。
-
-IOP 0.8.5 在工作流结束后登记命令生成的文件；持续实验需要提前读取时，可通过 IOP 的文件上传接口保存。第三方云计算的任务编号应及时保存，并用其原生恢复接口接续；当前不会自动重建任意远程软件会话。
-
-## 已提供的内容
-
-| 范围 | 内容 |
+| 系统 | 接入形式 |
 | --- | --- |
-| 96 项软件与产品族 | 连接说明、原始文档、已有官方或社区 MCP / Skill 入口。 |
-| 13 个已执行计算的软件 | tmm、miepython、raytracing、LightPipes、POPPY、HCIPy、QuTiP、SymPy、SciPy、scikit-image、KLayout、grcwa、legume；带安装配方和可运行计算。 |
-| 58 项 Python API，包括上述 13 项 | 模块发现、独立解释器配置、完整原生程序执行；其余软件尚未全部实跑。 |
-| 33 项原生命令或厂商接口 | 统一进程接入方式；仍需对应软件的启动程序、运行环境与许可。 |
-| 4 项自动化接口未明确的软件 | 保留资料，不标记为自动执行。 |
-| 1 个材料数据库 | 数据与来源，不作为求解器。 |
-| 14 个研究领域 | 模型选择、物理量、单位、软件间数据传递，按任务读取。 |
+| Agentic Research OS | 安装含 `plugin.json` 的目录，激活对应修订；Release ZIP 解压后直接得到这个目录。 |
+| Codex | `connect codex` 生成原生插件和 MCP 注册命令。 |
+| Claude Code | `connect claude`；使用 `claude --plugin-dir PATH` 或生成的 MCP 命令。 |
+| DeepSeek Harness | `connect deepseek`；使用 `dsh web --patch PATH/optics.cordis.yml`。 |
+| Qiushi | 研究系统版本使用其原生插件包；其他版本使用 `connect qiushi` 生成的 MCP 或命令入口。 |
+| 其他 MCP 宿主 | `connect mcp`，按宿主格式注册 stdio 命令。 |
 
-原生命令程序从 `IOP_REQUEST_FILE` 或标准输入读取 JSON，将文件写入 `IOP_OUTPUT_DIR`，将 JSON 结果写入 `IOP_RESULT_FILE`。通过 `--command-json` 指定可执行文件和参数。C、C++、C#、Java、Julia、商业软件批处理均可采用这一方式，不需要重写其计算核心。
+MCP 包含软件检索、环境准备、连接、资源设置、提交、任务查询、取消、继续、文件读取与下载。`prepare_environment` 在后台安装已有配方，返回任务编号；安装完成后软件环境自动登记。完整研究方法由两个 Skills 和 14 个领域参考文件按需提供。
 
-MCP 共 11 个工具，覆盖软件选择、环境配置、登记、提交、状态、取消与文件。大数组保存在文件中。原始 MCP 和 Skill 保留其作者及用途说明；本项目的插件由本仓库维护。
+计算发生在 MCP 服务所在的计算机。远程机器可通过 SSH 启动 stdio 服务，保持连接程序与科学环境在同一台机器：`ssh -T USER@HOST /path/to/python -m optics_photonics mcp`。`read_result` 把内容传回 Agent；`download_result` 写入服务所在机器的目标路径，大文件可通过 SSH/SFTP 取回。
 
-开发、三系统运行检查和宿主格式原始资料见 [English guide](CONNECT.md)。
+更新时安装新版本并生成新的插件目录，由宿主更新和激活。科学环境、研究记录和结果保留在 `OPTICS_HOME` 或 `~/.optics-photonics`。
+
+## 软件覆盖与扩展
+
+软件目录包含商业、开源和受限许可三组，每项保留原始接口文档及已有 MCP、Skill 的来源。可执行计算在交互指南中单独筛选。`software_details` 返回原生 API、安装配方、示例输入和物理约定。
+
+新增软件时补充连接记录、环境说明和原生程序，沿用共同的任务与文件接口。涉及商业 SDK、GUI、远程计算或 MPI 时，把对应启动与会话管理放在软件适配程序中。跨软件传递场、光谱、S 参数和模型时，同时保存单位、坐标、采样、归一化与材料来源。

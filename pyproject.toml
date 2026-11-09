@@ -4,13 +4,13 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "optics-photonics"
-version = "0.1.0"
+version = "0.2.0"
 description = "Optical software, research methods and executable connections for people and agents"
 requires-python = ">=3.10"
 license = "MIT"
 license-files = ["LICENSE"]
 readme = "README.md"
-authors = [{name = "AI4Instruments"}]
+authors = [{name = "Optics & Photonics"}]
 dependencies = []
 
 [project.scripts]

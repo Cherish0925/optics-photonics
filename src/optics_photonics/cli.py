@@ -4,8 +4,7 @@ import json
 from pathlib import Path
 import sys
 import subprocess
-from . import __version__, catalogue, environments, execution, operations
-from .iop import Client, step
+from . import __version__, catalogue, environments, execution, operations, jobs
 
 
 def object_argument(value):
@@ -26,12 +25,14 @@ def main(argv=None):
     for name in ('run','submit'):
         run = commands.add_parser(name); run.add_argument('tool'); run.add_argument('action',nargs='?',default=''); run.add_argument('--inputs',type=object_argument,default={}); run.add_argument('--program',type=Path)
         if name == 'run': run.add_argument('--output'); run.add_argument('--timeout',type=float)
-        else: run.add_argument('--name',default='Optics research'); run.add_argument('--request-id')
-    attach=commands.add_parser('attach'); attach.add_argument('tool')
+        else: run.add_argument('--name',default='Optical research'); run.add_argument('--request-id'); run.add_argument('--timeout',type=float)
+    resources=commands.add_parser('resources'); resources.add_argument('--cpu',type=int)
     workflow=commands.add_parser('submit-workflow'); workflow.add_argument('file',type=Path); workflow.add_argument('--name',default='Optics research'); workflow.add_argument('--request-id'); workflow.add_argument('--run-id')
-    for name in ('status','files','cancel'):
+    for name in ('status','files','cancel','resume'):
         item=commands.add_parser(name); item.add_argument('run_id')
-    download=commands.add_parser('download'); download.add_argument('artifact_id'); download.add_argument('destination')
+    download=commands.add_parser('download'); download.add_argument('run_id'); download.add_argument('file'); download.add_argument('destination')
+    read=commands.add_parser('read'); read.add_argument('run_id'); read.add_argument('file'); read.add_argument('--offset',type=int,default=0); read.add_argument('--limit',type=int,default=16384)
+    runs=commands.add_parser('runs'); runs.add_argument('--state'); runs.add_argument('--offset',type=int,default=0); runs.add_argument('--limit',type=int,default=20)
     commands.add_parser('mcp')
     commands.add_parser('tools')
     call=commands.add_parser('call'); call.add_argument('tool'); call.add_argument('arguments',type=object_argument)
@@ -49,13 +50,14 @@ def main(argv=None):
             request={k:a.pop(k) for k in ('inputs','action')}; request['source']=source
             tool=a.pop('tool')
             if command=='run': result=execution.run(tool,request,**a)
-            else: result=Client().submit([step(tool,**request)],**a)
-        elif command == 'attach': result=Client().attach(**a)
+            else:
+                timeout=a.pop('timeout'); result=jobs.submit([{'id':'calculate','tool':tool,**request,'timeout':timeout}],**a)
+        elif command == 'resources': result=jobs.resources(**a)
+        elif command == 'runs': result=jobs.list_runs(**a)
         elif command == 'submit-workflow':
-            steps=json.loads(a.pop('file').read_text(encoding='utf-8')); result=Client().submit(steps,**a)
-        elif command in ('status','files','cancel'):
-            result=getattr(Client(), {'status':'run'}.get(command,command))(**a)
-        elif command == 'download': result=Client().download(**a)
+            steps=json.loads(a.pop('file').read_text(encoding='utf-8')); result=jobs.submit(steps,**a)
+        elif command in ('status','files','cancel','resume','download','read'):
+            result=getattr(jobs, {'read':'read_result'}.get(command,command))(**a)
         elif command == 'connect':
             from .packages import package
             result=package(a.pop('output'),**a)

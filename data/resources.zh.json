@@ -2202,5 +2202,27 @@
     "software_names": [
       "PyTorch"
     ]
+  },
+  {
+    "url": "https://py-pol.readthedocs.io/en/master/",
+    "label": "Documentation",
+    "kind": "docs",
+    "software_ids": [
+      "py-pol"
+    ],
+    "software_names": [
+      "py-pol"
+    ]
+  },
+  {
+    "url": "https://github.com/JesusDelHoyo/py_pol",
+    "label": "Source and license",
+    "kind": "license",
+    "software_ids": [
+      "py-pol"
+    ],
+    "software_names": [
+      "py-pol"
+    ]
   }
 ]

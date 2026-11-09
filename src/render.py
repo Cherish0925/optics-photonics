@@ -184,6 +184,8 @@ html_text=f'''<!DOCTYPE html>
 <script type="application/json" id="catalogue-data">{catalogue_json}</script><script type="application/json" id="domain-data">{domain_json}</script><script>{js}</script></body></html>'''
 if LANG=='en':
  translations=json.loads((BASE/'src/strings.en.json').read_text(encoding='utf-8'))
+ translations[f'浏览 {len(D)} 项工具与产品族 ↓']=f'Browse {len(D)} tools and product families ↓'
+ translations[f'全部 {len(D)}']=f'All {len(D)}'
  for original,translated in sorted(translations.items(),key=lambda x:len(x[0]),reverse=True):
   html_text=html_text.replace(original,translated)
  html_text=html_text.replace('lang="zh-CN"','lang="en"')

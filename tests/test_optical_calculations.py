@@ -57,6 +57,37 @@ class ScienceTests(unittest.TestCase):
             self.assertAlmostEqual(a['maximum'],1,places=7)
             self.assertLess(abs(a['last']),1e-8)
 
+    def test_polarization_chain_follows_malus_law(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            for angle in (0, 30, 45, 90):
+                result = calculate('py-pol', 'polarization', {'elements':[{'type':'polarizer','azimuth_deg':angle}]}, tmp)
+                self.assertAlmostEqual(result['intensity'], math.cos(math.radians(angle))**2, places=12)
+            result = calculate('py-pol','polarization',{'elements':[{'type':'quarter_waveplate','azimuth_deg':45}]},tmp)
+            self.assertAlmostEqual(result['intensity'],1,places=12)
+            ex,ey=[complex(*v) for v in result['jones_xy']]
+            self.assertAlmostEqual(abs(ex),abs(ey),places=12)
+            self.assertAlmostEqual((ex*ey.conjugate()).real,0,places=12)
+
+    def test_real_rays_preserve_rotational_symmetry(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            result = calculate('optiland',*EXAMPLES['optiland'],tmp)
+            xy=result['image_xy_mm']
+            self.assertEqual(result['finite_intersections'],5)
+            self.assertAlmostEqual(xy[0][0],0,places=12)
+            self.assertAlmostEqual(xy[1][1],-xy[2][1],places=12)
+            self.assertAlmostEqual(xy[3][0],-xy[4][0],places=12)
+            self.assertAlmostEqual(abs(xy[1][1]),abs(xy[3][0]),places=12)
+
+    def test_generated_waveguide_is_a_readable_gds(self):
+        import klayout.db as kdb
+        with tempfile.TemporaryDirectory() as tmp:
+            result = calculate('gdsfactory',*EXAMPLES['gdsfactory'],tmp)
+            layout=kdb.Layout();layout.read(str(Path(tmp)/result['data']))
+            box=layout.top_cell().bbox()
+            self.assertAlmostEqual(box.width()*layout.dbu,20,places=9)
+            self.assertAlmostEqual(box.height()*layout.dbu,.5,places=9)
+            self.assertEqual({p['name'] for p in result['ports']},{'o1','o2'})
+
     def test_native_program_keeps_full_api_and_result_provenance(self):
         with tempfile.TemporaryDirectory() as tmp:
             bind('tmm',python=sys.executable,path=tmp)

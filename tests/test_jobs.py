@@ -52,7 +52,16 @@ class JobsTests(unittest.TestCase):
                 with jobs.worker_lock(self.home,run) as free:
                     if free: break
                 time.sleep(.05)
-        self.tmp.cleanup()
+        # A terminal result and an unlocked worker can precede the OS closing
+        # inherited log handles by a few milliseconds on Windows.
+        end=time.monotonic()+5
+        while True:
+            try:
+                self.tmp.cleanup()
+                break
+            except PermissionError:
+                if os.name != 'nt' or time.monotonic() >= end: raise
+                time.sleep(.02)
     def submit(self,steps,**kwargs):
         r=jobs.submit(steps,path=self.home,**kwargs);self.runs.append(r['run_id']);return r
     def wait(self,run,timeout=25):

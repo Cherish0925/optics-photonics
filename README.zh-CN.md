@@ -18,6 +18,12 @@
 
 ## 安装与使用
 
+**在 Agentic Research OS 安装：**打开 **Extensions → Plugins → Add from link**，粘贴
+`https://github.com/Cherish0925/optics-photonics/tree/main/connect/agentic-research-os`，
+安装并激活 `optics-photonics`。包内包含 MCP、软件目录和两个 Skills，使用研究系统自带的 Python。
+[Codex、Claude Code 与更新方法](docs/CONNECT.zh-CN.md#从插件市场安装)。
+
+
 仓库现提供可安装的连接器、完整原生程序执行、MCP 和研究 Skills。[接入说明](docs/CONNECT.zh-CN.md) · [交互指南](https://cherish0925.github.io/optics-photonics/connect.zh.html) · [下载发布包](https://github.com/Cherish0925/optics-photonics/releases)。
 
 ```sh

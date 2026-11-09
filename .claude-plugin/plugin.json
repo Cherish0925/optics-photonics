@@ -1,0 +1,9 @@
+{
+  "name": "optics-photonics",
+  "version": "0.3.0",
+  "description": "Optical software, simulation, background calculations and research methods.",
+  "author": {"name": "Optics & Photonics"},
+  "homepage": "https://cherish0925.github.io/optics-photonics/",
+  "repository": "https://github.com/Cherish0925/optics-photonics",
+  "license": "MIT"
+}

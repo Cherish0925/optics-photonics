@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "optics": {
+      "command": "python",
+      "args": ["-B", "${CLAUDE_PLUGIN_ROOT}/server.py", "mcp"]
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "name": "optics-photonics",
+  "owner": {"name": "Optics & Photonics"},
+  "plugins": [{
+    "name": "optics-photonics",
+    "source": "./",
+    "description": "Optical software, simulation, background calculations and research methods."
+  }]
+}

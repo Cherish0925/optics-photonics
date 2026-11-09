@@ -1,0 +1,21 @@
+{
+  "name": "optics-photonics",
+  "version": "0.3.0",
+  "description": "Optical software, native calculations and research methods",
+  "skills": [
+    "skills/optical-computation",
+    "skills/optical-research"
+  ],
+  "mcpServers": {
+    "optics": {
+      "transport": "stdio",
+      "command": "${RESEARCH_PYTHON}",
+      "args": [
+        "-B",
+        "${PACKAGE_ROOT}/server.py",
+        "mcp"
+      ],
+      "protocol_version": "2025-11-25"
+    }
+  }
+}

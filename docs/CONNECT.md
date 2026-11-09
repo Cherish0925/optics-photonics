@@ -60,6 +60,31 @@ optics-photonics resume RUN_ID
 
 Append preserves the research run. Resume retains successful steps and reruns unfinished steps into separate attempt directories. Provider-specific cloud job IDs and session continuation belong in the native research program. Complete examples appear in the [Chinese guide](CONNECT.zh-CN.md).
 
+## Install from a marketplace
+
+| Host | Add source and install |
+| --- | --- |
+| Agentic Research OS | **Extensions → Plugins → Add from link**: `https://github.com/Cherish0925/optics-photonics/tree/main/connect/agentic-research-os`. Install `optics-photonics`, then activate the returned revision. |
+| Codex | `codex plugin marketplace add Cherish0925/optics-photonics`, then `codex plugin add optics-photonics@optics-photonics`. |
+| Claude Code | `claude plugin marketplace add Cherish0925/optics-photonics`, then `claude plugin install optics-photonics@optics-photonics`. |
+
+The Research OS package includes the connector, catalogue and Skills and uses
+the host's Python. The Codex/Claude GitHub plugin runs the included source with
+`python` from the tool host's PATH, version 3.10 or newer. If your interpreter has
+another name or path, generate a host package below using that interpreter.
+Scientific software is prepared separately through `prepare_environment` or
+connected through `bind_environment` / `bind_native_software`.
+
+Update the source in Research OS and install its offered revision. Codex can
+refresh with `codex plugin marketplace upgrade optics-photonics` and install the
+updated plugin; Claude uses `claude plugin marketplace update optics-photonics`
+followed by `claude plugin update optics-photonics@optics-photonics`. New connections
+load the updated plugin; computation environments and saved research remain in
+`OPTICS_HOME`. Already submitted jobs continue with their launched worker.
+
+These are project-published GitHub marketplaces. The separate reviewed public
+directories operated by OpenAI and Anthropic have their own submission process.
+
 ## Agent hosts
 
 ```sh

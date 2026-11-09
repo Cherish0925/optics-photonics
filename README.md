@@ -18,6 +18,13 @@ Download [English HTML](https://raw.githubusercontent.com/Cherish0925/optics-pho
 
 ## Install and run
 
+**Agentic Research OS:** in **Extensions → Plugins → Add from link**, paste
+`https://github.com/Cherish0925/optics-photonics/tree/main/connect/agentic-research-os`,
+install `optics-photonics`, then activate it. The package carries its MCP server,
+catalogue and both Skills and uses Research OS's Python. No separate connector
+installation is needed. [Other hosts and updates](docs/CONNECT.md#install-from-a-marketplace).
+
+
 The repository now includes an installable connector, native-program execution, MCP and research Skills. [Connection guide](docs/CONNECT.md) · [Interactive guide](https://cherish0925.github.io/optics-photonics/connect.html) · [Release packages](https://github.com/Cherish0925/optics-photonics/releases).
 
 ```sh

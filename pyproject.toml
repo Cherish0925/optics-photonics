@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "optics-photonics"
+version = "0.1.0"
+description = "Optical software, research methods and executable connections for people and agents"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+readme = "README.md"
+authors = [{name = "AI4Instruments"}]
+dependencies = []
+
+[project.scripts]
+optics-photonics = "optics_photonics.cli:main"
+
+[project.urls]
+Repository = "https://github.com/Cherish0925/optics-photonics"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["optics_photonics*"]

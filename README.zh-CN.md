@@ -4,7 +4,7 @@
 
 # 光学与光子学软件目录
 
-面向光学科研、工程开发与 AI Agent 的双语工具目录，并加入贯穿全部子领域的统一物理基础：**场 + 物质 + 相互作用**。
+面向光学科研、工程开发与 AI Agent 的软件连接、研究方法和双语工具目录，并加入贯穿全部子领域的统一物理基础：**场 + 物质 + 相互作用**。
 
 **96 个工具与产品族 · 14 个领域 · 200 个文档与接口资料入口**
 
@@ -15,6 +15,18 @@
 | [基础框架](docs/foundations.zh.html) · [Foundations](docs/foundations.html) | [中文源文件](foundations/README.zh-CN.md) | **场 · 物质 · 相互作用** |
 
 也可以下载[中文 HTML](https://raw.githubusercontent.com/Cherish0925/optics-photonics/main/docs/index.zh.html)或[英文 HTML](https://raw.githubusercontent.com/Cherish0925/optics-photonics/main/docs/index.html)，直接用浏览器打开。两个文件分别内嵌完整数据、样式、脚本和中文字体子集，搜索、筛选、比较与导出均可离线使用；原始网站与文档链接需要联网。
+
+## 安装与使用
+
+仓库现提供可安装的连接器、完整原生程序执行、MCP 和研究 Skills。[接入说明](docs/CONNECT.zh-CN.md) · [交互指南](docs/connect.zh.html) · [下载发布包](https://github.com/Cherish0925/optics-photonics/releases)。
+
+```sh
+python -m pip install "git+https://github.com/Cherish0925/optics-photonics.git@optics-v0.1.0"
+optics-photonics prepare tmm
+optics-photonics connect agentic-research-os --output optics-plugin
+```
+
+13 个软件已有可执行计算，96 项目录均有连接说明。Agent 可使用软件完整的原生 API；长期计算和并行任务交给 [IOP Runtime](https://github.com/Cherish0925/AI4Instruments)，也可与真实仪器操作组成同一次实验。提供 Agentic Research OS、Codex、Claude Code、DeepSeek Harness、Qiushi 和通用 MCP 接入包。各科学软件保留自身安装环境、平台与许可要求。
 
 ## 统一物理基础
 

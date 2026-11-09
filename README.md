@@ -4,7 +4,7 @@
 
 # Optics · Photonics
 
-A bilingual software catalogue for optical science and engineering, with a compact physical foundation: **Field + Matter + Interaction**.
+Software connections, research methods and a bilingual catalogue for optical science and engineering, with a compact physical foundation: **Field + Matter + Interaction**.
 
 **96 tools and product families · 14 domains · 200 documentation and integration links**
 
@@ -15,6 +15,18 @@ A bilingual software catalogue for optical science and engineering, with a compa
 | [Foundations](docs/foundations.html) · [基础框架](docs/foundations.zh.html) | [Foundation source](foundations/README.md) | **Field · Matter · Interaction** |
 
 Download [English HTML](https://raw.githubusercontent.com/Cherish0925/optics-photonics/main/docs/index.html) or [Chinese HTML](https://raw.githubusercontent.com/Cherish0925/optics-photonics/main/docs/index.zh.html) and open either in a browser. Each file contains its own styles, scripts, font subset, catalogue and source index. Browsing, filtering, comparison and exports work offline; opening external documentation requires internet access.
+
+## Install and run
+
+The repository now includes an installable connector, native-program execution, MCP and research Skills. [Connection guide](docs/CONNECT.md) · [Interactive guide](docs/connect.html) · [Release packages](https://github.com/Cherish0925/optics-photonics/releases).
+
+```sh
+python -m pip install "git+https://github.com/Cherish0925/optics-photonics.git@optics-v0.1.0"
+optics-photonics prepare tmm
+optics-photonics connect agentic-research-os --output optics-plugin
+```
+
+13 libraries have executable calculations; all 96 catalogue entries have connection descriptions. Full native programs retain each solver's API. Long and parallel calculations use [IOP Runtime](https://github.com/Cherish0925/AI4Instruments), including experiments that mix computation and physical instruments. Host packages cover Agentic Research OS, Codex, Claude Code, DeepSeek Harness, Qiushi and generic MCP. Scientific software retains its own installation, platform and license requirements.
 
 ## Physical foundation
 

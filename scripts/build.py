@@ -32,6 +32,7 @@ def markdown(entries,domains,lang):
     return '\n'.join(lines)+'\n'
 
 def main():
+    subprocess.run([sys.executable,str(ROOT/"scripts/build_connect.py")],check=True)
     sets={}
     for lang in ('zh','en'):
         entries=json.loads((ROOT/f'data/catalogue.{lang}.json').read_text(encoding='utf-8'))
@@ -63,6 +64,10 @@ Reviewed: 2026-10-20. Schema version: 1.0. 96 tools / product families in 14 tas
 - [中文交互目录](https://cherish0925.github.io/optics-photonics/index.zh.html): full Chinese edition.
 
 ## Integrate
+
+- [Install and connect](https://github.com/Cherish0925/optics-photonics/blob/main/docs/CONNECT.md): native programs, MCP, Skills and IOP calculations.
+- [Connection data](https://raw.githubusercontent.com/Cherish0925/optics-photonics/main/data/connections.json): all catalogue IDs with execution routes and upstream sources.
+- [Research connections](https://cherish0925.github.io/optics-photonics/connect.html): interactive installation and coverage guide.
 
 - [English JSON](https://raw.githubusercontent.com/Cherish0925/optics-photonics/main/data/catalogue.en.json): complete structured entries.
 - [中文 JSON](https://raw.githubusercontent.com/Cherish0925/optics-photonics/main/data/catalogue.zh.json): same IDs and source URLs.

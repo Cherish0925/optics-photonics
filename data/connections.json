@@ -2186,14 +2186,8 @@
     "modules": [
       "pyDHM"
     ],
-    "pip": [
-      "pyDHM==1.0.5",
-      "opencv-python-headless>=4.10,<5"
-    ],
-    "distributions": [
-      "pyDHM",
-      "opencv-python-headless"
-    ],
+    "pip": [],
+    "distributions": [],
     "operations": [],
     "native_program": true,
     "installation": "https://github.com/catrujilla/pyDHM",
@@ -2214,7 +2208,8 @@
       }
     },
     "execution": "local-or-background",
-    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support.",
+    "installation_note": "pyDHM 1.0.5 angularSpectrum uses np.exp2(i*pi*z*kz) instead of exp(i*2*pi*z*kz), so its propagation phase differs from the angular-spectrum operator. Use a corrected upstream implementation or a separately checked propagation program. Other pyDHM modules can be bound through an existing environment."
   },
   "pynx": {
     "kind": "python",

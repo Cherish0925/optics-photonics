@@ -1,0 +1,7 @@
+{
+  "refractive_indices": [1.0, 1.45, 1.52],
+  "wavelength_min_nm": 450,
+  "wavelength_max_nm": 700,
+  "thickness_bounds_nm": [30, 200],
+  "spectrum_points": 1001
+}

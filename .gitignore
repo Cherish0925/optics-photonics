@@ -7,3 +7,7 @@ test-results/
 playwright-report/
 *.npz
 *.gds
+build/
+dist/
+*.egg-info/
+.optics-test/

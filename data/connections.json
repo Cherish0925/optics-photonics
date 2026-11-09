@@ -1,0 +1,2718 @@
+{
+  "opticstudio": {
+    "kind": "native",
+    "modules": [],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://optics.ansys.com/hc/en-us/articles/42661773562899-Sample-code-for-ZOS-API-users",
+    "interface": "ZOS-API .NET with Python, C#, C++ and MATLAB; ZPL macros; standalone and interactive connections.",
+    "sources": [
+      "https://optics.ansys.com/hc/en-us/articles/42661773562899-Sample-code-for-ZOS-API-users",
+      "https://optics.ansys.com/hc/en-us/articles/42661790380179-ZOS-API-NET-An-Overview"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "community",
+        "text": "Community OpticStudioMCPServer using ZOS-API",
+        "url": "https://github.com/jaruiz6363/OpticStudioMCPServer"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support.",
+    "installation_note": "Bind a program that uses the vendor API on its supported operating system; installation and licensing are provided by the vendor."
+  },
+  "codev": {
+    "kind": "native",
+    "modules": [],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://www.keysight.com.cn/cn/zh/products/software/optical-solutions-software/optical-design-solutions/codev.html",
+    "interface": "Macro-PLUS scripts, commands and batch design workflows. Consult the installed version for external automation details.",
+    "sources": [
+      "https://www.keysight.com.cn/cn/zh/products/software/optical-solutions-software/optical-design-solutions/codev.html"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "lighttools": {
+    "kind": "native",
+    "modules": [],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://www.keysight.com/es/en/products/software/optical-solutions-software/optical-design-solutions/lighttools.html",
+    "interface": "Built-in macros and LTAPI automation; third-party Python wrappers are available.",
+    "sources": [
+      "https://www.keysight.com/es/en/products/software/optical-solutions-software/optical-design-solutions/lighttools.html",
+      "https://github.com/Mestas/Lighttools"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support.",
+    "installation_note": "Bind a program that uses the vendor API on its supported operating system; installation and licensing are provided by the vendor."
+  },
+  "fred": {
+    "kind": "native",
+    "modules": [],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://support.photonengr.com/article/176-raytrace-and-analysis-loop",
+    "interface": "Built-in scripting and .frs workflows; official examples include trace-and-analysis loops.",
+    "sources": [
+      "https://support.photonengr.com/article/176-raytrace-and-analysis-loop",
+      "https://photonengr.com/",
+      "https://photonengr.com/academic-licenses"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "tracepro": {
+    "kind": "native",
+    "modules": [],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://lambdares.com/hubfs/TracePro_Users_Manual_2026.pdf",
+    "interface": "Scheme macros; the manual documents DDE and macro automation.",
+    "sources": [
+      "https://lambdares.com/hubfs/TracePro_Users_Manual_2026.pdf",
+      "https://lambdares.com/tracepro-2"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "oslo": {
+    "kind": "native",
+    "modules": [],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://lambdares.com/oslo",
+    "interface": "CCL programming and command system; features depend on the edition.",
+    "sources": [
+      "https://lambdares.com/oslo",
+      "https://lambdares.com/edu",
+      "https://lambdares.com/hubfs/Support/support/oslo/oslo_releases/OSLOProgramReference.pdf"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "asap": {
+    "kind": "native",
+    "modules": [],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://breault.com/asap/",
+    "interface": "Official integrated Python, VBScript and other scripting support for automated analyses.",
+    "sources": [
+      "https://breault.com/asap/"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "virtuallab": {
+    "kind": "native",
+    "modules": [],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://programmingreference.lighttrans.com/2026.2/api/VirtualLab.Programming.html",
+    "interface": "Official Programming API, programmable elements and scripts; documented extensions to Python / MATLAB workflows.",
+    "sources": [
+      "https://programmingreference.lighttrans.com/2026.2/api/VirtualLab.Programming.html",
+      "https://www.lighttrans.com/product/virtuallab-fusion/frequently-asked-questions/general-faqs.html"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "speos": {
+    "kind": "native",
+    "modules": [],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://optics.ansys.com/hc/en-us/articles/24752772596371-Optical-Automation-library-introduction",
+    "interface": "Speos scripts; Ansys optical-automation supplies public Python automation and interoperability code.",
+    "sources": [
+      "https://optics.ansys.com/hc/en-us/articles/24752772596371-Optical-Automation-library-introduction",
+      "https://github.com/ansys/optical-automation"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "lumerical": {
+    "kind": "python",
+    "modules": [
+      "lumapi"
+    ],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://optics.ansys.com/hc/en-us/articles/360037824513-Python-API-overview",
+    "interface": "lumapi Python; LSF scripts; lumopt inverse design; lumslurm scheduling.",
+    "sources": [
+      "https://optics.ansys.com/hc/en-us/articles/360037824513-Python-API-overview",
+      "https://github.com/ansys/pylumerical-mcp"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "official",
+        "text": "PyLumerical MCP published by the official Ansys organization",
+        "url": "https://github.com/ansys/pylumerical-mcp"
+      },
+      "skill": {
+        "kind": "community",
+        "text": "Community Lumerical_MCP_Skill",
+        "url": "https://github.com/zxqcreations/Lumerical_MCP_Skill"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support.",
+    "installation_note": "Use the lumapi module shipped with your licensed Ansys installation and configure its supported Python path."
+  },
+  "comsol": {
+    "kind": "native",
+    "modules": [],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://www.comsol.com/support/learning-center/article/overview-of-the-comsol-api-107912",
+    "interface": "Official Java API and batch execution; LiveLink for MATLAB; third-party Python bridges.",
+    "sources": [
+      "https://www.comsol.com/support/learning-center/article/overview-of-the-comsol-api-107912",
+      "https://www.comsol.com/livelink-for-matlab",
+      "https://github.com/Ching-Chiang/comsol-mcp"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "community",
+        "text": "Community comsol-mcp implementation",
+        "url": "https://github.com/Ching-Chiang/comsol-mcp"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "cst": {
+    "kind": "native",
+    "modules": [],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://www.3ds.com/products/simulia/cst-studio-suite",
+    "interface": "Official Python automation, VBA macros and batch solver workflows.",
+    "sources": [
+      "https://www.3ds.com/products/simulia/cst-studio-suite",
+      "https://blog.3ds.com/brands/simulia/cst-studio-suite-release-2021x-highlights/"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "rsoft": {
+    "kind": "native",
+    "modules": [],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://www.keysight.com/zz/en/products/software/optical-solutions-software/photonic-design-solutions.html",
+    "interface": "Parametric CAD, MOST scans and optimization; confirm scripting and external integration for each component.",
+    "sources": [
+      "https://www.keysight.com/zz/en/products/software/optical-solutions-software/photonic-design-solutions.html"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "jcm": {
+    "kind": "python",
+    "modules": [
+      "jcmwave"
+    ],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://www.jcmwave.com/jcmsuite/interface/",
+    "interface": "Official jcmwave Python; MATLAB / Octave and C interfaces; optimization and batch tasks.",
+    "sources": [
+      "https://www.jcmwave.com/jcmsuite/interface/",
+      "https://docs.jcmwave.com/JCMsuite/html/PythonInterface/bf647454e36069fd16f1a7a35cf6a865.html"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "photond": {
+    "kind": "native",
+    "modules": [],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://photond.com/fimmwave/features/scripting-optimisation",
+    "interface": "Official command-line, Python and MATLAB scripting; community pyFIMM is a wrapper reference.",
+    "sources": [
+      "https://photond.com/fimmwave/features/scripting-optimisation",
+      "https://photond.com/fimmwave/options/feature-option-table"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "tidy3d": {
+    "kind": "python",
+    "modules": [
+      "tidy3d"
+    ],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://docs.flexcompute.com/projects/tidy3d/en/stable/faq/docs/faq/How-is-using-Tidy3D-billed.html",
+    "interface": "Official Python API, web.run and batch execution; official MCP / agent plugins.",
+    "sources": [
+      "https://docs.flexcompute.com/projects/tidy3d/en/stable/faq/docs/faq/How-is-using-Tidy3D-billed.html",
+      "https://github.com/flexcompute/tidy3d",
+      "https://github.com/flexcompute/plugin-marketplace"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "official",
+        "text": "Official tidy3d-mcp / FlexAgent: documentation and bridge tools",
+        "url": "https://github.com/flexcompute/plugin-marketplace"
+      },
+      "skill": {
+        "kind": "official",
+        "text": "Official flexagent simulation, analysis and documentation Skills",
+        "url": "https://github.com/flexcompute/plugin-marketplace"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "ipkiss": {
+    "kind": "python",
+    "modules": [
+      "ipkiss3"
+    ],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://www.lucedaphotonics.com/luceda-photonics-design-platform",
+    "interface": "Native Python framework, PDK packages, device-simulation drivers and Canvas integration.",
+    "sources": [
+      "https://www.lucedaphotonics.com/luceda-photonics-design-platform",
+      "https://academy.lucedaphotonics.com/tutorials/device_sim/"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "vpi": {
+    "kind": "native",
+    "modules": [],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://www.vpiphotonics.com/Tools/DesignSuite/Features/",
+    "interface": "Official external simulation API; Python, MATLAB, C++ and COM co-simulation and custom modules.",
+    "sources": [
+      "https://www.vpiphotonics.com/Tools/DesignSuite/Features/",
+      "https://www.vpiphotonics.com/Tools/DesignSuite/"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "optisystem": {
+    "kind": "native",
+    "modules": [],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://optiwave.com/forums/topic/co-simulation-using-python/",
+    "interface": "Python / MATLAB co-simulation components; official examples for external execution and result access.",
+    "sources": [
+      "https://optiwave.com/forums/topic/co-simulation-using-python/",
+      "https://cdn.optiwave.com/wp-content/uploads/2017/11/OptiSystem_15_New_Features.pdf"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "macleod": {
+    "kind": "native",
+    "modules": [],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://www.thinfilmcenter.com/essential.php",
+    "interface": "The Function extension offers BASIC-like scripts and object access; spreadsheet macros.",
+    "sources": [
+      "https://www.thinfilmcenter.com/essential.php",
+      "https://www.thinfilmcenter.com/function.php"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "optilayer": {
+    "kind": "native",
+    "modules": [],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://optilayer.com/com-automation/",
+    "interface": "Official COM Automation with Python examples; OptiReOpt for production integration.",
+    "sources": [
+      "https://optilayer.com/com-automation/",
+      "https://optilayer.com/development-history/new-features-in-optilayer-2018-version-12-83/",
+      "https://optilayer.com/downloads/"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support.",
+    "installation_note": "Bind a program that uses the vendor API on its supported operating system; installation and licensing are provided by the vendor."
+  },
+  "rpfiber": {
+    "kind": "native",
+    "modules": [],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://www.rp-photonics.com/rp_fiber_power_interface.html",
+    "interface": "Built-in scripting language, generated scripts and custom forms.",
+    "sources": [
+      "https://www.rp-photonics.com/rp_fiber_power_interface.html",
+      "https://www.rp-photonics.com/software_script_language.html"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "rpresonator": {
+    "kind": "native",
+    "modules": [],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://www.rp-photonics.com/software_overview.html",
+    "interface": "Built-in scripting, interactive forms that generate models, and iteration loops.",
+    "sources": [
+      "https://www.rp-photonics.com/software_overview.html",
+      "https://www.rp-photonics.com/rp_propulse_interface.html"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "crosslight": {
+    "kind": "manual",
+    "modules": [],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": false,
+    "installation": "https://crosslight.com/",
+    "interface": "Official product and application scope confirmed; a general public API or MCP remains unverified.",
+    "sources": [
+      "https://crosslight.com/"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "consult-interface",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "synopsys-osd": {
+    "kind": "manual",
+    "modules": [],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": false,
+    "installation": "https://osdoptics.com/accessinstallation/",
+    "interface": "Command / macro-driven workflows; complete external API not verified.",
+    "sources": [
+      "https://osdoptics.com/accessinstallation/",
+      "https://osdoptics.com/wp-content/uploads/2024/09/SYNOPSYSTM-Lens-Design-Software-Starting-Guide-Ui-Plus.pdf"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "consult-interface",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "tfcalc": {
+    "kind": "manual",
+    "modules": [],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": false,
+    "installation": "https://www.sspectra.com/",
+    "interface": "Stable public API not verified; evaluate it primarily as a desktop product.",
+    "sources": [
+      "https://www.sspectra.com/",
+      "https://www.hulinks.co.jp/en/"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "consult-interface",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "matlab": {
+    "kind": "native",
+    "modules": [],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://github.com/matlab/matlab-mcp-server",
+    "interface": "MATLAB Engine API, batch execution, Simulink API and the official MATLAB MCP Server.",
+    "sources": [
+      "https://github.com/matlab/matlab-mcp-server",
+      "https://www.mathworks.com/help/cloudcenter/ug/run-matlab-with-ai-agentic-and-ai-assistant-applications.html"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "official",
+        "text": "Official MathWorks MATLAB MCP Server",
+        "url": "https://github.com/matlab/matlab-mcp-server"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "mathematica": {
+    "kind": "native",
+    "modules": [],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://www.wolfram.com/ai/mcp/",
+    "interface": "Wolfram Language, wolframscript, official Python Client and official Wolfram MCP.",
+    "sources": [
+      "https://www.wolfram.com/ai/mcp/",
+      "https://www.wolfram.com/artificial-intelligence/mcp/local/wolfram-mcp-local/",
+      "https://github.com/WolframResearch/AgentTools"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "official",
+        "text": "Official Wolfram Local / Cloud MCP",
+        "url": "https://www.wolfram.com/ai/mcp/"
+      },
+      "skill": {
+        "kind": "official",
+        "text": "Official WolframResearch AgentSkills",
+        "url": "https://github.com/WolframResearch/AgentTools"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "maple": {
+    "kind": "native",
+    "modules": [],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://jp.maplesoft.com/support/help/maple/view.aspx?path=OpenMaple%2FPython%2FAPI",
+    "interface": "OpenMaple Python / C / Java API; command-line kernel.",
+    "sources": [
+      "https://jp.maplesoft.com/support/help/maple/view.aspx?path=OpenMaple%2FPython%2FAPI",
+      "https://www.maplesoft.com/documentation_center/maple2024/ProgrammingGuide.pdf"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "photonforge": {
+    "kind": "python",
+    "modules": [
+      "photonforge"
+    ],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://docs.flexcompute.com/projects/photonforge/en/latest/getting_started.html",
+    "interface": "Native Python; official agent plugins and PCell, routing and verification Skills.",
+    "sources": [
+      "https://docs.flexcompute.com/projects/photonforge/en/latest/getting_started.html",
+      "https://github.com/flexcompute/plugin-marketplace"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "official",
+        "text": "Official PhotonForge documentation MCP, used alongside Python execution",
+        "url": "https://github.com/flexcompute/plugin-marketplace"
+      },
+      "skill": {
+        "kind": "official",
+        "text": "Official PCell, verification, circuit, version and serialization Skills",
+        "url": "https://github.com/flexcompute/plugin-marketplace"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "osloedu": {
+    "kind": "native",
+    "modules": [],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://lambdares.com/edu",
+    "interface": "Commands / macros within EDU limits; do not assume all commercial-edition interfaces are available.",
+    "sources": [
+      "https://lambdares.com/edu"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "ptypy": {
+    "kind": "python",
+    "modules": [
+      "ptypy"
+    ],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://github.com/ptycho/ptypy",
+    "interface": "Python, MPI and CUDA / CuPy acceleration engines.",
+    "sources": [
+      "https://github.com/ptycho/ptypy",
+      "https://raw.githubusercontent.com/ptycho/ptypy/HEAD/LICENSE"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "meep": {
+    "kind": "python",
+    "modules": [
+      "meep"
+    ],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://github.com/NanoComp/meep",
+    "interface": "Python, Scheme and C++; scripted execution, HDF5 outputs and adjoint optimization.",
+    "sources": [
+      "https://github.com/NanoComp/meep",
+      "https://raw.githubusercontent.com/NanoComp/meep/HEAD/LICENSE"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support.",
+    "installation_note": "Install the scientific Meep distribution from its official instructions, not the unrelated PyPI package named meep."
+  },
+  "mpb": {
+    "kind": "python",
+    "modules": [
+      "meep.mpb"
+    ],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://github.com/NanoComp/mpb",
+    "interface": "Python / Scheme; programmable parameter sweeps and mode-data analysis.",
+    "sources": [
+      "https://github.com/NanoComp/mpb",
+      "https://raw.githubusercontent.com/NanoComp/mpb/HEAD/COPYING"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support.",
+    "installation_note": "Install the scientific Meep distribution from its official instructions, not the unrelated PyPI package named meep."
+  },
+  "fdtdx": {
+    "kind": "python",
+    "modules": [
+      "fdtdx"
+    ],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://github.com/ymahlau/fdtdx",
+    "interface": "Native Python / JAX, automatic differentiation and programmable geometry.",
+    "sources": [
+      "https://github.com/ymahlau/fdtdx",
+      "https://raw.githubusercontent.com/ymahlau/fdtdx/HEAD/LICENSE"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "openems": {
+    "kind": "python",
+    "modules": [
+      "openEMS"
+    ],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://github.com/thliebig/openEMS",
+    "interface": "Python and Octave / MATLAB interfaces; command-line solver.",
+    "sources": [
+      "https://github.com/thliebig/openEMS",
+      "https://raw.githubusercontent.com/thliebig/openEMS/HEAD/COPYING"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "s4": {
+    "kind": "native",
+    "modules": [],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://github.com/victorliu/S4",
+    "interface": "Lua scripting; Python interface depends on the build.",
+    "sources": [
+      "https://github.com/victorliu/S4",
+      "https://raw.githubusercontent.com/victorliu/S4/HEAD/COPYING"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "torcwa": {
+    "kind": "python",
+    "modules": [
+      "torcwa"
+    ],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://github.com/kch3782/torcwa",
+    "interface": "Native Python / PyTorch and automatic differentiation.",
+    "sources": [
+      "https://github.com/kch3782/torcwa",
+      "https://raw.githubusercontent.com/kch3782/torcwa/HEAD/LICENSE"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "grcwa": {
+    "kind": "python",
+    "modules": [
+      "grcwa"
+    ],
+    "pip": [
+      "grcwa==0.1.2"
+    ],
+    "distributions": [
+      "grcwa"
+    ],
+    "operations": [
+      "film"
+    ],
+    "native_program": true,
+    "installation": "https://github.com/weiliangjinca/grcwa",
+    "interface": "Python with an Autograd backend.",
+    "sources": [
+      "https://github.com/weiliangjinca/grcwa",
+      "https://raw.githubusercontent.com/weiliangjinca/grcwa/HEAD/LICENSE"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "legume": {
+    "kind": "python",
+    "modules": [
+      "legume"
+    ],
+    "pip": [
+      "legume-gme==1.0.3"
+    ],
+    "distributions": [
+      "legume-gme"
+    ],
+    "operations": [
+      "bands"
+    ],
+    "native_program": true,
+    "installation": "https://github.com/fancompute/legume",
+    "interface": "Python; automatic differentiation and optimization workflows.",
+    "sources": [
+      "https://github.com/fancompute/legume",
+      "https://raw.githubusercontent.com/fancompute/legume/HEAD/LICENSE"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "ceviche": {
+    "kind": "python",
+    "modules": [
+      "ceviche"
+    ],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://github.com/fancompute/ceviche",
+    "interface": "Python / Autograd; examples compose the solver with optimizers.",
+    "sources": [
+      "https://github.com/fancompute/ceviche",
+      "https://raw.githubusercontent.com/fancompute/ceviche/HEAD/LICENSE"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "tmm": {
+    "kind": "python",
+    "modules": [
+      "tmm"
+    ],
+    "pip": [
+      "tmm==0.2.0"
+    ],
+    "distributions": [
+      "tmm"
+    ],
+    "operations": [
+      "spectrum"
+    ],
+    "native_program": true,
+    "installation": "https://github.com/sbyrnes321/tmm",
+    "interface": "Native Python / NumPy; coh_tmm, inc_tmm and related functions.",
+    "sources": [
+      "https://github.com/sbyrnes321/tmm",
+      "https://raw.githubusercontent.com/sbyrnes321/tmm/HEAD/LICENSE.txt"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "solcore": {
+    "kind": "python",
+    "modules": [
+      "solcore"
+    ],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://github.com/qpv-research-group/solcore5",
+    "interface": "Python API; composes transfer-matrix and other optical / electrical models.",
+    "sources": [
+      "https://github.com/qpv-research-group/solcore5",
+      "https://docs.solcore.solar/en/latest/Optics/optics.html",
+      "https://raw.githubusercontent.com/qpv-research-group/solcore5/HEAD/LICENSE.txt"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "rayoptics": {
+    "kind": "python",
+    "modules": [
+      "rayoptics"
+    ],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://github.com/mjhoptics/ray-optics",
+    "interface": "Native Python; scripts, notebooks and optical-model objects.",
+    "sources": [
+      "https://github.com/mjhoptics/ray-optics",
+      "https://raw.githubusercontent.com/mjhoptics/ray-optics/HEAD/LICENSE"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "optiland": {
+    "kind": "python",
+    "modules": [
+      "optiland"
+    ],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://github.com/optiland/optiland",
+    "interface": "Native Python; NumPy / PyTorch backends; JSON and selected commercial-format interoperability.",
+    "sources": [
+      "https://github.com/optiland/optiland",
+      "https://raw.githubusercontent.com/optiland/optiland/HEAD/LICENSE"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "raysect": {
+    "kind": "python",
+    "modules": [
+      "raysect"
+    ],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://github.com/raysect/source",
+    "interface": "Python API with compiled numerical components; programmable scenes and observers.",
+    "sources": [
+      "https://github.com/raysect/source",
+      "https://raw.githubusercontent.com/raysect/source/HEAD/LICENSE.txt"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "raytracing": {
+    "kind": "python",
+    "modules": [
+      "raytracing"
+    ],
+    "pip": [
+      "raytracing==1.4.7"
+    ],
+    "distributions": [
+      "raytracing"
+    ],
+    "operations": [
+      "abcd"
+    ],
+    "native_program": true,
+    "installation": "https://github.com/DCC-Lab/RayTracing",
+    "interface": "Python objects for matrices, elements, paths and analysis.",
+    "sources": [
+      "https://github.com/DCC-Lab/RayTracing",
+      "https://raw.githubusercontent.com/DCC-Lab/RayTracing/HEAD/LICENSE"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "lightpipes": {
+    "kind": "python",
+    "modules": [
+      "LightPipes"
+    ],
+    "pip": [
+      "LightPipes==2.1.5"
+    ],
+    "distributions": [
+      "LightPipes"
+    ],
+    "operations": [
+      "gaussian"
+    ],
+    "native_program": true,
+    "installation": "https://github.com/opticspy/lightpipes",
+    "interface": "Native Python functions for field construction and propagation.",
+    "sources": [
+      "https://github.com/opticspy/lightpipes",
+      "https://raw.githubusercontent.com/opticspy/lightpipes/HEAD/LICENSE.txt"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "poppy": {
+    "kind": "python",
+    "modules": [
+      "poppy"
+    ],
+    "pip": [
+      "poppy==1.2.0"
+    ],
+    "distributions": [
+      "poppy"
+    ],
+    "operations": [
+      "psf"
+    ],
+    "native_program": true,
+    "installation": "https://github.com/spacetelescope/poppy",
+    "interface": "Python API and reusable optical elements; integrates with scientific Python.",
+    "sources": [
+      "https://github.com/spacetelescope/poppy",
+      "https://raw.githubusercontent.com/spacetelescope/poppy/HEAD/LICENSE.md"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "hcipy": {
+    "kind": "python",
+    "modules": [
+      "hcipy"
+    ],
+    "pip": [
+      "hcipy==0.7.1"
+    ],
+    "distributions": [
+      "hcipy"
+    ],
+    "operations": [
+      "psf"
+    ],
+    "native_program": true,
+    "installation": "https://github.com/ehpor/hcipy",
+    "interface": "Native Python; composable fields, optical elements and estimators.",
+    "sources": [
+      "https://github.com/ehpor/hcipy",
+      "https://raw.githubusercontent.com/ehpor/hcipy/HEAD/LICENSE"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "prysm": {
+    "kind": "python",
+    "modules": [
+      "prysm"
+    ],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://github.com/brandondube/prysm",
+    "interface": "Native Python and numerical array interfaces.",
+    "sources": [
+      "https://github.com/brandondube/prysm",
+      "https://raw.githubusercontent.com/brandondube/prysm/HEAD/LICENSE.md"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support.",
+    "installation_note": "prysm 0.21.1 imports pkg_resources; use a compatible setuptools environment, or a newer upstream release that removes this dependency."
+  },
+  "diffractio": {
+    "kind": "python",
+    "modules": [
+      "diffractio"
+    ],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://github.com/optbrea/diffractio",
+    "interface": "Python API for scalar / vector sources, masks and fields.",
+    "sources": [
+      "https://github.com/optbrea/diffractio",
+      "https://raw.githubusercontent.com/optbrea/diffractio/HEAD/LICENSE"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "torchoptics": {
+    "kind": "python",
+    "modules": [
+      "torchoptics"
+    ],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://github.com/MatthewFilipovich/torchoptics",
+    "interface": "Native Python / PyTorch with automatic differentiation.",
+    "sources": [
+      "https://github.com/MatthewFilipovich/torchoptics",
+      "https://raw.githubusercontent.com/MatthewFilipovich/torchoptics/HEAD/LICENSE"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "waveprop": {
+    "kind": "python",
+    "modules": [
+      "waveprop"
+    ],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://github.com/ebezzam/waveprop",
+    "interface": "Python; selected PyTorch differentiable implementations.",
+    "sources": [
+      "https://github.com/ebezzam/waveprop",
+      "https://raw.githubusercontent.com/ebezzam/waveprop/HEAD/LICENSE"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "gdsfactory": {
+    "kind": "python",
+    "modules": [
+      "gdsfactory"
+    ],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://github.com/gdsfactory/gdsfactory",
+    "interface": "Native Python, PCells, PDKs, netlists and solver adapters; official component-designer Skill.",
+    "sources": [
+      "https://github.com/gdsfactory/gdsfactory",
+      "https://raw.githubusercontent.com/gdsfactory/gdsfactory/HEAD/LICENSE"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "official",
+        "text": "Official gdsfactory component-designer Skill",
+        "url": "https://github.com/gdsfactory/gdsfactory/blob/main/.agents/skills/gdsfactory-component-designer/SKILL.md"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "klayout": {
+    "kind": "python",
+    "modules": [
+      "klayout.db"
+    ],
+    "pip": [
+      "klayout==0.30.13"
+    ],
+    "distributions": [
+      "klayout"
+    ],
+    "operations": [
+      "layout"
+    ],
+    "native_program": true,
+    "installation": "https://github.com/KLayout/klayout",
+    "interface": "Python / Ruby APIs, macros, batch mode and the Python module.",
+    "sources": [
+      "https://github.com/KLayout/klayout",
+      "https://raw.githubusercontent.com/KLayout/klayout/HEAD/LICENSE"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "community",
+        "text": "Community klayout-draw-mcp; Python-module layout operations",
+        "url": "https://github.com/geniuskey/klayout-draw-mcp"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "sax": {
+    "kind": "python",
+    "modules": [
+      "sax"
+    ],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://github.com/flaport/sax",
+    "interface": "Python / JAX; callable component models and netlists.",
+    "sources": [
+      "https://github.com/flaport/sax",
+      "https://raw.githubusercontent.com/flaport/sax/HEAD/LICENSE"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "siepic": {
+    "kind": "native",
+    "modules": [],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://github.com/SiEPIC/SiEPIC-Tools",
+    "interface": "Python macros and KLayout extensions; integrates with PDKs and simulation tools.",
+    "sources": [
+      "https://github.com/SiEPIC/SiEPIC-Tools",
+      "https://raw.githubusercontent.com/SiEPIC/SiEPIC-Tools/HEAD/LICENSE.md"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "nazca": {
+    "kind": "native",
+    "modules": [],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://nazca-design.org/about/",
+    "interface": "Native Python; reusable building blocks and PDK interfaces.",
+    "sources": [
+      "https://nazca-design.org/about/",
+      "https://nazca-design.org/manual/introduction.html"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "adda": {
+    "kind": "native",
+    "modules": [],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://github.com/adda-team/adda",
+    "interface": "Command-line solver, input geometry and material files; scripts can drive sweeps and parse results.",
+    "sources": [
+      "https://github.com/adda-team/adda",
+      "https://raw.githubusercontent.com/adda-team/adda/HEAD/LICENSE"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "miepython": {
+    "kind": "python",
+    "modules": [
+      "miepython"
+    ],
+    "pip": [
+      "miepython==3.3.1"
+    ],
+    "distributions": [
+      "miepython"
+    ],
+    "operations": [
+      "sphere"
+    ],
+    "native_program": true,
+    "installation": "https://github.com/scottprahl/miepython",
+    "interface": "Native Python functions and array-oriented calculations.",
+    "sources": [
+      "https://github.com/scottprahl/miepython",
+      "https://raw.githubusercontent.com/scottprahl/miepython/HEAD/LICENSE.txt"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "treams": {
+    "kind": "python",
+    "modules": [
+      "treams"
+    ],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://github.com/tfp-photonics/treams",
+    "interface": "Python API for bases, translation operators and scattering matrices.",
+    "sources": [
+      "https://github.com/tfp-photonics/treams",
+      "https://raw.githubusercontent.com/tfp-photonics/treams/HEAD/LICENSE"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "smuthi": {
+    "kind": "python",
+    "modules": [
+      "smuthi"
+    ],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://smuthi.readthedocs.io/en/latest/_source/01%20about/about_smuthi.html",
+    "interface": "Python API for particles, layers, illumination and simulations.",
+    "sources": [
+      "https://smuthi.readthedocs.io/en/latest/_source/01%20about/about_smuthi.html",
+      "https://github.com/KMCzajkowski/smuthi"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "pygdm": {
+    "kind": "python",
+    "modules": [
+      "pyGDM2"
+    ],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://wiechapeter.gitlab.io/",
+    "interface": "Python API, programmable geometries, materials and optimization workflows.",
+    "sources": [
+      "https://wiechapeter.gitlab.io/",
+      "https://homepages.laas.fr/pwiecha/pygdm_doc/apidoc.html",
+      "https://gitlab.com/wiechapeter/pyGDM2"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "qutip": {
+    "kind": "python",
+    "modules": [
+      "qutip"
+    ],
+    "pip": [
+      "qutip==5.3.1"
+    ],
+    "distributions": [
+      "qutip"
+    ],
+    "operations": [
+      "rabi"
+    ],
+    "native_program": true,
+    "installation": "https://github.com/qutip/qutip",
+    "interface": "Native Python; quantum objects, solvers and numerical interfaces.",
+    "sources": [
+      "https://github.com/qutip/qutip",
+      "https://raw.githubusercontent.com/qutip/qutip/HEAD/LICENSE.txt"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "quantumoptics": {
+    "kind": "native",
+    "modules": [],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://github.com/qojulia/QuantumOptics.jl",
+    "interface": "Native Julia API; composable bases, operators and solvers.",
+    "sources": [
+      "https://github.com/qojulia/QuantumOptics.jl",
+      "https://raw.githubusercontent.com/qojulia/QuantumOptics.jl/HEAD/LICENSE.md"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "perceval": {
+    "kind": "python",
+    "modules": [
+      "perceval"
+    ],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://github.com/Quandela/Perceval",
+    "interface": "Python API; local backends and separately configured remote services.",
+    "sources": [
+      "https://github.com/Quandela/Perceval",
+      "https://raw.githubusercontent.com/Quandela/Perceval/HEAD/LICENSE"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "strawberry": {
+    "kind": "python",
+    "modules": [
+      "strawberryfields"
+    ],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://github.com/XanaduAI/strawberryfields",
+    "interface": "Python API, circuit programs and simulation backends.",
+    "sources": [
+      "https://github.com/XanaduAI/strawberryfields",
+      "https://raw.githubusercontent.com/XanaduAI/strawberryfields/HEAD/LICENSE"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "luna": {
+    "kind": "native",
+    "modules": [],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://github.com/LupoLab/Luna.jl",
+    "interface": "Native Julia API and scripted models.",
+    "sources": [
+      "https://github.com/LupoLab/Luna.jl",
+      "https://raw.githubusercontent.com/LupoLab/Luna.jl/HEAD/LICENSE"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "pyfmas": {
+    "kind": "python",
+    "modules": [
+      "fmas"
+    ],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://github.com/omelchert/py-fmas",
+    "interface": "Python classes for propagation models, grids and solvers.",
+    "sources": [
+      "https://github.com/omelchert/py-fmas",
+      "https://raw.githubusercontent.com/omelchert/py-fmas/HEAD/LICENSE.md"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "laserfun": {
+    "kind": "python",
+    "modules": [
+      "laserfun"
+    ],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://github.com/laserfun/laserfun",
+    "interface": "Python interface for pulses, fibers and nonlinear propagation.",
+    "sources": [
+      "https://github.com/laserfun/laserfun",
+      "https://raw.githubusercontent.com/laserfun/laserfun/HEAD/LICENSE"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "opticomm": {
+    "kind": "python",
+    "modules": [
+      "optic"
+    ],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://github.com/edsonportosilva/OptiCommPy",
+    "interface": "Native Python with modular transmitter, channel and DSP functions.",
+    "sources": [
+      "https://github.com/edsonportosilva/OptiCommPy",
+      "https://raw.githubusercontent.com/edsonportosilva/OptiCommPy/HEAD/LICENSE"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "finesse": {
+    "kind": "python",
+    "modules": [
+      "finesse"
+    ],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://finesse.ifosim.org/docs/latest/",
+    "interface": "Python API and KatScript model language; programmable analyses.",
+    "sources": [
+      "https://finesse.ifosim.org/docs/latest/",
+      "https://finesse.docs.ligo.org/finesse-ligo/index.html",
+      "https://git.ligo.org/finesse/finesse3"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "rezonator": {
+    "kind": "manual",
+    "modules": [],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": false,
+    "installation": "https://github.com/orion-project/rezonator2",
+    "interface": "Desktop GUI and project files; a complete stable headless API was not verified.",
+    "sources": [
+      "https://github.com/orion-project/rezonator2",
+      "https://raw.githubusercontent.com/orion-project/rezonator2/HEAD/LICENSE"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "consult-interface",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "mcx": {
+    "kind": "native",
+    "modules": [],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://github.com/fangq/mcx",
+    "interface": "Command-line / JSON configurations and language bindings; programmable batch simulations.",
+    "sources": [
+      "https://github.com/fangq/mcx",
+      "https://raw.githubusercontent.com/fangq/mcx/HEAD/LICENSE.txt"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "mmc": {
+    "kind": "native",
+    "modules": [],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://github.com/fangq/mmc",
+    "interface": "Command-line / configuration files and language bindings.",
+    "sources": [
+      "https://github.com/fangq/mmc",
+      "https://raw.githubusercontent.com/fangq/mmc/HEAD/LICENSE.txt"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "holopy": {
+    "kind": "python",
+    "modules": [
+      "holopy"
+    ],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://github.com/manoharan-lab/holopy",
+    "interface": "Python API connecting scattering calculations, image handling and inference.",
+    "sources": [
+      "https://github.com/manoharan-lab/holopy",
+      "https://raw.githubusercontent.com/manoharan-lab/holopy/HEAD/LICENSE"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "pydhm": {
+    "kind": "python",
+    "modules": [
+      "pyDHM"
+    ],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://github.com/catrujilla/pyDHM",
+    "interface": "Native Python functions for holographic processing.",
+    "sources": [
+      "https://github.com/catrujilla/pyDHM",
+      "https://catrujilla.github.io/pyDHM/",
+      "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0275818"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "pynx": {
+    "kind": "python",
+    "modules": [
+      "pynx"
+    ],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://pynx.esrf.fr/en/stable/",
+    "interface": "Python API and command-line reconstruction tools.",
+    "sources": [
+      "https://pynx.esrf.fr/en/stable/",
+      "https://pynx.esrf.fr/en/stable/scripts/"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "mitsuba": {
+    "kind": "python",
+    "modules": [
+      "mitsuba"
+    ],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://github.com/mitsuba-renderer/mitsuba3",
+    "interface": "Python / C++ API; differentiable variants through Dr.Jit.",
+    "sources": [
+      "https://github.com/mitsuba-renderer/mitsuba3",
+      "https://raw.githubusercontent.com/mitsuba-renderer/mitsuba3/HEAD/LICENSE"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "pbrt": {
+    "kind": "native",
+    "modules": [],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://github.com/mmp/pbrt-v4",
+    "interface": "C++ source, scene descriptions and command-line execution.",
+    "sources": [
+      "https://github.com/mmp/pbrt-v4",
+      "https://raw.githubusercontent.com/mmp/pbrt-v4/HEAD/LICENSE.txt"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "srw": {
+    "kind": "native",
+    "modules": [],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://github.com/ochubar/SRW",
+    "interface": "Python interface and scripted radiation / propagation models.",
+    "sources": [
+      "https://github.com/ochubar/SRW",
+      "https://pypi.org/project/oasys-srwpy/1.0.3/"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "shadow": {
+    "kind": "python",
+    "modules": [
+      "shadow4"
+    ],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://github.com/oasys-kit/shadow4",
+    "interface": "Native SHADOW4 Python; OASYS plugins; batch simulations can be scripted.",
+    "sources": [
+      "https://github.com/oasys-kit/shadow4",
+      "https://github.com/oasys-kit/shadow4/blob/master/LICENSE",
+      "https://github.com/oasys-kit/OASYS1-shadow4"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "xrt": {
+    "kind": "python",
+    "modules": [
+      "xrt"
+    ],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://github.com/kklmn/xrt",
+    "interface": "Python; programmable beamlines and batch analysis.",
+    "sources": [
+      "https://github.com/kklmn/xrt",
+      "https://raw.githubusercontent.com/kklmn/xrt/HEAD/LICENSE.txt"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "sympy": {
+    "kind": "python",
+    "modules": [
+      "sympy"
+    ],
+    "pip": [
+      "sympy==1.14.0"
+    ],
+    "distributions": [
+      "sympy"
+    ],
+    "operations": [
+      "abcd"
+    ],
+    "native_program": true,
+    "installation": "https://github.com/sympy/sympy",
+    "interface": "Python; numerical-function and code generation.",
+    "sources": [
+      "https://github.com/sympy/sympy",
+      "https://raw.githubusercontent.com/sympy/sympy/HEAD/LICENSE"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "sage": {
+    "kind": "python",
+    "modules": [
+      "sage.all"
+    ],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://www.sagemath.org/",
+    "interface": "Python-style interface, CLI and notebooks.",
+    "sources": [
+      "https://www.sagemath.org/"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "freecad": {
+    "kind": "python",
+    "modules": [
+      "FreeCAD"
+    ],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://github.com/FreeCAD/FreeCAD",
+    "interface": "Python API, macros and plugins.",
+    "sources": [
+      "https://github.com/FreeCAD/FreeCAD",
+      "https://raw.githubusercontent.com/FreeCAD/FreeCAD/HEAD/LICENSE"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "gmsh": {
+    "kind": "python",
+    "modules": [
+      "gmsh"
+    ],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://gmsh.info/",
+    "interface": "Python, C, C++ and Julia APIs; CLI and .geo scripts.",
+    "sources": [
+      "https://gmsh.info/",
+      "https://gmsh.info/doc/texinfo/"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "scikitimage": {
+    "kind": "python",
+    "modules": [
+      "skimage"
+    ],
+    "pip": [
+      "scikit-image==0.26.0"
+    ],
+    "distributions": [
+      "scikit-image"
+    ],
+    "operations": [
+      "registration"
+    ],
+    "native_program": true,
+    "installation": "https://github.com/scikit-image/scikit-image",
+    "interface": "Native Python API.",
+    "sources": [
+      "https://github.com/scikit-image/scikit-image",
+      "https://raw.githubusercontent.com/scikit-image/scikit-image/HEAD/LICENSE.txt"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "napari": {
+    "kind": "python",
+    "modules": [
+      "napari"
+    ],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://github.com/napari/napari",
+    "interface": "Python API, CLI and plugin system.",
+    "sources": [
+      "https://github.com/napari/napari",
+      "https://raw.githubusercontent.com/napari/napari/HEAD/LICENSE"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "refractiveindex": {
+    "kind": "data",
+    "modules": [],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": false,
+    "installation": "https://github.com/polyanskiy/refractiveindex.info-database",
+    "interface": "Machine-readable YAML, accessible from Python and other languages; a database rather than a solver.",
+    "sources": [
+      "https://github.com/polyanskiy/refractiveindex.info-database",
+      "https://raw.githubusercontent.com/polyanskiy/refractiveindex.info-database/HEAD/LICENSE",
+      "https://refractiveindex.info/"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "consult-interface",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "fenics": {
+    "kind": "python",
+    "modules": [
+      "dolfinx"
+    ],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://github.com/FEniCS/dolfinx",
+    "interface": "Python / C++; UFL weak forms; MPI and numerical backends.",
+    "sources": [
+      "https://github.com/FEniCS/dolfinx",
+      "https://fenicsproject.org/"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "ngsolve": {
+    "kind": "python",
+    "modules": [
+      "ngsolve"
+    ],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://github.com/NGSolve/ngsolve",
+    "interface": "Python / C++; official Maxwell and eigenmode tutorials.",
+    "sources": [
+      "https://github.com/NGSolve/ngsolve",
+      "https://ngsolve.org/ngsolve/docs/i-tutorials/unit-2.4-Maxwell/Maxwellevp.html"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "scipy": {
+    "kind": "python",
+    "modules": [
+      "scipy"
+    ],
+    "pip": [
+      "scipy"
+    ],
+    "distributions": [
+      "scipy"
+    ],
+    "operations": [
+      "fit_gaussian"
+    ],
+    "native_program": true,
+    "installation": "https://numpy.org/",
+    "interface": "Native Python; NumPy arrays and scipy.optimize, integrate, signal and other modules.",
+    "sources": [
+      "https://numpy.org/",
+      "https://scipy.org/"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "jax": {
+    "kind": "python",
+    "modules": [
+      "jax"
+    ],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://docs.jax.dev/en/latest/",
+    "interface": "Python; jit, grad, vmap and related transformations.",
+    "sources": [
+      "https://docs.jax.dev/en/latest/",
+      "https://github.com/jax-ml/jax"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  },
+  "pytorch": {
+    "kind": "python",
+    "modules": [
+      "torch"
+    ],
+    "pip": [],
+    "distributions": [],
+    "operations": [],
+    "native_program": true,
+    "installation": "https://pytorch.org/",
+    "interface": "Python / C++; Autograd and GPU tensor interfaces.",
+    "sources": [
+      "https://pytorch.org/",
+      "https://github.com/pytorch/pytorch"
+    ],
+    "upstream": {
+      "mcp": {
+        "kind": "unverified",
+        "text": "Dedicated MCP not verified in this review"
+      },
+      "skill": {
+        "kind": "unverified",
+        "text": "Dedicated agent Skill not verified in this review"
+      }
+    },
+    "execution": "local-or-iop",
+    "environment": "Use the software’s supported OS, architecture, dependencies and license. The connector does not change solver platform support."
+  }
+}

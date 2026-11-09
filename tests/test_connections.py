@@ -35,6 +35,12 @@ class ConnectionTests(unittest.TestCase):
         self.assertEqual(set(x['id'] for x in a['items']) & set(x['id'] for x in b['items']),set())
         self.assertEqual(catalogue.search('tmm')['items'][0]['id'],'tmm')
 
+    def test_search_uses_bilingual_domain_names_and_normalized_terms(self):
+        for query in ('thin film','thin-film','ＴＨＩＮ　ＦＩＬＭ','薄膜'):
+            items = catalogue.search(query,license_group='open',limit=100)['items']
+            self.assertTrue({'tmm','grcwa'} <= {row['id'] for row in items},query)
+        self.assertIn('py-pol',{r['id'] for r in catalogue.search('py pol')['items']})
+
     def test_mcp_initialization_and_tool_call(self):
         requests = [
             {'jsonrpc':'2.0','id':1,'method':'initialize','params':{'protocolVersion':'2025-11-25'}},

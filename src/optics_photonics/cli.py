@@ -30,6 +30,8 @@ def main(argv=None):
     workflow=commands.add_parser('submit-workflow'); workflow.add_argument('file',type=Path); workflow.add_argument('--name',default='Optics research'); workflow.add_argument('--request-id'); workflow.add_argument('--run-id')
     for name in ('status','files','cancel','resume'):
         item=commands.add_parser(name); item.add_argument('run_id')
+        if name in ('status','files'):
+            item.add_argument('--offset',type=int,default=0); item.add_argument('--limit',type=int,default=50 if name=='status' else 100)
     download=commands.add_parser('download'); download.add_argument('run_id'); download.add_argument('file'); download.add_argument('destination')
     read=commands.add_parser('read'); read.add_argument('run_id'); read.add_argument('file'); read.add_argument('--offset',type=int,default=0); read.add_argument('--limit',type=int,default=16384)
     runs=commands.add_parser('runs'); runs.add_argument('--state'); runs.add_argument('--offset',type=int,default=0); runs.add_argument('--limit',type=int,default=20)

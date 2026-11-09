@@ -50,7 +50,7 @@ async def exercise(home):
             text=result(await session.call_tool('read_result',{'run_id':run_id,'file':spectrum}))['data']
             assert '4.000000000000000' in text
             copied=result(await session.call_tool('download_result',{'run_id':run_id,'file':spectrum,'destination':str(home/'download.csv')}))
-            assert (home/'download.csv').read_text()==text
+            assert (home/'download.csv').read_bytes()==text.encode('utf-8')
     until=time.monotonic()+5
     while time.monotonic()<until:
         with jobs.worker_lock(home,run_id) as available:

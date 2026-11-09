@@ -1132,13 +1132,16 @@
   "tmm": {
     "kind": "python",
     "modules": [
-      "tmm"
+      "tmm",
+      "numpy"
     ],
     "pip": [
-      "tmm==0.2.0"
+      "tmm==0.2.0",
+      "numpy"
     ],
     "distributions": [
-      "tmm"
+      "tmm",
+      "numpy"
     ],
     "operations": [
       "spectrum"

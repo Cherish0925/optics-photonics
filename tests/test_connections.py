@@ -15,6 +15,14 @@ from optics_photonics.packages import package, HOSTS
 
 
 class ConnectionTests(unittest.TestCase):
+    def test_tmm_recipe_includes_its_undeclared_numpy_dependency(self):
+        record = catalogue.software('tmm')['connection']
+        self.assertIn('numpy', record['pip'])
+        self.assertIn('numpy', record['modules'])
+        self.assertIn('numpy', record['distributions'])
+        generated = Path(__file__).resolve().parents[1] / 'connect/agentic-research-os/lib/optics_photonics/resources/data/connections.json'
+        self.assertEqual(json.loads(generated.read_text(encoding='utf-8'))['tmm'], record)
+
     def test_every_catalogued_tool_has_a_source_and_connection(self):
         entries = catalogue.catalogue()
         self.assertEqual({r['id'] for r in entries}, set(catalogue.connections()))

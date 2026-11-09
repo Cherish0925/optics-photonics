@@ -3,11 +3,18 @@ import json
 import os
 from pathlib import Path
 import shutil
+import shlex
 import sys
 from . import __version__
 from .catalogue import resources
 
 HOSTS = ('agentic-research-os','codex','claude','deepseek','qiushi','mcp')
+
+
+def shell_command(arguments):
+    if os.name == 'nt':
+        return '& ' + ' '.join("'" + str(value).replace("'", "''") + "'" for value in arguments)
+    return shlex.join(str(value) for value in arguments)
 
 
 def write(path, value):
@@ -51,19 +58,20 @@ def package(destination, host='mcp', python=None):
         write(target/'mcp.json', {'mcpServers':{'optics':server}})
         instructions = ('Register this local plugin directory in '+host+'. Its MCP configuration points to the selected Python and this directory. Regenerate with `optics-photonics connect '+host+' --output PATH` after relocating it. The accompanying host connection command is recorded below.')
         if host == 'codex':
-            instructions += '\n\ncodex mcp add optics -- '+interpreter+' -B '+str(target/'server.py')+' mcp\n'
+            command = ['codex','mcp','add','optics','--',interpreter,'-B',str(target/'server.py'),'mcp']
         else:
-            instructions += '\n\nclaude mcp add --transport stdio optics -- '+interpreter+' -B '+str(target/'server.py')+' mcp\n'
+            command = ['claude','mcp','add','--transport','stdio','optics','--',interpreter,'-B',str(target/'server.py'),'mcp']
+        instructions += '\n\n```'+('powershell' if os.name == 'nt' else 'sh')+'\n'+shell_command(command)+'\n```\n'
     elif host == 'deepseek':
         overlay = [{'insert':[{'id':'optics-photonics','name':'@deepseek-ai/dsh-mcp-client',
                     'config':{'serverName':'optics','transport':'stdio',**server,'env':{},'cwd':str(target)}}]}]
         # JSON is valid YAML and preserves Windows paths without manual escaping.
         write(target/'optics.cordis.yml',overlay)
-        instructions = 'Start with: dsh web --patch "'+str(target/'optics.cordis.yml')+'"\nFor persistent activation, merge the single insert patch into the profile’s cordis.patch.yml. Keep other profile entries. This uses DeepSeek’s native dsh-mcp-client, not a Claude configuration file.'
+        instructions = 'Start with:\n\n```'+('powershell' if os.name == 'nt' else 'sh')+'\n'+shell_command(['dsh','web','--patch',str(target/'optics.cordis.yml')])+'\n```\nFor persistent activation, merge the single insert patch into the profile’s cordis.patch.yml. Keep other profile entries. This uses DeepSeek’s native dsh-mcp-client, not a Claude configuration file.'
     elif host == 'qiushi':
         write(target/'plugin.json', {**descriptor,'mcpServers':{'optics':{'transport':'stdio',**server}}})
         write(target/'mcp.json',{'mcpServers':{'optics':server}})
-        (target/'optics').write_text('#!/bin/sh\nexec '+json.dumps(interpreter)+' -B "$(dirname "$0")/server.py" "$@"\n', encoding='utf-8')
+        (target/'optics').write_text('#!/bin/sh\nexec '+shlex.quote(interpreter)+' -B "$(dirname "$0")/server.py" "$@"\n', encoding='utf-8')
         (target/'optics').chmod(0o755)
         instructions = 'For Qiushi deployments based on Agentic Research OS, use the agentic-research-os bundle. Other Qiushi hosts can register this mcp.json or invoke server.py tools / server.py call TOOL JSON through their shell interface. Native plugin loading depends on the host edition.'
     else:

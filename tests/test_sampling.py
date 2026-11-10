@@ -1,4 +1,5 @@
 import json
+import os
 from pathlib import Path
 import sys
 import tempfile
@@ -36,7 +37,17 @@ class SamplingCase(unittest.TestCase):
         exec(PROGRAM, self.namespace)
 
     def tearDown(self):
-        self.temp.cleanup()
+        # Windows can retain the detached worker's inherited log handle briefly
+        # after its calculation and lock have both finished.
+        deadline = time.monotonic() + 5
+        while True:
+            try:
+                self.temp.cleanup()
+                break
+            except PermissionError:
+                if os.name != 'nt' or time.monotonic() >= deadline:
+                    raise
+                time.sleep(.02)
 
     def collect(self, folder, **kwargs):
         return sampling.collect(self.namespace['make_env'], self.namespace['make_policy'],

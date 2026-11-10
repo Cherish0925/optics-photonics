@@ -2,7 +2,7 @@
 
 我们发布了一个面向科研、工程与 AI Agent 的双语软件目录，收录 **97 项工具与产品族，覆盖 14 个任务领域**：
 
-https://github.com/Cherish0925/optics-photonics
+https://github.com/Cherish0925/Optics-Photonics-AI-Lab
 
 目录将商业付费、免费开源、免费但授权受限的工具分开，逐项整理物理方法、适用任务、许可证、编程接口、计算环境、应用依据、局限与一手来源。原生 API、官方或社区 MCP、Agent Skills 分别标注，避免把文档查询入口误认为求解器执行接口。
 

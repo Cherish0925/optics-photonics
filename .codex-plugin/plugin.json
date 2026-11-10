@@ -1,10 +1,12 @@
 {
   "name": "optics-photonics",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Optical software, simulation, background calculations and research methods.",
-  "author": {"name": "Optics & Photonics"},
-  "homepage": "https://cherish0925.github.io/optics-photonics/",
-  "repository": "https://github.com/Cherish0925/optics-photonics",
+  "author": {
+    "name": "Optics & Photonics"
+  },
+  "homepage": "https://cherish0925.github.io/Optics-Photonics-AI-Lab/",
+  "repository": "https://github.com/Cherish0925/Optics-Photonics-AI-Lab",
   "license": "MIT",
   "skills": "./skills/",
   "mcpServers": "./mcp.codex.json",

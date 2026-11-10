@@ -1,6 +1,6 @@
 ---
 name: optical-computation
-description: "Connect optical software environments, model and simulate optical systems, run native research programs and parallel calculations, retrieve scientific results, or install optical MCP and plugin connections."
+description: "Connect optical software environments, model and simulate optical systems, run native research programs and parallel calculations, collect versioned research episodes for learning, retrieve scientific results, or install optical MCP and plugin connections."
 ---
 
 # Optical computation
@@ -22,3 +22,5 @@ Without MCP, use `optics-photonics` or `python -m optics_photonics`: `search`, `
 Native executable programs read JSON from `OPTICS_REQUEST_FILE` or stdin, write scientific files under `OPTICS_OUTPUT_DIR`, and write JSON to `OPTICS_RESULT_FILE`. Bind them using an executable/argument array; optional placeholders are `{request}`, `{output}`, `{result}`. C/C++/C#/Java/Julia and vendor programs use this interface directly.
 
 Create a host package with `optics-photonics connect HOST --output DIR`, choosing agentic-research-os, codex, claude, deepseek, qiushi or mcp. Follow DIR/INSTALL.md. For Research OS install and activate the package revision; for DeepSeek use its Cordis overlay. Run the MCP process on the machine containing the scientific environment, locally or through SSH. Install a new plugin version into a new directory; retain existing environments and research data.
+
+For repeated environment interactions, `sample_episodes` accepts a program defining `make_env()` and `make_policy(seed)`. The environment implements Gymnasium-style `reset(seed, options)`, `step(action)` and `close()`. Supply task/policy id and version, episode count, worker count and step limit. Each worker keeps its solver context while running complete episodes; no MCP call is needed per step. Seeds depend on episode ID, not worker count. Read the saved trajectory and numerical files through the existing result tools. A failed worker retains completed records; `resume_run` reruns unfinished worker steps as new attempts, so select one attempt per episode when assembling a dataset. Use this entry only for environments with explicitly defined initialization and feedback.

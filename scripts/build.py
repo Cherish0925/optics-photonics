@@ -7,7 +7,7 @@ ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'src'))
 from resources import collect_resources
 REVIEWED='2026-10-20'
-RAW='https://raw.githubusercontent.com/Cherish0925/optics-photonics/main/'
+RAW='https://raw.githubusercontent.com/Cherish0925/Optics-Photonics-AI-Lab/main/'
 
 def write_json(path,value):
     path.write_text(json.dumps(value,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
@@ -43,7 +43,7 @@ def main():
         subprocess.run([sys.executable,str(ROOT/'src/render.py'),lang],check=True)
     counts=dict(collections.Counter(x['group'] for x in sets['en']))
     source_count=len({s['url'] for d in sets['en'] for s in d['sources']})
-    write_json(ROOT/'data/manifest.json',{'schema_version':'1.0','reviewed':REVIEWED,'project':'https://github.com/Cherish0925/optics-photonics','description_license':'MIT','languages':['en','zh'],'entries':len(sets['en']),'domains':14,'groups':counts,'primary_source_urls':source_count,'resource_urls_including_connectors':len(collect_resources(sets['en'])),'catalogues':{lang:RAW+f'data/catalogue.{lang}.json' for lang in ('en','zh')}})
+    write_json(ROOT/'data/manifest.json',{'schema_version':'1.0','reviewed':REVIEWED,'project':'https://github.com/Cherish0925/Optics-Photonics-AI-Lab','description_license':'MIT','languages':['en','zh'],'entries':len(sets['en']),'domains':14,'groups':counts,'primary_source_urls':source_count,'resource_urls_including_connectors':len(collect_resources(sets['en'])),'catalogues':{lang:RAW+f'data/catalogue.{lang}.json' for lang in ('en','zh')}})
     llms=f'''# Optics · Photonics
 
 > Independent optical and photonic research software: native programs, background calculations, simulation sessions, MCP, Skills and Agent plugins.
@@ -52,29 +52,29 @@ Reviewed: 2026-10-20. Schema version: 1.0. {len(sets['en'])} tools / product fam
 
 ## Foundations
 
-- [Field · Matter · Interaction](https://cherish0925.github.io/optics-photonics/foundations.html): unified physical framework across classical and quantum optics.
-- [场 · 物质 · 相互作用](https://cherish0925.github.io/optics-photonics/foundations.zh.html): 中文统一物理基础。
-- [Foundation Markdown](https://github.com/Cherish0925/optics-photonics/blob/main/foundations/README.md): maintainable English source.
+- [Field · Matter · Interaction](https://cherish0925.github.io/Optics-Photonics-AI-Lab/foundations.html): unified physical framework across classical and quantum optics.
+- [场 · 物质 · 相互作用](https://cherish0925.github.io/Optics-Photonics-AI-Lab/foundations.zh.html): 中文统一物理基础。
+- [Foundation Markdown](https://github.com/Cherish0925/Optics-Photonics-AI-Lab/blob/main/foundations/README.md): maintainable English source.
 
 ## Read
 
-- [Complete English catalogue](https://raw.githubusercontent.com/Cherish0925/optics-photonics/main/llms-full.txt): all entries, interfaces, limits and sources.
-- [中文完整目录](https://raw.githubusercontent.com/Cherish0925/optics-photonics/main/docs/catalogue.zh.md): Chinese equivalent.
-- [English interactive catalogue](https://cherish0925.github.io/optics-photonics/catalogue.html): models, workflows, examples and resource search.
-- [中文交互目录](https://cherish0925.github.io/optics-photonics/catalogue.zh.html): full Chinese catalogue.
+- [Complete English catalogue](https://raw.githubusercontent.com/Cherish0925/Optics-Photonics-AI-Lab/main/llms-full.txt): all entries, interfaces, limits and sources.
+- [中文完整目录](https://raw.githubusercontent.com/Cherish0925/Optics-Photonics-AI-Lab/main/docs/catalogue.zh.md): Chinese equivalent.
+- [English interactive catalogue](https://cherish0925.github.io/Optics-Photonics-AI-Lab/catalogue.html): models, workflows, examples and resource search.
+- [中文交互目录](https://cherish0925.github.io/Optics-Photonics-AI-Lab/catalogue.zh.html): full Chinese catalogue.
 
 ## Integrate
 
-- [Install and connect](https://github.com/Cherish0925/optics-photonics/blob/main/docs/CONNECT.md): native programs, MCP, Skills and independent background calculations.
-- [Connection data](https://raw.githubusercontent.com/Cherish0925/optics-photonics/main/data/connections.json): all catalogue IDs with execution routes and upstream sources.
-- [Research connections](https://cherish0925.github.io/optics-photonics/connect.html): interactive installation and coverage guide.
+- [Install and connect](https://github.com/Cherish0925/Optics-Photonics-AI-Lab/blob/main/docs/CONNECT.md): native programs, MCP, Skills and independent background calculations.
+- [Connection data](https://raw.githubusercontent.com/Cherish0925/Optics-Photonics-AI-Lab/main/data/connections.json): all catalogue IDs with execution routes and upstream sources.
+- [Research connections](https://cherish0925.github.io/Optics-Photonics-AI-Lab/connect.html): interactive installation and coverage guide.
 
-- [English JSON](https://raw.githubusercontent.com/Cherish0925/optics-photonics/main/data/catalogue.en.json): complete structured entries.
-- [中文 JSON](https://raw.githubusercontent.com/Cherish0925/optics-photonics/main/data/catalogue.zh.json): same IDs and source URLs.
-- [Resource index](https://raw.githubusercontent.com/Cherish0925/optics-photonics/main/data/resources.en.json): documentation, code, licenses and connector URLs linked to software IDs.
-- [Schema](https://raw.githubusercontent.com/Cherish0925/optics-photonics/main/data/schema.json): fields and classifications.
-- [Manifest](https://raw.githubusercontent.com/Cherish0925/optics-photonics/main/data/manifest.json): review date, version, counts and endpoints.
-- [Contributing](https://github.com/Cherish0925/optics-photonics/blob/main/CONTRIBUTING.md): source and update conventions.
+- [English JSON](https://raw.githubusercontent.com/Cherish0925/Optics-Photonics-AI-Lab/main/data/catalogue.en.json): complete structured entries.
+- [中文 JSON](https://raw.githubusercontent.com/Cherish0925/Optics-Photonics-AI-Lab/main/data/catalogue.zh.json): same IDs and source URLs.
+- [Resource index](https://raw.githubusercontent.com/Cherish0925/Optics-Photonics-AI-Lab/main/data/resources.en.json): documentation, code, licenses and connector URLs linked to software IDs.
+- [Schema](https://raw.githubusercontent.com/Cherish0925/Optics-Photonics-AI-Lab/main/data/schema.json): fields and classifications.
+- [Manifest](https://raw.githubusercontent.com/Cherish0925/Optics-Photonics-AI-Lab/main/data/manifest.json): review date, version, counts and endpoints.
+- [Contributing](https://github.com/Cherish0925/Optics-Photonics-AI-Lab/blob/main/CONTRIBUTING.md): source and update conventions.
 
 ## Interpretation
 

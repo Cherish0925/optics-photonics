@@ -10,24 +10,24 @@
 
 | 阅读与浏览 | 数据与资料 | 参与开发 |
 | --- | --- | --- |
-| [中文 HTML](https://cherish0925.github.io/optics-photonics/index.zh.html) · [English HTML](https://cherish0925.github.io/optics-photonics/) | [中文 JSON](data/catalogue.zh.json) · [English JSON](data/catalogue.en.json) | [Agent 入口](llms.txt) · [贡献说明](CONTRIBUTING.md) |
+| [中文 HTML](https://cherish0925.github.io/Optics-Photonics-AI-Lab/index.zh.html) · [English HTML](https://cherish0925.github.io/Optics-Photonics-AI-Lab/) | [中文 JSON](data/catalogue.zh.json) · [English JSON](data/catalogue.en.json) | [Agent 入口](llms.txt) · [贡献说明](CONTRIBUTING.md) |
 | [中文 Markdown](docs/catalogue.zh.md) · [English Markdown](docs/catalogue.en.md) | [资料索引](data/resources.zh.json) · [数据结构](data/schema.json) | [代码示例](examples/) · [本地开发](#本地开发) |
 | [基础框架](docs/foundations.zh.html) · [Foundations](docs/foundations.html) | [中文源文件](foundations/README.zh-CN.md) | **场 · 物质 · 相互作用** |
 
-也可以下载[中文 HTML](https://raw.githubusercontent.com/Cherish0925/optics-photonics/main/docs/index.zh.html)或[英文 HTML](https://raw.githubusercontent.com/Cherish0925/optics-photonics/main/docs/index.html)，直接用浏览器打开。两个独立文件包含安装、Agent 接入、软件、研究方法与结果六个栏目，可离线浏览。[完整软件目录](https://cherish0925.github.io/optics-photonics/catalogue.zh.html)继续提供比较与资料导出；外部文档需要联网。
+也可以下载[中文 HTML](https://raw.githubusercontent.com/Cherish0925/Optics-Photonics-AI-Lab/main/docs/index.zh.html)或[英文 HTML](https://raw.githubusercontent.com/Cherish0925/Optics-Photonics-AI-Lab/main/docs/index.html)，直接用浏览器打开。两个独立文件包含安装、Agent 接入、软件、研究方法与结果六个栏目，可离线浏览。[完整软件目录](https://cherish0925.github.io/Optics-Photonics-AI-Lab/catalogue.zh.html)继续提供比较与资料导出；外部文档需要联网。
 
 ## 安装与使用
 
 **在 Agentic Research OS 安装：**打开 **Extensions → Plugins → Add from link**，粘贴
-`https://github.com/Cherish0925/optics-photonics/tree/main/connect/agentic-research-os`，
+`https://github.com/Cherish0925/Optics-Photonics-AI-Lab/tree/main/connect/agentic-research-os`，
 安装并激活 `optics-photonics`。包内包含 MCP、软件目录和两个 Skills，使用研究系统自带的 Python。
 [Codex、Claude Code 与更新方法](docs/CONNECT.zh-CN.md#从插件市场安装)。
 
 
-仓库现提供可安装的连接器、完整原生程序执行、MCP 和研究 Skills。[接入说明](docs/CONNECT.zh-CN.md) · [交互指南](https://cherish0925.github.io/optics-photonics/connect.zh.html) · [下载发布包](https://github.com/Cherish0925/optics-photonics/releases)。
+仓库现提供可安装的连接器、完整原生程序执行、MCP 和研究 Skills。[接入说明](docs/CONNECT.zh-CN.md) · [交互指南](https://cherish0925.github.io/Optics-Photonics-AI-Lab/connect.zh.html) · [下载发布包](https://github.com/Cherish0925/Optics-Photonics-AI-Lab/releases)。
 
 ```sh
-python -m pip install "git+https://github.com/Cherish0925/optics-photonics.git@optics-v0.3.1"
+python -m pip install "git+https://github.com/Cherish0925/Optics-Photonics-AI-Lab.git@optics-v0.4.0"
 optics-photonics prepare tmm
 optics-photonics connect agentic-research-os --output optics-plugin
 ```
@@ -35,6 +35,12 @@ optics-photonics connect agentic-research-os --output optics-plugin
 原生会话连接器接入本机 COMSOL、Lumerical、OpticStudio 与 CST，[查看配置与操作](docs/NATIVE.zh-CN.md)。16 个科学软件库已实际运行计算，97 项目录均有连接说明与原始资料。Agent 可使用各软件完整的原生 API。独立后台进程执行并行与依赖计算、协调 CPU 资源、保留已完成步骤并返回科学数据文件；关闭 Agent 不会停止已提交的计算。
 
 提供 Agentic Research OS、Codex、Claude Code、DeepSeek Harness、Qiushi 和通用 MCP 接入包。连接器运行于 Windows、macOS 和 Linux；各科学软件保留自身支持的平台与许可。
+
+## 研究任务与并行采样
+
+0.4.0 新增在原生计算进程内连续执行完整 episode 的能力。研究程序定义环境和策略，通过 `sample_episodes`、Python SDK 或 `optics-photonics sample` 提交。各进程独立运行，沿用已有 CPU 与软件并发配置；保存任务和策略版本、随机种子、动作、观测、奖励及结束原因。数值数组保留为独立文件。
+
+[接口与可运行的薄膜计算示例](docs/LEARNING.md)。各宿主插件包含同一实现，独立于 IOP。仓库改名后，软件包名、命令、插件 ID 和本地计算环境保持兼容。
 
 ## 统一物理基础
 
@@ -76,7 +82,7 @@ optics-photonics connect agentic-research-os --output optics-plugin
 import json
 from urllib.request import urlopen
 
-url = "https://raw.githubusercontent.com/Cherish0925/optics-photonics/main/data/catalogue.zh.json"
+url = "https://raw.githubusercontent.com/Cherish0925/Optics-Photonics-AI-Lab/main/data/catalogue.zh.json"
 tools = json.load(urlopen(url))
 candidates = [t for t in tools
               if t["group"] == "open"
@@ -93,8 +99,8 @@ for tool in candidates:
 需要 Python **3.10+**，构建仅使用标准库：
 
 ```bash
-git clone https://github.com/Cherish0925/optics-photonics.git
-cd optics-photonics
+git clone https://github.com/Cherish0925/Optics-Photonics-AI-Lab.git
+cd Optics-Photonics-AI-Lab
 python scripts/build.py
 python -m unittest discover -s tests
 python -m http.server 8000 --directory docs

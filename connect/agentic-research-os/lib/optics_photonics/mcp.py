@@ -20,6 +20,7 @@ TOOLS = [
     ('bind_environment', 'Connect an existing scientific Python environment or explicit native executable; does not install a solver.', schema({'tool':STRING,'python':STRING,'command':{'type':'array','items':STRING,'minItems':1},'threads':{'type':'integer','minimum':1},'concurrency':{'type':'integer','minimum':1},'cwd':STRING},['tool'])),
     ('compute_resources', 'Read or set the total CPU thread capacity shared by background calculations on this computer.', schema({'cpu':{'type':'integer','minimum':1}})),
     ('submit_calculation', 'Start an independent background calculation and return its run ID immediately. source runs a complete native Python program with INPUTS, OUTPUT_DIR and RESULT. Reuse request_id when retrying.', schema({'tool':STRING,'inputs':{'type':'object'},'action':STRING,'source':STRING,'name':STRING,'request_id':STRING,'timeout':{'type':'number','exclusiveMinimum':0}},['tool'])),
+    ('sample_episodes', 'Run complete research episodes in independent native worker processes. source defines make_env() with Gymnasium-style reset/step/close and make_policy(seed) returning an action function. task/policy need id/version. CPU and software concurrency settings apply across jobs. Each worker saves trajectory.jsonl and typed arrays; read through result_files/read_result. No solver installation or training algorithm is implied.', schema({'tool':STRING, 'source':STRING, 'task':{'type':'object'}, 'policy':{'type':'object'}, 'episodes':{'type':'integer','minimum':1}, 'workers':{'type':'integer','minimum':1}, 'max_steps':{'type':'integer','minimum':1}, 'seed':{'type':'integer','minimum':0}, 'inputs':{'type':'object'}, 'options':{'type':'object'}, 'request_id':STRING, 'timeout':{'type':'number','exclusiveMinimum':0}}, ['tool','source','task','policy','episodes'])),
     ('submit_workflow', 'Submit dependent or independent calculation steps in one request. Each step has id, tool, action or source, inputs, after, optional timeout and bindings {input_name: {step, path: [keys]}}. Supply run_id to append a batch to an existing research run.', schema({'steps':{'type':'array','items':{'type':'object'},'minItems':1},'name':STRING,'request_id':STRING,'run_id':STRING},['steps'])),
     ('run_status', 'Read execution state and compact results; the background calculation continues after this MCP connection closes.', schema({'run_id':STRING,'offset':{'type':'integer','minimum':0},'limit':{'type':'integer','minimum':1,'maximum':200}},['run_id'])),
     ('cancel_run', 'Cancel a research run and its active calculations.', schema({'run_id':STRING},['run_id'])),
@@ -46,6 +47,9 @@ def invoke(name, args):
         data = dict(args)
         name = data.pop('name','Optics research'); key = data.pop('request_id',None)
         return jobs.submit([{'id':'calculate',**data}],name=name,request_id=key)
+    if name == 'sample_episodes':
+        from . import sampling
+        return sampling.submit(**args)
     if name == 'submit_workflow': return jobs.submit(**args)
     if name == 'run_status': return jobs.status(**args)
     if name == 'cancel_run': return jobs.cancel(**args)

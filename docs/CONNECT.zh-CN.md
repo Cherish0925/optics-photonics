@@ -7,7 +7,7 @@ Optics & Photonics 独立提供光学软件连接、原生研究程序、后台�
 连接程序使用 Python 3.10+，支持 Windows、macOS、Linux。科学软件使用各自支持的 Python、系统与许可；可以为每个软件连接不同的环境。
 
 ```sh
-python -m pip install "git+https://github.com/Cherish0925/optics-photonics.git@optics-v0.3.1"
+python -m pip install "git+https://github.com/Cherish0925/Optics-Photonics-AI-Lab.git@optics-v0.3.1"
 optics-photonics search "thin film" --license-group open
 optics-photonics info tmm
 optics-photonics prepare tmm
@@ -81,9 +81,9 @@ optics-photonics resume RUN_ID
 
 | 宿主 | 添加来源与安装 |
 | --- | --- |
-| Agentic Research OS | **Extensions → Plugins → Add from link**，填写 `https://github.com/Cherish0925/optics-photonics/tree/main/connect/agentic-research-os`，安装 `optics-photonics`，激活返回的修订。 |
-| Codex | `codex plugin marketplace add Cherish0925/optics-photonics`，再执行 `codex plugin add optics-photonics@optics-photonics`。 |
-| Claude Code | `claude plugin marketplace add Cherish0925/optics-photonics`，再执行 `claude plugin install optics-photonics@optics-photonics`。 |
+| Agentic Research OS | **Extensions → Plugins → Add from link**，填写 `https://github.com/Cherish0925/Optics-Photonics-AI-Lab/tree/main/connect/agentic-research-os`，安装 `optics-photonics`，激活返回的修订。 |
+| Codex | `codex plugin marketplace add Cherish0925/Optics-Photonics-AI-Lab`，再执行 `codex plugin add optics-photonics@optics-photonics`。 |
+| Claude Code | `claude plugin marketplace add Cherish0925/Optics-Photonics-AI-Lab`，再执行 `claude plugin install optics-photonics@optics-photonics`。 |
 
 Research OS 包携带连接器、目录与 Skills，使用宿主自带的 Python。
 Codex/Claude 的 GitHub 插件通过工具执行端 PATH 中的 `python`（3.10+）运行包内代码。

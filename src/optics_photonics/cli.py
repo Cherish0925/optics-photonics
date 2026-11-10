@@ -28,6 +28,12 @@ def main(argv=None):
         run = commands.add_parser(name); run.add_argument('tool'); run.add_argument('action',nargs='?',default=''); run.add_argument('--inputs',type=object_argument,default={}); run.add_argument('--program',type=Path)
         if name == 'run': run.add_argument('--output'); run.add_argument('--timeout',type=float)
         else: run.add_argument('--name',default='Optical research'); run.add_argument('--request-id'); run.add_argument('--timeout',type=float)
+    sample = commands.add_parser('sample'); sample.add_argument('tool'); sample.add_argument('program', type=Path)
+    sample.add_argument('--task', type=object_argument, required=True); sample.add_argument('--policy', type=object_argument, required=True)
+    sample.add_argument('--episodes', type=int, required=True); sample.add_argument('--workers', type=int, default=1)
+    sample.add_argument('--max-steps', type=int, default=1000); sample.add_argument('--seed', type=int, default=0)
+    sample.add_argument('--inputs', type=object_argument, default={}); sample.add_argument('--options', type=object_argument, default={})
+    sample.add_argument('--request-id'); sample.add_argument('--timeout', type=float)
     resources=commands.add_parser('resources'); resources.add_argument('--cpu',type=int)
     workflow=commands.add_parser('submit-workflow'); workflow.add_argument('file',type=Path,help='JSON file containing a top-level array of steps; each step needs id and tool'); workflow.add_argument('--name',default='Optics research'); workflow.add_argument('--request-id'); workflow.add_argument('--run-id')
     for name in ('status','files','cancel','resume'):
@@ -59,6 +65,9 @@ def main(argv=None):
             if command=='run': result=execution.run(tool,request,**a)
             else:
                 timeout=a.pop('timeout'); result=jobs.submit([{'id':'calculate','tool':tool,**request,'timeout':timeout}],**a)
+        elif command == 'sample':
+            from . import sampling
+            a['source'] = a.pop('program').read_text(encoding='utf-8'); result = sampling.submit(**a)
         elif command == 'resources': result=jobs.resources(**a)
         elif command == 'runs': result=jobs.list_runs(**a)
         elif command == 'submit-workflow':

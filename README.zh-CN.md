@@ -36,6 +36,8 @@ optics-photonics connect agentic-research-os --output optics-plugin
 
 提供 Agentic Research OS、Codex、Claude Code、DeepSeek Harness、Qiushi 和通用 MCP 接入包。连接器运行于 Windows、macOS 和 Linux；各科学软件保留自身支持的平台与许可。
 
+目录之外的自研或外部研究工具，也可通过 `register_software` 和 `bind_environment` 接入同一套执行与数据接口。[自定义工具接入](docs/CONNECT.zh-CN.md#接入目录之外的研究工具)。
+
 ## 研究任务与并行采样
 
 0.4.0 新增在原生计算进程内连续执行完整 episode 的能力。研究程序定义环境和策略，通过 `sample_episodes`、Python SDK 或 `optics-photonics sample` 提交。各进程独立运行，沿用已有 CPU 与软件并发配置；保存任务和策略版本、随机种子、动作、观测、奖励及结束原因。数值数组保留为独立文件。

@@ -60,10 +60,11 @@ def execute(tool, request, output):
 
 def main():
     tool = sys.argv[1]
-    software(tool)
     request_path = os.environ.get('OPTICS_REQUEST_FILE') or sys.argv[2]
     raw = json.loads(Path(request_path).read_text(encoding='utf-8'))
     request = raw.get('arguments', raw)
+    if not request.get('source'):
+        software(tool)
     output = os.environ.get('OPTICS_OUTPUT_DIR') or sys.argv[3]
     execute(tool, request, output)
 

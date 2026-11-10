@@ -1,5 +1,6 @@
 """Use installed scientific environments, or prepare a separate Python environment."""
 import json
+import re
 from contextlib import contextmanager
 import time
 import os
@@ -9,7 +10,7 @@ import subprocess
 import sys
 import tempfile
 import venv
-from .catalogue import software
+from .catalogue import software as catalogue_software, catalogue
 
 
 def home(path=None):
@@ -59,8 +60,42 @@ def save(value, path=None):
     os.replace(temporary, directory / 'connections.json')
 
 
-def probe(tool, python=None):
-    record = software(tool)['connection']
+def register(tool, name, description, *, kind='python', modules=None, distributions=None, sources=None, path=None):
+    """Describe a local research tool without changing the published software catalogue."""
+    if not isinstance(tool, str) or not re.fullmatch(r'[a-z0-9][a-z0-9_.-]{0,99}', tool):
+        raise ValueError('Use a lowercase software ID with letters, digits, dots, hyphens or underscores')
+    if any(item['id'] == tool for item in catalogue()):
+        raise ValueError('This ID belongs to the published catalogue; bind its environment directly')
+    if not isinstance(name, str) or not name.strip() or not isinstance(description, str) or not description.strip():
+        raise ValueError('Provide a software name and description')
+    if kind not in ('python', 'command'):
+        raise ValueError('kind must be python or command')
+    values = {'modules': [] if modules is None else modules, 'distributions': [] if distributions is None else distributions, 'sources': [] if sources is None else sources}
+    for key, items in values.items():
+        if not isinstance(items, list) or any(not isinstance(item, str) or not item.strip() for item in items):
+            raise ValueError(key + ' must be an array of nonempty strings')
+    definition = {'id': tool, 'name': name, 'summary': description, 'origin': 'local',
+                  'connection': {'kind': kind, 'pip': [], 'operations': [], **values}}
+    with editing(path):
+        configuration = read(path)
+        configuration.setdefault('software', {})[tool] = definition
+        save(configuration, path)
+    return definition
+
+
+def software(tool, language='en', path=None):
+    local = read(path).get('software', {}).get(tool)
+    if local is not None:
+        return local
+    return catalogue_software(tool, language)
+
+
+def registered(path=None):
+    return list(read(path).get('software', {}).values())
+
+
+def probe(tool, python=None, path=None):
+    record = software(tool, path=path)['connection']
     # Resolving a venv's symlink would select the base interpreter and lose its packages.
     interpreter = os.path.abspath(os.path.expanduser(str(python or sys.executable)))
     modules = record.get('modules', [])
@@ -81,12 +116,12 @@ print(json.dumps({'python':sys.executable,'python_version':sys.version.split()[0
     if result.returncode:
         raise RuntimeError(result.stderr.strip() or 'Could not inspect this interpreter')
     status = json.loads(result.stdout)
-    status.update(tool=tool, available=bool(modules) and all(status['modules'].values()))
+    status.update(tool=tool, available=all(status['modules'].values()))
     return status
 
 
 def bind(tool, *, python=None, command=None, path=None, threads=1, concurrency=1, cwd=None):
-    item = software(tool)
+    item = software(tool, path=path)
     if type(threads) is not int or threads < 1 or type(concurrency) is not int or concurrency < 1:
         raise ValueError('threads and concurrency must be positive integers')
     if command:
@@ -99,7 +134,7 @@ def bind(tool, *, python=None, command=None, path=None, threads=1, concurrency=1
     else:
         if item['connection']['kind'] != 'python':
             raise ValueError('Provide the native executable and arguments from this software’s documentation')
-        inspected = probe(tool, python)
+        inspected = probe(tool, python, path)
         if not inspected['available']:
             missing = [k for k, v in inspected['modules'].items() if not v]
             raise ValueError('Missing modules in the selected interpreter: ' + ', '.join(missing))
@@ -109,6 +144,8 @@ def bind(tool, *, python=None, command=None, path=None, threads=1, concurrency=1
         if not Path(cwd).is_dir():
             raise ValueError('Working directory does not exist')
     connection.update(threads=threads, concurrency=concurrency, cwd=cwd)
+    if item.get('origin') == 'local':
+        connection['definition'] = item
     with editing(path):
         configuration = read(path)
         configuration['tools'][tool] = connection
@@ -117,7 +154,7 @@ def bind(tool, *, python=None, command=None, path=None, threads=1, concurrency=1
 
 
 def prepare(tool, *, path=None, python=None):
-    record = software(tool)['connection']
+    record = software(tool, path=path)['connection']
     requirements = record.get('pip', [])
     if not requirements:
         raise ValueError('This software uses its own installer. Follow its installation source, then use bind.')
@@ -138,7 +175,7 @@ def available(path=None):
         item = {'id': tool, **value}
         try:
             if value['kind'] == 'python':
-                item['environment'] = probe(tool, value['python'])
+                item['environment'] = probe(tool, value['python'], path)
             elif value['kind'] == 'native':
                 from . import native
                 item['environment'] = native.probe(value)

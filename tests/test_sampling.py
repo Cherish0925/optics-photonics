@@ -101,12 +101,13 @@ class SamplingCase(unittest.TestCase):
     def test_batch_uses_background_scheduler_and_survives_client_reconnection(self):
         # Worker execution uses Python itself; no optional solver dependency.
         home = self.root/'home'
-        environments.save({'tools': {'sympy': {'kind':'python','python':sys.executable,'threads':1,'concurrency':2}}}, home)
+        environments.register('research-model', 'Research model', 'A user-defined environment', modules=['random'], path=home)
+        environments.bind('research-model', python=sys.executable, concurrency=2, path=home)
         jobs.resources(cpu=2, path=home)
         kwargs = dict(task=self.task, policy=self.policy, episodes=6, workers=3, max_steps=3, seed=91,
                       request_id='episodes', path=home)
-        run = sampling.submit('sympy', PROGRAM, **kwargs)
-        self.assertEqual(sampling.submit('sympy', PROGRAM, **kwargs), run)
+        run = sampling.submit('research-model', PROGRAM, **kwargs)
+        self.assertEqual(sampling.submit('research-model', PROGRAM, **kwargs), run)
         deadline = time.monotonic() + 30
         while time.monotonic() < deadline:
             state = jobs.status(run['run_id'], path=home)

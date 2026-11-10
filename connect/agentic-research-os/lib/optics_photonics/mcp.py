@@ -13,6 +13,8 @@ STRING = {'type':'string'}
 TOOLS = [
     ('software_search', 'Find optical software by physical problem, domain and license; paginated results. Does not imply installation.', schema({'query':STRING,'domain':STRING,'license_group':{'enum':['open','paid','limited']},'offset':{'type':'integer','minimum':0},'limit':{'type':'integer','minimum':1,'maximum':100},'language':{'enum':['zh','en']}})),
     ('software_details', 'Read native interfaces, installation source, upstream MCP/Skills and executable operation inputs for one software.', schema({'tool':STRING,'language':{'enum':['zh','en']}},['tool'])),
+    ('register_software', 'Register a local research library, solver or executable that is not in the published catalogue. Provide its identity, installed module/distribution names and documentation sources; then use bind_environment. Registration does not download or execute it.', schema({'tool':STRING,'name':STRING,'description':STRING,'kind':{'enum':['python','command']},'modules':{'type':'array','items':STRING},'distributions':{'type':'array','items':STRING},'sources':{'type':'array','items':STRING}},['tool','name','description'])),
+    ('registered_software', 'List locally registered research tools beyond the published software catalogue.', schema()),
     ('environments', 'List configured local scientific interpreters and executable availability.', schema()),
     ('discover_native_software', 'Find local Lumerical, COMSOL, OpticStudio and CST installation paths; inspect adapter requirements and native program examples. Does not launch a licensed solver.', schema({'roots':{'type':'array','items':STRING}})),
     ('bind_native_software', 'Connect an installed commercial solver SDK to its own Python environment. Each calculation owns a software session with full native API, project load/save and data export.', schema({'tool':STRING,'python':STRING,'sdk_path':STRING,'options':{'type':'object'},'threads':{'type':'integer','minimum':1},'concurrency':{'type':'integer','minimum':1}},['tool'])),
@@ -35,7 +37,9 @@ TOOLS = [
 def invoke(name, args):
     if name == 'software_search': return catalogue.search(**args)
     if name == 'software_details':
-        return {**catalogue.software(**args), 'execution':operations.details(args['tool'])}
+        return {**environments.software(**args), 'execution':operations.details(args['tool'])}
+    if name == 'register_software': return environments.register(**args)
+    if name == 'registered_software': return {'software': environments.registered()}
     if name == 'environments': return {'environments':environments.available()}
     if name in ('discover_native_software','bind_native_software'):
         from . import native

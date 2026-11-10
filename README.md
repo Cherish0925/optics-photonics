@@ -37,6 +37,8 @@ Native session adapters connect installed COMSOL, Lumerical, OpticStudio and CST
 
 Host packages cover Agentic Research OS, Codex, Claude Code, DeepSeek Harness, Qiushi and generic MCP. The connector runs on Windows, macOS and Linux; each scientific solver keeps its own supported platforms and license.
 
+The environment also accepts locally developed or externally installed tools beyond the catalogue through `register_software` and `bind_environment`. [Custom tool connection](docs/CONNECT.md#add-a-research-tool-outside-the-catalogue).
+
 ## Research episodes and parallel sampling
 
 Version 0.4.0 adds complete episode sampling inside native software workers. Define a Gymnasium-style environment and policy in a Python program; submit it through `sample_episodes`, the Python SDK or `optics-photonics sample`. Workers share the existing CPU and software concurrency settings. Every episode retains its task/policy version, deterministic seed, actions, observations, reward and termination state. Arrays remain typed numerical files.

@@ -128,3 +128,20 @@ PowerShell: set `$env:OPTICS_SCIENCE_TESTS="1"` before running the tests. Native
 Host format sources: [Codex](https://developers.openai.com/plugins/build/plugins), [Claude Code](https://code.claude.com/docs/en/plugins-reference), [DeepSeek Harness](https://deepseek-harness.github.io/deepseek-harness/en/guide/mcp-memory).
 
 [Local commercial software: discovery, sessions, projects and results](NATIVE.md).
+
+## Add a research tool outside the catalogue
+
+Register its local description, then bind its installed environment. The published catalogue remains unchanged.
+
+```python
+import sys
+from optics_photonics import environments
+
+environments.register('lab-wave-model', 'Lab wave model',
+    'Our numerical wave-propagation model', modules=['numpy'], distributions=['numpy'])
+environments.bind('lab-wave-model', python=sys.executable, threads=2, concurrency=4)
+```
+
+Use `submit_calculation` or `submit_workflow` with this tool ID and a complete native program. For a C/C++/Java/Julia or other executable, register with `kind='command'`, then bind an executable/argument array. It receives `OPTICS_REQUEST_FILE`, `OPTICS_OUTPUT_DIR` and `OPTICS_RESULT_FILE`, exactly like other command adapters. A custom Python environment can also run `sample_episodes`.
+
+MCP exposes `register_software` and `registered_software`; `software_details` reads both published and locally registered software. Shell clients use `optics-photonics register-software @definition.json` and `registered-software`. Registration describes software; binding selects an installed interpreter or executable. Installation remains under the tool's own requirements and license. Keep files under the job's OUTPUT_DIR so parallel computations own separate outputs.

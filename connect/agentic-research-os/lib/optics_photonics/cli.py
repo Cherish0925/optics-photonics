@@ -19,6 +19,8 @@ def main(argv=None):
     commands = parser.add_subparsers(dest='command', required=True)
     search = commands.add_parser('search'); search.add_argument('query', nargs='?', default=''); search.add_argument('--domain'); search.add_argument('--license-group', choices=('open','paid','limited')); search.add_argument('--limit',type=int,default=20); search.add_argument('--offset',type=int,default=0); search.add_argument('--language',choices=('zh','en'),default='en')
     info = commands.add_parser('info'); info.add_argument('tool'); info.add_argument('--language',choices=('zh','en'),default='en')
+    register = commands.add_parser('register-software'); register.add_argument('definition', type=object_argument)
+    commands.add_parser('registered-software')
     env = commands.add_parser('environments')
     discovery = commands.add_parser('discover'); discovery.add_argument('--root', dest='roots', action='append')
     native_bind = commands.add_parser('bind-native'); native_bind.add_argument('tool'); native_bind.add_argument('--python'); native_bind.add_argument('--sdk-path'); native_bind.add_argument('--options', type=object_argument, default={}); native_bind.add_argument('--threads', type=int, default=1); native_bind.add_argument('--concurrency', type=int, default=1)
@@ -51,7 +53,9 @@ def main(argv=None):
     a=vars(parser.parse_args(argv)); command=a.pop('command')
     try:
         if command == 'search': result=catalogue.search(**a)
-        elif command == 'info': result={**catalogue.software(**a),'execution':operations.details(a['tool'])}
+        elif command == 'info': result={**environments.software(**a),'execution':operations.details(a['tool'])}
+        elif command == 'register-software': result=environments.register(**a['definition'])
+        elif command == 'registered-software': result={'software':environments.registered()}
         elif command == 'environments': result={'environments':environments.available()}
         elif command in ('discover', 'bind-native'):
             from . import native

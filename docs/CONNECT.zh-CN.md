@@ -128,3 +128,19 @@ MCP 包含软件检索、环境准备、连接、资源设置、提交、任务�
 [本机商业软件：发现、会话、项目与结果](NATIVE.zh-CN.md)。
 
 长时间研究任务应运行在持续存在的计算主机上。独立工作进程可以在提交程序退出后继续计算；如果宿主回收整个容器或进程组，工作进程也会结束。此类 Agent 环境应通过 SSH 连接科学工作站上的 MCP，将计算留在工作站。
+
+## 接入目录之外的研究工具
+
+通过 `register_software` 登记本地软件的名称、用途、Python 模块与资料来源，再用 `bind_environment` 连接已经安装的解释器或可执行程序。`registered_software` 列出本地工具，`software_details` 读取其说明。目录中的已有软件 ID 保持原有含义。
+
+Python 示例：
+
+```python
+import sys
+from optics_photonics import environments
+environments.register('lab-wave-model', '实验室波动模型',
+    '研究组开发的波动传播程序', modules=['numpy'], distributions=['numpy'])
+environments.bind('lab-wave-model', python=sys.executable, threads=2, concurrency=4)
+```
+
+随后用该 ID 提交完整研究程序、并行工作流或 episode 采样。C/C++、Java、Julia 等可执行程序使用 `kind='command'` 登记并绑定命令数组，沿用请求文件、输出目录和 JSON 结果接口。程序应将输出写入该任务的 OUTPUT_DIR，避免并行计算共享临时文件。登记不代替软件本身的安装与许可。

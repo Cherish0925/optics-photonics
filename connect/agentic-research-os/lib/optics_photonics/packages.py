@@ -40,7 +40,7 @@ def package(destination, host='mcp', python=None):
     server = {'command':interpreter, 'args':['-B',str(target/'server.py'),'mcp']}
     skills = ['skills/'+p.name for p in sorted((target/'skills').iterdir()) if (p/'SKILL.md').exists()]
     descriptor = {'name':'optics-photonics', 'version':__version__,
-                  'description':'Optical software, native calculations and research methods', 'skills':skills}
+                  'description':'Optical research environment: solvers, native programs and episode sampling', 'skills':skills}
     if host == 'agentic-research-os':
         descriptor['mcpServers'] = {'optics':{'transport':'stdio','command':'${RESEARCH_PYTHON}',
             'args':['-B','${PACKAGE_ROOT}/server.py','mcp'], 'protocol_version':'2025-11-25'}}
@@ -77,5 +77,5 @@ def package(destination, host='mcp', python=None):
     else:
         write(target/'mcp.json', {'mcpServers':{'optics':server}})
         instructions = 'Register the optics stdio server from mcp.json in a compatible MCP host. Use the matching host’s own configuration format. This connector needs Python 3.10 or newer; the scientific environment may use a different interpreter.'
-    (target/'INSTALL.md').write_text(instructions+'\n\nOptics: https://github.com/Cherish0925/optics-photonics\n', encoding='utf-8')
+    (target/'INSTALL.md').write_text(instructions+'\n\nOptics: https://github.com/Cherish0925/Optics-Photonics-AI-Lab\n', encoding='utf-8')
     return {'directory':str(target),'host':host,'version':__version__,'skills':len(skills)}

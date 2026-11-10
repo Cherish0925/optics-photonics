@@ -2,7 +2,7 @@
 
 We have published a bilingual catalogue of **97 tools and product families across 14 optical and photonic task domains**:
 
-https://github.com/Cherish0925/optics-photonics
+https://github.com/Cherish0925/Optics-Photonics-AI-Lab
 
 The catalogue separates commercial software, free and open-source tools, and restricted free offerings. Each entry connects the physical method and use case to licensing, programming interfaces, compute requirements, limitations and primary sources. API access, official or community MCP integrations, and agent Skills are recorded separately.
 

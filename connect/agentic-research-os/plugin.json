@@ -1,7 +1,7 @@
 {
   "name": "optics-photonics",
-  "version": "0.3.1",
-  "description": "Optical software, native calculations and research methods",
+  "version": "0.4.0",
+  "description": "Optical research environment: solvers, native programs and episode sampling",
   "skills": [
     "skills/optical-computation",
     "skills/optical-research"

@@ -7,7 +7,7 @@ Optics & Photonics 独立提供光学软件连接、原生研究程序、后台�
 连接程序使用 Python 3.10+，支持 Windows、macOS、Linux。科学软件使用各自支持的 Python、系统与许可；可以为每个软件连接不同的环境。
 
 ```sh
-python -m pip install "git+https://github.com/Cherish0925/optics-photonics.git@optics-v0.3.1"
+python -m pip install "git+https://github.com/Cherish0925/Optics-Photonics-AI-Lab.git@optics-v0.3.1"
 optics-photonics search "thin film" --license-group open
 optics-photonics info tmm
 optics-photonics prepare tmm
@@ -81,9 +81,9 @@ optics-photonics resume RUN_ID
 
 | 宿主 | 添加来源与安装 |
 | --- | --- |
-| Agentic Research OS | **Extensions → Plugins → Add from link**，填写 `https://github.com/Cherish0925/optics-photonics/tree/main/connect/agentic-research-os`，安装 `optics-photonics`，激活返回的修订。 |
-| Codex | `codex plugin marketplace add Cherish0925/optics-photonics`，再执行 `codex plugin add optics-photonics@optics-photonics`。 |
-| Claude Code | `claude plugin marketplace add Cherish0925/optics-photonics`，再执行 `claude plugin install optics-photonics@optics-photonics`。 |
+| Agentic Research OS | **Extensions → Plugins → Add from link**，填写 `https://github.com/Cherish0925/Optics-Photonics-AI-Lab/tree/main/connect/agentic-research-os`，安装 `optics-photonics`，激活返回的修订。 |
+| Codex | `codex plugin marketplace add Cherish0925/Optics-Photonics-AI-Lab`，再执行 `codex plugin add optics-photonics@optics-photonics`。 |
+| Claude Code | `claude plugin marketplace add Cherish0925/Optics-Photonics-AI-Lab`，再执行 `claude plugin install optics-photonics@optics-photonics`。 |
 
 Research OS 包携带连接器、目录与 Skills，使用宿主自带的 Python。
 Codex/Claude 的 GitHub 插件通过工具执行端 PATH 中的 `python`（3.10+）运行包内代码。
@@ -128,3 +128,19 @@ MCP 包含软件检索、环境准备、连接、资源设置、提交、任务�
 [本机商业软件：发现、会话、项目与结果](NATIVE.zh-CN.md)。
 
 长时间研究任务应运行在持续存在的计算主机上。独立工作进程可以在提交程序退出后继续计算；如果宿主回收整个容器或进程组，工作进程也会结束。此类 Agent 环境应通过 SSH 连接科学工作站上的 MCP，将计算留在工作站。
+
+## 接入目录之外的研究工具
+
+通过 `register_software` 登记本地软件的名称、用途、Python 模块与资料来源，再用 `bind_environment` 连接已经安装的解释器或可执行程序。`registered_software` 列出本地工具，`software_details` 读取其说明。目录中的已有软件 ID 保持原有含义。
+
+Python 示例：
+
+```python
+import sys
+from optics_photonics import environments
+environments.register('lab-wave-model', '实验室波动模型',
+    '研究组开发的波动传播程序', modules=['numpy'], distributions=['numpy'])
+environments.bind('lab-wave-model', python=sys.executable, threads=2, concurrency=4)
+```
+
+随后用该 ID 提交完整研究程序、并行工作流或 episode 采样。C/C++、Java、Julia 等可执行程序使用 `kind='command'` 登记并绑定命令数组，沿用请求文件、输出目录和 JSON 结果接口。程序应将输出写入该任务的 OUTPUT_DIR，避免并行计算共享临时文件。登记不代替软件本身的安装与许可。

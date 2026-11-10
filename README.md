@@ -2,33 +2,33 @@
 
 ![Optics · Photonics — software, physics, programmable access](docs/assets/readme-header.webp)
 
-# Optics · Photonics
+# Optics-Photonics AI Lab
 
-An independent digital research toolkit for optics and photonics: scientific software, native programs, background calculations, MCP, plugins and research Skills. Its physical foundation is **Field + Matter + Interaction**.
+An independent digital research environment for optics and photonics: scientific software, native programs, background calculations, MCP, plugins and research Skills. Its physical foundation is **Field + Matter + Interaction**.
 
 **Native programs · Background computation · MCP · Skills · Agent plugins**
 
 | Read | Explore the data | Build on it |
 | --- | --- | --- |
-| [English HTML](https://cherish0925.github.io/optics-photonics/) · [中文 HTML](https://cherish0925.github.io/optics-photonics/index.zh.html) | [English JSON](data/catalogue.en.json) · [中文 JSON](data/catalogue.zh.json) | [Agent entry point](llms.txt) · [Contributing](CONTRIBUTING.md) |
+| [English HTML](https://cherish0925.github.io/Optics-Photonics-AI-Lab/) · [中文 HTML](https://cherish0925.github.io/Optics-Photonics-AI-Lab/index.zh.html) | [English JSON](data/catalogue.en.json) · [中文 JSON](data/catalogue.zh.json) | [Agent entry point](llms.txt) · [Contributing](CONTRIBUTING.md) |
 | [English Markdown](docs/catalogue.en.md) · [中文 Markdown](docs/catalogue.zh.md) | [Source index](data/resources.en.json) · [Schema](data/schema.json) | [Examples](examples/) · [Build instructions](#develop) |
 | [Foundations](docs/foundations.html) · [基础框架](docs/foundations.zh.html) | [Foundation source](foundations/README.md) | **Field · Matter · Interaction** |
 
-Download [English HTML](https://raw.githubusercontent.com/Cherish0925/optics-photonics/main/docs/index.html) or [Chinese HTML](https://raw.githubusercontent.com/Cherish0925/optics-photonics/main/docs/index.zh.html) and open either in a browser. The self-contained pages cover installation, Agent connections, software, research methods and results. The [full software catalogue](https://cherish0925.github.io/optics-photonics/catalogue.html) retains comparisons and source exports. External documentation opens online.
+Download [English HTML](https://raw.githubusercontent.com/Cherish0925/Optics-Photonics-AI-Lab/main/docs/index.html) or [Chinese HTML](https://raw.githubusercontent.com/Cherish0925/Optics-Photonics-AI-Lab/main/docs/index.zh.html) and open either in a browser. The self-contained pages cover installation, Agent connections, software, research methods and results. The [full software catalogue](https://cherish0925.github.io/Optics-Photonics-AI-Lab/catalogue.html) retains comparisons and source exports. External documentation opens online.
 
 ## Install and run
 
 **Agentic Research OS:** in **Extensions → Plugins → Add from link**, paste
-`https://github.com/Cherish0925/optics-photonics/tree/main/connect/agentic-research-os`,
+`https://github.com/Cherish0925/Optics-Photonics-AI-Lab/tree/main/connect/agentic-research-os`,
 install `optics-photonics`, then activate it. The package carries its MCP server,
 catalogue and both Skills and uses Research OS's Python. No separate connector
 installation is needed. [Other hosts and updates](docs/CONNECT.md#install-from-a-marketplace).
 
 
-The repository now includes an installable connector, native-program execution, MCP and research Skills. [Connection guide](docs/CONNECT.md) · [Interactive guide](https://cherish0925.github.io/optics-photonics/connect.html) · [Release packages](https://github.com/Cherish0925/optics-photonics/releases).
+The repository now includes an installable connector, native-program execution, MCP and research Skills. [Connection guide](docs/CONNECT.md) · [Interactive guide](https://cherish0925.github.io/Optics-Photonics-AI-Lab/connect.html) · [Release packages](https://github.com/Cherish0925/Optics-Photonics-AI-Lab/releases).
 
 ```sh
-python -m pip install "git+https://github.com/Cherish0925/optics-photonics.git@optics-v0.3.1"
+python -m pip install "git+https://github.com/Cherish0925/Optics-Photonics-AI-Lab.git@optics-v0.4.0"
 optics-photonics prepare tmm
 optics-photonics connect agentic-research-os --output optics-plugin
 ```
@@ -36,6 +36,14 @@ optics-photonics connect agentic-research-os --output optics-plugin
 Native session adapters connect installed COMSOL, Lumerical, OpticStudio and CST; [setup and operations](docs/NATIVE.md). 16 libraries have executed scientific calculations; all 97 catalogue entries have connection descriptions and primary sources. Native programs retain each solver's full API. Independent background workers execute parallel and dependent calculations, coordinate CPU resources, preserve completed steps and return scientific files. Closing the Agent does not stop submitted jobs.
 
 Host packages cover Agentic Research OS, Codex, Claude Code, DeepSeek Harness, Qiushi and generic MCP. The connector runs on Windows, macOS and Linux; each scientific solver keeps its own supported platforms and license.
+
+The environment also accepts locally developed or externally installed tools beyond the catalogue through `register_software` and `bind_environment`. [Custom tool connection](docs/CONNECT.md#add-a-research-tool-outside-the-catalogue).
+
+## Research episodes and parallel sampling
+
+Version 0.4.0 adds complete episode sampling inside native software workers. Define a Gymnasium-style environment and policy in a Python program; submit it through `sample_episodes`, the Python SDK or `optics-photonics sample`. Workers share the existing CPU and software concurrency settings. Every episode retains its task/policy version, deterministic seed, actions, observations, reward and termination state. Arrays remain typed numerical files.
+
+[Episode API and executable coating example](docs/LEARNING.md). Research OS and other host bundles include the same implementation. The package remains independent of IOP. Existing package names, commands, plugin IDs and stored software environments are unchanged after the repository rename.
 
 ## Physical foundation
 
@@ -77,7 +85,7 @@ Start at [`llms.txt`](llms.txt). Read [`llms-full.txt`](llms-full.txt) for the c
 import json
 from urllib.request import urlopen
 
-url = "https://raw.githubusercontent.com/Cherish0925/optics-photonics/main/data/catalogue.en.json"
+url = "https://raw.githubusercontent.com/Cherish0925/Optics-Photonics-AI-Lab/main/data/catalogue.en.json"
 tools = json.load(urlopen(url))
 candidates = [t for t in tools
               if t["group"] == "open"
@@ -94,8 +102,8 @@ Follow the linked documentation to prepare the environment and call the native i
 Python **3.10+**, standard library only:
 
 ```bash
-git clone https://github.com/Cherish0925/optics-photonics.git
-cd optics-photonics
+git clone https://github.com/Cherish0925/Optics-Photonics-AI-Lab.git
+cd Optics-Photonics-AI-Lab
 python scripts/build.py
 python -m unittest discover -s tests
 python -m http.server 8000 --directory docs

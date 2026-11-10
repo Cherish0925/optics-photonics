@@ -1,16 +1,12 @@
-Independent digital optics and photonics research, from software selection to running calculations and retrieving results.
+# Optics-Photonics AI Lab 0.4.0
 
-Version 0.3.1 fixes clean-environment installation of the TMM solver: the connection recipe now installs and verifies NumPy alongside TMM. The Research OS plugin and Connect packages include the corrected recipe.
+The repository now uses its independent environment name, Optics-Photonics-AI-Lab. Existing Python imports, CLI commands, plugin IDs and saved software bindings remain unchanged.
 
-- Native session adapters for installed Lumerical, COMSOL, OpticStudio and CST: SDK discovery and binding, owned sessions, project load/save, full native programs and scientific data export. Commercial adapter lifecycle tests use SDK doubles; licensed solver execution requires the target workstation.
-- Background calculations run independently of the Agent process. Parallel and dependent steps share a CPU budget and per-software concurrency settings.
-- SQLite stores research runs, source programs, inputs, environment settings and results. Reconnecting uses the same run ID; request IDs prevent duplicate submissions. Resume retains completed steps and starts a new attempt for unfinished steps.
-- MCP supports background environment preparation, calculation submission, progress, cancellation, result browsing and chunked file reading. Plugins use the same independent implementation.
-- 16 executable scientific libraries, including new Optiland real-ray tracing, gdsfactory layout and py-pol polarization calculations. Native programs retain the complete upstream APIs.
-- 97 software descriptions, 14 research domains and 202 original documentation and integration links, with Chinese and English interactive guides.
+- Register research libraries and executable solvers outside the published catalogue. Bind their installed environments and use the same native programs, background jobs and result interfaces.
+- Collect complete research episodes in native worker processes through Python, CLI or MCP. Programs define their environment and policy using the Gymnasium reset/step interface.
+- Distribute disjoint episode IDs across workers while preserving the same seed for each episode. Existing CPU and per-software concurrency limits apply.
+- Save ordered observations, actions, scalar rewards and termination information as JSON Lines, with typed NumPy arrays in separate files. Read results incrementally and retain completed records if a later episode fails.
+- Include a runnable broadband dielectric-coating environment using TMM and Gymnasium, with explicit material assumptions and power-balance output.
+- Update repository and installation links after the rename. Research OS and other generated host packages carry the same source and Skills.
 
-Install with Python 3.10+ or the release wheel. The Research OS ZIP contains an installable plugin; the Connect ZIP generates packages for Codex, Claude Code, DeepSeek Harness, Qiushi and generic MCP. Software environments are independent of plugin updates.
-
-Windows, macOS and Linux CI runs the scientific calculations, background scheduling, cancellation, installed wheel, generated plugin and real MCP disconnect/reconnect workflow. Scientific solvers retain their supported platforms, dependencies and licenses.
-
-[中文指南](https://cherish0925.github.io/optics-photonics/connect.zh.html) · [English guide](https://cherish0925.github.io/optics-photonics/connect.html)
+IOP is not a dependency. Native solver installations and licenses remain associated with the computing host. Sampling is local worker parallelism; distributed learner coordination and solver-specific state restoration remain with the research program and learning framework.

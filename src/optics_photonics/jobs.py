@@ -181,8 +181,7 @@ def submit(steps, name='Optical research', request_id=None, run_id=None, path=No
 
 
 def prepare(tool, python=None, request_id=None, path=None):
-    from .catalogue import software
-    if not software(tool)['connection'].get('pip'):
+    if not environments.software(tool, path=path)['connection'].get('pip'):
         raise ValueError('Use this software’s native installer, then bind its environment')
     config={'kind':'command','command':[sys.executable,'-B',str(Path(__file__).with_name('setup_worker.py'))],'threads':1,'concurrency':1,'cwd':None}
     return submit([{'id':'install','tool':tool,'inputs':{'tool':tool,'python':python,'home':str(environments.home(path))}}],name='Prepare '+tool,request_id=request_id,path=path,_environments={tool:config})

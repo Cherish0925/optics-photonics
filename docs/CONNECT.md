@@ -7,7 +7,7 @@ An independent package for optical software, native research programs, backgroun
 The connector supports Python 3.10+ on Windows, macOS and Linux. Each solver uses its own supported Python version, operating system and license. Different tools may use different environments.
 
 ```sh
-python -m pip install "git+https://github.com/Cherish0925/optics-photonics.git@optics-v0.3.1"
+python -m pip install "git+https://github.com/Cherish0925/Optics-Photonics-AI-Lab.git@optics-v0.3.1"
 optics-photonics info tmm
 optics-photonics prepare tmm
 optics-photonics run tmm spectrum --inputs "@inputs.json"
@@ -64,9 +64,9 @@ Append preserves the research run. Resume retains successful steps and reruns un
 
 | Host | Add source and install |
 | --- | --- |
-| Agentic Research OS | **Extensions → Plugins → Add from link**: `https://github.com/Cherish0925/optics-photonics/tree/main/connect/agentic-research-os`. Install `optics-photonics`, then activate the returned revision. |
-| Codex | `codex plugin marketplace add Cherish0925/optics-photonics`, then `codex plugin add optics-photonics@optics-photonics`. |
-| Claude Code | `claude plugin marketplace add Cherish0925/optics-photonics`, then `claude plugin install optics-photonics@optics-photonics`. |
+| Agentic Research OS | **Extensions → Plugins → Add from link**: `https://github.com/Cherish0925/Optics-Photonics-AI-Lab/tree/main/connect/agentic-research-os`. Install `optics-photonics`, then activate the returned revision. |
+| Codex | `codex plugin marketplace add Cherish0925/Optics-Photonics-AI-Lab`, then `codex plugin add optics-photonics@optics-photonics`. |
+| Claude Code | `claude plugin marketplace add Cherish0925/Optics-Photonics-AI-Lab`, then `claude plugin install optics-photonics@optics-photonics`. |
 
 The Research OS package includes the connector, catalogue and Skills and uses
 the host's Python. The Codex/Claude GitHub plugin runs the included source with
@@ -128,3 +128,20 @@ PowerShell: set `$env:OPTICS_SCIENCE_TESTS="1"` before running the tests. Native
 Host format sources: [Codex](https://developers.openai.com/plugins/build/plugins), [Claude Code](https://code.claude.com/docs/en/plugins-reference), [DeepSeek Harness](https://deepseek-harness.github.io/deepseek-harness/en/guide/mcp-memory).
 
 [Local commercial software: discovery, sessions, projects and results](NATIVE.md).
+
+## Add a research tool outside the catalogue
+
+Register its local description, then bind its installed environment. The published catalogue remains unchanged.
+
+```python
+import sys
+from optics_photonics import environments
+
+environments.register('lab-wave-model', 'Lab wave model',
+    'Our numerical wave-propagation model', modules=['numpy'], distributions=['numpy'])
+environments.bind('lab-wave-model', python=sys.executable, threads=2, concurrency=4)
+```
+
+Use `submit_calculation` or `submit_workflow` with this tool ID and a complete native program. For a C/C++/Java/Julia or other executable, register with `kind='command'`, then bind an executable/argument array. It receives `OPTICS_REQUEST_FILE`, `OPTICS_OUTPUT_DIR` and `OPTICS_RESULT_FILE`, exactly like other command adapters. A custom Python environment can also run `sample_episodes`.
+
+MCP exposes `register_software` and `registered_software`; `software_details` reads both published and locally registered software. Shell clients use `optics-photonics register-software @definition.json` and `registered-software`. Registration describes software; binding selects an installed interpreter or executable. Installation remains under the tool's own requirements and license. Keep files under the job's OUTPUT_DIR so parallel computations own separate outputs.

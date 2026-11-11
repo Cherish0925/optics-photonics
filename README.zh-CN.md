@@ -2,29 +2,28 @@
 
 ![Optics · Photonics — 软件、物理模型与可编程接口](docs/assets/readme-header.webp)
 
-# 光学与光子学研究工具
+# 光学与光子学研究环境
 
-独立的光学与光子学数字研究工具：科学软件、原生研究程序、后台计算、MCP、插件与研究 Skills。统一物理基础：**场 + 物质 + 相互作用**。
-
-**原生研究程序 · 后台计算 · MCP · Skills · Agent 插件**
+研究者和 Agent 可以把它作为 Python 包、MCP 服务、插件或 Skills 安装。它从 97 项软件目录中选择工具，在各软件自己的环境中运行完整的原生研究程序，Agent 断开后长计算继续运行，结果以科学数据文件保存，可以按需读取其中一部分。统一物理基础：**场 + 物质 + 相互作用**。
 
 | 阅读与浏览 | 数据与资料 | 参与开发 |
 | --- | --- | --- |
 | [中文 HTML](https://cherish0925.github.io/Optics-Photonics-AI-Lab/index.zh.html) · [English HTML](https://cherish0925.github.io/Optics-Photonics-AI-Lab/) | [中文 JSON](data/catalogue.zh.json) · [English JSON](data/catalogue.en.json) | [Agent 入口](llms.txt) · [贡献说明](CONTRIBUTING.md) |
 | [中文 Markdown](docs/catalogue.zh.md) · [English Markdown](docs/catalogue.en.md) | [资料索引](data/resources.zh.json) · [数据结构](data/schema.json) | [代码示例](examples/) · [本地开发](#本地开发) |
-| [基础框架](docs/foundations.zh.html) · [Foundations](docs/foundations.html) | [中文源文件](foundations/README.zh-CN.md) | **场 · 物质 · 相互作用** |
+| [基础框架](docs/foundations.zh.html) · [Foundations](docs/foundations.html) | [中文源文件](foundations/README.zh-CN.md) | [运行机制](docs/EXECUTION.md) · [原生软件](docs/NATIVE.zh-CN.md) |
 
-也可以下载[中文 HTML](https://raw.githubusercontent.com/Cherish0925/Optics-Photonics-AI-Lab/main/docs/index.zh.html)或[英文 HTML](https://raw.githubusercontent.com/Cherish0925/Optics-Photonics-AI-Lab/main/docs/index.html)，直接用浏览器打开。两个独立文件包含安装、Agent 接入、软件、研究方法与结果六个栏目，可离线浏览。[完整软件目录](https://cherish0925.github.io/Optics-Photonics-AI-Lab/catalogue.zh.html)继续提供比较与资料导出；外部文档需要联网。
+[中文](https://raw.githubusercontent.com/Cherish0925/Optics-Photonics-AI-Lab/main/docs/index.zh.html)和[英文](https://raw.githubusercontent.com/Cherish0925/Optics-Photonics-AI-Lab/main/docs/index.html) HTML 是独立文件，下载后可离线打开。[完整软件目录](https://cherish0925.github.io/Optics-Photonics-AI-Lab/catalogue.zh.html)提供并排比较和 CSV/JSON 导出。
 
-## 安装与使用
+## 安装
 
-**在 Agentic Research OS 安装：**下载 [Research OS 插件包](https://github.com/Cherish0925/Optics-Photonics-AI-Lab/releases/download/optics-v0.5.1/Optics-Photonics-0.5.1-ResearchOS.zip)，解压后安装其中包含 `plugin.json` 的目录。包内包含原生执行程序、MCP、软件目录和两个 Skills，使用研究系统自带的 Python。
-
-从仓库目录安装适合开发使用；Release 插件包包含六种系统与架构的原生执行程序。
-[Codex、Claude Code 与更新方法](docs/CONNECT.zh-CN.md#从插件市场安装)。
-
-
-仓库现提供可安装的连接器、完整原生程序执行、MCP 和研究 Skills。[接入说明](docs/CONNECT.zh-CN.md) · [交互指南](https://cherish0925.github.io/Optics-Photonics-AI-Lab/connect.zh.html) · [下载发布包](https://github.com/Cherish0925/Optics-Photonics-AI-Lab/releases)。
+| 宿主 | 安装方式 |
+| --- | --- |
+| Agentic Research OS | 下载 [Research OS 插件包](https://github.com/Cherish0925/Optics-Photonics-AI-Lab/releases/download/optics-v0.5.1/Optics-Photonics-0.5.1-ResearchOS.zip)，解压后安装包含 `plugin.json` 的目录；包内有六种系统与架构的原生执行程序、MCP、软件目录和两个 Skills，使用宿主自带的 Python。也可以在 **Extensions → Plugins → Add from link** 填入 `https://github.com/Cherish0925/Optics-Photonics-AI-Lab/tree/main/connect/agentic-research-os`。 |
+| Codex | `codex plugin marketplace add Cherish0925/Optics-Photonics-AI-Lab`，再 `codex plugin add optics-photonics@optics-photonics` |
+| Claude Code | `claude plugin marketplace add Cherish0925/Optics-Photonics-AI-Lab`，再 `claude plugin install optics-photonics@optics-photonics` |
+| Qiushi | 基于 Research OS 的版本使用上面的插件包；其他版本用 `optics-photonics connect qiushi` 生成 MCP 或命令入口。 |
+| DeepSeek Harness | 项目索引 `https://raw.githubusercontent.com/Cherish0925/Optics-Photonics-AI-Lab/main/docs/dsh/index.json`；指定解释器时运行 `optics-photonics connect deepseek`。 |
+| 其他 MCP 宿主、Python、命令行 | 安装下面的 wheel，把 `optics-photonics mcp` 注册为 stdio 服务。 |
 
 ```sh
 python -m pip install "https://github.com/Cherish0925/Optics-Photonics-AI-Lab/releases/download/optics-v0.5.1/optics_photonics-0.5.1-py3-none-any.whl"
@@ -32,98 +31,73 @@ optics-photonics prepare tmm
 optics-photonics connect agentic-research-os --output optics-plugin
 ```
 
-原生会话连接器接入本机 COMSOL、Lumerical、OpticStudio 与 CST，[查看配置与操作](docs/NATIVE.zh-CN.md)。16 个科学软件库已实际运行计算，97 项目录均有连接说明与原始资料。Agent 可使用各软件完整的原生 API。独立后台进程执行并行与依赖计算、协调 CPU 资源、保留已完成步骤并返回科学数据文件；关闭 Agent 不会停止已提交的计算。
+连接程序需要 Python 3.10+，支持 Windows、macOS 和 Linux，不依赖第三方库。插件市场安装的版本使用宿主 PATH 中的 `python`；需要指定解释器时，用 `optics-photonics connect HOST` 生成接入包。各科学软件保留自己的 Python、平台和许可。MCP 服务应运行在装有科学软件的机器上，本地或通过 SSH 均可。[接入说明](docs/CONNECT.zh-CN.md) · [交互指南](https://cherish0925.github.io/Optics-Photonics-AI-Lab/connect.zh.html) · [发布包](https://github.com/Cherish0925/Optics-Photonics-AI-Lab/releases)
 
-提供 Agentic Research OS、Codex、Claude Code、DeepSeek Harness、Qiushi 和通用 MCP 接入包。连接器运行于 Windows、macOS 和 Linux；各科学软件保留自身支持的平台与许可。
+## 一次计算怎么进行
 
-目录之外的自研或外部研究工具，也可通过 `register_software` 和 `bind_environment` 接入同一套执行与数据接口。[自定义工具接入](docs/CONNECT.zh-CN.md#接入目录之外的研究工具)。
+1. **选软件。** `software_search` 和 `software_details` 返回每项软件的物理方法、接口、安装来源和内置计算。目录之外的工具用 `register_software` 加入。
+2. **连接环境。** `prepare_environment` 按记录的安装方法装入独立环境；`bind_environment` 复用已有解释器或可执行程序；`discover_native_software` 和 `bind_native_software` 连接本机 COMSOL、Lumerical、OpticStudio、CST 的 SDK（[原生会话](docs/NATIVE.zh-CN.md)）。
+3. **提交完整程序。** Python 程序接收 `INPUTS` 和 `OUTPUT_DIR`，使用软件完整的原生 API，设置 `RESULT`；可执行程序通过环境变量使用同样的文件。`submit_calculation` 立即返回运行编号；`submit_workflow` 增加依赖或并行的步骤，前一步的结果可以绑定为后一步的输入。
+4. **继续与取回结果。** `run_status` 每次最多等待 25 秒，等待期间同一连接上的其他请求照常返回。运行不随连接断开而停止，用 `list_runs` 重新找到。`result_files`、`read_result`、`read_array` 分别返回文件列表、字节片段和 NPY/NPZ 数组的局部。`resume_run` 重跑未完成步骤，保留已完成步骤。
+5. **采集 episode。** `sample_episodes` 在并行的软件进程中运行 Gymnasium 形式的环境，保存种子、动作、观测和奖励，供学习使用（[接口说明](docs/LEARNING.md)）。
 
-## 研究任务与并行采样
+同样的操作也有 `optics-photonics` 命令、Python 接口和 TypeScript 客户端。16 个开源库的内置计算已实际运行；四个商业软件的会话适配器只用 SDK 替身运行过，尚未在有许可证的求解器上运行。
 
-0.4.0 新增在原生计算进程内连续执行完整 episode 的能力。研究程序定义环境和策略，通过 `sample_episodes`、Python SDK 或 `optics-photonics sample` 提交。各进程独立运行，沿用已有 CPU 与软件并发配置；保存任务和策略版本、随机种子、动作、观测、奖励及结束原因。数值数组保留为独立文件。
+## 运行机制
 
-[接口与可运行的薄膜计算示例](docs/LEARNING.md)。各宿主插件包含同一实现，独立于 IOP。仓库改名后，软件包名、命令、插件 ID 和本地计算环境保持兼容。
+Rust 执行器管理求解进程、取消和超时。Python 连接科学 SDK 并组织任务。SQLite 保存运行记录，并按本机所有运行共享的 CPU 和命名额度（GPU、软件许可证等）安排步骤。TypeScript 客户端连接 Agent 宿主。MPI 进程数、GPU 选择和集群队列仍在各软件自己的启动配置中设置。[运行机制与资源](docs/EXECUTION.md)
 
 ## 统一物理基础
 
-本仓库使用一个简洁但可以贯穿不同尺度与理论层级的物理框架：
-
 > **光学 / 光子学 = 场 + 物质 + 相互作用**
 
-这里的**场**包括经典与量子化电磁场及其状态；**物质**包括微观自由度、材料、器件与探测器；**相互作用**描述二者之间的能量、动量与信息交换。自由传播属于场动力学；光学器件是结构化物质；测量本质上是被设计好的场—物质相互作用。这个框架同时覆盖量子光学、纳米光子学、激光、光纤、成像、光谱、波动光学与几何光学，同时保留各有效理论的适用边界。
+**场**指经典或量子化的电磁场及其状态；**物质**包括微观自由度、材料、器件和探测器；**相互作用**是二者之间能量、动量和信息的交换。自由传播是场的动力学，光学器件是结构化的物质，测量是设计好的场与物质相互作用。软件目录和 Skills 按这一框架组织，覆盖几何光学、波动光学、纳米光子学、光纤、激光、成像、光谱和量子光学，并保留各有效理论的适用边界。[基础框架](docs/foundations.zh.html) · [Markdown 源文件](foundations/)
 
-完整内容见[中文基础框架](docs/foundations.zh.html)与 [English Foundations](docs/foundations.html)，可维护的 Markdown 源文件位于 [`foundations/`](foundations/)。
+## 软件目录
 
-## 包含什么
+- **29 项商业软件**、**65 项开源软件**、**3 项免费但有限制**。免费客户端、收费求解器、学术许可和外部 PDK 分别说明。
+- 每项记录物理方法、用途、编程接口、运行环境、许可、应用依据、适用边界和原始资料。资料核对日期 **2026-10-20**。
+- API、命令行和宏与**官方 / 社区 / 未核实**的 MCP 服务、Agent Skills 分开标注。文档检索类 MCP 不当作求解器接口。
+- 中英文使用同一套稳定编号 `id`。Agent 先读 [`llms.txt`](llms.txt)，再读 [`llms-full.txt`](llms-full.txt) 或 JSON。
 
-- **29 项商业付费、65 项免费开源、3 项免费但授权或功能受限**。开源客户端、收费求解器、学术专用许可和外部 PDK 分别说明。
-- 每项记录物理方法、用途、编程接口、运行环境、许可、应用依据、适用边界与原始资料。
-- API、命令行、宏与 **官方／社区／未核实的 MCP、Agent Skills** 分别标注；文档检索 MCP 不被当成求解器执行接口。
-- 按任务、软件名称和接口检索，按领域与授权筛选，最多四项并排比较，导出 CSV 或 JSON。
-- 集中的资料目录把官网、手册、代码、许可证和 Agent 接入资料关联到对应软件。
-- 七类物理模型、六条可组合工作流、数字孪生与代理模型说明，以及四组实际接口示例。
+不同模型之间通过它们传递的物理量连接：
 
-## 从物理模型连接数字实验室
-
-| 任务链 | 软件之间传递什么 | 目录中的工具示例 |
+| 任务链 | 模型之间传递什么 | 目录中的工具示例 |
 | --- | --- | --- |
 | 镜头 → 图像 → 反演 | 瞳面复场、像差、PSF、采样与探测器响应 | OpticStudio、CODE V、Optiland、prysm、POPPY |
 | 单胞 → 超表面 → 系统 | 复数透反射、偏振、角度和波长依赖 | torcwa、grcwa、Meep、Lumerical、Tidy3D、Diffractio |
 | 版图 → 器件 → 电路 | 工艺层、端口、参考平面和归一化 S 参数 | gdsfactory、KLayout、IPKISS、JCMsuite、SAX |
 | 脉冲 → 链路 → 接收 | 复包络、时间网格、色散、非线性与噪声 | Luna、py-fmas、RP Fiber Power、VPI、OptiCommPy |
 | 光机热 → 腔模 → 读出 | 热致形变、折射率变化、工作点和噪声谱 | COMSOL、Finesse、HCIPy |
-| 样品 → 传播 → 重建 | 实际观测量及其对应的前向算子 | MCX、MMC、PyNX、pyDHM、HoloPy |
+| 样品 → 传播 → 重建 | 实际观测量及其前向算子 | MCX、MMC、PyNX、pyDHM、HoloPy |
 
-这些是建模组合建议。统一物理量、单位、参考系和近似条件，才能把不同软件连接成可信的计算链。
-
-## 给 AI Agent 的入口
-
-先读取 [`llms.txt`](llms.txt)，再按任务读取完整 [Markdown](docs/catalogue.zh.md)、[`llms-full.txt`](llms-full.txt) 或 JSON。两种语言使用同一套稳定编号 `id`，便于搜索、引用和自动更新。
-
-```python
-import json
-from urllib.request import urlopen
-
-url = "https://raw.githubusercontent.com/Cherish0925/Optics-Photonics-AI-Lab/main/data/catalogue.zh.json"
-tools = json.load(urlopen(url))
-candidates = [t for t in tools
-              if t["group"] == "open"
-              and "periodic" in t["cats"]
-              and t["route"] == "api"]
-for tool in candidates:
-    print(tool["id"], tool["api"], tool["sources"])
-```
-
-读取对应原始文档、准备运行环境，再调用软件原生接口。连接器分别标注功能范围及官方、社区、未核实三种来源状态。
+每一处连接都要统一单位、参考系、场的约定和模型近似。
 
 ## 本地开发
-
-需要 Python **3.10+**，构建仅使用标准库：
 
 ```bash
 git clone https://github.com/Cherish0925/Optics-Photonics-AI-Lab.git
 cd Optics-Photonics-AI-Lab
-python scripts/build.py
+python -m pip install -e ".[rl]"
 python -m unittest discover -s tests
-python -m http.server 8000 --directory docs
+python scripts/build.py
+python scripts/package_marketplace.py
 ```
 
-浏览 `http://localhost:8000/index.zh.html`。修改 `data/catalogue.zh.json` 与 `data/catalogue.en.json` 后重新构建；数据、翻译和页面渲染分别维护。生成的 HTML 一并提交，读者无需安装开发环境。
+`build.py` 根据 `data/` 重新生成 HTML、Markdown、资料索引和 Agent 文档；修改源码或 Skills 后，`package_marketplace.py` 重新生成内置的 Research OS 副本。生成的文件随仓库提交。设置 `OPTICS_SCIENCE_TESTS=1` 会运行调用科学软件库的用例。
 
-目录说明、技术细节和英文项目介绍见 [README.md](README.md)。欢迎补充遗漏工具、修正许可和接口、增加可复现示例及改进翻译，具体格式见 [CONTRIBUTING.md](CONTRIBUTING.md)。
+| 路径 | 内容 |
+| --- | --- |
+| `src/optics_photonics/` | 连接程序：软件目录、环境、执行、任务、结果数组、episode 采样、MCP、命令行 |
+| `native/executor/` | Rust 进程执行器 |
+| `clients/typescript/` | 供 Agent 宿主使用的 TypeScript 客户端 |
+| `skills/` | Agent Skills 与领域参考资料 |
+| `connect/` | 生成的宿主接入包 |
+| `data/` | 中英文软件目录、连接方式、领域和数据结构 |
+| `src/render.py`、`scripts/build.py` | 网页与文档生成 |
+| `examples/` | 原生程序、软件会话和 episode 示例 |
+| `foundations/` | 场 · 物质 · 相互作用框架 |
 
-## 范围与许可
+## 许可
 
-资料核查日期为 **2026-10-20**，依据厂商文档、维护者仓库、许可证与作者资料。每项保留应用依据、模型条件和来源链接。
-
-本项目原创代码与目录说明采用 [MIT](LICENSE) 许可。被收录软件、外部文档、PDK 和数据仍遵循各自许可；内嵌字体采用 [SIL OFL 1.1](docs/assets/FONT_LICENSE.txt)。详见 [NOTICE](NOTICE)。
-
-## 0.5 执行与接入
-
-Rust 执行器管理程序及其子进程，TypeScript 客户端连接研究宿主，Python 保留科学 SDK 和任务组织，SQLite 保存任务与资源分配。任务完成即通知调度器；CPU、GPU 和许可证等资源可跨研究任务共享。目录之外的程序使用相同机制。
-
-[执行方式与 TypeScript](docs/EXECUTION.md) · [安装与连接](docs/CONNECT.zh-CN.md)
-
-DeepSeek 项目索引：
-https://raw.githubusercontent.com/Cherish0925/Optics-Photonics-AI-Lab/main/docs/dsh/index.json
-通用连接使用已安装的 `optics-photonics mcp`；指定 Python 或目录时运行 `connect deepseek`。
+本项目原创代码与目录说明采用 [MIT](LICENSE) 许可。被收录软件、外部文档、PDK 和数据遵循各自许可；内嵌字体采用 [SIL OFL 1.1](docs/assets/FONT_LICENSE.txt)。详见 [NOTICE](NOTICE)。仓库改名后，软件包名、命令、插件 ID 和本地计算环境保持不变。

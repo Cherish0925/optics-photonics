@@ -1,3 +1,4 @@
+import errno
 import json
 import os
 from pathlib import Path
@@ -53,15 +54,17 @@ class JobsTests(unittest.TestCase):
                 with jobs.worker_lock(self.home,run) as free:
                     if free: break
                 time.sleep(.05)
-        # A terminal result and an unlocked worker can precede the OS closing
-        # inherited log handles by a few milliseconds on Windows.
+        # After unlocking, a worker finishes notifications and checks for queued
+        # work. Its final database access can overlap directory removal; Windows
+        # may also retain an inherited log handle until the process exits.
         end=time.monotonic()+5
         while True:
             try:
                 self.tmp.cleanup()
                 break
-            except PermissionError:
-                if os.name != 'nt' or time.monotonic() >= end: raise
+            except OSError as exc:
+                finishing = exc.errno == errno.ENOTEMPTY or (os.name == 'nt' and isinstance(exc, PermissionError))
+                if not finishing or time.monotonic() >= end: raise
                 time.sleep(.02)
     def submit(self,steps,**kwargs):
         r=jobs.submit(steps,path=self.home,**kwargs);self.runs.append(r['run_id']);return r

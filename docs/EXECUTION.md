@@ -46,7 +46,9 @@ MCP `run_status` defaults to compact state and accepts `wait` up to 25 seconds.
 Read result files only when needed; `include_results=true` returns inline step
 values. Python's existing status function retains its detailed default.
 Environment listing is paginated and does not start every interpreter unless
-`refresh=true`. Only referenced predecessor results are loaded for a step.
+`refresh=true`. Only referenced predecessor results are loaded for a step. A
+binding with `file` passes the location of a predecessor's file instead of a
+value, so large arrays are not copied through JSON.
 
 One MCP connection answers tool calls as each completes; replies carry their
 request ID and may arrive in a different order. Up to 16 calls execute at once.
@@ -60,7 +62,8 @@ accepted calculations continue.
 ## Read large results
 
 `result_files` lists a run page by page; `prefix` such as `sweep/attempt-1/`
-walks only that step or folder. NPY and NPZ entries carry dtype and shape.
+walks only that step or folder. Folders are read one at a time and sizes only
+for the returned page. NPY and NPZ entries carry dtype and shape.
 `read_array` returns part of an NPY array or NPZ member without NumPy and
 without loading the file: per axis, `index` takes an integer to select one
 position, `[start, stop, step]` for a range, or `null` for the whole axis;
@@ -94,4 +97,7 @@ Closing a client leaves accepted work running. Reconnect and read the same run I
 To stop a calculation, call `cancel`; closing a client is not a cancellation.
 Requests on one client run concurrently. `wait`, `status` and `call` accept an
 `AbortSignal`: aborting stops that request's wait on the server, not the run.
+`lab.download(run_id, file, destination)` copies a result file to the client's
+computer through the connection, also when the server runs on another machine;
+`lab.array(run_id, file, {index})` reads part of an array.
 The native MCP interface remains available to other languages and hosts.

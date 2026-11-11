@@ -6,7 +6,7 @@ from concurrent.futures import ThreadPoolExecutor
 from contextlib import contextmanager, nullcontext
 import json
 import os
-from pathlib import Path
+from pathlib import Path, PurePosixPath, PureWindowsPath
 import re
 import shutil
 import sqlite3
@@ -104,6 +104,17 @@ def identifier(value):
     return value
 
 
+def written(file):
+    """Normalize a file or folder path relative to a step's output directory."""
+    if not isinstance(file, str) or not file.strip():
+        raise ValueError('A file binding names a path inside the predecessor output directory')
+    text = file.replace('\\', '/')
+    parts = PurePosixPath(text).parts
+    if text.startswith('/') or PureWindowsPath(file).drive or '..' in parts:
+        raise ValueError('A file binding names a path inside the predecessor output directory')
+    return '/'.join(parts)
+
+
 def validate(steps, known=()):
     """Check new steps. known holds the IDs of steps already in the run.
 
@@ -130,9 +141,12 @@ def validate(steps, known=()):
         quantities(s.get('requirements', {}))
         s.setdefault('after', [])
         for key, reference in s.get('bindings', {}).items():
-            if not isinstance(reference, dict) or set(reference)-{'step','path'} or not isinstance(reference.get('step'),str):
-                raise ValueError('A binding needs step and an optional path array')
-            if not isinstance(reference.get('path', []), list): raise ValueError('Binding path must be an array of object keys or array indices')
+            if not isinstance(reference, dict) or set(reference)-{'step','path','file'} or not isinstance(reference.get('step'),str):
+                raise ValueError('A binding needs step and either a result path array or a file')
+            if 'file' in reference:
+                if 'path' in reference: raise ValueError('A binding takes a result path or a file, not both')
+                written(reference['file'])
+            elif not isinstance(reference.get('path', []), list): raise ValueError('Binding path must be an array of object keys or array indices')
             if reference['step'] not in s['after']: s['after'].append(reference['step'])
         graph[s['id']] = s['after']
         result.append(s)
@@ -343,10 +357,31 @@ def file_path(run_id, file, path=None):
     return selected
 
 
+def folder(directory):
+    """(name, is_folder) entries of one directory in listing order; symbolic links are left out."""
+    found = []
+    try:
+        with os.scandir(directory) as entries:
+            for entry in entries:
+                if entry.is_dir(follow_symlinks=False): found.append((entry.name, True))
+                elif entry.is_file(follow_symlinks=False): found.append((entry.name, False))
+    except OSError:
+        return []  # removed by its calculation while listing
+    return sorted(found, key=lambda item: (os.path.normcase(item[0]), item[0]))
+
+
+def walk(directory, relative=''):
+    """Relative file paths below a directory in a stable order, one folder at a time."""
+    for name, is_folder in folder(directory):
+        if is_folder: yield from walk(os.path.join(directory, name), relative+name+'/')
+        elif name != 'worker.lock': yield relative+name
+
+
 def files(run_id, path=None, offset=0, limit=100, prefix=''):
     """List result files; prefix (e.g. 'solve/attempt-1/') walks only that part of the run.
 
-    NPY and NPZ entries on the returned page include dtype and shape.
+    Names are read folder by folder; sizes, and dtype and shape of NPY and NPZ
+    files, are read only for the returned page.
     """
     identifier(run_id)
     if offset<0 or not 1<=limit<=500: raise ValueError('Use offset >= 0 and limit between 1 and 500')
@@ -356,17 +391,19 @@ def files(run_id, path=None, offset=0, limit=100, prefix=''):
     base = (root/prefix).resolve()
     if not base.is_dir(): base = base.parent
     if not base.is_relative_to(root): raise ValueError('prefix must be inside the run')
-    found = []
-    for item in sorted(base.rglob('*')):
-        name = item.relative_to(root).as_posix()
-        if name.startswith(prefix) and item.is_file() and not item.is_symlink() and item.name != 'worker.lock':
-            found.append({'file':name,'bytes':item.stat().st_size})
-    page = found[offset:offset+limit]
-    for entry in page:
-        if entry['file'].endswith(('.npy','.npz')):
-            try: entry['array'] = arrays.describe(root/entry['file'])
-            except (OSError, ValueError): pass  # still being written
-    return {'run_id':run_id, 'files':page, 'total':len(found), 'next_offset':offset+limit if offset+limit<len(found) else None}
+    inside = base.relative_to(root).as_posix()
+    page, total = [], 0
+    for name in walk(str(base), '' if inside == '.' else inside+'/'):
+        if not name.startswith(prefix): continue
+        if offset <= total < offset+limit:
+            try: entry = {'file':name,'bytes':os.stat(root/name).st_size}
+            except OSError: continue  # removed since its folder was read
+            if name.endswith(('.npy','.npz')):
+                try: entry['array'] = arrays.describe(root/name)
+                except (OSError, ValueError): pass  # still being written
+            page.append(entry)
+        total += 1
+    return {'run_id':run_id, 'files':page, 'total':total, 'next_offset':offset+limit if offset+limit<total else None}
 
 
 def download(run_id, file, destination, path=None):
@@ -392,9 +429,17 @@ def read_array(run_id, file, member=None, index=None, max_elements=10000, path=N
     return {'run_id':run_id, 'file':file, **arrays.read(file_path(run_id, file, path), member=member, index=index, max_elements=max_elements)}
 
 
-def resolved_inputs(spec, results):
+def resolved_inputs(spec, results, folders):
+    """Step inputs with bound values: a result value by path, or the location of a file a predecessor wrote."""
     inputs = dict(spec.get('inputs', {}))
     for key, reference in spec.get('bindings', {}).items():
+        if 'file' in reference:
+            folder_ = folders[reference['step']]
+            target = (folder_/written(reference['file'])).resolve()
+            if not target.is_relative_to(folder_.resolve()) or not target.exists():
+                raise ValueError(f"Step {reference['step']} did not write {reference['file']}")
+            inputs[key] = str(target)
+            continue
         value = results[reference['step']]
         for part in reference.get('path', []): value = value[part]
         inputs[key] = value
@@ -406,13 +451,16 @@ def perform(run_id, row, path, cancellation):
     output = environments.home(path)/'runs'/run_id/row['id']/('attempt-'+str(row['attempt']))
     try:
         with database(path) as db:
-            results = {}
+            results, folders = {}, {}
             for reference in spec.get('bindings', {}).values():
                 key = reference['step']
-                if key not in results:
+                if 'file' in reference and key not in folders:
+                    attempt = db.execute("SELECT attempt FROM steps WHERE run_id=? AND id=? AND state='succeeded'",(run_id,key)).fetchone()[0]
+                    folders[key] = environments.home(path)/'runs'/run_id/key/('attempt-'+str(attempt))
+                elif 'file' not in reference and key not in results:
                     row_result = db.execute("SELECT result FROM steps WHERE run_id=? AND id=? AND state='succeeded'",(run_id,key)).fetchone()
                     results[key] = json.loads(row_result[0])
-        request = {'action':spec.get('action',''),'source':spec.get('source',''),'inputs':resolved_inputs(spec,results)}
+        request = {'action':spec.get('action',''),'source':spec.get('source',''),'inputs':resolved_inputs(spec,results,folders)}
         result = execution.run(spec['tool'],request,output=output,configuration=config,timeout=spec.get('timeout'),cancel=cancellation)
         record = result['record']
         result = {'output':result['output'], **record} if isinstance(record,dict) and 'result' in record else {'output':result['output'],'result':record}

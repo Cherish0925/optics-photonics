@@ -1,8 +1,9 @@
 import { spawn, type ChildProcessWithoutNullStreams } from 'node:child_process';
+import { open, rm } from 'node:fs/promises';
 import { createInterface } from 'node:readline';
 
 export type Step = { id:string; tool:string; source?:string; action?:string; inputs?:Record<string,unknown>;
-  after?:string[]; bindings?:Record<string,{step:string;path?:(string|number)[]}>; timeout?:number; requirements?:Record<string,number> };
+  after?:string[]; bindings?:Record<string,{step:string;path?:(string|number)[];file?:string}>; timeout?:number; requirements?:Record<string,number> };
 export type Submission = {run_id:string;request_id:string};
 export type RunStatus = {id:string;state:string;counts:Record<string,number>;next_offset:number|null;
   steps:{id:string;state:string;output?:string;result?:unknown;error?:string;attempt:number}[]};
@@ -107,6 +108,25 @@ export class OpticsLab {
   /** Part of an NPY array or NPZ member; index entries are positions or [start, stop, step]. */
   array(run_id:string,file:string,options:{member?:string;index?:(number|(number|null)[])[];max_elements?:number}={}){return this.call('read_array',{run_id,file,...options});}
   read(run_id:string,file:string,offset=0,limit=16384){return this.call('read_result',{run_id,file,offset,limit});}
+  /** Copy a result file to this computer; the server may run elsewhere, for example over SSH. */
+  async download(run_id:string,file:string,destination:string,options:RequestOptions={}):Promise<{path:string;bytes:number}> {
+    const output=await open(destination,'wx');
+    let offset=0,bytes=0,complete=false;
+    try {
+      for(;;){
+        const part=await this.call<{encoding:string;data:string;next_offset:number|null}>('read_result',{run_id,file,offset,limit:65536},options);
+        const chunk=Buffer.from(part.data,part.encoding==='base64'?'base64':'utf8');
+        await output.write(chunk);bytes+=chunk.length;
+        if(part.next_offset===null) break;
+        offset=part.next_offset;
+      }
+      complete=true;
+    } finally {
+      await output.close();
+      if(!complete) await rm(destination,{force:true});
+    }
+    return {path:destination,bytes};
+  }
   cancel(run_id:string){return this.call('cancel_run',{run_id});}
   resume(run_id:string){return this.call('resume_run',{run_id});}
   close(){this.child.stdin.end();this.child.kill();this.fail(new Error('Optics client closed'));}

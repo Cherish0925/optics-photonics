@@ -59,7 +59,7 @@ optics-photonics array RUN_ID calculate/attempt-1/field.npz --member field --ind
 
 提交后立即返回任务编号。后台进程继续执行，CLI 或 MCP 关闭不会结束计算。再次提交同一请求时沿用 `request-id`，会返回原任务。运行期间已经写出的文件可以直接读取。`files --prefix STEP/` 只列某一步的文件，`array` 读取 NPY 或 NPZ 数组的一部分，不需要载入整个文件。
 
-工作流是 JSON 数组。每一步包含 `id`、`tool`、`inputs`，以及 `action` 或 `source`。`after` 指定前置步骤；`bindings` 把前一步结果写入下一步输入，并自动建立依赖。例如：
+工作流是 JSON 数组。每一步包含 `id`、`tool`、`inputs`，以及 `action` 或 `source`。`after` 指定前置步骤；`bindings` 把前一步结果写入下一步输入，并自动建立依赖。数组、网格、模型这类大数据按文件传递：`{"field":{"step":"solve","file":"field.npz"}}` 把输入 `field` 设为该步骤写出的文件或文件夹在计算机器上的位置；引用相对于本次运行保存，步骤开始时才解析成路径。例如：
 
 ```json
 [
@@ -116,7 +116,7 @@ optics-photonics connect agentic-research-os --output optics-plugin
 
 MCP 包含软件检索、环境准备、连接、资源设置、提交、任务查询、取消、继续、文件读取与下载。`prepare_environment` 在后台安装已有配方，返回任务编号；安装完成后软件环境自动登记。完整研究方法由两个 Skills 和 14 个领域参考文件按需提供。
 
-计算发生在 MCP 服务所在的计算机。远程机器可通过 SSH 启动 stdio 服务，保持连接程序与科学环境在同一台机器：`ssh -T USER@HOST /path/to/python -m optics_photonics mcp`。`read_result` 把内容传回 Agent，`read_array` 传回 NPY/NPZ 数组的一部分；`download_result` 写入服务所在机器的目标路径，大文件可通过 SSH/SFTP 取回。
+计算发生在 MCP 服务所在的计算机。远程机器可通过 SSH 启动 stdio 服务，保持连接程序与科学环境在同一台机器：`ssh -T USER@HOST /path/to/python -m optics_photonics mcp`。`read_result` 把内容传回 Agent，`read_array` 传回 NPY/NPZ 数组的一部分；`download_result` 写入服务所在机器的目标路径。TypeScript 客户端的 `download` 通过连接把文件内容传到客户端所在的机器；特别大的远端文件仍可用 SSH/SFTP 取回。
 
 更新时安装新版本并生成新的插件目录，由宿主更新和激活。科学环境、研究记录和结果保留在 `OPTICS_HOME` 或 `~/.optics-photonics`。
 

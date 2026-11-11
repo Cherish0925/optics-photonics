@@ -1,0 +1,19 @@
+[
+  {
+    "insert": [
+      {
+        "id": "dsh-optics-photonics",
+        "name": "@deepseek-ai/dsh-mcp-client",
+        "config": {
+          "serverName": "optics",
+          "transport": "stdio",
+          "command": "optics-photonics",
+          "args": [
+            "mcp"
+          ],
+          "env": {}
+        }
+      }
+    ]
+  }
+]

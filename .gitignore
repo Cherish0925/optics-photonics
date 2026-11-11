@@ -11,3 +11,6 @@ build/
 dist/
 *.egg-info/
 .optics-test/
+
+native/executor/target/
+src/optics_photonics/bin/

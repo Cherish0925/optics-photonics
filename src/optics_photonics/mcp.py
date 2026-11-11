@@ -15,16 +15,16 @@ TOOLS = [
     ('software_details', 'Read native interfaces, installation source, upstream MCP/Skills and executable operation inputs for one software.', schema({'tool':STRING,'language':{'enum':['zh','en']}},['tool'])),
     ('register_software', 'Register a local research library, solver or executable that is not in the published catalogue. Provide its identity, installed module/distribution names and documentation sources; then use bind_environment. Registration does not download or execute it.', schema({'tool':STRING,'name':STRING,'description':STRING,'kind':{'enum':['python','command']},'modules':{'type':'array','items':STRING},'distributions':{'type':'array','items':STRING},'sources':{'type':'array','items':STRING}},['tool','name','description'])),
     ('registered_software', 'List locally registered research tools beyond the published software catalogue.', schema()),
-    ('environments', 'List configured local scientific interpreters and executable availability.', schema()),
+    ('environments', 'Read a short page of configured software. refresh=true checks only this page’s installed programs; tool selects one connection.', schema({'tool':STRING,'offset':{'type':'integer','minimum':0},'limit':{'type':'integer','minimum':1,'maximum':100},'refresh':{'type':'boolean'}})),
     ('discover_native_software', 'Find local Lumerical, COMSOL, OpticStudio and CST installation paths; inspect adapter requirements and native program examples. Does not launch a licensed solver.', schema({'roots':{'type':'array','items':STRING}})),
-    ('bind_native_software', 'Connect an installed commercial solver SDK to its own Python environment. Each calculation owns a software session with full native API, project load/save and data export.', schema({'tool':STRING,'python':STRING,'sdk_path':STRING,'options':{'type':'object'},'threads':{'type':'integer','minimum':1},'concurrency':{'type':'integer','minimum':1}},['tool'])),
+    ('bind_native_software', 'Connect an installed commercial solver SDK to its own Python environment. Each calculation owns a software session with full native API, project load/save and data export.', schema({'tool':STRING,'python':STRING,'sdk_path':STRING,'options':{'type':'object'},'threads':{'type':'integer','minimum':1},'concurrency':{'type':'integer','minimum':1},'requirements':{'type':'object','additionalProperties':{'type':'integer','minimum':1}},'env':{'type':'object','additionalProperties':STRING}},['tool'])),
     ('prepare_environment', 'Install a documented software recipe into its isolated Python environment in the background; returns a run ID. Existing environments can be bound directly.', schema({'tool':STRING,'python':STRING,'request_id':STRING},['tool'])),
-    ('bind_environment', 'Connect an existing scientific Python environment or explicit native executable; does not install a solver.', schema({'tool':STRING,'python':STRING,'command':{'type':'array','items':STRING,'minItems':1},'threads':{'type':'integer','minimum':1},'concurrency':{'type':'integer','minimum':1},'cwd':STRING},['tool'])),
-    ('compute_resources', 'Read or set the total CPU thread capacity shared by background calculations on this computer.', schema({'cpu':{'type':'integer','minimum':1}})),
+    ('bind_environment', 'Connect an existing scientific Python environment or explicit native executable; does not install a solver.', schema({'tool':STRING,'python':STRING,'command':{'type':'array','items':STRING,'minItems':1},'threads':{'type':'integer','minimum':1},'concurrency':{'type':'integer','minimum':1},'cwd':STRING,'requirements':{'type':'object','additionalProperties':{'type':'integer','minimum':1}},'env':{'type':'object','additionalProperties':STRING}},['tool'])),
+    ('compute_resources', 'Read or update shared CPU and named resource capacities (GPU, solver license, memory slots). Requirements are acquired together across all runs; adapters select the actual hardware or license.', schema({'cpu':{'type':'integer','minimum':1},'pools':{'type':'object','additionalProperties':{'type':'integer','minimum':1}}})),
     ('submit_calculation', 'Start an independent background calculation and return its run ID immediately. source runs a complete native Python program with INPUTS, OUTPUT_DIR and RESULT. Reuse request_id when retrying.', schema({'tool':STRING,'inputs':{'type':'object'},'action':STRING,'source':STRING,'name':STRING,'request_id':STRING,'timeout':{'type':'number','exclusiveMinimum':0}},['tool'])),
     ('sample_episodes', 'Run complete research episodes in independent native worker processes. source defines make_env() with Gymnasium-style reset/step/close and make_policy(seed) returning an action function. task/policy need id/version. CPU and software concurrency settings apply across jobs. Each worker saves trajectory.jsonl and typed arrays; read through result_files/read_result. No solver installation or training algorithm is implied.', schema({'tool':STRING, 'source':STRING, 'task':{'type':'object'}, 'policy':{'type':'object'}, 'episodes':{'type':'integer','minimum':1}, 'workers':{'type':'integer','minimum':1}, 'max_steps':{'type':'integer','minimum':1}, 'seed':{'type':'integer','minimum':0}, 'inputs':{'type':'object'}, 'options':{'type':'object'}, 'request_id':STRING, 'timeout':{'type':'number','exclusiveMinimum':0}}, ['tool','source','task','policy','episodes'])),
     ('submit_workflow', 'Submit dependent or independent calculation steps in one request. Each step has id, tool, action or source, inputs, after, optional timeout and bindings {input_name: {step, path: [keys]}}. Supply run_id to append a batch to an existing research run.', schema({'steps':{'type':'array','items':{'type':'object'},'minItems':1},'name':STRING,'request_id':STRING,'run_id':STRING},['steps'])),
-    ('run_status', 'Read execution state and compact results; the background calculation continues after this MCP connection closes.', schema({'run_id':STRING,'offset':{'type':'integer','minimum':0},'limit':{'type':'integer','minimum':1,'maximum':200}},['run_id'])),
+    ('run_status', 'Read compact execution state. wait (0–25 seconds) waits for completion without repeated calls. Results stay in files by default; include_results returns step values. Calculations continue after disconnection.', schema({'run_id':STRING,'offset':{'type':'integer','minimum':0},'limit':{'type':'integer','minimum':1,'maximum':200},'include_results':{'type':'boolean'},'wait':{'type':'number','minimum':0,'maximum':25}},['run_id'])),
     ('cancel_run', 'Cancel a research run and its active calculations.', schema({'run_id':STRING},['run_id'])),
     ('result_files', 'List files written so far by a research run, including running calculations.', schema({'run_id':STRING,'offset':{'type':'integer','minimum':0},'limit':{'type':'integer','minimum':1,'maximum':500}},['run_id'])),
     ('download_result', 'Copy a result file to a new destination on the MCP host computer.', schema({'run_id':STRING,'file':STRING,'destination':STRING},['run_id','file','destination'])),
@@ -40,7 +40,7 @@ def invoke(name, args):
         return {**environments.software(**args), 'execution':operations.details(args['tool'])}
     if name == 'register_software': return environments.register(**args)
     if name == 'registered_software': return {'software': environments.registered()}
-    if name == 'environments': return {'environments':environments.available()}
+    if name == 'environments': return environments.page(**args)
     if name in ('discover_native_software','bind_native_software'):
         from . import native
         return native.discover(**args) if name == 'discover_native_software' else native.bind(**args)
@@ -55,7 +55,7 @@ def invoke(name, args):
         from . import sampling
         return sampling.submit(**args)
     if name == 'submit_workflow': return jobs.submit(**args)
-    if name == 'run_status': return jobs.status(**args)
+    if name == 'run_status': return jobs.status(**{'include_results':False, **args})
     if name == 'cancel_run': return jobs.cancel(**args)
     if name == 'result_files': return jobs.files(**args)
     if name == 'download_result': return jobs.download(**args)
@@ -81,11 +81,21 @@ def serve(input_stream=None, output_stream=None):
                 proposed = params.get('protocolVersion')
                 result = {'protocolVersion':proposed if proposed in supported else '2025-11-25',
                           'serverInfo':{'name':'optics-photonics','version':__version__},
-                          'capabilities':{'tools':{'listChanged':False}},
+                          'capabilities':{'tools':{'listChanged':False},'resources':{}},
                           'instructions':'Search software, read its operation inputs, select an installed environment, and submit long calculations to the independent background worker. Native programs use INPUTS, OUTPUT_DIR and a JSON RESULT. Solver installation and license requirements remain those of the upstream software.'}
             elif method == 'ping': result = {}
             elif method == 'tools/list':
                 result = {'tools':[{'name':n,'description':d,'inputSchema':s} for n,d,s in TOOLS]}
+            elif method == 'resources/list':
+                result = {'resources':[{'uri':'optics://guides/'+name,'name':name,'mimeType':'text/markdown'}
+                    for name in ('optical-computation','optical-research')]}
+            elif method == 'resources/read':
+                uri = params.get('uri','')
+                name = uri.removeprefix('optics://guides/')
+                if uri != 'optics://guides/'+name or name not in ('optical-computation','optical-research'):
+                    raise ValueError('Unknown optical guide')
+                text = (catalogue.resources()/'skills'/name/'SKILL.md').read_text(encoding='utf-8')
+                result = {'contents':[{'uri':uri,'mimeType':'text/markdown','text':text}]}
             elif method == 'tools/call':
                 try:
                     name = params['name']; args = params.get('arguments', {})

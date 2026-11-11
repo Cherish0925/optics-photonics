@@ -8,7 +8,7 @@ import sys
 from . import __version__
 from .catalogue import resources
 
-HOSTS = ('agentic-research-os','codex','claude','deepseek','qiushi','mcp')
+HOSTS = ('agentic-research-os','codex','claude','deepseek','qiushi','mcp','portable')
 
 
 def shell_command(arguments):
@@ -41,7 +41,13 @@ def package(destination, host='mcp', python=None):
     skills = ['skills/'+p.name for p in sorted((target/'skills').iterdir()) if (p/'SKILL.md').exists()]
     descriptor = {'name':'optics-photonics', 'version':__version__,
                   'description':'Optical research environment: solvers, native programs and episode sampling', 'skills':skills}
-    if host == 'agentic-research-os':
+    if host == 'portable':
+        write(target/'plugin.json', {'$schema':'https://agent-plugins.org/schemas/1.0.0/plugin.schema.json',
+            **{k:v for k,v in descriptor.items() if k != 'skills'}, 'license':'MIT'})
+        write(target/'mcp.json', {'$schema':'https://agent-plugins.org/schemas/1.0.0/mcp.schema.json',
+            'mcpServers':{'optics':{'type':'stdio',**server}}})
+        instructions = 'Install this directory in a host supporting Agent Plugins. Skills and mcp.json are discovered at the package root. The selected interpreter and server path are explicit; regenerate after moving the directory.'
+    elif host == 'agentic-research-os':
         descriptor['mcpServers'] = {'optics':{'transport':'stdio','command':'${RESEARCH_PYTHON}',
             'args':['-B','${PACKAGE_ROOT}/server.py','mcp'], 'protocol_version':'2025-11-25'}}
         write(target/'plugin.json',descriptor)
@@ -67,6 +73,11 @@ def package(destination, host='mcp', python=None):
                     'config':{'serverName':'optics','transport':'stdio',**server,'env':{},'cwd':str(target)}}]}]
         # JSON is valid YAML and preserves Windows paths without manual escaping.
         write(target/'optics.cordis.yml',overlay)
+        write(target/'cordis.patch.yml',overlay)
+        write(target/'package.json', {'name':'dsh-optics-photonics','version':__version__,'description':descriptor['description'],
+            'type':'module','main':'index.js','license':'MIT','dsh':{'bundle':{'patch':'./cordis.patch.yml'}},
+            'peerDependencies':{'@deepseek-ai/dsh-mcp-client':'*'}})
+        (target/'index.js').write_text('export {}\n',encoding='utf-8')
         instructions = 'Start with:\n\n```'+('powershell' if os.name == 'nt' else 'sh')+'\n'+shell_command(['dsh','web','--patch',str(target/'optics.cordis.yml')])+'\n```\nFor persistent activation, merge the single insert patch into the profile’s cordis.patch.yml. Keep other profile entries. This uses DeepSeek’s native dsh-mcp-client, not a Claude configuration file.'
     elif host == 'qiushi':
         write(target/'plugin.json', {**descriptor,'mcpServers':{'optics':{'transport':'stdio',**server}}})

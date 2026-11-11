@@ -4,13 +4,9 @@ import os
 from pathlib import Path
 import signal
 import subprocess
-import time
 import uuid
-from . import environments
-
-
-class Cancelled(RuntimeError):
-    pass
+from . import environments, processes
+from .processes import Cancelled
 
 
 def binding(tool, path=None):
@@ -37,6 +33,7 @@ def stop_process(process):
 
 
 def run(tool, request, *, output=None, path=None, timeout=None, cancel=None, configuration=None):
+    if cancel and cancel(): raise Cancelled('Calculation cancelled')
     selected = configuration or binding(tool, path)
     directory = Path(output or environments.home(path)/'runs'/str(uuid.uuid4())).expanduser().resolve()
     directory.mkdir(parents=True, exist_ok=True)
@@ -51,27 +48,14 @@ def run(tool, request, *, output=None, path=None, timeout=None, cancel=None, con
     else:
         replacements = {'{request}': str(request_file), '{output}': str(directory), '{result}': str(directory/'result.json')}
         command = [replacements.get(arg, arg) for arg in selected['command']]
-    env = {**os.environ, **{name: str(selected['threads']) for name in ('OMP_NUM_THREADS','OPENBLAS_NUM_THREADS','MKL_NUM_THREADS','NUMEXPR_NUM_THREADS')},
+    env = {**os.environ, **selected.get('env', {}), **{name: str(selected['threads']) for name in ('OMP_NUM_THREADS','OPENBLAS_NUM_THREADS','MKL_NUM_THREADS','NUMEXPR_NUM_THREADS')},
            'OPTICS_REQUEST_FILE': str(request_file), 'OPTICS_OUTPUT_DIR': str(directory), 'OPTICS_RESULT_FILE': str(directory/'result.json')}
     env.pop('OPTICS_NATIVE_CONNECTION', None)
     if selected['kind'] == 'native': env['OPTICS_NATIVE_CONNECTION'] = str(directory/'native-connection.json')
-    options = {'creationflags': subprocess.CREATE_NEW_PROCESS_GROUP} if os.name == 'nt' else {'start_new_session': True}
-    started = time.monotonic()
-    with request_file.open('rb') as incoming, (directory/'stdout.txt').open('wb') as stdout, (directory/'stderr.txt').open('wb') as stderr:
-        process = subprocess.Popen(command, stdin=incoming, stdout=stdout, stderr=stderr,
-                                   cwd=selected.get('cwd') or directory, env=env, **options)
-        try:
-            while process.poll() is None:
-                if cancel and cancel():
-                    raise Cancelled('Calculation cancelled')
-                if timeout is not None and time.monotonic()-started >= timeout:
-                    raise TimeoutError(f'Calculation exceeded {timeout:g} seconds')
-                time.sleep(.05)
-        except BaseException:
-            stop_process(process)
-            raise
-    if process.returncode:
+    code = processes.execute(command, directory=directory, cwd=selected.get('cwd') or directory,
+                             env=env, timeout=timeout, cancel=cancel, stop=stop_process)
+    if code:
         message = (directory/'stderr.txt').read_text(encoding='utf-8', errors='replace')[-4000:]
-        raise RuntimeError(f'{tool} exited with code {process.returncode}. Output: {directory}\n{message}')
+        raise RuntimeError(f'{tool} exited with code {code}. Output: {directory}\n{message}')
     result = directory/'result.json'
     return {'output': str(directory), 'record': json.loads(result.read_text(encoding='utf-8')) if result.exists() else {'exit_code': 0}}

@@ -1,3 +1,6 @@
 include LICENSE README.md
 recursive-include data *.json
 recursive-include skills *.md *.yaml
+recursive-include src/optics_photonics/bin *
+
+recursive-include native/executor *.toml *.lock *.rs LICENSE

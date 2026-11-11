@@ -7,7 +7,7 @@ An independent package for optical software, native research programs, backgroun
 The connector supports Python 3.10+ on Windows, macOS and Linux. Each solver uses its own supported Python version, operating system and license. Different tools may use different environments.
 
 ```sh
-python -m pip install "git+https://github.com/Cherish0925/Optics-Photonics-AI-Lab.git@optics-v0.3.1"
+python -m pip install "git+https://github.com/Cherish0925/Optics-Photonics-AI-Lab.git@optics-v0.5.0"
 optics-photonics info tmm
 optics-photonics prepare tmm
 optics-photonics run tmm spectrum --inputs "@inputs.json"
@@ -145,3 +145,6 @@ environments.bind('lab-wave-model', python=sys.executable, threads=2, concurrenc
 Use `submit_calculation` or `submit_workflow` with this tool ID and a complete native program. For a C/C++/Java/Julia or other executable, register with `kind='command'`, then bind an executable/argument array. It receives `OPTICS_REQUEST_FILE`, `OPTICS_OUTPUT_DIR` and `OPTICS_RESULT_FILE`, exactly like other command adapters. A custom Python environment can also run `sample_episodes`.
 
 MCP exposes `register_software` and `registered_software`; `software_details` reads both published and locally registered software. Shell clients use `optics-photonics register-software @definition.json` and `registered-software`. Registration describes software; binding selects an installed interpreter or executable. Installation remains under the tool's own requirements and license. Keep files under the job's OUTPUT_DIR so parallel computations own separate outputs.
+
+`optics-photonics connect portable --output DIR` creates an Agent Plugins package with root plugin.json, mcp.json and skills/.
+MCP resources `optics://guides/optical-computation` and `optics://guides/optical-research` provide instructions on demand.

@@ -27,7 +27,7 @@
 仓库现提供可安装的连接器、完整原生程序执行、MCP 和研究 Skills。[接入说明](docs/CONNECT.zh-CN.md) · [交互指南](https://cherish0925.github.io/Optics-Photonics-AI-Lab/connect.zh.html) · [下载发布包](https://github.com/Cherish0925/Optics-Photonics-AI-Lab/releases)。
 
 ```sh
-python -m pip install "git+https://github.com/Cherish0925/Optics-Photonics-AI-Lab.git@optics-v0.4.0"
+python -m pip install "git+https://github.com/Cherish0925/Optics-Photonics-AI-Lab.git@optics-v0.5.0"
 optics-photonics prepare tmm
 optics-photonics connect agentic-research-os --output optics-plugin
 ```
@@ -40,7 +40,7 @@ optics-photonics connect agentic-research-os --output optics-plugin
 
 ## 研究任务与并行采样
 
-0.4.0 新增在原生计算进程内连续执行完整 episode 的能力。研究程序定义环境和策略，通过 `sample_episodes`、Python SDK 或 `optics-photonics sample` 提交。各进程独立运行，沿用已有 CPU 与软件并发配置；保存任务和策略版本、随机种子、动作、观测、奖励及结束原因。数值数组保留为独立文件。
+0.5.0 新增在原生计算进程内连续执行完整 episode 的能力。研究程序定义环境和策略，通过 `sample_episodes`、Python SDK 或 `optics-photonics sample` 提交。各进程独立运行，沿用已有 CPU 与软件并发配置；保存任务和策略版本、随机种子、动作、观测、奖励及结束原因。数值数组保留为独立文件。
 
 [接口与可运行的薄膜计算示例](docs/LEARNING.md)。各宿主插件包含同一实现，独立于 IOP。仓库改名后，软件包名、命令、插件 ID 和本地计算环境保持兼容。
 
@@ -117,3 +117,13 @@ python -m http.server 8000 --directory docs
 资料核查日期为 **2026-10-20**，依据厂商文档、维护者仓库、许可证与作者资料。每项保留应用依据、模型条件和来源链接。
 
 本项目原创代码与目录说明采用 [MIT](LICENSE) 许可。被收录软件、外部文档、PDK 和数据仍遵循各自许可；内嵌字体采用 [SIL OFL 1.1](docs/assets/FONT_LICENSE.txt)。详见 [NOTICE](NOTICE)。
+
+## 0.5.0 执行与接入
+
+Rust 执行器管理程序及其子进程，TypeScript 客户端连接研究宿主，Python 保留科学 SDK 和任务组织，SQLite 保存任务与资源分配。任务完成即通知调度器；CPU、GPU 和许可证等资源可跨研究任务共享。目录之外的程序使用相同机制。
+
+[执行方式与 TypeScript](docs/EXECUTION.md) · [安装与连接](docs/CONNECT.zh-CN.md)
+
+DeepSeek 项目索引：
+https://raw.githubusercontent.com/Cherish0925/Optics-Photonics-AI-Lab/main/docs/dsh/index.json
+通用连接使用已安装的 `optics-photonics mcp`；指定 Python 或目录时运行 `connect deepseek`。

@@ -18,6 +18,7 @@ import uuid
 if __package__ in (None, ''):
     sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from optics_photonics import environments, execution
+from optics_photonics.signals import Cancellation, Wakeup, notify
 
 TERMINAL = {'succeeded', 'failed', 'cancelled', 'blocked', 'interrupted'}
 
@@ -50,6 +51,13 @@ def database(path=None):
     ''')
         db.execute("INSERT OR IGNORE INTO settings VALUES('cpu',?)", (cores(),))
         db.execute('PRAGMA user_version=1')
+        db.commit()
+    if db.execute('PRAGMA user_version').fetchone()[0] < 2:
+        db.executescript('''
+        CREATE TABLE IF NOT EXISTS pools(name TEXT PRIMARY KEY, capacity INTEGER NOT NULL);
+        CREATE TABLE IF NOT EXISTS wakeups(id TEXT PRIMARY KEY, port INTEGER NOT NULL, expires REAL NOT NULL);
+        PRAGMA user_version=2;
+        ''')
         db.commit()
     try:
         yield db
@@ -105,14 +113,15 @@ def validate(steps, previous=None):
         s = dict(item)
         identifier(s.get('id'))
         if s['id'] in graph: raise ValueError('Duplicate step ID: '+s['id'])
-        if set(s)-{'id','tool','action','source','inputs','after','bindings','timeout'}:
-            raise ValueError('A step accepts id, tool, action, source, inputs, after, bindings and timeout')
+        if set(s)-{'id','tool','action','source','inputs','after','bindings','timeout','requirements'}:
+            raise ValueError('A step accepts id, tool, action, source, inputs, after, bindings, requirements and timeout')
         if not isinstance(s.get('tool'), str): raise ValueError('Each step needs a software tool ID')
         if not isinstance(s.get('inputs', {}), dict): raise ValueError('inputs must be an object')
         if not isinstance(s.get('after', []), list): raise ValueError('after must be a list of step IDs')
         if not isinstance(s.get('bindings', {}), dict): raise ValueError('bindings must be an object')
         if s.get('timeout') is not None and (isinstance(s['timeout'], bool) or not isinstance(s['timeout'], (int,float)) or s['timeout'] <= 0):
             raise ValueError('timeout must be positive seconds')
+        quantities(s.get('requirements', {}))
         s.setdefault('after', [])
         for key, reference in s.get('bindings', {}).items():
             if not isinstance(reference, dict) or set(reference)-{'step','path'} or not isinstance(reference.get('step'),str):
@@ -121,11 +130,25 @@ def validate(steps, previous=None):
             if reference['step'] not in s['after']: s['after'].append(reference['step'])
         graph[s['id']] = s['after']
         result.append(s)
-    remaining = dict(graph)
-    while remaining:
-        ready = [key for key, deps in remaining.items() if all(dep in graph and dep not in remaining for dep in deps)]
-        if not ready: raise ValueError('Workflow contains a cycle or an unknown predecessor')
-        for key in ready: del remaining[key]
+    # Kahn's traversal is linear even for a long sequential experiment.
+    from collections import deque
+    children = {key: [] for key in graph}
+    degree = {}
+    for key, deps in graph.items():
+        unique = set(deps)
+        if any(dep not in graph for dep in unique):
+            raise ValueError('Workflow contains an unknown predecessor')
+        degree[key] = len(unique)
+        for dep in unique:
+            children[dep].append(key)
+    ready = deque(key for key, count in degree.items() if not count)
+    visited = 0
+    while ready:
+        visited += 1
+        for child in children[ready.popleft()]:
+            degree[child] -= 1
+            if not degree[child]: ready.append(child)
+    if visited != len(graph): raise ValueError('Workflow contains a cycle')
     return result
 
 
@@ -169,6 +192,10 @@ def submit(steps, name='Optical research', request_id=None, run_id=None, path=No
                 environment = (_environments or {}).get(spec['tool']) or execution.binding(spec['tool'], path)
                 if environment['threads'] > capacity:
                     raise ValueError(f"{spec['tool']} requests {environment['threads']} CPU threads; configured capacity is {capacity}")
+                limits = dict(db.execute('SELECT name,capacity FROM pools'))
+                for resource, count in requirements(spec, environment).items():
+                    if count > limits.get(resource, 0):
+                        raise ValueError('Configure sufficient capacity for resource: '+resource)
                 prepared.append((result_id,spec['id'],encoded(spec),encoded(environment),'queued'))
             if not existing:
                 db.execute('INSERT INTO runs(id,name,state,created) VALUES(?,?,?,?)', (result_id,name,'queued',time.time()))
@@ -176,6 +203,7 @@ def submit(steps, name='Optical research', request_id=None, run_id=None, path=No
                 db.execute("UPDATE runs SET state=CASE WHEN state='running' THEN state ELSE 'queued' END,finished=NULL WHERE id=?", (result_id,))
             db.executemany('INSERT INTO steps(run_id,id,specification,environment,state) VALUES(?,?,?,?,?)', prepared)
             db.execute('INSERT INTO requests VALUES(?,?,?)', (key,payload,result_id))
+    notify(path)
     start_worker(result_id, path)
     return {'run_id':result_id, 'request_id':key}
 
@@ -198,7 +226,16 @@ def reconcile(path=None):
                 db.execute("UPDATE runs SET state='interrupted',finished=? WHERE id=? AND state='running'", (time.time(),run_id))
 
 
-def status(run_id, path=None, offset=0, limit=50):
+def status(run_id, path=None, offset=0, limit=50, include_results=True, wait=0):
+    if not 0 <= wait <= 25: raise ValueError("wait must be between 0 and 25 seconds")
+    if wait:
+        deadline = time.monotonic()+wait
+        with Wakeup(path) as wake:
+            while True:
+                result = status(run_id, path, offset, limit, include_results)
+                remaining = deadline-time.monotonic()
+                if result["state"] in TERMINAL or remaining <= 0: return result
+                wake.wait(min(remaining, 2))
     identifier(run_id)
     if offset < 0 or not 1 <= limit <= 200: raise ValueError('Use offset >= 0 and limit between 1 and 200')
     reconcile(path)
@@ -207,8 +244,13 @@ def status(run_id, path=None, offset=0, limit=50):
         if not row: raise ValueError('Unknown run: '+run_id)
         result = dict(row)
         result['counts'] = dict(db.execute('SELECT state,count(*) FROM steps WHERE run_id=? GROUP BY state', (run_id,)))
-        items = db.execute('SELECT id,state,result,error,started,finished,attempt FROM steps WHERE run_id=? ORDER BY rowid LIMIT ? OFFSET ?', (run_id,limit+1,offset)).fetchall()
+        projection = 'result' if include_results else 'NULL AS result'
+        items = db.execute(f'SELECT id,state,{projection},error,started,finished,attempt FROM steps WHERE run_id=? ORDER BY rowid LIMIT ? OFFSET ?', (run_id,limit+1,offset)).fetchall()
         result['steps'] = [{**dict(s), 'result':json.loads(s['result']) if s['result'] else None} for s in items[:limit]]
+        if not include_results:
+            for item in result['steps']:
+                item.pop('result', None)
+                item['output'] = item['id']+'/attempt-'+str(item['attempt'])+'/'
         result['next_offset'] = offset+limit if len(items)>limit else None
     if result['state']=='queued': start_worker(run_id, path)
     return result
@@ -227,6 +269,7 @@ def cancel(run_id, path=None):
     with database(path) as db:
         if not db.execute('SELECT 1 FROM runs WHERE id=?', (run_id,)).fetchone(): raise ValueError('Unknown run: '+run_id)
         db.execute('UPDATE runs SET cancel=1 WHERE id=?', (run_id,))
+    notify(path)
     start_worker(run_id, path)
     return {'run_id':run_id,'cancel_requested':True}
 
@@ -243,14 +286,39 @@ def resume(run_id, path=None):
     return {'run_id':run_id,'resumed':True}
 
 
-def resources(cpu=None, path=None):
+def quantities(value):
+    if not isinstance(value, dict) or any(not isinstance(k, str) or not k.strip() or
+        k == 'cpu' or type(v) is not int or v < 1 for k, v in value.items()):
+        raise ValueError('Resource pools need names and positive integer quantities; CPU uses threads')
+    return value
+
+
+def requirements(spec, config):
+    result = dict(quantities(config.get('requirements', {})))
+    for name, count in quantities(spec.get('requirements', {})).items():
+        result[name] = max(count, result.get(name, 0))
+    return result
+
+
+def resources(cpu=None, pools=None, path=None):
+    if pools is not None: quantities(pools)
     with database(path) as db:
+        db.execute('BEGIN IMMEDIATE')
+        pending = [(json.loads(r[0]), json.loads(r[1])) for r in db.execute(
+            "SELECT specification,environment FROM steps WHERE state IN ('queued','running')")]
         if cpu is not None:
             if type(cpu) is not int or cpu < 1: raise ValueError('cpu must be a positive integer')
-            pending=[json.loads(r[0])['threads'] for r in db.execute("SELECT environment FROM steps WHERE state='queued'")]
-            if pending and max(pending)>cpu: raise ValueError('A queued calculation requires more threads than this capacity')
+            if any(c['threads'] > cpu for s, c in pending):
+                raise ValueError('A pending calculation requires more CPU threads than this capacity')
             db.execute("UPDATE settings SET value=? WHERE key='cpu'", (cpu,))
-        return {'cpu':db.execute("SELECT value FROM settings WHERE key='cpu'").fetchone()[0]}
+        for name, count in (pools or {}).items():
+            if any(requirements(s, c).get(name, 0) > count for s, c in pending):
+                raise ValueError('A pending calculation requires more capacity for: '+name)
+            db.execute('INSERT INTO pools VALUES(?,?) ON CONFLICT(name) DO UPDATE SET capacity=excluded.capacity', (name,count))
+        result = {'cpu':db.execute("SELECT value FROM settings WHERE key='cpu'").fetchone()[0],
+                  'pools':dict(db.execute('SELECT name,capacity FROM pools'))}
+    if cpu is not None or pools is not None: notify(path)
+    return result
 
 
 def file_path(run_id, file, path=None):
@@ -300,16 +368,19 @@ def resolved_inputs(spec, results):
     return inputs
 
 
-def perform(run_id, row, path):
+def perform(run_id, row, path, cancellation):
     spec, config = json.loads(row['specification']), json.loads(row['environment'])
     output = environments.home(path)/'runs'/run_id/row['id']/('attempt-'+str(row['attempt']))
-    def cancelled():
-        with database(path) as db: return bool(db.execute('SELECT cancel FROM runs WHERE id=?',(run_id,)).fetchone()[0])
     try:
         with database(path) as db:
-            results = {r['id']:json.loads(r['result']) for r in db.execute("SELECT id,result FROM steps WHERE run_id=? AND state='succeeded'",(run_id,))}
+            results = {}
+            for reference in spec.get('bindings', {}).values():
+                key = reference['step']
+                if key not in results:
+                    row_result = db.execute("SELECT result FROM steps WHERE run_id=? AND id=? AND state='succeeded'",(run_id,key)).fetchone()
+                    results[key] = json.loads(row_result[0])
         request = {'action':spec.get('action',''),'source':spec.get('source',''),'inputs':resolved_inputs(spec,results)}
-        result = execution.run(spec['tool'],request,output=output,configuration=config,timeout=spec.get('timeout'),cancel=cancelled)
+        result = execution.run(spec['tool'],request,output=output,configuration=config,timeout=spec.get('timeout'),cancel=cancellation)
         record = result['record']
         result = {'output':result['output'], **record} if isinstance(record,dict) and 'result' in record else {'output':result['output'],'result':record}
         state, error = 'succeeded', None
@@ -329,14 +400,16 @@ def work(run_id, path):
             run = db.execute('SELECT state FROM runs WHERE id=?',(run_id,)).fetchone()
             if not run or run[0] in TERMINAL: return
             db.execute("UPDATE runs SET state='running',launched=0 WHERE id=?",(run_id,))
-        with ThreadPoolExecutor(max_workers=resources(path=path)['cpu']) as pool:
+        with Wakeup(path) as wake, ThreadPoolExecutor(max_workers=resources(path=path)['cpu']) as pool:
             pending = {}
+            cancellation = Cancellation()
             while True:
                 for key, future in list(pending.items()):
                     if future.done(): future.result(); del pending[key]
                 with database(path) as db:
                     db.execute('BEGIN IMMEDIATE')
                     cancelled = db.execute('SELECT cancel FROM runs WHERE id=?',(run_id,)).fetchone()[0]
+                    if cancelled: cancellation.set()
                     rows = db.execute('SELECT * FROM steps WHERE run_id=? ORDER BY rowid',(run_id,)).fetchall()
                     states = {r['id']:r['state'] for r in rows}
                     if all(s in TERMINAL for s in states.values()):
@@ -347,21 +420,32 @@ def work(run_id, path):
                     used = sum(c['threads'] for s,c in active)
                     counts = Counter(s['tool'] for s,c in active)
                     cpu = db.execute("SELECT value FROM settings WHERE key='cpu'").fetchone()[0]
+                    limits = dict(db.execute('SELECT name,capacity FROM pools'))
+                    occupied = Counter()
+                    for spec, config in active: occupied.update(requirements(spec, config))
                     ready = []
+                    changed = False
                     for row in rows:
                         if row['state'] != 'queued': continue
                         spec, config = json.loads(row['specification']),json.loads(row['environment'])
                         if cancelled:
-                            db.execute("UPDATE steps SET state='cancelled',finished=? WHERE run_id=? AND id=?",(time.time(),run_id,row['id'])); continue
+                            db.execute("UPDATE steps SET state='cancelled',finished=? WHERE run_id=? AND id=?",(time.time(),run_id,row['id'])); changed=True; continue
                         if any(states[d] in TERMINAL-{'succeeded'} for d in spec['after']):
-                            db.execute("UPDATE steps SET state='blocked',error='A predecessor did not complete',finished=? WHERE run_id=? AND id=?",(time.time(),run_id,row['id'])); continue
+                            db.execute("UPDATE steps SET state='blocked',error='A predecessor did not complete',finished=? WHERE run_id=? AND id=?",(time.time(),run_id,row['id'])); changed=True; continue
                         if not all(states[d]=='succeeded' for d in spec['after']): continue
                         concurrency = min([config['concurrency']]+[c['concurrency'] for s,c in active if s['tool']==spec['tool']])
                         if used+config['threads']>cpu or counts[spec['tool']]>=concurrency: continue
+                        needed = requirements(spec, config)
+                        if any(occupied[name]+count > limits.get(name,0) for name,count in needed.items()): continue
+                        occupied.update(needed)
                         db.execute("UPDATE steps SET state='running',started=? WHERE run_id=? AND id=?",(time.time(),run_id,row['id']))
                         used+=config['threads']; counts[spec['tool']]+=1; active.append((spec,config)); ready.append(dict(row))
-                for row in ready: pending[row['id']]=pool.submit(perform,run_id,row,path)
-                time.sleep(.1)
+                for row in ready:
+                    future = pool.submit(perform,run_id,row,path,cancellation)
+                    pending[row['id']] = future
+                    future.add_done_callback(lambda _: notify(path))
+                if not changed: wake.wait()
+    notify(path)
     with database(path) as db:
         restart = db.execute("SELECT state FROM runs WHERE id=?",(run_id,)).fetchone()[0]=='queued'
     if restart: start_worker(run_id,path)

@@ -1,12 +1,9 @@
-# Optics-Photonics AI Lab 0.4.0
+# Optics-Photonics-AI-Lab 0.5.0
 
-The repository now uses its independent environment name, Optics-Photonics-AI-Lab. Existing Python imports, CLI commands, plugin IDs and saved software bindings remain unchanged.
+Calculations now wake the scheduler when they finish. Native Rust execution owns program process trees and handles cancellation and duration limits, with scientific output going directly to files. Universal release packages include six native executors: Windows/macOS/Linux on x86_64/ARM64.
 
-- Register research libraries and executable solvers outside the published catalogue. Bind their installed environments and use the same native programs, background jobs and result interfaces.
-- Collect complete research episodes in native worker processes through Python, CLI or MCP. Programs define their environment and policy using the Gymnasium reset/step interface.
-- Distribute disjoint episode IDs across workers while preserving the same seed for each episode. Existing CPU and per-software concurrency limits apply.
-- Save ordered observations, actions, scalar rewards and termination information as JSON Lines, with typed NumPy arrays in separate files. Read results incrementally and retain completed records if a later episode fails.
-- Include a runnable broadband dielectric-coating environment using TMM and Gymnasium, with explicit material assumptions and power-balance output.
-- Update repository and installation links after the rename. Research OS and other generated host packages carry the same source and Skills.
+CPU, GPU slots, solver licenses and other named capacities are shared across research runs. Local software outside the catalogue supports the same resource requirements, environment variables, background execution and saved results. Dependency validation is linear in the graph size.
 
-IOP is not a dependency. Native solver installations and licenses remain associated with the computing host. Sampling is local worker parallelism; distributed learner coordination and solver-specific state restoration remain with the research program and learning framework.
+MCP returns compact status by default, waits up to 25 seconds for completion, and lists configured environments by page without launching every interpreter. The new TypeScript client submits research programs and reconnects to their saved runs. MCP resources serve scientific operating guides on demand.
+
+Connection generation includes portable Agent Plugins packages and DeepSeek bundle metadata, alongside Codex, Claude Code, Research OS, Qiushi and ordinary MCP configurations. Existing scientific environments, software descriptions and research data remain in place.

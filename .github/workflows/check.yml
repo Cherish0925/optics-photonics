@@ -33,6 +33,13 @@ jobs:
           cache: pip
       - run: python -m pip install -e ".[rl]" build mcp -r requirements-science.txt
       - run: python -m unittest discover -s tests -v
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci
+        working-directory: clients/typescript
+      - run: npm test
+        working-directory: clients/typescript
       - run: python scripts/check_standalone_connection.py
       - run: python -m build
       - name: Install wheel outside the checkout
@@ -45,6 +52,40 @@ jobs:
           "$PY" -m optics_photonics search tmm
           "$PY" -m optics_photonics connect agentic-research-os --output "$RUNNER_TEMP/optics-plugin"
           "$PY" "$RUNNER_TEMP/optics-plugin/server.py" info tmm
+  native:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-22.04, ubuntu-22.04-arm, windows-2022, windows-11-arm, macos-15, macos-15-intel]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: dtolnay/rust-toolchain@stable
+      - run: cargo build --release --locked --manifest-path native/executor/Cargo.toml
+      - name: Include platform executor
+        shell: python
+        run: |
+          import os, platform, shutil
+          from pathlib import Path
+          system = platform.system().lower()
+          machine = platform.machine().lower()
+          arch = {'amd64':'x86_64','aarch64':'arm64'}.get(machine,machine)
+          name = 'optics-execd.exe' if system == 'windows' else 'optics-execd'
+          target = Path('src/optics_photonics/bin') / (system+'-'+arch)
+          target.mkdir(parents=True)
+          shutil.copy2(Path('native/executor/target/release')/name, target/name)
+          with open(os.environ['GITHUB_ENV'],'a') as stream:
+              stream.write('PYTHONPATH='+str(Path('src').resolve())+'\n')
+      - run: python -m unittest discover -s tests -p test_jobs.py -v
+      - run: python -m unittest discover -s tests -p test_shared_resources.py -v
+      - run: python -m unittest discover -s tests -p test_executor.py -v
+      - uses: actions/upload-artifact@v4
+        with:
+          name: optics-native-${{ matrix.os }}
+          path: src/optics_photonics/bin/
   python-minimum:
     runs-on: ubuntu-latest
     steps:
@@ -56,7 +97,7 @@ jobs:
       - run: python -m unittest discover -s tests
   release:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    needs: [catalogue, connections, python-minimum]
+    needs: [catalogue, connections, python-minimum, native]
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -65,8 +106,18 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: optics-native-*
+          merge-multiple: true
+          path: src/optics_photonics/bin
       - run: python -m pip install build
       - run: python -m build
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci && npm run build && npm pack --pack-destination ../../dist
+        working-directory: clients/typescript
       - run: python scripts/package_release.py
       - name: Publish versioned packages
         env:
@@ -78,5 +129,5 @@ jobs:
           if gh release view "$TAG" >/dev/null 2>&1; then
             echo "Version already published; retain its original packages."
           else
-            gh release create "$TAG" dist/*.whl dist/*.tar.gz dist/*.zip --target "$GITHUB_SHA" --title "Optics & Photonics $VERSION" --notes-file docs/RELEASE.md
+            gh release create "$TAG" dist/*.whl dist/*.tar.gz dist/*.zip dist/*.tgz --target "$GITHUB_SHA" --title "Optics & Photonics $VERSION" --notes-file docs/RELEASE.md
           fi

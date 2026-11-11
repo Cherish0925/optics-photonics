@@ -23,8 +23,8 @@ def main(argv=None):
     commands.add_parser('registered-software')
     env = commands.add_parser('environments')
     discovery = commands.add_parser('discover'); discovery.add_argument('--root', dest='roots', action='append')
-    native_bind = commands.add_parser('bind-native'); native_bind.add_argument('tool'); native_bind.add_argument('--python'); native_bind.add_argument('--sdk-path'); native_bind.add_argument('--options', type=object_argument, default={}); native_bind.add_argument('--threads', type=int, default=1); native_bind.add_argument('--concurrency', type=int, default=1)
-    bind = commands.add_parser('bind'); bind.add_argument('tool'); choice=bind.add_mutually_exclusive_group(required=True); choice.add_argument('--python'); choice.add_argument('--command-json',type=object_argument); bind.add_argument('--threads',type=int,default=1); bind.add_argument('--concurrency',type=int,default=1); bind.add_argument('--cwd')
+    native_bind = commands.add_parser('bind-native'); native_bind.add_argument('tool'); native_bind.add_argument('--python'); native_bind.add_argument('--sdk-path'); native_bind.add_argument('--options', type=object_argument, default={}); native_bind.add_argument('--threads', type=int, default=1); native_bind.add_argument('--concurrency', type=int, default=1); native_bind.add_argument('--requirements', type=object_argument); native_bind.add_argument('--env', type=object_argument)
+    bind = commands.add_parser('bind'); bind.add_argument('tool'); choice=bind.add_mutually_exclusive_group(required=True); choice.add_argument('--python'); choice.add_argument('--command-json',type=object_argument); bind.add_argument('--threads',type=int,default=1); bind.add_argument('--concurrency',type=int,default=1); bind.add_argument('--cwd'); bind.add_argument('--requirements',type=object_argument); bind.add_argument('--env',type=object_argument)
     prep = commands.add_parser('prepare'); prep.add_argument('tool'); prep.add_argument('--python')
     for name in ('run','submit'):
         run = commands.add_parser(name); run.add_argument('tool'); run.add_argument('action',nargs='?',default=''); run.add_argument('--inputs',type=object_argument,default={}); run.add_argument('--program',type=Path)
@@ -36,12 +36,14 @@ def main(argv=None):
     sample.add_argument('--max-steps', type=int, default=1000); sample.add_argument('--seed', type=int, default=0)
     sample.add_argument('--inputs', type=object_argument, default={}); sample.add_argument('--options', type=object_argument, default={})
     sample.add_argument('--request-id'); sample.add_argument('--timeout', type=float)
-    resources=commands.add_parser('resources'); resources.add_argument('--cpu',type=int)
+    resources=commands.add_parser('resources'); resources.add_argument('--cpu',type=int); resources.add_argument('--pools',type=object_argument)
     workflow=commands.add_parser('submit-workflow'); workflow.add_argument('file',type=Path,help='JSON file containing a top-level array of steps; each step needs id and tool'); workflow.add_argument('--name',default='Optics research'); workflow.add_argument('--request-id'); workflow.add_argument('--run-id')
     for name in ('status','files','cancel','resume'):
         item=commands.add_parser(name); item.add_argument('run_id')
         if name in ('status','files'):
             item.add_argument('--offset',type=int,default=0); item.add_argument('--limit',type=int,default=50 if name=='status' else 100)
+        if name == 'status':
+            item.add_argument('--wait',type=float,default=0); item.add_argument('--summary',dest='include_results',action='store_false')
     download=commands.add_parser('download'); download.add_argument('run_id'); download.add_argument('file'); download.add_argument('destination')
     read=commands.add_parser('read'); read.add_argument('run_id'); read.add_argument('file'); read.add_argument('--offset',type=int,default=0); read.add_argument('--limit',type=int,default=16384)
     runs=commands.add_parser('runs'); runs.add_argument('--state'); runs.add_argument('--offset',type=int,default=0); runs.add_argument('--limit',type=int,default=20)

@@ -7,7 +7,7 @@ Optics & Photonics 独立提供光学软件连接、原生研究程序、后台�
 连接程序使用 Python 3.10+，支持 Windows、macOS、Linux。科学软件使用各自支持的 Python、系统与许可；可以为每个软件连接不同的环境。
 
 ```sh
-python -m pip install "git+https://github.com/Cherish0925/Optics-Photonics-AI-Lab.git@optics-v0.3.1"
+python -m pip install "git+https://github.com/Cherish0925/Optics-Photonics-AI-Lab.git@optics-v0.5.0"
 optics-photonics search "thin film" --license-group open
 optics-photonics info tmm
 optics-photonics prepare tmm
@@ -144,3 +144,6 @@ environments.bind('lab-wave-model', python=sys.executable, threads=2, concurrenc
 ```
 
 随后用该 ID 提交完整研究程序、并行工作流或 episode 采样。C/C++、Java、Julia 等可执行程序使用 `kind='command'` 登记并绑定命令数组，沿用请求文件、输出目录和 JSON 结果接口。程序应将输出写入该任务的 OUTPUT_DIR，避免并行计算共享临时文件。登记不代替软件本身的安装与许可。
+
+`optics-photonics connect portable --output DIR` creates an Agent Plugins package with root plugin.json, mcp.json and skills/.
+MCP resources `optics://guides/optical-computation` and `optics://guides/optical-research` provide instructions on demand.

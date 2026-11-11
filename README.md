@@ -28,7 +28,7 @@ installation is needed. [Other hosts and updates](docs/CONNECT.md#install-from-a
 The repository now includes an installable connector, native-program execution, MCP and research Skills. [Connection guide](docs/CONNECT.md) · [Interactive guide](https://cherish0925.github.io/Optics-Photonics-AI-Lab/connect.html) · [Release packages](https://github.com/Cherish0925/Optics-Photonics-AI-Lab/releases).
 
 ```sh
-python -m pip install "git+https://github.com/Cherish0925/Optics-Photonics-AI-Lab.git@optics-v0.4.0"
+python -m pip install "git+https://github.com/Cherish0925/Optics-Photonics-AI-Lab.git@optics-v0.5.0"
 optics-photonics prepare tmm
 optics-photonics connect agentic-research-os --output optics-plugin
 ```
@@ -41,7 +41,7 @@ The environment also accepts locally developed or externally installed tools bey
 
 ## Research episodes and parallel sampling
 
-Version 0.4.0 adds complete episode sampling inside native software workers. Define a Gymnasium-style environment and policy in a Python program; submit it through `sample_episodes`, the Python SDK or `optics-photonics sample`. Workers share the existing CPU and software concurrency settings. Every episode retains its task/policy version, deterministic seed, actions, observations, reward and termination state. Arrays remain typed numerical files.
+Version 0.5.0 adds complete episode sampling inside native software workers. Define a Gymnasium-style environment and policy in a Python program; submit it through `sample_episodes`, the Python SDK or `optics-photonics sample`. Workers share the existing CPU and software concurrency settings. Every episode retains its task/policy version, deterministic seed, actions, observations, reward and termination state. Arrays remain typed numerical files.
 
 [Episode API and executable coating example](docs/LEARNING.md). Research OS and other host bundles include the same implementation. The package remains independent of IOP. Existing package names, commands, plugin IDs and stored software environments are unchanged after the repository rename.
 
@@ -130,3 +130,13 @@ Reviewed **2026-10-20** against vendor documentation, maintainer repositories, l
 Useful contributions include missing tools, primary-source corrections, license changes, new interfaces, reproducible examples and translation improvements. See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 **License:** original project code and catalogue descriptions are [MIT](LICENSE). Referenced software, documentation, PDKs and data retain their own licenses. The embedded Noto-derived font subset is [SIL OFL 1.1](docs/assets/FONT_LICENSE.txt). See [NOTICE](NOTICE).
+
+## Execution and connections in 0.5.0
+
+Rust owns native processes, TypeScript connects research hosts, Python hosts scientific SDKs and job coordination, and SQLite retains tasks and resource allocation. Completion wakes scheduling. Named GPU/license capacities are shared across runs; software outside the catalogue uses the same mechanism.
+
+[Execution and TypeScript](docs/EXECUTION.md) · [Installation](docs/CONNECT.md)
+
+DeepSeek project index:
+https://raw.githubusercontent.com/Cherish0925/Optics-Photonics-AI-Lab/main/docs/dsh/index.json.
+The general connection uses the installed `optics-photonics mcp`; generate a `connect deepseek` package for a specific interpreter or directory.

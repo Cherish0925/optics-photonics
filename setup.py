@@ -13,6 +13,9 @@ class Build(build_py):
         for directory in ('data', 'skills'):
             shutil.copytree(root / directory, target / directory, dirs_exist_ok=True)
         shutil.copy2(root / 'LICENSE', target / 'LICENSE')
+        binaries = root / 'src/optics_photonics/bin'
+        if binaries.is_dir():
+            shutil.copytree(binaries, Path(self.build_lib)/'optics_photonics/bin', dirs_exist_ok=True)
 
 
 setup(cmdclass={'build_py': Build})

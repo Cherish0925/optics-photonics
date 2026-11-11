@@ -94,7 +94,7 @@ print(json.dumps({'python':sys.executable,'modules':found,'importable':all(found
     return json.loads(result.stdout.strip().splitlines()[-1])
 
 
-def bind(tool, *, python=None, sdk_path=None, options=None, threads=1, concurrency=1, path=None):
+def bind(tool, *, python=None, sdk_path=None, options=None, threads=1, concurrency=1, path=None, requirements=None, env=None):
     if tool not in ADAPTERS:
         raise ValueError('Native session adapters: ' + ', '.join(ADAPTERS))
     if platform.system() not in ADAPTERS[tool]['platforms']:
@@ -118,6 +118,11 @@ def bind(tool, *, python=None, sdk_path=None, options=None, threads=1, concurren
         if not Path(sdk_path).is_dir(): raise ValueError('SDK directory does not exist')
     connection = {'kind': 'native', 'adapter': tool, 'python': os.path.abspath(os.path.expanduser(str(python or sys.executable))),
                   'sdk_path': sdk_path, 'options': settings, 'threads': threads, 'concurrency': concurrency, 'cwd': None}
+    from .jobs import quantities
+    quantities(requirements or {})
+    if env is not None and (not isinstance(env, dict) or any(not isinstance(k,str) or not isinstance(v,str) for k,v in env.items())):
+        raise ValueError('env must map environment variable names to strings')
+    connection.update(requirements=requirements or {}, env=env or {})
     inspected = probe(connection)
     if not inspected['importable']:
         raise ValueError('Missing SDK modules: ' + ', '.join(k for k, v in inspected['modules'].items() if not v))

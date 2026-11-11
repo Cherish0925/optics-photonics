@@ -1,0 +1,22 @@
+{
+  "name": "dsh-optics-photonics",
+  "version": "0.5.0",
+  "description": "Optics-Photonics research environment",
+  "type": "module",
+  "main": "index.js",
+  "license": "MIT",
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Cherish0925/Optics-Photonics-AI-Lab",
+    "directory": "connect/deepseek"
+  },
+  "files": [
+    "index.js",
+    "cordis.patch.yml"
+  ]
+}

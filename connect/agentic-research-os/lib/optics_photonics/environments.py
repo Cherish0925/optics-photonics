@@ -120,7 +120,8 @@ print(json.dumps({'python':sys.executable,'python_version':sys.version.split()[0
     return status
 
 
-def bind(tool, *, python=None, command=None, path=None, threads=1, concurrency=1, cwd=None):
+def bind(tool, *, python=None, command=None, path=None, threads=1, concurrency=1, cwd=None,
+         requirements=None, env=None):
     item = software(tool, path=path)
     if type(threads) is not int or threads < 1 or type(concurrency) is not int or concurrency < 1:
         raise ValueError('threads and concurrency must be positive integers')
@@ -143,7 +144,13 @@ def bind(tool, *, python=None, command=None, path=None, threads=1, concurrency=1
         cwd = str(Path(cwd).expanduser().resolve())
         if not Path(cwd).is_dir():
             raise ValueError('Working directory does not exist')
-    connection.update(threads=threads, concurrency=concurrency, cwd=cwd)
+    from .jobs import quantities
+    quantities(requirements or {})
+    if env is not None and (not isinstance(env, dict) or any(not isinstance(k, str) or
+        not isinstance(v, str) for k, v in env.items())):
+        raise ValueError('env must map environment variable names to strings')
+    connection.update(threads=threads, concurrency=concurrency, cwd=cwd,
+                      requirements=requirements or {}, env=env or {})
     if item.get('origin') == 'local':
         connection['definition'] = item
     with editing(path):
@@ -185,3 +192,26 @@ def available(path=None):
             item['environment'] = {'available': False, 'error': str(error)}
         entries.append(item)
     return entries
+
+
+def page(tool=None, offset=0, limit=20, refresh=False, path=None):
+    """Read connection summaries without starting every scientific interpreter."""
+    if offset < 0 or not 1 <= limit <= 100: raise ValueError('Use offset >= 0 and limit from 1 to 100')
+    configured = read(path)['tools']
+    keys = sorted(k for k in configured if tool is None or k == tool)
+    items = []
+    for key in keys[offset:offset+limit]:
+        connection = configured[key]
+        row = {'id':key, **{k:v for k,v in connection.items() if k in ('kind','threads','concurrency','requirements','versions')}}
+        row['state'] = 'configured'
+        if refresh:
+            try:
+                if connection['kind'] == 'python': row['environment'] = probe(key, connection['python'], path)
+                elif connection['kind'] == 'native':
+                    from . import native
+                    row['environment'] = native.probe(connection)
+                else: row['environment'] = {'available':bool(shutil.which(connection['command'][0]))}
+            except (OSError, ValueError, RuntimeError, subprocess.SubprocessError) as error:
+                row['environment'] = {'available':False, 'error':str(error)}
+        items.append(row)
+    return {'environments':items, 'total':len(keys), 'next_offset':offset+limit if offset+limit<len(keys) else None}

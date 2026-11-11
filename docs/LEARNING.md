@@ -69,3 +69,27 @@ for record in records('PATH/TO/samples', arrays=True):
 `resume_run` preserves completed worker steps and reruns unfinished worker steps in a new attempt. It does not restore the internal state of an interrupted solver. Assemble a dataset from one chosen attempt per episode; do not concatenate retries as additional independent episodes. Software that supports state restoration can implement it explicitly in its research program.
 
 For online RL, policy updates and distributed rollout/learner coordination belong to the learning framework. This release provides isolated local execution, reproducible episode assignment and recorded trajectories. It does not claim a distributed training cluster or universal solver support.
+
+## Simulated and instrument episodes
+
+[IOP](https://github.com/Cherish0925/IOP) records episodes from physical experiments with the same structure: an initial observation, then transitions whose observation is the state after the action. The files differ in identifiers and provenance:
+
+| Field | This collector | IOP export |
+| --- | --- | --- |
+| Episode ID | integer `episode_id` | string `id` in the header, `episode_id` in transitions |
+| Run | not recorded | `run_id` |
+| Reward | finite number | finite number, or `null` for an unscored record |
+| Provenance | program, inputs and versions in the job record | `operation_ids` of completed instrument operations |
+| End of episode | `episode_end` record | last transition with `terminated` or `truncated` |
+| Arrays | NPY files referenced by `$array` | artifact IDs |
+
+`optics_photonics.episodes.read` accepts sample directories, trajectory files and IOP exports in one call and yields the same dictionary for each episode: `source` (`simulation` or `instrument`), `run_id`, string `episode_id`, `task`, `policy`, `seed`, initial `observation`, `info`, `transitions` and `complete`. Every transition has `sequence`, `action`, `observation`, `reward`, `terminated`, `truncated`, `info` and `operation_ids` (empty for simulation). Neither file format changes.
+
+```python
+from optics_photonics import episodes
+data = episodes.read('runs/RUN/sampler-0/attempt-1/samples', 'iop/episode-0.jsonl', run_id='RUN')
+for episode, transition in episodes.scored(data):
+    consume(episode['source'], episode['task'], transition)
+```
+
+Interrupted episodes are omitted unless `complete=False`. `scored` drops transitions with `reward=None`. Observations keep their own units and keys; mapping a simulated observation onto a measured one (reference planes, calibration, noise) is part of the research program.

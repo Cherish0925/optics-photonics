@@ -10,10 +10,12 @@ is the state after the action. They differ in identifiers and provenance:
 episode IDs are integers here and strings in IOP, IOP links each transition to
 completed instrument operations, IOP rewards may be null for unscored records,
 and only this collector writes an ``episode_end`` record. :func:`read` maps both
-onto one dictionary layout without changing either file format.
+onto one dictionary layout without changing either file format, and
+:func:`collected` assembles the episodes of sampling runs, each one once.
 """
 import json
 from pathlib import Path
+from . import environments, jobs, sampling
 from .sampling import restore
 
 TRANSITION_FIELDS = ('sequence', 'action', 'observation', 'reward', 'terminated', 'truncated', 'info')
@@ -40,10 +42,11 @@ def _trajectory(path):
 
 
 def _episode(source, run_id, episode_id, header):
-    return {'source': source, 'run_id': run_id, 'episode_id': str(episode_id),
+    return {'source': source, 'run_id': run_id, 'step': header.get('step'), 'attempt': header.get('attempt'),
+            'episode_id': str(episode_id), 'definition': header.get('definition'),
             'task': header['task'], 'policy': header.get('policy'), 'seed': header.get('seed'),
-            'observation': header['observation'], 'info': header.get('info', {}),
-            'transitions': [], 'complete': False}
+            'observation': header.get('observation'), 'info': header.get('info', {}),
+            'transitions': [], 'complete': False, 'error': None}
 
 
 def _transition(record):
@@ -52,27 +55,37 @@ def _transition(record):
     return step
 
 
-def _simulated(file, run_id, arrays):
-    root = file.parent
+def _records(records, run_id, root, arrays):
+    """Group collector records into episodes; an episode without its end record is incomplete."""
     current = None
-    for record in _lines(file):
+    for record in records:
         if arrays:
             record = restore(record, root)
         kind = record.get('type')
-        if kind == 'episode':
+        mine = current is not None and str(record.get('episode_id')) == current['episode_id']
+        if kind == 'episode' or kind == 'episode_error' and not mine:
             if current is not None:
                 yield current
-            current = _episode('simulation', run_id, record['episode_id'], record)
-        elif current is None or str(record.get('episode_id')) != current['episode_id']:
-            raise ValueError('Record before its episode header in ' + str(file))
-        elif kind == 'transition':
+            # A failure before the first observation carries the episode identity itself.
+            current = _episode('simulation', record.get('run_id', run_id), record['episode_id'], record)
+        elif not mine:
+            raise ValueError('Record before its episode header')
+        if kind == 'transition':
             current['transitions'].append(_transition(record))
+        elif kind == 'episode_error':
+            current['error'] = {'stage': record['stage'], 'message': record['error']}
+            yield current
+            current = None
         elif kind == 'episode_end':
             current['complete'] = True
             yield current
             current = None
     if current is not None:
         yield current
+
+
+def _simulated(file, run_id, arrays):
+    return _records(_lines(file), run_id, file.parent, arrays)
 
 
 def _instrument(file):
@@ -100,14 +113,17 @@ def _is_instrument(file):
 def read(*paths, run_id=None, arrays=False, complete=True):
     """Yield episodes from trajectory files, sample directories or IOP exports.
 
-    Each episode is ``{source, run_id, episode_id, task, policy, seed,
-    observation, info, transitions, complete}``. ``source`` is ``simulation`` or
-    ``instrument``; ``episode_id`` is always a string. Each transition holds
-    sequence, action, observation, reward (``None`` when unscored), terminated,
-    truncated, info and operation_ids (empty for simulation). ``complete=True``
-    omits episodes cut off by an interruption. ``arrays=True`` loads NumPy
-    arrays written by the collector; IOP artifact references stay unchanged.
-    ``run_id`` labels simulated episodes, which do not record their run.
+    Each episode is ``{source, run_id, step, attempt, episode_id, definition,
+    task, policy, seed, observation, info, transitions, complete, error}``.
+    ``source`` is ``simulation`` or ``instrument``; ``episode_id`` is always a
+    string. Each transition holds sequence, action, observation, reward
+    (``None`` when unscored), terminated, truncated, info and operation_ids
+    (empty for simulation). ``complete=True`` omits episodes that did not
+    finish: an interrupted collection leaves ``error`` empty, a failure of the
+    environment or policy sets ``error`` to its stage and message.
+    ``arrays=True`` loads NumPy arrays written by the collector; IOP artifact
+    references stay unchanged. ``run_id`` labels simulated episodes collected
+    outside a run; step, attempt and definition are empty for instruments.
     """
     for path in paths:
         file = _trajectory(path)
@@ -115,6 +131,47 @@ def read(*paths, run_id=None, arrays=False, complete=True):
         for episode in source:
             if episode['complete'] or not complete:
                 yield episode
+
+
+def collected(*runs, path=None, arrays=False, complete=True):
+    """Yield each episode of the given sampling runs once, in episode order.
+
+    An episode completed by several attempts or runs (a retried worker, a
+    continued run) is taken from the first of them: runs as given, then steps
+    and attempts in order. Completed episodes are located through index.jsonl
+    and read by byte range. ``complete=False`` then also yields every record
+    of an episode that completed nowhere, interrupted or failed.
+    """
+    home = environments.home(path)
+    chosen, folders = {}, []
+    for run in runs:
+        root = home / 'runs' / jobs.identifier(run)
+        if not root.is_dir():
+            raise ValueError('Unknown run: ' + run)
+        for folder in sorted(root.glob('*/attempt-*/samples'),
+                             key=lambda f: (f.parents[1].name, int(f.parent.name.rpartition('-')[2]))):
+            folders.append((run, folder))
+            for entry in sampling.completed(folder):
+                chosen.setdefault((entry.get('definition') or '', entry['episode_id']), (run, folder, entry))
+    for key in sorted(chosen):
+        run, folder, entry = chosen[key]
+        with (folder / 'trajectory.jsonl').open('rb') as stream:
+            stream.seek(entry['offset'])
+            lines = stream.read(entry['end'] - entry['offset']).decode('utf-8').splitlines()
+        episode = next(_records(map(json.loads, lines), run, folder, arrays))
+        yield _located(episode, folder)
+    if not complete:
+        for run, folder in folders:
+            for episode in _simulated(folder / 'trajectory.jsonl', run, arrays):
+                if not episode['complete'] and (episode['definition'] or '', int(episode['episode_id'])) not in chosen:
+                    yield _located(episode, folder)
+
+
+def _located(episode, folder):
+    # Records written before run, step and attempt were stored take them from their folder.
+    episode['step'] = episode['step'] or folder.parents[1].name
+    episode['attempt'] = episode['attempt'] or int(folder.parent.name.rpartition('-')[2])
+    return episode
 
 
 def scored(episodes):

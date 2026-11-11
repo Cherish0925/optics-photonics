@@ -28,8 +28,8 @@ class EpisodeReadingCase(unittest.TestCase):
         self.assertEqual([e['source'] for e in found], ['simulation', 'simulation', 'instrument'])
         self.assertEqual([e['episode_id'] for e in found], ['0', '1', 'sample-0'])
         self.assertEqual([e['run_id'] for e in found], ['sim-run', 'sim-run', 'run_example'])
-        keys = {'source', 'run_id', 'episode_id', 'task', 'policy', 'seed', 'observation', 'info',
-                'transitions', 'complete'}
+        keys = {'source', 'run_id', 'step', 'attempt', 'episode_id', 'definition', 'task', 'policy', 'seed',
+                'observation', 'info', 'transitions', 'complete', 'error'}
         step_keys = set(episodes.TRANSITION_FIELDS) | {'operation_ids'}
         for episode in found:
             self.assertEqual(set(episode), keys)

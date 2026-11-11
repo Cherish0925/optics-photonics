@@ -35,6 +35,7 @@ def main(argv=None):
     sample.add_argument('--episodes', type=int, required=True); sample.add_argument('--workers', type=int, default=1)
     sample.add_argument('--max-steps', type=int, default=1000); sample.add_argument('--seed', type=int, default=0)
     sample.add_argument('--inputs', type=object_argument, default={}); sample.add_argument('--options', type=object_argument, default={})
+    sample.add_argument('--continue-from', nargs='*', default=[], metavar='RUN_ID'); sample.add_argument('--on-error', choices=['stop','continue'], default='stop')
     sample.add_argument('--request-id'); sample.add_argument('--timeout', type=float)
     resources=commands.add_parser('resources'); resources.add_argument('--cpu',type=int); resources.add_argument('--pools',type=object_argument)
     workflow=commands.add_parser('submit-workflow'); workflow.add_argument('file',type=Path,help='JSON file containing a top-level array of steps; each step needs id and tool'); workflow.add_argument('--name',default='Optics research'); workflow.add_argument('--request-id'); workflow.add_argument('--run-id')

@@ -48,6 +48,15 @@ values. Python's existing status function retains its detailed default.
 Environment listing is paginated and does not start every interpreter unless
 `refresh=true`. Only referenced predecessor results are loaded for a step.
 
+One MCP connection answers tool calls as each completes; replies carry their
+request ID and may arrive in a different order. Up to 16 calls execute at once.
+`run_status` waits use their own threads, so any number of them leaves a
+search, a file read or `cancel_run` sent afterwards unaffected. A connection
+accepts 256 unanswered requests. MCP `notifications/cancelled` ends that
+request's wait without a reply; `cancel_run` stops the calculation itself. When
+the host closes the connection, pending waits return their current state and
+accepted calculations continue.
+
 ## TypeScript
 
 Install the `.tgz` from the release with npm, then:
@@ -62,4 +71,6 @@ lab.close();
 
 Closing a client leaves accepted work running. Reconnect and read the same run ID.
 To stop a calculation, call `cancel`; closing a client is not a cancellation.
+Requests on one client run concurrently. `wait`, `status` and `call` accept an
+`AbortSignal`: aborting stops that request's wait on the server, not the run.
 The native MCP interface remains available to other languages and hosts.

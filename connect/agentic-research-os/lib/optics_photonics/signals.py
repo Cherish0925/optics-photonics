@@ -62,6 +62,12 @@ class Wakeup:
         finally:
             self.socket.close()
 
+    def interrupt(self):
+        """Wake this reader without a state change, e.g. when its request is cancelled."""
+        with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sender:
+            try: sender.sendto(b'1', ('127.0.0.1', self.port))
+            except OSError: pass
+
     def wait(self, timeout=2):
         from .jobs import database
         with database(self.path) as db:

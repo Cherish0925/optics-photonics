@@ -1,8 +1,10 @@
 """Dependency-free MCP stdio server. Calculations run independently in the background."""
+from concurrent.futures import ThreadPoolExecutor
 import json
 import sys
+import threading
 from . import __version__, catalogue, environments, operations
-from . import jobs
+from . import jobs, signals
 
 
 def schema(properties=None, required=None):
@@ -34,7 +36,7 @@ TOOLS = [
 ]
 
 
-def invoke(name, args):
+def invoke(name, args, cancellation=None):
     if name == 'software_search': return catalogue.search(**args)
     if name == 'software_details':
         return {**environments.software(**args), 'execution':operations.details(args['tool'])}
@@ -55,7 +57,7 @@ def invoke(name, args):
         from . import sampling
         return sampling.submit(**args)
     if name == 'submit_workflow': return jobs.submit(**args)
-    if name == 'run_status': return jobs.status(**{'include_results':False, **args})
+    if name == 'run_status': return jobs.status(**{'include_results':False, **args}, cancel=cancellation)
     if name == 'cancel_run': return jobs.cancel(**args)
     if name == 'result_files': return jobs.files(**args)
     if name == 'download_result': return jobs.download(**args)
@@ -65,53 +67,155 @@ def invoke(name, args):
     raise ValueError('Unknown tool: '+name)
 
 
-def serve(input_stream=None, output_stream=None):
-    incoming, outgoing = input_stream or sys.stdin, output_stream or sys.stdout
-    supported = {'2025-11-25','2025-06-18','2025-03-26','2024-11-05'}
-    for line in incoming:
-        if not line.strip(): continue
-        id = None
+class Connection:
+    """One stdio session: requests are read in order and answered as each completes.
+
+    Tool calls run on a bounded thread pool; status waits have their own
+    threads, so no number of waits delays a query or cancel_run sent after
+    them. Each response is written as one line. MCP request cancellation ends
+    the request's wait; cancel_run stops a calculation. Calculations already
+    accepted continue after disconnection.
+    """
+    WORKERS = 16   # tool calls executing at once, waits excluded
+    PENDING = 256  # requests accepted and not yet answered
+
+    def __init__(self, outgoing):
+        self.outgoing, self.lock = outgoing, threading.Lock()
+        self.active, self.withdrawn, self.state = {}, set(), threading.Lock()
+
+    def send(self, message):
+        text = json.dumps(message, ensure_ascii=False, allow_nan=False) + '\n'
+        with self.lock:
+            try:
+                self.outgoing.write(text); self.outgoing.flush()
+            except (OSError, ValueError):
+                pass  # The client has gone; accepted calculations continue.
+
+    def cancel(self, request_id):
+        # The host no longer expects this reply (MCP notifications/cancelled).
+        if not valid_id(request_id): return
+        with self.state:
+            cancellation = self.active.get(key(request_id))
+            if cancellation: self.withdrawn.add(key(request_id))
+        if cancellation: cancellation.set()
+
+    def accept(self, request_id):
+        with self.state:
+            if len(self.active) >= self.PENDING:
+                raise RuntimeError(f'{self.PENDING} requests are already in progress on this connection')
+            if key(request_id) in self.active:
+                raise ValueError('This request ID is already in progress')
+            cancellation = self.active[key(request_id)] = signals.Cancellation()
+            return cancellation
+
+    def call(self, request_id, params, cancellation):
         try:
-            request = json.loads(line)
-            if not isinstance(request, dict) or request.get('jsonrpc') != '2.0':
-                raise ValueError('Expected a JSON-RPC 2.0 request')
-            if 'id' not in request: continue
-            id = request['id']; method = request.get('method'); params = request.get('params', {})
-            if method == 'initialize':
-                proposed = params.get('protocolVersion')
-                result = {'protocolVersion':proposed if proposed in supported else '2025-11-25',
-                          'serverInfo':{'name':'optics-photonics','version':__version__},
-                          'capabilities':{'tools':{'listChanged':False},'resources':{}},
-                          'instructions':'Search software, read its operation inputs, select an installed environment, and submit long calculations to the independent background worker. Native programs use INPUTS, OUTPUT_DIR and a JSON RESULT. Solver installation and license requirements remain those of the upstream software.'}
-            elif method == 'ping': result = {}
-            elif method == 'tools/list':
-                result = {'tools':[{'name':n,'description':d,'inputSchema':s} for n,d,s in TOOLS]}
-            elif method == 'resources/list':
-                result = {'resources':[{'uri':'optics://guides/'+name,'name':name,'mimeType':'text/markdown'}
-                    for name in ('optical-computation','optical-research')]}
-            elif method == 'resources/read':
-                uri = params.get('uri','')
-                name = uri.removeprefix('optics://guides/')
-                if uri != 'optics://guides/'+name or name not in ('optical-computation','optical-research'):
-                    raise ValueError('Unknown optical guide')
-                text = (catalogue.resources()/'skills'/name/'SKILL.md').read_text(encoding='utf-8')
-                result = {'contents':[{'uri':uri,'mimeType':'text/markdown','text':text}]}
-            elif method == 'tools/call':
-                try:
-                    name = params['name']; args = params.get('arguments', {})
-                    spec = next((s for n,d,s in TOOLS if n == name), None)
-                    if spec is None: raise ValueError('Unknown tool: '+name)
-                    if not isinstance(args, dict) or set(args)-set(spec['properties']) or set(spec['required'])-set(args):
-                        raise ValueError('Arguments do not match this tool’s input schema')
-                    value = invoke(name, args)
-                    result = {'content':[{'type':'text','text':json.dumps(value,ensure_ascii=False,allow_nan=False)}], 'structuredContent':value, 'isError':False}
-                except Exception as error:
-                    result = {'content':[{'type':'text','text':str(error)}], 'isError':True}
-            else:
-                outgoing.write(json.dumps({'jsonrpc':'2.0','id':id,'error':{'code':-32601,'message':'Method not found'}})+'\n'); outgoing.flush(); continue
-            response = {'jsonrpc':'2.0','id':id,'result':result}
-        except json.JSONDecodeError:
-            response = {'jsonrpc':'2.0','id':None,'error':{'code':-32700,'message':'Invalid JSON'}}
+            result = tool_result(params, cancellation)
+            with self.state:
+                withdrawn = key(request_id) in self.withdrawn
+            if not withdrawn:
+                self.send({'jsonrpc':'2.0','id':request_id,'result':result})
         except Exception as error:
-            response = {'jsonrpc':'2.0','id':id,'error':{'code':-32600,'message':str(error)}}
-        outgoing.write(json.dumps(response,ensure_ascii=False,allow_nan=False)+'\n'); outgoing.flush()
+            self.send({'jsonrpc':'2.0','id':request_id,'error':{'code':-32603,'message':str(error)}})
+        finally:
+            with self.state:
+                self.active.pop(key(request_id), None); self.withdrawn.discard(key(request_id))
+
+    def close(self):
+        # End of input: waits return their current state; replies are still written.
+        with self.state:
+            pending = list(self.active.values())
+        for cancellation in pending: cancellation.set()
+
+
+def valid_id(request_id):
+    return isinstance(request_id, (str, int, float)) and not isinstance(request_id, bool)
+
+
+def key(request_id):
+    # JSON-RPC distinguishes 1 from "1".
+    return (type(request_id).__name__, request_id)
+
+
+def waiting(params):
+    """A run_status call that waits for completion; it occupies no worker."""
+    if not isinstance(params, dict) or params.get('name') != 'run_status': return False
+    arguments = params.get('arguments')
+    return isinstance(arguments, dict) and bool(arguments.get('wait'))
+
+
+def tool_result(params, cancellation=None):
+    try:
+        name = params['name']; args = params.get('arguments', {})
+        spec = next((s for n,d,s in TOOLS if n == name), None)
+        if spec is None: raise ValueError('Unknown tool: '+name)
+        if not isinstance(args, dict) or set(args)-set(spec['properties']) or set(spec['required'])-set(args):
+            raise ValueError('Arguments do not match this tool’s input schema')
+        value = invoke(name, args, cancellation)
+        return {'content':[{'type':'text','text':json.dumps(value,ensure_ascii=False,allow_nan=False)}], 'structuredContent':value, 'isError':False}
+    except Exception as error:
+        return {'content':[{'type':'text','text':str(error)}], 'isError':True}
+
+
+def respond(method, params):
+    if method == 'initialize':
+        proposed = params.get('protocolVersion')
+        return {'protocolVersion':proposed if proposed in SUPPORTED else '2025-11-25',
+                'serverInfo':{'name':'optics-photonics','version':__version__},
+                'capabilities':{'tools':{'listChanged':False},'resources':{}},
+                'instructions':'Search software, read its operation inputs, select an installed environment, and submit long calculations to the independent background worker. Native programs use INPUTS, OUTPUT_DIR and a JSON RESULT. Solver installation and license requirements remain those of the upstream software.'}
+    if method == 'ping': return {}
+    if method == 'tools/list':
+        return {'tools':[{'name':n,'description':d,'inputSchema':s} for n,d,s in TOOLS]}
+    if method == 'resources/list':
+        return {'resources':[{'uri':'optics://guides/'+name,'name':name,'mimeType':'text/markdown'} for name in GUIDES]}
+    if method == 'resources/read':
+        uri = params.get('uri','')
+        name = uri.removeprefix('optics://guides/')
+        if uri != 'optics://guides/'+name or name not in GUIDES:
+            raise ValueError('Unknown optical guide')
+        text = (catalogue.resources()/'skills'/name/'SKILL.md').read_text(encoding='utf-8')
+        return {'contents':[{'uri':uri,'mimeType':'text/markdown','text':text}]}
+    return None
+
+
+SUPPORTED = {'2025-11-25','2025-06-18','2025-03-26','2024-11-05'}
+GUIDES = ('optical-computation','optical-research')
+
+
+def serve(input_stream=None, output_stream=None):
+    incoming = input_stream or sys.stdin
+    connection = Connection(output_stream or sys.stdout)
+    with ThreadPoolExecutor(Connection.WORKERS, thread_name_prefix='optics-mcp') as pool, \
+         ThreadPoolExecutor(Connection.PENDING, thread_name_prefix='optics-mcp-wait') as waits:
+        try:
+            for line in incoming:
+                if not line.strip(): continue
+                id = None
+                try:
+                    request = json.loads(line)
+                    if not isinstance(request, dict) or request.get('jsonrpc') != '2.0':
+                        raise ValueError('Expected a JSON-RPC 2.0 request')
+                    method = request.get('method'); params = request.get('params') or {}
+                    if 'id' not in request:
+                        if method == 'notifications/cancelled' and isinstance(params, dict):
+                            connection.cancel(params.get('requestId'))
+                        continue
+                    if not valid_id(request['id']):
+                        raise ValueError('A request ID is a string or a number')
+                    id = request['id']
+                    if method == 'tools/call':
+                        lane = waits if waiting(params) else pool
+                        lane.submit(connection.call, id, params, connection.accept(id))
+                        continue
+                    result = respond(method, params)
+                    if result is None:
+                        connection.send({'jsonrpc':'2.0','id':id,'error':{'code':-32601,'message':'Method not found'}}); continue
+                    connection.send({'jsonrpc':'2.0','id':id,'result':result})
+                except json.JSONDecodeError:
+                    connection.send({'jsonrpc':'2.0','id':None,'error':{'code':-32700,'message':'Invalid JSON'}})
+                except Exception as error:
+                    connection.send({'jsonrpc':'2.0','id':id,'error':{'code':-32600,'message':str(error)}})
+        finally:
+            # End waits promptly; submissions already accepted finish registering.
+            connection.close()

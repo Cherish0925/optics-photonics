@@ -7,7 +7,8 @@ export type Submission = {run_id:string;request_id:string};
 export type RunStatus = {id:string;state:string;counts:Record<string,number>;next_offset:number|null;
   steps:{id:string;state:string;output?:string;result?:unknown;error?:string;attempt:number}[]};
 export type Options = {command?:string;args?:string[];home?:string;env?:NodeJS.ProcessEnv;timeout?:number};
-type Pending = {resolve:(value:any)=>void;reject:(error:Error)=>void;timer:ReturnType<typeof setTimeout>};
+type Pending = {resolve:(value:any)=>void;reject:(error:Error)=>void;timer:ReturnType<typeof setTimeout>;release:()=>void};
+export type RequestOptions = {signal?:AbortSignal};
 
 /** One connection per host. Accepted calculations outlive this client. */
 export class OpticsLab {
@@ -26,7 +27,7 @@ export class OpticsLab {
         const reply=JSON.parse(line);
         const request=this.pending.get(reply.id);
         if (!request) return;
-        this.pending.delete(reply.id);clearTimeout(request.timer);
+        this.pending.delete(reply.id);clearTimeout(request.timer);request.release();
         if (reply.error) request.reject(new Error(reply.error.message));
         else request.resolve(reply.result);
       } catch(error) { this.fail(new Error('Invalid MCP response: '+String(error)));this.child.kill(); }
@@ -40,31 +41,47 @@ export class OpticsLab {
     const client=new OpticsLab(options);
     try {
       await client.request('initialize',{protocolVersion:'2025-11-25',capabilities:{},clientInfo:{name:'optics-typescript',version:'0.5.0'}});
-      client.child.stdin.write(JSON.stringify({jsonrpc:'2.0',method:'notifications/initialized'})+'\n');
+      client.notify('notifications/initialized');
       return client;
     } catch(error) { client.close(); throw error; }
   }
   private fail(error:Error) {
     this.closed=true;
-    for (const request of this.pending.values()) {clearTimeout(request.timer);request.reject(error);}
+    for (const request of this.pending.values()) {clearTimeout(request.timer);request.release();request.reject(error);}
     this.pending.clear();
   }
-  private request(method:string,params:unknown):Promise<any> {
+  private notify(method:string,params?:unknown) {
+    if(!this.closed) this.child.stdin.write(JSON.stringify({jsonrpc:'2.0',method,...(params===undefined?{}:{params})})+'\n');
+  }
+  /** Requests are answered independently; aborting one stops its wait, not an accepted calculation. */
+  private request(method:string,params:unknown,options:RequestOptions={}):Promise<any> {
     if(this.closed) return Promise.reject(new Error('Optics connection is closed'));
+    const signal=options.signal;
+    if(signal?.aborted) return Promise.reject(signal.reason);
     const id=++this.sequence;
     return new Promise((resolve,reject)=>{
-      const timer=setTimeout(()=>{this.pending.delete(id);reject(new Error(`Optics request timed out: ${method}`));},this.options.timeout??35000);
+      const withdraw=(error:unknown,reason:string)=>{
+        const request=this.pending.get(id);
+        if(!request) return;
+        this.pending.delete(id);clearTimeout(request.timer);request.release();
+        this.notify('notifications/cancelled',{requestId:id,reason});
+        reject(error);
+      };
+      const timer=setTimeout(()=>withdraw(new Error(`Optics request timed out: ${method}`),'Client timeout'),this.options.timeout??35000);
+      const abort=()=>withdraw(signal?.reason,'Aborted by client');
+      const release=()=>signal?.removeEventListener('abort',abort);
       let message:string;
       try {message=JSON.stringify({jsonrpc:'2.0',id,method,params})+'\n';}
       catch(error){clearTimeout(timer);reject(error);return;}
-      this.pending.set(id,{resolve,reject,timer});
+      this.pending.set(id,{resolve,reject,timer,release});
+      signal?.addEventListener('abort',abort,{once:true});
       this.child.stdin.write(message,error=>{
-        if(error){clearTimeout(timer);this.pending.delete(id);reject(error);}
+        if(error){clearTimeout(timer);release();this.pending.delete(id);reject(error);}
       });
     });
   }
-  async call<T=unknown>(name:string,arguments_:Record<string,unknown>={}):Promise<T> {
-    const result=await this.request('tools/call',{name,arguments:arguments_});
+  async call<T=unknown>(name:string,arguments_:Record<string,unknown>={},options:RequestOptions={}):Promise<T> {
+    const result=await this.request('tools/call',{name,arguments:arguments_},options);
     if(result.isError) throw new Error(result.content?.map((c:{text?:string})=>c.text??'').join('\n')||'Optics operation failed');
     return result.structuredContent as T;
   }
@@ -72,14 +89,17 @@ export class OpticsLab {
   environments(options:Record<string,unknown>={}) {return this.call('environments',options);}
   resources(cpu?:number,pools?:Record<string,number>) {return this.call('compute_resources',{...(cpu===undefined?{}:{cpu}),...(pools===undefined?{}:{pools})});}
   submit(steps:Step[],options:{name?:string;request_id?:string;run_id?:string}={}) {return this.call<Submission>('submit_workflow',{steps,...options});}
-  status(run_id:string,options:{wait?:number;offset?:number;limit?:number;include_results?:boolean}={}) {return this.call<RunStatus>('run_status',{run_id,...options});}
+  status(run_id:string,options:{wait?:number;offset?:number;limit?:number;include_results?:boolean;signal?:AbortSignal}={}) {
+    const {signal,...query}=options;
+    return this.call<RunStatus>('run_status',{run_id,...query},{signal});
+  }
   async wait(run_id:string,options:{signal?:AbortSignal;timeout?:number}={}) {
     const end=options.timeout===undefined?Infinity:Date.now()+options.timeout;
     for(;;){
       options.signal?.throwIfAborted();
       const remaining=end-Date.now();
       if(remaining<=0) throw new Error('Calculation is still running: '+run_id);
-      const state=await this.status(run_id,{wait:Math.min(25,remaining/1000)});
+      const state=await this.status(run_id,{wait:Math.min(25,remaining/1000),signal:options.signal});
       if(['succeeded','failed','cancelled','blocked','interrupted'].includes(state.state)) return state;
     }
   }

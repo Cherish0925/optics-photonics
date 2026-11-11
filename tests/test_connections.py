@@ -57,7 +57,8 @@ class ConnectionTests(unittest.TestCase):
             {'jsonrpc':'2.0','id':3,'method':'tools/call','params':{'name':'software_details','arguments':{'tool':'missing'}}},
             {'jsonrpc':'2.0','id':4,'method':'ping'}]
         out=io.StringIO();serve(io.StringIO('\n'.join(json.dumps(r) for r in requests)),out)
-        messages=[json.loads(s) for s in out.getvalue().splitlines()]
+        # Tool calls complete independently; replies are matched by request ID.
+        messages=sorted((json.loads(s) for s in out.getvalue().splitlines()),key=lambda m:m['id'])
         self.assertEqual([m['id'] for m in messages],[1,2,3,4])
         self.assertEqual(messages[1]['result']['structuredContent']['execution']['operations'][0]['name'],'spectrum')
         self.assertTrue(messages[2]['result']['isError'])

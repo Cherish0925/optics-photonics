@@ -25,3 +25,27 @@ test('submit arbitrary software, reconnect and retrieve its saved output',async(
   assert.equal(repeated.run_id,submission.run_id);
  }finally{client.close();await rm(home,{recursive:true,force:true,maxRetries:20,retryDelay:50});}
 });
+
+test('a status wait does not delay other requests and can be aborted',async()=>{
+ const home=await mkdtemp(join(tmpdir(),'Optics TypeScript '));
+ const command=process.env.OPTICS_PYTHON||(process.platform==='win32'?'python':'python3');
+ const client=await OpticsLab.connect({command,args:['-B',resolve('../../server.py'),'mcp'],home});
+ try {
+  const script=join(home,'slow.py');
+  await writeFile(script,'import time\ntime.sleep(60)\n');
+  await client.call('register_software',{tool:'slow',name:'Slow program',description:'Sleeps',kind:'command'});
+  await client.call('bind_environment',{tool:'slow',command:[command,script]});
+  const {run_id}=await client.submit([{id:'sleep',tool:'slow'}]);
+  const controller=new AbortController();
+  const started=Date.now();
+  const waiting=client.wait(run_id,{signal:controller.signal});
+  const found=await client.search('thin film',{limit:1});
+  assert.ok(Date.now()-started<1500);
+  assert.equal(found.items.length,1);
+  controller.abort(new Error('Stop waiting'));
+  await assert.rejects(waiting,/Stop waiting/);
+  assert.ok(['queued','running'].includes((await client.status(run_id)).state));
+  await client.cancel(run_id);
+  assert.equal((await client.wait(run_id,{timeout:15000})).state,'cancelled');
+ }finally{client.close();await rm(home,{recursive:true,force:true,maxRetries:20,retryDelay:50});}
+});

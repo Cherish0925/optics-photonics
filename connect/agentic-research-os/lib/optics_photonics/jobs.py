@@ -2,7 +2,7 @@
 import base64
 from collections import Counter
 from concurrent.futures import ThreadPoolExecutor
-from contextlib import contextmanager
+from contextlib import contextmanager, nullcontext
 import json
 import os
 from pathlib import Path
@@ -226,15 +226,16 @@ def reconcile(path=None):
                 db.execute("UPDATE runs SET state='interrupted',finished=? WHERE id=? AND state='running'", (time.time(),run_id))
 
 
-def status(run_id, path=None, offset=0, limit=50, include_results=True, wait=0):
+def status(run_id, path=None, offset=0, limit=50, include_results=True, wait=0, cancel=None):
+    """Read a run; wait returns early on completion or when cancel (a Cancellation) is set."""
     if not 0 <= wait <= 25: raise ValueError("wait must be between 0 and 25 seconds")
     if wait:
         deadline = time.monotonic()+wait
-        with Wakeup(path) as wake:
+        with Wakeup(path) as wake, (cancel.subscribe(wake.interrupt) if cancel else nullcontext()):
             while True:
                 result = status(run_id, path, offset, limit, include_results)
                 remaining = deadline-time.monotonic()
-                if result["state"] in TERMINAL or remaining <= 0: return result
+                if result["state"] in TERMINAL or remaining <= 0 or cancel and cancel(): return result
                 wake.wait(min(remaining, 2))
     identifier(run_id)
     if offset < 0 or not 1 <= limit <= 200: raise ValueError('Use offset >= 0 and limit between 1 and 200')

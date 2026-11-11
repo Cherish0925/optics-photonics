@@ -1,5 +1,6 @@
 """Independent background calculations, dependency graphs and persisted results."""
 import base64
+import heapq
 from collections import Counter
 from concurrent.futures import ThreadPoolExecutor
 from contextlib import contextmanager, nullcontext
@@ -103,16 +104,21 @@ def identifier(value):
     return value
 
 
-def validate(steps, previous=None):
+def validate(steps, known=()):
+    """Check new steps. known holds the IDs of steps already in the run.
+
+    Existing steps cannot depend on new ones, so only the new steps are traversed
+    and appending to a long run costs no more than the batch itself.
+    """
     if not isinstance(steps, list) or not steps:
         raise ValueError('Provide a nonempty steps array')
-    graph = {s['id']: list(s.get('after', [])) for s in previous or []}
+    graph = {}
     result = []
     for item in steps:
         if not isinstance(item, dict): raise ValueError('Each step must be an object')
         s = dict(item)
         identifier(s.get('id'))
-        if s['id'] in graph: raise ValueError('Duplicate step ID: '+s['id'])
+        if s['id'] in graph or s['id'] in known: raise ValueError('Duplicate step ID: '+s['id'])
         if set(s)-{'id','tool','action','source','inputs','after','bindings','timeout','requirements'}:
             raise ValueError('A step accepts id, tool, action, source, inputs, after, bindings, requirements and timeout')
         if not isinstance(s.get('tool'), str): raise ValueError('Each step needs a software tool ID')
@@ -136,10 +142,11 @@ def validate(steps, previous=None):
     degree = {}
     for key, deps in graph.items():
         unique = set(deps)
-        if any(dep not in graph for dep in unique):
+        if any(dep not in graph and dep not in known for dep in unique):
             raise ValueError('Workflow contains an unknown predecessor')
-        degree[key] = len(unique)
-        for dep in unique:
+        inside = [dep for dep in unique if dep in graph]
+        degree[key] = len(inside)
+        for dep in inside:
             children[dep].append(key)
     ready = deque(key for key, count in degree.items() if not count)
     visited = 0
@@ -184,8 +191,8 @@ def submit(steps, name='Optical research', request_id=None, run_id=None, path=No
             existing = db.execute('SELECT * FROM runs WHERE id=?', (result_id,)).fetchone()
             if run_id and not existing: raise ValueError('Unknown run: '+run_id)
             if existing and existing['cancel']: raise ValueError('Resume the cancelled run before appending steps')
-            previous = [json.loads(r[0]) for r in db.execute('SELECT specification FROM steps WHERE run_id=?', (result_id,))]
-            checked = validate(steps, previous)
+            known = {r[0] for r in db.execute('SELECT id FROM steps WHERE run_id=?', (result_id,))}
+            checked = validate(steps, known)
             capacity = db.execute("SELECT value FROM settings WHERE key='cpu'").fetchone()[0]
             prepared = []
             for spec in checked:
@@ -397,6 +404,131 @@ def perform(run_id, row, path, cancellation):
         state, result, error = 'failed', None, str(exc)
     with database(path) as db:
         db.execute('UPDATE steps SET state=?,result=?,error=?,finished=? WHERE run_id=? AND id=?', (state,encoded(result) if result is not None else None,error,time.time(),run_id,row['id']))
+    return state
+
+
+def admission(spec, config):
+    """The part of a step that scheduling needs; stored specifications never change."""
+    return {'tool':spec['tool'], 'threads':config['threads'], 'concurrency':config['concurrency'],
+            'needs':requirements(spec, config)}
+
+
+class Scheduler:
+    """Admit one run's steps; dependency state is kept in memory by this worker.
+
+    Only this worker changes the states of its run's steps while it holds the
+    run lock, so each iteration reads new steps, the cancel flag and the steps
+    running across all runs, instead of every step and its result.
+    """
+    def __init__(self, run_id, path, db):
+        self.run_id, self.path, self.db = run_id, path, db
+        self.steps, self.children = {}, {}
+        self.ready, self.last_rowid, self.unsettled = [], 0, 0
+        self.shared = {}  # (run_id, step_id) -> admission of a running step
+
+    def load(self):
+        """Read steps appended since the last iteration and place them in the graph."""
+        rows = self.db.execute('SELECT rowid,id,specification,environment,state FROM steps '
+                               'WHERE run_id=? AND rowid>? ORDER BY rowid', (self.run_id, self.last_rowid)).fetchall()
+        if not rows: return False
+        batch = []
+        for row in rows:
+            spec = json.loads(row['specification'])
+            node = {'position':row['rowid'], 'after':sorted(set(spec['after'])), 'state':row['state'], 'pending':0,
+                    **admission(spec, json.loads(row['environment']))}
+            self.steps[row['id']] = node; self.children.setdefault(row['id'], [])
+            batch.append((row['id'], node))
+            self.last_rowid = row['rowid']
+            if node['state'] not in TERMINAL: self.unsettled += 1
+        # Predecessors may appear later in the same batch.
+        for key, node in batch:
+            for dep in node['after']:
+                self.children[dep].append(key)
+                if self.steps[dep]['state'] != 'succeeded': node['pending'] += 1
+        for key, node in batch:
+            if node['state'] == 'running':
+                # Left by a previous worker of this run; this worker holds the lock.
+                self.finish(key, 'interrupted', 'Background worker stopped; completed results are retained')
+            elif node['state'] == 'queued':
+                if any(self.steps[d]['state'] in TERMINAL-{'succeeded'} for d in node['after']):
+                    self.finish(key, 'blocked', 'A predecessor did not complete')
+                elif not node['pending']:
+                    heapq.heappush(self.ready, (node['position'], key))
+        return True
+
+    def finish(self, key, state, error=None, *, recorded=False):
+        """Record a terminal state and release or block the steps that follow it."""
+        stack = [(key, state, error, recorded)]
+        while stack:
+            key, state, error, recorded = stack.pop()
+            node = self.steps[key]
+            if node['state'] in TERMINAL: continue
+            node['state'] = state; self.unsettled -= 1
+            if not recorded:
+                self.db.execute('UPDATE steps SET state=?,error=?,finished=? WHERE run_id=? AND id=?',
+                                (state, error, time.time(), self.run_id, key))
+            for child in self.children[key]:
+                follower = self.steps[child]
+                if follower['state'] != 'queued': continue
+                if state == 'succeeded':
+                    follower['pending'] -= 1
+                    if not follower['pending']: heapq.heappush(self.ready, (follower['position'], child))
+                else:
+                    stack.append((child, 'blocked', 'A predecessor did not complete', False))
+
+    def cancel_queued(self):
+        now = time.time()
+        self.db.execute("UPDATE steps SET state='cancelled',finished=? WHERE run_id=? AND state='queued'", (now, self.run_id))
+        for node in self.steps.values():
+            if node['state'] == 'queued': node['state'] = 'cancelled'; self.unsettled -= 1
+        self.ready.clear()
+
+    def running(self):
+        """Admissions of steps running in every run; they share CPU and named capacity."""
+        keys = set(map(tuple, self.db.execute("SELECT run_id,id FROM steps WHERE state='running'")))
+        for key in set(self.shared) - keys: del self.shared[key]
+        for key in keys - set(self.shared):
+            row = self.db.execute('SELECT specification,environment FROM steps WHERE run_id=? AND id=?', key).fetchone()
+            self.shared[key] = admission(json.loads(row[0]), json.loads(row[1]))
+        return list(self.shared.values())
+
+    def admit(self):
+        """Mark ready steps running in submission order while capacity remains."""
+        active = self.running()
+        cpu = self.db.execute("SELECT value FROM settings WHERE key='cpu'").fetchone()[0]
+        limits = dict(self.db.execute('SELECT name,capacity FROM pools'))
+        used = sum(a['threads'] for a in active)
+        counts = Counter(a['tool'] for a in active)
+        occupied = Counter()
+        for a in active: occupied.update(a['needs'])
+        admitted, deferred = [], []
+        while self.ready and used < cpu:
+            position, key = heapq.heappop(self.ready)
+            node = self.steps[key]
+            concurrency = min([node['concurrency']]+[a['concurrency'] for a in active if a['tool']==node['tool']])
+            if used+node['threads'] > cpu or counts[node['tool']] >= concurrency or \
+               any(occupied[name]+count > limits.get(name, 0) for name, count in node['needs'].items()):
+                deferred.append((position, key)); continue
+            occupied.update(node['needs']); used += node['threads']; counts[node['tool']] += 1
+            active.append(node); node['state'] = 'running'
+            self.shared[(self.run_id, key)] = node
+            row = self.db.execute('SELECT specification,environment,attempt FROM steps WHERE run_id=? AND id=?',
+                                  (self.run_id, key)).fetchone()
+            self.db.execute("UPDATE steps SET state='running',started=? WHERE run_id=? AND id=?", (time.time(), self.run_id, key))
+            admitted.append({'id':key, 'specification':row[0], 'environment':row[1], 'attempt':row[2]})
+        for item in deferred: heapq.heappush(self.ready, item)
+        return admitted
+
+
+@contextmanager
+def transaction(db):
+    db.execute('BEGIN IMMEDIATE')
+    try:
+        yield
+        db.commit()
+    except BaseException:
+        db.rollback()
+        raise
 
 
 def work(run_id, path):
@@ -407,51 +539,31 @@ def work(run_id, path):
             run = db.execute('SELECT state FROM runs WHERE id=?',(run_id,)).fetchone()
             if not run or run[0] in TERMINAL: return
             db.execute("UPDATE runs SET state='running',launched=0 WHERE id=?",(run_id,))
-        with Wakeup(path) as wake, ThreadPoolExecutor(max_workers=resources(path=path)['cpu']) as pool:
-            pending = {}
-            cancellation = Cancellation()
+        with database(path) as db, Wakeup(path) as wake, \
+             ThreadPoolExecutor(max_workers=resources(path=path)['cpu']) as pool:
+            db.commit()
+            scheduler, pending, cancellation = Scheduler(run_id, path, db), {}, Cancellation()
             while True:
-                for key, future in list(pending.items()):
-                    if future.done(): future.result(); del pending[key]
-                with database(path) as db:
-                    db.execute('BEGIN IMMEDIATE')
+                with transaction(db):
+                    for key, future in list(pending.items()):
+                        if future.done():
+                            del pending[key]
+                            scheduler.finish(key, future.result(), recorded=True)
+                    changed = scheduler.load()
                     cancelled = db.execute('SELECT cancel FROM runs WHERE id=?',(run_id,)).fetchone()[0]
-                    if cancelled: cancellation.set()
-                    rows = db.execute('SELECT * FROM steps WHERE run_id=? ORDER BY rowid',(run_id,)).fetchall()
-                    states = {r['id']:r['state'] for r in rows}
-                    if all(s in TERMINAL for s in states.values()):
-                        state = 'cancelled' if cancelled else ('succeeded' if all(s=='succeeded' for s in states.values()) else 'failed')
+                    if cancelled:
+                        cancellation.set(); scheduler.cancel_queued()
+                    if not scheduler.unsettled and not pending:
+                        states = {node['state'] for node in scheduler.steps.values()}
+                        state = 'cancelled' if cancelled else ('succeeded' if states <= {'succeeded'} else 'failed')
                         db.execute('UPDATE runs SET state=?,finished=? WHERE id=?',(state,time.time(),run_id))
                         break
-                    active = [(json.loads(r['specification']),json.loads(r['environment'])) for r in db.execute("SELECT specification,environment FROM steps WHERE state='running'")]
-                    used = sum(c['threads'] for s,c in active)
-                    counts = Counter(s['tool'] for s,c in active)
-                    cpu = db.execute("SELECT value FROM settings WHERE key='cpu'").fetchone()[0]
-                    limits = dict(db.execute('SELECT name,capacity FROM pools'))
-                    occupied = Counter()
-                    for spec, config in active: occupied.update(requirements(spec, config))
-                    ready = []
-                    changed = False
-                    for row in rows:
-                        if row['state'] != 'queued': continue
-                        spec, config = json.loads(row['specification']),json.loads(row['environment'])
-                        if cancelled:
-                            db.execute("UPDATE steps SET state='cancelled',finished=? WHERE run_id=? AND id=?",(time.time(),run_id,row['id'])); changed=True; continue
-                        if any(states[d] in TERMINAL-{'succeeded'} for d in spec['after']):
-                            db.execute("UPDATE steps SET state='blocked',error='A predecessor did not complete',finished=? WHERE run_id=? AND id=?",(time.time(),run_id,row['id'])); changed=True; continue
-                        if not all(states[d]=='succeeded' for d in spec['after']): continue
-                        concurrency = min([config['concurrency']]+[c['concurrency'] for s,c in active if s['tool']==spec['tool']])
-                        if used+config['threads']>cpu or counts[spec['tool']]>=concurrency: continue
-                        needed = requirements(spec, config)
-                        if any(occupied[name]+count > limits.get(name,0) for name,count in needed.items()): continue
-                        occupied.update(needed)
-                        db.execute("UPDATE steps SET state='running',started=? WHERE run_id=? AND id=?",(time.time(),run_id,row['id']))
-                        used+=config['threads']; counts[spec['tool']]+=1; active.append((spec,config)); ready.append(dict(row))
-                for row in ready:
+                    admitted = [] if cancelled else scheduler.admit()
+                for row in admitted:
                     future = pool.submit(perform,run_id,row,path,cancellation)
                     pending[row['id']] = future
                     future.add_done_callback(lambda _: notify(path))
-                if not changed: wake.wait()
+                if not changed and not any(f.done() for f in pending.values()): wake.wait()
     notify(path)
     with database(path) as db:
         restart = db.execute("SELECT state FROM runs WHERE id=?",(run_id,)).fetchone()[0]=='queued'

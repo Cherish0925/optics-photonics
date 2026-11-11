@@ -5,6 +5,7 @@ from pathlib import Path
 import subprocess
 import sys
 import tempfile
+import threading
 import time
 import unittest
 from unittest.mock import patch
@@ -118,6 +119,46 @@ class JobsTests(unittest.TestCase):
         jobs.submit([{**self.step('append'),'bindings':{'value':{'step':'complete','path':['result','value']}}}],run_id=r,path=self.home)
         final=self.wait(r);self.assertEqual(final['state'],'succeeded',final)
         self.assertEqual(final['steps'][3]['result']['result']['value'],3)
+
+    def test_failure_blocks_descendants_and_independent_branch_completes(self):
+        steps=[self.step('a',fail_once=str(self.root/'flag')),{**self.step('b'),'after':['a']},{**self.step('c'),'after':['b']},
+               self.step('d',value=5),{**self.step('e'),'after':['d']}]
+        result=self.wait(self.submit(steps)['run_id'])
+        self.assertEqual(result['state'],'failed')
+        self.assertEqual({s['id']:s['state'] for s in result['steps']},
+                         {'a':'failed','b':'blocked','c':'blocked','d':'succeeded','e':'succeeded'})
+
+    def test_appended_step_may_follow_a_later_step_of_its_batch(self):
+        with patch.object(jobs,'start_worker'):
+            run=self.submit([self.step('first')])['run_id']
+            jobs.submit([{**self.step('x'),'bindings':{'value':{'step':'y','path':['result','value']}}},self.step('y',value=7)],
+                        run_id=run,path=self.home)
+        jobs.start_worker(run,path=self.home)
+        result=self.wait(run)
+        self.assertEqual(result['state'],'succeeded',result)
+        steps={s['id']:s for s in result['steps']}
+        self.assertEqual(steps['x']['result']['result']['value'],7)
+        self.assertGreaterEqual(steps['x']['started'],steps['y']['finished'])
+
+    def test_step_left_running_by_a_stopped_worker_is_interrupted(self):
+        with patch.object(jobs,'start_worker'):
+            run=self.submit([self.step('stale'),{**self.step('next'),'after':['stale']},self.step('other')])['run_id']
+        with jobs.database(self.home) as db:
+            db.execute("UPDATE steps SET state='running' WHERE run_id=? AND id='stale'",(run,))
+        worker=threading.Thread(target=jobs.work,args=(run,self.home));worker.start();worker.join(20)
+        self.assertFalse(worker.is_alive())
+        result=jobs.status(run,path=self.home)
+        self.assertEqual({s['id']:s['state'] for s in result['steps']},{'stale':'interrupted','next':'blocked','other':'succeeded'})
+        self.assertEqual(result['state'],'failed')
+
+    def test_appended_steps_are_checked_against_existing_step_ids(self):
+        with patch.object(jobs,'start_worker'):
+            run=self.submit([self.step('a'),{**self.step('b'),'after':['a']}])['run_id']
+            for invalid in ([self.step('a')],[{**self.step('c'),'after':['missing']}],
+                            [{**self.step('c'),'after':['b','d']},{**self.step('d'),'after':['c']}]):
+                with self.assertRaises(ValueError):jobs.submit(invalid,run_id=run,path=self.home)
+            jobs.submit([{**self.step('c'),'after':['b','d']},self.step('d')],run_id=run,path=self.home)
+            self.assertEqual(jobs.status(run,path=self.home)['counts'],{'queued':4})
 
     def test_cancel_terminates_native_process_tree(self):
         child=self.root/'child.txt'

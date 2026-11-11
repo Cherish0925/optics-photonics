@@ -1,3 +1,4 @@
+include .cargo/config.toml
 include LICENSE README.md
 recursive-include data *.json
 recursive-include skills *.md *.yaml

@@ -12,7 +12,7 @@ program outside it. The same job, resource and result APIs apply to both.
 | SQLite | Cross-process resource admission and persistent research records |
 
 The release carries executors for Windows, macOS and Linux, on x86_64 and ARM64.
-Linux executors are built on Ubuntu 22.04. The package selects its native binary
+Windows executors include the C runtime. Linux executors are built on Ubuntu 22.04. The package selects its native binary
 on the computing host. A source installation can use the Python process runner
 or set `OPTICS_EXECUTOR` to a locally built binary. Python 3.10+ runs the connector;
 scientific programs keep their independently selected environments.

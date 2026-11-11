@@ -277,11 +277,17 @@ def cancel(run_id, path=None):
 def resume(run_id, path=None):
     identifier(run_id)
     with worker_lock(path, run_id) as available:
-        if not available: raise ValueError('This run is still executing')
         with database(path) as db:
-            if not db.execute('SELECT 1 FROM runs WHERE id=?', (run_id,)).fetchone(): raise ValueError('Unknown run: '+run_id)
+            db.execute('BEGIN IMMEDIATE')
+            run = db.execute('SELECT state FROM runs WHERE id=?', (run_id,)).fetchone()
+            if not run: raise ValueError('Unknown run: '+run_id)
+            if not available and run['state'] not in TERMINAL:
+                raise ValueError('This run is still executing')
+            # A terminal worker may still be closing its notification socket.
+            # It no longer writes steps and starts queued work after unlocking.
             db.execute("UPDATE steps SET state='queued',result=NULL,error=NULL,started=NULL,finished=NULL,attempt=attempt+1 WHERE run_id=? AND state<>'succeeded'", (run_id,))
-            db.execute("UPDATE runs SET state='queued',cancel=0,finished=NULL WHERE id=?", (run_id,))
+            db.execute("UPDATE runs SET state='queued',cancel=0,finished=NULL,launched=0 WHERE id=?", (run_id,))
+    notify(path)
     start_worker(run_id, path)
     return {'run_id':run_id,'resumed':True}
 

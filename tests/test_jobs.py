@@ -125,6 +125,25 @@ class JobsTests(unittest.TestCase):
         jobs.cancel(r,path=self.home);self.assertEqual(self.wait(r)['state'],'cancelled')
         snapshot=child.read_bytes();time.sleep(.3);self.assertEqual(child.read_bytes(),snapshot)
 
+    def test_resume_while_finished_worker_is_closing(self):
+        with patch.object(jobs,'start_worker'):
+            run=self.submit([self.step('retry',value=42)])['run_id']
+            with jobs.worker_lock(self.home,run) as held:
+                self.assertTrue(held)
+                with jobs.database(self.home) as db:
+                    db.execute("UPDATE runs SET state='running' WHERE id=?",(run,))
+                with self.assertRaisesRegex(ValueError,'still executing'):
+                    jobs.resume(run,path=self.home)
+                with jobs.database(self.home) as db:
+                    db.execute("UPDATE steps SET state='failed' WHERE run_id=?",(run,))
+                    db.execute("UPDATE runs SET state='failed' WHERE id=?",(run,))
+                self.assertTrue(jobs.resume(run,path=self.home)['resumed'])
+        jobs.start_worker(run,path=self.home)
+        result=self.wait(run)
+        self.assertEqual(result['state'],'succeeded',result)
+        self.assertEqual(result['steps'][0]['attempt'],2)
+        self.assertEqual(result['steps'][0]['result']['result']['value'],42)
+
     def test_timeout_and_invalid_workflows(self):
         r=self.submit([{**self.step('slow',sleep=5),'timeout':.2}])['run_id']
         result=self.wait(r);self.assertEqual(result['state'],'failed')

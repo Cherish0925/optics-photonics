@@ -19,6 +19,8 @@ def main():
     with tempfile.TemporaryDirectory() as temporary:
         generated = Path(temporary) / "optics-photonics"
         package(generated, "agentic-research-os")
+        # Repository installs carry source; release archives add native executors.
+        shutil.rmtree(generated / "lib" / "optics_photonics" / "bin", ignore_errors=True)
         if "--check" in sys.argv:
             if files(generated) != files(destination):
                 raise SystemExit("Regenerate the Research OS package: python scripts/package_marketplace.py")

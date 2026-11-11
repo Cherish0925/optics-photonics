@@ -1,0 +1,176 @@
+# Optical research environment: development handoff
+
+[中文](DEVELOPMENT.zh-CN.md) · [Contributing](../CONTRIBUTING.md) · [Execution](EXECUTION.md)
+
+The objective is to let researchers and agents connect real computing environments, run complete optical research programs, combine software and retain scientific results that can be interpreted and reused. Optics-Photonics-AI-Lab installs, runs and releases independently.
+
+## Starting point
+
+This handoff describes the [main branch on 2026-11-11](https://github.com/Cherish0925/Optics-Photonics-AI-Lab/tree/e9d9dc39add13a805b3976f57d7ada468fa4ed81), with release 0.5.1 available. OP-01 through OP-16 below are proposed work, not released capabilities.
+
+| Area | Present implementation | Next development |
+| --- | --- | --- |
+| Execution | Rust process ownership, cancellation and timeouts; Python scientific SDKs; TypeScript clients; SQLite persistence | Concurrent requests, large workflows and efficient result access |
+| Software | 97 catalogue descriptions, packaged calculations for 16 libraries, four native session adapters, registration outside the catalogue | Independently distributed integrations and complete research programs |
+| Results | Files, NPY/NPZ, complex arrays, shape/dtype, paginated reads | Array selections, physical conventions and software-to-software exchange |
+| Continuity | Background jobs, dependencies, appended steps, retention of successful steps, rerunning unfinished steps | Progress inside long steps and reconnecting remote jobs |
+| Resources | Shared local CPU and named capacities | Mapping allocations to actual GPUs, MPI, licenses and remote resources |
+| Learning | Local parallel episodes, stable episode IDs/seeds, trajectories and numerical files | Episode-level continuation and asynchronous learner integration |
+| Hosts | MCP, CLI, Python/TypeScript, host packages and two Skills with domain references | Responsive connections, installation/updates and remote file transfer |
+
+Catalogue coverage does not mean that every feature has been executed. Native session adapters retain full SDK access; particular operations in licensed workstations still need to be run there.
+
+## Start here
+
+Deliver **OP-01** first: one waiting MCP request currently blocks subsequent requests on that connection. Follow with **OP-02 and OP-03** to reduce repeated workflow and file reads. Another contributor can independently start **OP-05**, the shared basis for extending the software ecosystem.
+
+Contributors with licensed workstations can work on **OP-06** in parallel; others can extend open software through **OP-07**. Improve existing adapters and use the same extension mechanism for new tools.
+
+## Execution and data
+
+### OP-01 · Concurrent MCP requests
+
+`mcp.serve()` currently reads and executes requests sequentially. In one local run, `run_status(wait=2)` immediately followed by `ping` and `cancel_run` returned all three responses after approximately 2.013 seconds. Waiting for status blocked the later requests.
+
+Separate request reading from bounded execution, correlate responses by request ID and serialize complete output messages. A pending status wait must permit other queries, guide reads and cancellation. MCP request cancellation ends that request's wait; `cancel_run` requests cancellation of the durable computation. Disconnecting a client preserves accepted work.
+
+Deliver concurrent long waits, short queries and cancellation on one connection, with TypeScript behavior and errors aligned. Follow the negotiated MCP version. Start in [mcp.py](../src/optics_photonics/mcp.py) and the [TypeScript client](../clients/typescript/src/index.ts); see [MCP cancellation](https://modelcontextprotocol.io/specification/2025-11-25/basic/utilities/cancellation).
+
+### OP-02 · Large workflow scheduling
+
+Completion notifications and atomic resource admission already exist. `jobs.work()` still reads every step of its run and active resource records during scheduling; `SELECT *` also brings back completed result payloads.
+
+Select only scheduling fields and maintain the needed readiness/resource queries. Preserve shared capacities, appended work, cancellation and reconnecting. Measure SQL, process startup and solver time separately before deciding whether persistent compute workers are useful.
+
+Deliver long chains, wide graphs and interleaved runs with before/after results for step count, payload size, scheduling time and peak memory. Start in [jobs.py](../src/optics_photonics/jobs.py), [signals.py](../src/optics_photonics/signals.py) and the [executor](../native/executor/).
+
+### OP-03 · Large files and array access
+
+`jobs.files()` currently traverses and sorts the entire directory for each page. Add incrementally maintained file indexing, including older runs and new files from active programs. References should identify run, step, attempt and relative path so they remain meaningful across machines.
+
+Extend bounded byte reads with numerical selections, channels and requested downsampling. Start with memory-mapped NPY; add chunked formats according to actual solver output. Downstream inputs should refer to files without copying arrays through JSON. Remote download must transfer contents to the client rather than merely returning a server path.
+
+Deliver bounded reads for many files, files still being written and datasets larger than memory. Start in [jobs.py](../src/optics_photonics/jobs.py), [native.export](../src/optics_photonics/native.py) and [mcp.py](../src/optics_photonics/mcp.py). Coordinate with OP-01 and OP-04.
+
+### OP-04 · Scientific data descriptions
+
+Extend existing shape/dtype and file output with axes, units, coordinates, complex conventions, frequency/wavelength definitions, field or power normalization, port ordering and reference planes. Material parameters retain source, version and applicable conditions. Require only fields relevant to the data being exchanged.
+
+Begin with composable field, spectrum, S-parameter and image descriptions. Transform conventions explicitly, preserving original and transformed data. Scalars remain simple.
+
+Deliver an actual exchange between two programs that reconstructs the physical meaning correctly. Extend to meshes, rays and density matrices through the same mechanism. Start in [native.py](../src/optics_photonics/native.py), [operations.py](../src/optics_photonics/operations.py) and [sampling.py](../src/optics_photonics/sampling.py).
+
+## Software and research capabilities
+
+### OP-05 · Independently installable software integrations
+
+Preserve `register_software`, `bind_environment`, native programs and command execution. Let integration packages carry software identity, version/platform requirements, installation sources, capabilities, runnable programs and domain references, including software outside the catalogue.
+
+Report installation, interpreter selection, SDK access, session opening and actual calculation separately. Collect missing configuration once, reuse working environments and install scientific dependencies on demand. Connector updates preserve environments and prior runs.
+
+Deliver independently packaged Python, native-command and SDK integrations without changing core dispatch. Define discovery, installation, updating and removal. Start in [environments.py](../src/optics_photonics/environments.py), [catalogue.py](../src/optics_photonics/catalogue.py), [packages.py](../src/optics_photonics/packages.py) and [connections.json](../data/connections.json).
+
+### OP-06 · Complete native-software research
+
+For COMSOL, Lumerical, OpticStudio and CST, complete project loading/creation, parameter changes, solving/analysis, result extraction, model saving and session shutdown. Use separate PRs per software; retain its full native API.
+
+Prioritize repeated session startup, version differences, license release and interrupted-project recovery. Actual workstation runs record software version, platform and operations performed. Identify community bridges separately from vendor SDKs.
+
+Deliver a real research program that repeatedly changes and computes a model, saves it and reloads it. Independent runs own separate outputs; reconnecting retrieves their results. Start in [native.py](../src/optics_photonics/native.py), [examples/native](../examples/native/) and [NATIVE.md](NATIVE.md). This can proceed beside OP-05, gradually adopting OP-04.
+
+### OP-07 · Open-software research coverage
+
+Extend the 16 packaged library calculations into complete programs, and connect catalogue tools without complete execution paths. Organize by research need; these examples are not a closed support list. New software follows OP-05.
+
+| Research object | Initial programs and integrations |
+| --- | --- |
+| Geometrical optics and illumination | Optiland / Raysect: real rays, nonsequential propagation and system optimization |
+| Diffraction, imaging and polarization | HCIPy / POPPY / LightPipes / py-pol: complex fields, aberrations, PSF/OTF, polarization and reconstruction |
+| Films, materials and scattering | TMM / Mie: dispersion, absorption, angle/wavelength dependence and material sources |
+| Maxwell equations, periodic structures and modes | Meep / MPB / grcwa / legume: meshes, boundaries, sources, modes, fields and flux |
+| Integrated photonics | gdsfactory / KLayout / SAX: layouts, device ports, S-parameters and circuits |
+| Fibers, pulses, lasers and cavities | Relevant catalogue software: complex envelopes, dispersion, nonlinearity, gain and noise |
+| Quantum optics | QuTiP: open systems, dissipation, correlations and measurement results |
+| Tissue optics, X-rays and inverse problems | Relevant transport, beamline and reconstruction tools: geometry, sources, materials and observables |
+
+Deliver environment preparation, a parameterized research program, scientific output, usage and model conditions for each integration. Use an analytical limit, convergence change or another method when it establishes the scientific result. Adding catalogue rows is not a substitute for an executable workflow.
+
+### OP-08 · Research across multiple programs
+
+Build executable exchanges for three useful paths: fields/aberrations to PSF and imaging quantities; periodic-structure complex reflection/transmission to finite-device propagation; layout to device S-parameters and circuit response. Start with two paths that can actually run in available environments.
+
+Each conversion states its approximation, units, sampling, phase and reference plane. Geometry, materials and parameters remain replaceable.
+
+Deliver a run initiated from one parameter file, with intermediate results and final observables, and the ability to replace a software component. Depends on OP-03, OP-04 and relevant OP-06/07 integrations.
+
+## Continuing computation and learning
+
+### OP-09 · Remote and cluster job continuation
+
+SSH can already launch MCP; remote solver task IDs currently remain the research program's responsibility. Persist backend, job ID, state and result location so submission, attachment, status, cancellation and download share the existing run interface.
+
+Start with Slurm and Tidy3D as two distinct execution systems. Reconnect to existing tasks after interruption. If a submission response is lost, use provider-supported identifiers to find the task; otherwise retain an unknown submission outcome rather than automatically submitting again. Distinguish network interruption from solver failure.
+
+Deliver reconnection after connector restart, remote result retrieval and cancellation of the actual remote task. Use existing computing accounts; state which portions ran locally when remote infrastructure is unavailable. See [Slurm](https://slurm.schedmd.com/rest_api.html) and [Tidy3D](https://docs.flexcompute.com/projects/tidy3d/en/latest/api/submit_simulations.html). Depends on OP-03/05 and coordinates with OP-10.
+
+### OP-10 · Apply resource choices to solvers
+
+Existing `cpu`, `requirements` and `pools` administer local shared quantities; some adapters already pass thread counts. Map them explicitly to solver threads, MPI ranks, GPU devices and remote queues, and retain effective launch settings.
+
+License capacity comes from workstation configuration or a supported license-service query. Describe the capacity source and actual availability separately. Preserve queued work and its reason when a resource is unavailable. The relevant backend confirms completion of active work.
+
+Deliver simultaneous studies that actually respect thread, GPU and software-concurrency settings. An external scheduler remains responsible for cluster allocation. Start in [jobs.resources](../src/optics_photonics/jobs.py), [environments.bind](../src/optics_photonics/environments.py) and [native.session](../src/optics_photonics/native.py).
+
+### OP-11 · Continue inside long programs
+
+`resume_run` retains successful steps and reruns unfinished steps. Add optional progress and save-point interfaces for long sweeps, optimization and solver programs. Reload solver state when supported; otherwise continue from an explicitly saved program step.
+
+Retain program version, inputs, completion position and needed model files. Remote jobs use OP-09 attachment. Live local sessions remain inside research processes; arbitrary SDK objects are not presumed serializable.
+
+Deliver an interrupted sweep that retains completed parameter points and computes the remainder without resubmitting existing work. Depends on OP-03 and adopts OP-04 output descriptions.
+
+### OP-12 · Episode continuation and datasets
+
+Episode IDs and seeds already remain independent of worker count. Rerunning a failed worker creates another attempt and may recompute its completed episodes. Persist episode completion and select attempts explicitly when reading datasets; preserve interrupted records.
+
+Retain `terminated`, `truncated` and final observations. Represent collection failure, solver failure and a scientific task's negative reward separately. Support different physical models, action spaces and observation structures.
+
+Deliver resumption with a changed worker count and no duplicate completed episode in the assembled dataset. Read by task, policy version, episode and attempt. Depends on OP-03/11; start in [sampling.py](../src/optics_photonics/sampling.py).
+
+### OP-13 · Parallel collection and learner integration
+
+Build on OP-12 with asynchronous episode allocation, capacity-limited data transfer and policy updates. Keep numerical loops in scientific processes, without an MCP call per action. Support lightweight CPU environments, heavier full-wave computations and long-lived solver sessions.
+
+Deliver a real learner connection that collects data and updates a policy. Report worker count, episode-duration distribution, collection throughput, waiting and resource use. Complete single-host operation before extending through OP-09; learning frameworks own the training algorithm.
+
+## Installation, knowledge and collaboration
+
+### OP-14 · Host installation and updates
+
+Complete actual installation paths for Research OS/Qiushi, Codex, Claude Code, DeepSeek Harness and ordinary MCP. Record host version, interface and installation, connection, execution and update results separately. Generating a package does not establish that a host has used it.
+
+Deliver clean-directory installation, computation from the host, disconnection/reconnection, file retrieval and updating while preserving environments and research data. Address three-system paths, spaces, multiple Python installations and headless servers. State marketplace listing only after it is published.
+
+Start in [packages.py](../src/optics_photonics/packages.py), [connect](../connect/), the [TypeScript client](../clients/typescript/) and [package_release.py](../scripts/package_release.py).
+
+### OP-15 · Task-specific research instructions
+
+Keep the two entry Skills short and executable; load domain references on demand. Software instructions answer which model applies, how to prepare the environment, submit a complete program, interpret output and continue after interruption. Match the actual tool arguments.
+
+Deliver usable entry points for installed tools, new tools, remote programs and cross-tool research while loading only relevant material. Edit canonical sources and regenerate package copies. Start in [skills](../skills/), [mcp.py](../src/optics_photonics/mcp.py) and [package_marketplace.py](../scripts/package_marketplace.py); update alongside the implemented capabilities above.
+
+### OP-16 · Catalogue and integration status
+
+Update software versions, licenses, installation, platforms and primary references per entry. Record the source date and distinguish documentation, installation route, executable programs and the actual environments/operations exercised. Retain the previous date for entries not reread.
+
+Deliver synchronized Chinese/English/JSON with discovery by research task, platform, license and executable capability. Third-party packages can join without changing the core. Let research coverage determine catalogue growth. Start in [English](../data/catalogue.en.json), [Chinese](../data/catalogue.zh.json), [connections.json](../data/connections.json) and [build.py](../scripts/build.py).
+
+## Collaboration and delivery
+
+Start each contribution on a separate branch from current main, after reading open PRs and related branches. A PR addresses a usable behavior and explains the change, usage, environment actually used and any external environment still needed. OP IDs aid handoff; one task may need more than one PR.
+
+OP-01/02/03/09/11 often touch execution code: agree on interface changes before splitting edits. OP-05/06/07/15/16 can proceed with separate contributors. Preserve project names, software IDs, existing calls and research data; format changes include an explicit reading/migration path. Preserve contributor attribution.
+
+TypeScript handles hosts and clients, Rust native processes, Python scientific software/programs and SQL tasks/resources. Move responsibilities when measured behavior warrants it.
+
+Use the repository's relevant execution workflows for changed source, regenerate bundled plugins where affected, and let maintainers coordinate releases. Describe features through concrete operations, data and results.

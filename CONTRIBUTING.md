@@ -1,7 +1,25 @@
 # Contributing / 参与贡献
 
-Help make the catalogue useful for real optical research and engineering.
-欢迎补充实际可用的软件、接口和资料，并修正已有条目。
+Contribute to the independent optical research environment: execution, scientific software, research programs, host connections and source-backed software descriptions.
+欢迎参与执行机制、科学软件接入、研究程序、宿主连接和软件资料的开发。
+
+## Development work / 开发任务
+
+[Development handoff](docs/DEVELOPMENT.md) · [中文接力任务](docs/DEVELOPMENT.zh-CN.md)
+
+Read current main, open PRs and related branches before starting. Use a separate branch for each coherent change and retain contributor attribution. A PR describes the resulting behavior, how to use it and which software/platform actually ran. Coordinate shared execution interfaces before changing them in parallel.
+
+开始前查看主分支、现有 PR 与相关分支；在独立分支中完成一项连贯的改进。PR 说明实现后的行为、使用方式与实际运行环境，共同修改执行接口时先衔接设计。发布由维护者统一安排。
+
+| Source / 源文件 | Purpose / 用途 |
+| --- | --- |
+| `src/optics_photonics/` | Execution, environments, scientific adapters, sampling and MCP / 执行、环境、科学软件接入、采样及 MCP |
+| `native/executor/` | Native process execution / 原生进程执行 |
+| `clients/typescript/` | Typed host client / 宿主客户端 |
+| `skills/` and `data/` | Canonical research instructions and software descriptions / 研究说明与软件资料源文件 |
+| `scripts/package_marketplace.py` | Generate the bundled Research OS plugin from source / 从源文件生成内置插件 |
+
+Run the relevant existing workflows for the changed behavior. Changes bundled into the Research OS plugin also require `python scripts/package_marketplace.py`; edit canonical files rather than the generated `connect/agentic-research-os/lib` copies. Keep English and Chinese user-facing instructions aligned.
 
 ## Change an entry / 修改条目
 

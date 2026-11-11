@@ -1,11 +1,12 @@
 import json
-import os
 from pathlib import Path
 import sys
 import tempfile
 import time
 import unittest
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 from optics_photonics import environments, jobs, sampling
+from support import remove
 
 
 PROGRAM = '''import random
@@ -37,17 +38,7 @@ class SamplingCase(unittest.TestCase):
         exec(PROGRAM, self.namespace)
 
     def tearDown(self):
-        # Windows can retain the detached worker's inherited log handle briefly
-        # after its calculation and lock have both finished.
-        deadline = time.monotonic() + 5
-        while True:
-            try:
-                self.temp.cleanup()
-                break
-            except PermissionError:
-                if os.name != 'nt' or time.monotonic() >= deadline:
-                    raise
-                time.sleep(.02)
+        remove(self.temp)
 
     def collect(self, folder, **kwargs):
         return sampling.collect(self.namespace['make_env'], self.namespace['make_policy'],

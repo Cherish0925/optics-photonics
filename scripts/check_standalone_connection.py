@@ -60,4 +60,5 @@ async def exercise(home):
 
 
 if __name__=='__main__':
-    with tempfile.TemporaryDirectory() as tmp:asyncio.run(exercise(Path(tmp)/'optics'))
+    # A detached worker may still be closing its database when the directory is removed.
+    with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as tmp:asyncio.run(exercise(Path(tmp)/'optics'))

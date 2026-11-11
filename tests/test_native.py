@@ -4,15 +4,15 @@ import os
 from pathlib import Path
 import subprocess
 import sys
-import tempfile
 import time
-from contextlib import contextmanager
 from types import SimpleNamespace
 import unittest
 from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'src'))
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 from optics_photonics import native, environments, execution, jobs
+from support import workspace
 
 
 LUMAPI = '''from pathlib import Path
@@ -26,22 +26,6 @@ class FDTD:
   if self.path: self.path.with_suffix(".closed").write_text("closed")
  def run(self): self.value+=1
 '''
-
-
-@contextmanager
-def workspace():
-    tmp = tempfile.TemporaryDirectory()
-    try:
-        yield tmp.name
-    finally:
-        end = time.monotonic() + 5
-        while True:
-            try:
-                tmp.cleanup()
-                break
-            except PermissionError:
-                if os.name != 'nt' or time.monotonic() >= end: raise
-                time.sleep(.02)
 
 
 class NativeTests(unittest.TestCase):

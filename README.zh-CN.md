@@ -18,16 +18,16 @@
 
 ## 安装与使用
 
-**在 Agentic Research OS 安装：**打开 **Extensions → Plugins → Add from link**，粘贴
-`https://github.com/Cherish0925/Optics-Photonics-AI-Lab/tree/main/connect/agentic-research-os`，
-安装并激活 `optics-photonics`。包内包含 MCP、软件目录和两个 Skills，使用研究系统自带的 Python。
+**在 Agentic Research OS 安装：**下载 [Research OS 插件包](https://github.com/Cherish0925/Optics-Photonics-AI-Lab/releases/download/optics-v0.5.1/Optics-Photonics-0.5.1-ResearchOS.zip)，解压后安装其中包含 `plugin.json` 的目录。包内包含原生执行程序、MCP、软件目录和两个 Skills，使用研究系统自带的 Python。
+
+从仓库目录安装适合开发使用；Release 插件包包含六种系统与架构的原生执行程序。
 [Codex、Claude Code 与更新方法](docs/CONNECT.zh-CN.md#从插件市场安装)。
 
 
 仓库现提供可安装的连接器、完整原生程序执行、MCP 和研究 Skills。[接入说明](docs/CONNECT.zh-CN.md) · [交互指南](https://cherish0925.github.io/Optics-Photonics-AI-Lab/connect.zh.html) · [下载发布包](https://github.com/Cherish0925/Optics-Photonics-AI-Lab/releases)。
 
 ```sh
-python -m pip install "git+https://github.com/Cherish0925/Optics-Photonics-AI-Lab.git@optics-v0.5.1"
+python -m pip install "https://github.com/Cherish0925/Optics-Photonics-AI-Lab/releases/download/optics-v0.5.1/optics_photonics-0.5.1-py3-none-any.whl"
 optics-photonics prepare tmm
 optics-photonics connect agentic-research-os --output optics-plugin
 ```

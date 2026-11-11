@@ -7,7 +7,7 @@ An independent package for optical software, native research programs, backgroun
 The connector supports Python 3.10+ on Windows, macOS and Linux. Each solver uses its own supported Python version, operating system and license. Different tools may use different environments.
 
 ```sh
-python -m pip install "git+https://github.com/Cherish0925/Optics-Photonics-AI-Lab.git@optics-v0.5.1"
+python -m pip install "https://github.com/Cherish0925/Optics-Photonics-AI-Lab/releases/download/optics-v0.5.1/optics_photonics-0.5.1-py3-none-any.whl"
 optics-photonics info tmm
 optics-photonics prepare tmm
 optics-photonics run tmm spectrum --inputs "@inputs.json"

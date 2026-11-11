@@ -18,17 +18,13 @@ Download [English HTML](https://raw.githubusercontent.com/Cherish0925/Optics-Pho
 
 ## Install and run
 
-**Agentic Research OS:** in **Extensions → Plugins → Add from link**, paste
-`https://github.com/Cherish0925/Optics-Photonics-AI-Lab/tree/main/connect/agentic-research-os`,
-install `optics-photonics`, then activate it. The package carries its MCP server,
-catalogue and both Skills and uses Research OS's Python. No separate connector
-installation is needed. [Other hosts and updates](docs/CONNECT.md#install-from-a-marketplace).
+**Agentic Research OS:** download the [Research OS plugin package](https://github.com/Cherish0925/Optics-Photonics-AI-Lab/releases/download/optics-v0.5.1/Optics-Photonics-0.5.1-ResearchOS.zip), extract it, and install the directory containing `plugin.json`. It includes native executors, MCP, the catalogue and both Skills, and uses the host’s Python. Repository-directory installs are useful for development; release packages include executors for all six system/architecture combinations. [Other hosts and updates](docs/CONNECT.md#install-from-a-marketplace).
 
 
 The repository now includes an installable connector, native-program execution, MCP and research Skills. [Connection guide](docs/CONNECT.md) · [Interactive guide](https://cherish0925.github.io/Optics-Photonics-AI-Lab/connect.html) · [Release packages](https://github.com/Cherish0925/Optics-Photonics-AI-Lab/releases).
 
 ```sh
-python -m pip install "git+https://github.com/Cherish0925/Optics-Photonics-AI-Lab.git@optics-v0.5.1"
+python -m pip install "https://github.com/Cherish0925/Optics-Photonics-AI-Lab/releases/download/optics-v0.5.1/optics_photonics-0.5.1-py3-none-any.whl"
 optics-photonics prepare tmm
 optics-photonics connect agentic-research-os --output optics-plugin
 ```

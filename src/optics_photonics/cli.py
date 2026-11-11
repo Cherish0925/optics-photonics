@@ -42,9 +42,11 @@ def main(argv=None):
         item=commands.add_parser(name); item.add_argument('run_id')
         if name in ('status','files'):
             item.add_argument('--offset',type=int,default=0); item.add_argument('--limit',type=int,default=50 if name=='status' else 100)
+        if name == 'files': item.add_argument('--prefix',default='')
         if name == 'status':
             item.add_argument('--wait',type=float,default=0); item.add_argument('--summary',dest='include_results',action='store_false')
     download=commands.add_parser('download'); download.add_argument('run_id'); download.add_argument('file'); download.add_argument('destination')
+    array=commands.add_parser('array',help='Read part of an NPY array or NPZ member'); array.add_argument('run_id'); array.add_argument('file'); array.add_argument('--member'); array.add_argument('--index',type=json.loads,help='JSON list, e.g. [10, [0, 100, 2]]'); array.add_argument('--max-elements',type=int,default=10000)
     read=commands.add_parser('read'); read.add_argument('run_id'); read.add_argument('file'); read.add_argument('--offset',type=int,default=0); read.add_argument('--limit',type=int,default=16384)
     runs=commands.add_parser('runs'); runs.add_argument('--state'); runs.add_argument('--offset',type=int,default=0); runs.add_argument('--limit',type=int,default=20)
     commands.add_parser('mcp')
@@ -78,8 +80,8 @@ def main(argv=None):
         elif command == 'runs': result=jobs.list_runs(**a)
         elif command == 'submit-workflow':
             steps=json.loads(a.pop('file').read_text(encoding='utf-8')); result=jobs.submit(steps,**a)
-        elif command in ('status','files','cancel','resume','download','read'):
-            result=getattr(jobs, {'read':'read_result'}.get(command,command))(**a)
+        elif command in ('status','files','cancel','resume','download','read','array'):
+            result=getattr(jobs, {'read':'read_result','array':'read_array'}.get(command,command))(**a)
         elif command == 'connect':
             from .packages import package
             result=package(a.pop('output'),**a)

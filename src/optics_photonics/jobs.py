@@ -18,7 +18,7 @@ import uuid
 
 if __package__ in (None, ''):
     sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from optics_photonics import environments, execution
+from optics_photonics import arrays, environments, execution
 from optics_photonics.signals import Cancellation, Wakeup, notify
 
 TERMINAL = {'succeeded', 'failed', 'cancelled', 'blocked', 'interrupted'}
@@ -343,16 +343,30 @@ def file_path(run_id, file, path=None):
     return selected
 
 
-def files(run_id, path=None, offset=0, limit=100):
+def files(run_id, path=None, offset=0, limit=100, prefix=''):
+    """List result files; prefix (e.g. 'solve/attempt-1/') walks only that part of the run.
+
+    NPY and NPZ entries on the returned page include dtype and shape.
+    """
     identifier(run_id)
     if offset<0 or not 1<=limit<=500: raise ValueError('Use offset >= 0 and limit between 1 and 500')
-    root = environments.home(path)/'runs'/run_id
+    root = (environments.home(path)/'runs'/run_id).resolve()
     if not root.is_dir(): raise ValueError('Unknown run: '+run_id)
+    prefix = str(prefix or '').replace('\\','/').lstrip('/')
+    base = (root/prefix).resolve()
+    if not base.is_dir(): base = base.parent
+    if not base.is_relative_to(root): raise ValueError('prefix must be inside the run')
     found = []
-    for item in sorted(root.rglob('*')):
-        if item.is_file() and not item.is_symlink() and item.name != 'worker.lock':
-            found.append({'file':str(item.relative_to(root)).replace(os.sep,'/'),'bytes':item.stat().st_size})
-    return {'run_id':run_id, 'files':found[offset:offset+limit], 'total':len(found), 'next_offset':offset+limit if offset+limit<len(found) else None}
+    for item in sorted(base.rglob('*')):
+        name = item.relative_to(root).as_posix()
+        if name.startswith(prefix) and item.is_file() and not item.is_symlink() and item.name != 'worker.lock':
+            found.append({'file':name,'bytes':item.stat().st_size})
+    page = found[offset:offset+limit]
+    for entry in page:
+        if entry['file'].endswith(('.npy','.npz')):
+            try: entry['array'] = arrays.describe(root/entry['file'])
+            except (OSError, ValueError): pass  # still being written
+    return {'run_id':run_id, 'files':page, 'total':len(found), 'next_offset':offset+limit if offset+limit<len(found) else None}
 
 
 def download(run_id, file, destination, path=None):
@@ -371,6 +385,11 @@ def read_result(run_id, file, offset=0, limit=16384, path=None):
     try: data=content.decode('utf-8'); format='utf-8'
     except UnicodeDecodeError: data=base64.b64encode(content).decode('ascii'); format='base64'
     return {'file':file,'offset':offset,'encoding':format,'data':data,'next_offset':offset+len(content) if offset+len(content)<source.stat().st_size else None}
+
+
+def read_array(run_id, file, member=None, index=None, max_elements=10000, path=None):
+    """Read part of an NPY array or NPZ member from a run; see arrays.read."""
+    return {'run_id':run_id, 'file':file, **arrays.read(file_path(run_id, file, path), member=member, index=index, max_elements=max_elements)}
 
 
 def resolved_inputs(spec, results):

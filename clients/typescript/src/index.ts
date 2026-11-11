@@ -103,7 +103,9 @@ export class OpticsLab {
       if(['succeeded','failed','cancelled','blocked','interrupted'].includes(state.state)) return state;
     }
   }
-  files(run_id:string,offset=0,limit=100){return this.call('result_files',{run_id,offset,limit});}
+  files(run_id:string,offset=0,limit=100,prefix=''){return this.call('result_files',{run_id,offset,limit,...(prefix?{prefix}:{})});}
+  /** Part of an NPY array or NPZ member; index entries are positions or [start, stop, step]. */
+  array(run_id:string,file:string,options:{member?:string;index?:(number|(number|null)[])[];max_elements?:number}={}){return this.call('read_array',{run_id,file,...options});}
   read(run_id:string,file:string,offset=0,limit=16384){return this.call('read_result',{run_id,file,offset,limit});}
   cancel(run_id:string){return this.call('cancel_run',{run_id});}
   resume(run_id:string){return this.call('resume_run',{run_id});}

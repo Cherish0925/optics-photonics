@@ -57,6 +57,27 @@ request's wait without a reply; `cancel_run` stops the calculation itself. When
 the host closes the connection, pending waits return their current state and
 accepted calculations continue.
 
+## Read large results
+
+`result_files` lists a run page by page; `prefix` such as `sweep/attempt-1/`
+walks only that step or folder. NPY and NPZ entries carry dtype and shape.
+`read_array` returns part of an NPY array or NPZ member without NumPy and
+without loading the file: per axis, `index` takes an integer to select one
+position, `[start, stop, step]` for a range, or `null` for the whole axis;
+`member` names an NPZ array. A selection
+larger than `max_elements` (default 10000, at most 100000) is thinned: each axis
+keeps at most c elements by a uniform step, with the largest c that fits, so
+short axes such as ports or field components stay whole. The response states
+the steps used. Complex values
+return `real` and `imag`. An array still being written reports how many bytes
+are present; an NPZ file is readable once the solver has closed it. Boolean,
+integer, real and complex arrays are supported. Use `read_result` for other
+formats.
+
+```json
+{"run_id": "RUN", "file": "solve/attempt-1/field.npz", "member": "Ex", "index": [[0, null, 4], 128]}
+```
+
 ## TypeScript
 
 Install the `.tgz` from the release with npm, then:

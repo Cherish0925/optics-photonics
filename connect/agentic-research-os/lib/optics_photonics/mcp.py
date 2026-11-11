@@ -28,9 +28,10 @@ TOOLS = [
     ('submit_workflow', 'Submit dependent or independent calculation steps in one request. Each step has id, tool, action or source, inputs, after, optional timeout and bindings {input_name: {step, path: [keys]}}. Supply run_id to append a batch to an existing research run.', schema({'steps':{'type':'array','items':{'type':'object'},'minItems':1},'name':STRING,'request_id':STRING,'run_id':STRING},['steps'])),
     ('run_status', 'Read compact execution state. wait (0–25 seconds) waits for completion without repeated calls. Results stay in files by default; include_results returns step values. Calculations continue after disconnection.', schema({'run_id':STRING,'offset':{'type':'integer','minimum':0},'limit':{'type':'integer','minimum':1,'maximum':200},'include_results':{'type':'boolean'},'wait':{'type':'number','minimum':0,'maximum':25}},['run_id'])),
     ('cancel_run', 'Cancel a research run and its active calculations.', schema({'run_id':STRING},['run_id'])),
-    ('result_files', 'List files written so far by a research run, including running calculations.', schema({'run_id':STRING,'offset':{'type':'integer','minimum':0},'limit':{'type':'integer','minimum':1,'maximum':500}},['run_id'])),
+    ('result_files', 'List files written so far by a research run, including running calculations. prefix such as "solve/attempt-1/" limits the listing to one step or folder. NPY/NPZ entries include dtype and shape.', schema({'run_id':STRING,'prefix':STRING,'offset':{'type':'integer','minimum':0},'limit':{'type':'integer','minimum':1,'maximum':500}},['run_id'])),
+    ('read_array', 'Read part of an NPY array or NPZ member without loading the whole file. index has one entry per leading axis: an integer selects a position and drops the axis; [start, stop, step] keeps it (Python slice rules, null for open ends); null keeps the whole axis. Beyond max_elements long axes are thinned by uniform steps while short axes (ports, components) stay whole; selection reports the steps used. Complex data returns real and imag; non-finite values are "nan", "inf", "-inf".', schema({'run_id':STRING,'file':STRING,'member':STRING,'index':{'type':'array','items':{'anyOf':[{'type':'integer'},{'type':'null'},{'type':'array','items':{'type':['integer','null']},'minItems':1,'maxItems':3}]}},'max_elements':{'type':'integer','minimum':1,'maximum':100000}},['run_id','file'])),
     ('download_result', 'Copy a result file to a new destination on the MCP host computer.', schema({'run_id':STRING,'file':STRING,'destination':STRING},['run_id','file','destination'])),
-    ('read_result', 'Read a bounded part of a result or log. Text returns UTF-8; binary returns base64.', schema({'run_id':STRING,'file':STRING,'offset':{'type':'integer','minimum':0},'limit':{'type':'integer','minimum':1,'maximum':65536}},['run_id','file'])),
+    ('read_result', 'Read a bounded byte range of a result or log. Text returns UTF-8; binary returns base64. Use read_array for NPY/NPZ data.', schema({'run_id':STRING,'file':STRING,'offset':{'type':'integer','minimum':0},'limit':{'type':'integer','minimum':1,'maximum':65536}},['run_id','file'])),
     ('list_runs', 'Find previous and active research runs after reconnecting.', schema({'state':STRING,'offset':{'type':'integer','minimum':0},'limit':{'type':'integer','minimum':1,'maximum':200}})),
     ('resume_run', 'Rerun unfinished steps of a stopped research run, keeping completed steps and previous output files.', schema({'run_id':STRING},['run_id'])),
 ]
@@ -62,6 +63,7 @@ def invoke(name, args, cancellation=None):
     if name == 'result_files': return jobs.files(**args)
     if name == 'download_result': return jobs.download(**args)
     if name == 'read_result': return jobs.read_result(**args)
+    if name == 'read_array': return jobs.read_array(**args)
     if name == 'resume_run': return jobs.resume(**args)
     if name == 'list_runs': return jobs.list_runs(**args)
     raise ValueError('Unknown tool: '+name)

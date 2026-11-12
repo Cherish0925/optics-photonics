@@ -26,6 +26,10 @@ class ScienceTests(unittest.TestCase):
                 np.testing.assert_array_equal(arrays[metadata['field']['array']],field)
                 self.assertEqual(arrays[metadata['wavelength_m']['array']].item(),1.55e-6)
             self.assertEqual(metadata['unit'],'V/m')
+            from optics_photonics import data
+            described = export({'E': data.quantity(field, 'electric field', unit='V/m', time_dependence='exp(-i omega t)')}, 'described', root)
+            entry = json.loads((root/described['metadata']).read_text())['E']
+            self.assertEqual((entry['shape'], entry['unit'], entry['time_dependence']), ([2,3,4], 'V/m', 'exp(-i omega t)'))
 
     def test_skills_have_readable_yaml_metadata(self):
         import yaml

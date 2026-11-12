@@ -12,6 +12,7 @@ import re
 import struct
 import zipfile
 from pathlib import Path
+from . import data
 
 MAGIC = b'\x93NUMPY'
 LIMIT = 100_000
@@ -62,11 +63,11 @@ def describe(file, member=None):
             names = [n for n in archive.namelist() if n.endswith('.npy')]
             if member is not None:
                 names = [_member(archive, member)]
-            result = {}
+            result, described = {}, data.descriptions(file) or {}
             for name in names[:50]:
                 with archive.open(name) as stream:
                     descr, shape, _, _ = header(stream)
-                result[name[:-4]] = {'dtype': descr, 'shape': list(shape)}
+                result[name[:-4]] = {'dtype': descr, 'shape': list(shape), **data.summary(described.get(name[:-4], {}))}
             return {'arrays': result, 'count': len(names)}
     with file.open('rb') as stream:
         descr, shape, _, _ = header(stream)
@@ -147,13 +148,39 @@ def read(file, *, member=None, index=None, max_elements=10_000):
                 name = _member(archive, member)
                 size = archive.getinfo(name).file_size
                 with archive.open(name) as stream:
-                    return {'member': name[:-4], **_read(stream, size, index, max_elements)}
+                    result = {'member': name[:-4], **_read(stream, size, index, max_elements)}
+                return {**result, **_described(file, archive, name[:-4], result['selection'])}
         if member is not None:
             raise ValueError('member applies to NPZ files')
         with file.open('rb') as stream:
             return _read(stream, file.stat().st_size, index, max_elements)
     except (struct.error, zipfile.BadZipFile, EOFError):
         raise ValueError('The array data ended before the selected values') from None
+
+
+def _described(file, archive, member, chosen):
+    """The saved description of an NPZ member and the coordinates of the selected values."""
+    described = data.descriptions(file) or {}
+    if member not in described:
+        return {}
+
+    def coordinates(axis, positions):
+        # A resolved descending range ends at -1 for "before the first element", which is not an index to send again.
+        picked = None if isinstance(positions, int) else range(*positions)
+        if picked is not None and not picked:
+            return []
+        forward = picked if picked is None or picked.step > 0 else picked[::-1]
+        name = _member(archive, axis)
+        with archive.open(name) as stream:
+            values = _read(stream, archive.getinfo(name).file_size,
+                           [positions if picked is None else [forward[0], forward[-1] + 1, forward.step]], LIMIT)['values']
+        return values if forward is picked else values[::-1]
+    description = {key: value for key, value in described[member].items() if key not in ('dtype', 'shape')}
+    try:
+        axes, at = data.located(description, described, chosen, coordinates)
+    except (ValueError, KeyError, TypeError, IndexError):
+        return {'description': description}  # the description does not fit the stored arrays
+    return {'description': description, 'axes': axes, **({'at': at} if at else {})}
 
 
 def _read(stream, size, index, max_elements):

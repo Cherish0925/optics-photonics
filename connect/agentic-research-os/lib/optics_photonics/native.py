@@ -134,12 +134,14 @@ def bind(tool, *, python=None, sdk_path=None, options=None, threads=1, concurren
 def export(value, name, output):
     """Keep multidimensional and complex data in files, with a small JSON description."""
     import numpy as np
+    from .data import Quantity
     if not isinstance(name, str) or Path(name).name != name or name in ('', '.', '..'):
         raise ValueError('Use a filename without directory components')
     arrays = {}
     def encode(item):
         if isinstance(item, dict): return {str(k): encode(v) for k, v in item.items()}
         if isinstance(item, (list, tuple)): return [encode(v) for v in item]
+        if isinstance(item, Quantity): return {**encode(item.values), **item.description}
         if isinstance(item, np.ndarray) or isinstance(item, (complex, np.generic)):
             data = np.asarray(item)
             if data.dtype.hasobject: raise ValueError('Export numeric arrays rather than opaque Python objects')

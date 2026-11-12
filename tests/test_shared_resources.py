@@ -6,13 +6,15 @@ import tempfile
 import time
 import unittest
 from unittest.mock import patch
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 from optics_photonics import environments, jobs
 from optics_photonics.signals import Wakeup, notify
+from support import workspace
 
 
 class ResourceCase(unittest.TestCase):
     def test_arbitrary_software_shares_a_license_pool_and_keeps_results_bounded(self):
-        with tempfile.TemporaryDirectory() as folder:
+        with workspace() as folder:
             root=Path(folder); home=root/'home'; solver=root/'solver.py'
             solver.write_text('''import os,json,time
 from pathlib import Path

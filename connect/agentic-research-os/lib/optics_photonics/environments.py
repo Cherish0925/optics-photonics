@@ -1,4 +1,5 @@
 """Use installed scientific environments, or prepare a separate Python environment."""
+import errno
 import json
 import re
 from contextlib import contextmanager
@@ -22,8 +23,7 @@ def editing(path=None):
     directory = home(path)
     directory.mkdir(parents=True, exist_ok=True)
     with (directory/'connections.lock').open('a+b') as stream:
-        if stream.tell() == 0:
-            stream.write(b'0'); stream.flush()
+        # Both systems can lock an empty file; do not write before owning it.
         stream.seek(0)
         if os.name == 'nt':
             import msvcrt
@@ -31,7 +31,9 @@ def editing(path=None):
                 try:
                     msvcrt.locking(stream.fileno(), msvcrt.LK_NBLCK, 1)
                     break
-                except OSError:
+                except OSError as error:
+                    if error.errno != errno.EACCES:
+                        raise
                     time.sleep(.02)
         else:
             import fcntl
@@ -46,18 +48,40 @@ def editing(path=None):
 
 
 def read(path=None):
+    # Windows file replacement cannot overlap a reader's open file handle.
+    with editing(path):
+        return _read(path)
+
+
+def _read(path=None):
     file = home(path) / 'connections.json'
     return json.loads(file.read_text(encoding='utf-8')) if file.exists() else {'tools': {}}
 
 
 def save(value, path=None):
+    with editing(path):
+        _save(value, path)
+
+
+def update(section, key, value, path=None):
+    """Change one entry while retaining concurrent registrations."""
+    with editing(path):
+        configuration = _read(path)
+        configuration.setdefault(section, {})[key] = value
+        _save(configuration, path)
+
+
+def _save(value, path=None):
     directory = home(path)
     directory.mkdir(parents=True, exist_ok=True)
     with tempfile.NamedTemporaryFile(mode='w', encoding='utf-8', dir=directory, delete=False) as stream:
         json.dump(value, stream, ensure_ascii=False, indent=2)
         stream.write('\n')
         temporary = stream.name
-    os.replace(temporary, directory / 'connections.json')
+    try:
+        os.replace(temporary, directory / 'connections.json')
+    finally:
+        Path(temporary).unlink(missing_ok=True)
 
 
 def register(tool, name, description, *, kind='python', modules=None, distributions=None, sources=None, path=None):
@@ -76,10 +100,7 @@ def register(tool, name, description, *, kind='python', modules=None, distributi
             raise ValueError(key + ' must be an array of nonempty strings')
     definition = {'id': tool, 'name': name, 'summary': description, 'origin': 'local',
                   'connection': {'kind': kind, 'pip': [], 'operations': [], **values}}
-    with editing(path):
-        configuration = read(path)
-        configuration.setdefault('software', {})[tool] = definition
-        save(configuration, path)
+    update('software', tool, definition, path)
     return definition
 
 
@@ -88,6 +109,19 @@ def software(tool, language='en', path=None):
     if local is not None:
         return local
     return catalogue_software(tool, language)
+
+
+REPEATED = ('interface', 'sources', 'upstream', 'operations', 'native_program')
+
+
+def details(tool, language='en', path=None):
+    """One software entry with its connection and what it can run; each fact appears once."""
+    from . import operations
+    item = software(tool, language, path)
+    if item.get('origin') != 'local':
+        # connections.json repeats these catalogue fields so that the file can be read on its own.
+        item = {**item, 'connection': {key: value for key, value in item['connection'].items() if key not in REPEATED}}
+    return {**item, 'execution': operations.details(tool)}
 
 
 def registered(path=None):
@@ -153,10 +187,7 @@ def bind(tool, *, python=None, command=None, path=None, threads=1, concurrency=1
                       requirements=requirements or {}, env=env or {})
     if item.get('origin') == 'local':
         connection['definition'] = item
-    with editing(path):
-        configuration = read(path)
-        configuration['tools'][tool] = connection
-        save(configuration, path)
+    update('tools', tool, connection, path)
     return {'tool': tool, **connection}
 
 

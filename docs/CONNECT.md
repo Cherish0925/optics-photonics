@@ -7,7 +7,7 @@ An independent package for optical software, native research programs, backgroun
 The connector supports Python 3.10+ on Windows, macOS and Linux. Each solver uses its own supported Python version, operating system and license. Different tools may use different environments.
 
 ```sh
-python -m pip install "https://github.com/Cherish0925/Optics-Photonics-AI-Lab/releases/download/optics-v0.5.1/optics_photonics-0.5.1-py3-none-any.whl"
+python -m pip install "https://github.com/Cherish0925/Optics-Photonics-AI-Lab/releases/download/optics-v0.6.0/optics_photonics-0.6.0-py3-none-any.whl"
 optics-photonics info tmm
 optics-photonics prepare tmm
 optics-photonics run tmm spectrum --inputs "@inputs.json"
@@ -45,11 +45,12 @@ optics-photonics status RUN_ID
 optics-photonics files RUN_ID
 optics-photonics read RUN_ID calculate/attempt-1/result.json
 optics-photonics download RUN_ID calculate/attempt-1/spectrum.csv spectrum.csv
+optics-photonics array RUN_ID calculate/attempt-1/field.npz --member field --index "[[0, null, 4], 128]"
 ```
 
-Submission returns immediately. The independent worker continues when the submitting CLI or MCP process exits. Reuse `request-id` for retries of the same submission. Written files can be read while the run is active.
+Submission returns immediately. The independent worker continues when the submitting CLI or MCP process exits. Reuse `request-id` for retries of the same submission. Written files can be read while the run is active. `files --prefix STEP/` lists one step, and `array` returns part of an NPY or NPZ array without loading the file.
 
-A workflow is an array of steps with `id`, `tool`, `inputs`, `action` or `source`, optional `after`, `bindings` and `timeout`. Independent steps run within resource limits. A binding such as `{"value":{"step":"solve","path":["result","R"]}}` copies a predecessor result into the input named `value` and adds the dependency. `output` in a predecessor result identifies its directory for large-file exchange.
+A workflow is an array of steps with `id`, `tool`, `inputs`, `action` or `source`, optional `after`, `bindings` and `timeout`. Independent steps run within resource limits. A binding such as `{"value":{"step":"solve","path":["result","R"]}}` copies a predecessor result into the input named `value` and adds the dependency. For large data, `{"field":{"step":"solve","file":"field.npz"}}` sets the input `field` to the location of a file or folder that step wrote; the reference stays relative to the run and is resolved on the computing host when the step starts.
 
 ```sh
 optics-photonics submit-workflow workflow.json --request-id study-002
@@ -69,9 +70,11 @@ Append preserves the research run. Resume retains successful steps and reruns un
 | Claude Code | `claude plugin marketplace add Cherish0925/Optics-Photonics-AI-Lab`, then `claude plugin install optics-photonics@optics-photonics`. |
 
 The Research OS package includes the connector, catalogue and Skills and uses
-the host's Python. The Codex/Claude GitHub plugin runs the included source with
-`python` from the tool host's PATH, version 3.10 or newer. If your interpreter has
-another name or path, generate a host package below using that interpreter.
+the host's Python. Codex/Claude marketplace plugins and the DeepSeek bundle use
+[uv](https://docs.astral.sh/uv/getting-started/installation/) to select Python 3.10+;
+it downloads an interpreter only when needed. Install uv once on the execution host.
+With an existing Python, generate a host package below to use it directly.
+Codex resolves the plugin working directory; Claude expands its own plugin path variable.
 Scientific software is prepared separately through `prepare_environment` or
 connected through `bind_environment` / `bind_native_software`.
 
@@ -100,9 +103,9 @@ optics-photonics connect agentic-research-os --output optics-plugin
 | Qiushi | Research OS editions use its native package; other editions use `connect qiushi` for MCP or command access. |
 | Other MCP hosts | `connect mcp`; register the stdio command in the host's format. |
 
-MCP provides software search, environment preparation/binding, resource settings, submission, history, status, cancellation, resumption and result access. `prepare_environment` installs a listed recipe in the background and returns a run ID; successful installation registers the environment. Two Skills and 14 domain references supply scientific methods on demand.
+MCP provides software search, environment preparation/binding, resource settings, submission, history, status, cancellation, resumption and result access. `prepare_environment` installs a listed recipe in the background and returns a run ID; successful installation registers the environment. Two Skills and their references supply operating and scientific guidance on demand; `read_guide` returns any of them to a host that does not load Skills.
 
-Computations run on the MCP host. SSH can launch the stdio server on a workstation with the scientific software: `ssh -T USER@HOST /path/to/python -m optics_photonics mcp`. `read_result` returns bounded text/binary contents. `download_result` copies to a path on the MCP host; use SSH/SFTP for large remote files.
+Computations run on the MCP host. SSH can launch the stdio server on a workstation with the scientific software: `ssh -T USER@HOST /path/to/python -m optics_photonics mcp`. `read_result` returns bounded text/binary contents and `read_array` part of an NPY/NPZ array. `download_result` copies to a path on the MCP host. The TypeScript client's `download` transfers a file's content through the connection; SSH/SFTP remains an option for very large remote files.
 
 Use a persistent computing host for long research runs. A detached worker survives the submitting process, but a host that disposes of the entire container or process group also stops its workers. For such Agent environments, connect to the scientific workstation over SSH rather than starting the calculation inside a disposable tool execution.
 
@@ -147,4 +150,5 @@ Use `submit_calculation` or `submit_workflow` with this tool ID and a complete n
 MCP exposes `register_software` and `registered_software`; `software_details` reads both published and locally registered software. Shell clients use `optics-photonics register-software @definition.json` and `registered-software`. Registration describes software; binding selects an installed interpreter or executable. Installation remains under the tool's own requirements and license. Keep files under the job's OUTPUT_DIR so parallel computations own separate outputs.
 
 `optics-photonics connect portable --output DIR` creates an Agent Plugins package with root plugin.json, mcp.json and skills/.
-MCP resources `optics://guides/optical-computation` and `optics://guides/optical-research` provide instructions on demand.
+Portable packages use a bare `uv` command and plugin-relative paths, so moving or updating a package does not retain paths from its author’s computer. `connect codex --managed-python` and `connect claude --managed-python` generate similarly movable native packages. Local packages generated without that option retain the selected Python.
+The `read_guide` tool and the MCP resources `optics://guides/TOPIC` return both Skills and each of their references on demand.

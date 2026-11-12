@@ -47,7 +47,27 @@ class ConnectionTests(unittest.TestCase):
         for query in ('thin film','thin-film','ＴＨＩＮ　ＦＩＬＭ','薄膜'):
             items = catalogue.search(query,license_group='open',limit=100)['items']
             self.assertTrue({'tmm','grcwa'} <= {row['id'] for row in items},query)
-        self.assertIn('py-pol',{r['id'] for r in catalogue.search('py pol')['items']})
+        self.assertEqual(catalogue.search('py pol')['items'][0]['id'],'py-pol')
+
+    def test_search_ranks_related_word_forms_and_reports_missing_words(self):
+        def found(query, **options):
+            return [(row['id'], row.get('missing')) for row in catalogue.search(query, limit=100, **options)['items']]
+        # Plural, participle and joined forms of the catalogue's words.
+        self.assertEqual(found('photonic crystal bands')[0], ('mpb', None))
+        self.assertEqual(found('mie scattering sphere')[0], ('miepython', None))
+        self.assertEqual({tool for tool, _ in found('xray beamline')}, {tool for tool, _ in found('x-ray beamline')})
+        self.assertIn(('xrt', None), found('xray beamline'))
+        # A word matches the start of a word: ring is not found inside scattering.
+        self.assertNotIn('miepython', [tool for tool, _ in found('ring')])
+        # Three or more words also return software one word short, after the full matches.
+        ranked = found('mie scattering sphere')
+        self.assertIn(('treams', ['sphere']), ranked)
+        self.assertEqual([missing for _, missing in ranked], sorted((missing for _, missing in ranked), key=bool))
+        # Two words must both match while some software has both.
+        self.assertTrue(all(missing is None for _, missing in found('thin film')))
+        self.assertEqual(found('zzzz film'), [(tool, ['zzzz']) for tool, _ in found('film')])
+        self.assertEqual(found('zzzz yyyy'), [])
+        self.assertEqual(len(found('')), len(catalogue.catalogue()))
 
     def test_mcp_initialization_and_tool_call(self):
         requests = [
@@ -57,7 +77,8 @@ class ConnectionTests(unittest.TestCase):
             {'jsonrpc':'2.0','id':3,'method':'tools/call','params':{'name':'software_details','arguments':{'tool':'missing'}}},
             {'jsonrpc':'2.0','id':4,'method':'ping'}]
         out=io.StringIO();serve(io.StringIO('\n'.join(json.dumps(r) for r in requests)),out)
-        messages=[json.loads(s) for s in out.getvalue().splitlines()]
+        # Tool calls complete independently; replies are matched by request ID.
+        messages=sorted((json.loads(s) for s in out.getvalue().splitlines()),key=lambda m:m['id'])
         self.assertEqual([m['id'] for m in messages],[1,2,3,4])
         self.assertEqual(messages[1]['result']['structuredContent']['execution']['operations'][0]['name'],'spectrum')
         self.assertTrue(messages[2]['result']['isError'])
@@ -100,11 +121,39 @@ class ConnectionTests(unittest.TestCase):
     def test_concurrent_environment_registration_keeps_every_tool(self):
         with tempfile.TemporaryDirectory() as tmp:
             ids = ['tmm','grcwa','scipy','optiland','gdsfactory','py-pol']
-            code = 'from optics_photonics.environments import bind;import sys;bind(sys.argv[1],command=[sys.executable],path=sys.argv[2])'
-            workers = [subprocess.Popen([sys.executable, '-c', code, tool, tmp]) for tool in ids]
-            for process in workers:
-                self.assertEqual(process.wait(timeout=30), 0)
-            self.assertEqual(set(environments.read(tmp)['tools']), set(ids))
+            code = '''from optics_photonics.environments import bind, read
+import sys
+for i in range(20):
+    bind(sys.argv[1],command=[sys.executable],path=sys.argv[2],threads=i+1)
+    assert read(sys.argv[2])['tools'][sys.argv[1]]['threads']==i+1
+'''
+            workers = [subprocess.Popen([sys.executable, '-c', code, tool, tmp],
+                stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True) for tool in ids]
+            try:
+                outcomes = [(process, process.communicate(timeout=30)) for process in workers]
+                for process, (_, error) in outcomes:
+                    self.assertEqual(process.returncode, 0, error)
+            finally:
+                for process in workers:
+                    if process.poll() is None:
+                        process.kill(); process.communicate()
+            configured = environments.read(tmp)['tools']
+            self.assertEqual(set(configured), set(ids))
+            self.assertTrue(all(item['threads'] == 20 for item in configured.values()))
+
+    def test_concurrent_threads_keep_software_and_connections(self):
+        from concurrent.futures import ThreadPoolExecutor
+        with tempfile.TemporaryDirectory() as tmp:
+            def add(index):
+                tool = 'local-' + str(index)
+                environments.register(tool, tool, 'Local command', kind='command', path=tmp)
+                environments.bind(tool, command=[sys.executable], path=tmp)
+                return environments.software(tool, path=tmp)
+            with ThreadPoolExecutor(max_workers=8) as pool:
+                definitions = list(pool.map(add, range(24)))
+            configured = environments.read(tmp)
+            self.assertEqual(set(configured['software']), {item['id'] for item in definitions})
+            self.assertEqual(set(configured['tools']), set(configured['software']))
 
     def test_invalid_setup_does_not_change_connections(self):
         with tempfile.TemporaryDirectory() as tmp:

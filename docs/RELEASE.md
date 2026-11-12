@@ -1,11 +1,17 @@
-# Optics-Photonics-AI-Lab 0.5.1
+# Optics-Photonics-AI-Lab 0.6.0
 
-Calculations now wake the scheduler when they finish. Native Rust execution owns program process trees and handles cancellation and duration limits, with scientific output going directly to files. Universal release packages include six native executors: Windows/macOS/Linux on x86_64/ARM64.
+Agent requests remain responsive while calculations run. MCP handles concurrent calls, independent status waits and request cancellation; the TypeScript client supports AbortSignal. Scheduling retains dependency state and reads newly appended work without loading old results each time.
 
-CPU, GPU slots, solver licenses and other named capacities are shared across research runs. Local software outside the catalogue supports the same resource requirements, environment variables, background execution and saved results. Dependency validation is linear in the graph size.
+Concurrent environment registration coordinates readers and writers across processes and threads, including Windows file replacement. Software and native SDK bindings use the same update path.
 
-MCP returns compact status by default, waits up to 25 seconds for completion, and lists configured environments by page without launching every interpreter. The new TypeScript client submits research programs and reconnects to their saved runs. MCP resources serve scientific operating guides on demand.
+NPY/NPZ arrays can be read by axis, position and forward or reverse slice, with bounded output and complex values. Workflow steps pass files by reference. The TypeScript client retrieves binary or text results to the client computer.
 
-Connection generation includes portable Agent Plugins packages and DeepSeek bundle metadata, alongside Codex, Claude Code, Research OS, Qiushi and ordinary MCP configurations. Existing scientific environments, software descriptions and research data remain in place.
+Episode collection records completed episodes separately, retains partial attempts and continues without collecting completed episodes again, including when the worker count changes. Task and policy versions identify scientific program changes; solver errors remain distinct from scientific outcomes.
 
-Windows executors include their C runtime, so launching them does not require a separate Visual C++ runtime installation.
+The two Skills and their references are available through read_guide and optics://guides resources. Software search ranks English and Chinese queries and reports missing terms; argument errors state the expected input.
+
+Codex uses its actual plugin-relative working directory. Claude uses CLAUDE_PLUGIN_ROOT. Portable Agent Plugins 1.0.0 packages contain no author-machine executable paths. GitHub marketplace entries use uv to select Python 3.10+; local packages can retain an explicitly selected interpreter. Research OS keeps its host Python. Updates preserve existing environments and runs under OPTICS_HOME.
+
+Downloads include ResearchOS, Connect, Codex, Claude and Portable ZIP packages, a Python wheel/source archive and a TypeScript package. The universal packages carry Rust executors for Windows, macOS and Linux on x86_64 and ARM64. Install uv once for the managed launchers; an existing-Python installation does not require it.
+
+This release integrates the contributor branches and the development handoff. Scientific units/coordinates, independently distributed solver integrations, remote job attachment and broader licensed-workstation execution remain active development work.

@@ -127,10 +127,7 @@ def bind(tool, *, python=None, sdk_path=None, options=None, threads=1, concurren
     if not inspected['importable']:
         raise ValueError('Missing SDK modules: ' + ', '.join(k for k, v in inspected['modules'].items() if not v))
     connection['python'] = inspected['python']
-    with environments.editing(path):
-        config = environments.read(path)
-        config['tools'][tool] = connection
-        environments.save(config, path)
+    environments.update('tools', tool, connection, path)
     return {'tool': tool, **connection, 'sdk': inspected}
 
 

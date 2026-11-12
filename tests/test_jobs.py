@@ -5,6 +5,7 @@ from pathlib import Path
 import subprocess
 import sys
 import tempfile
+import threading
 import time
 import unittest
 from unittest.mock import patch
@@ -31,6 +32,8 @@ if p.get('child'):
  subprocess.Popen([sys.executable,'-c',"import time;from pathlib import Path;p=Path("+repr(p['child'])+");[(p.write_text(str(i)),time.sleep(.05)) for i in range(2000)]"])
  time.sleep(100)
 time.sleep(p.get('sleep',0))
+if p.get('source'): p['value']=int(Path(p['source']).read_text())
+if p.get('folder'): p['other']=len([f for f in Path(p['folder']).iterdir() if f.suffix=='.csv'])
 Path(os.environ['OPTICS_OUTPUT_DIR'],'value.csv').write_text(str(p.get('value',1)+p.get('other',0)))
 Path(os.environ['OPTICS_RESULT_FILE']).write_text(json.dumps({'value':p.get('value',1)+p.get('other',0)}))
 '''
@@ -118,6 +121,84 @@ class JobsTests(unittest.TestCase):
         jobs.submit([{**self.step('append'),'bindings':{'value':{'step':'complete','path':['result','value']}}}],run_id=r,path=self.home)
         final=self.wait(r);self.assertEqual(final['state'],'succeeded',final)
         self.assertEqual(final['steps'][3]['result']['result']['value'],3)
+
+    def test_failure_blocks_descendants_and_independent_branch_completes(self):
+        steps=[self.step('a',fail_once=str(self.root/'flag')),{**self.step('b'),'after':['a']},{**self.step('c'),'after':['b']},
+               self.step('d',value=5),{**self.step('e'),'after':['d']}]
+        result=self.wait(self.submit(steps)['run_id'])
+        self.assertEqual(result['state'],'failed')
+        self.assertEqual({s['id']:s['state'] for s in result['steps']},
+                         {'a':'failed','b':'blocked','c':'blocked','d':'succeeded','e':'succeeded'})
+
+    def test_appended_step_may_follow_a_later_step_of_its_batch(self):
+        with patch.object(jobs,'start_worker'):
+            run=self.submit([self.step('first')])['run_id']
+            jobs.submit([{**self.step('x'),'bindings':{'value':{'step':'y','path':['result','value']}}},self.step('y',value=7)],
+                        run_id=run,path=self.home)
+        jobs.start_worker(run,path=self.home)
+        result=self.wait(run)
+        self.assertEqual(result['state'],'succeeded',result)
+        steps={s['id']:s for s in result['steps']}
+        self.assertEqual(steps['x']['result']['result']['value'],7)
+        self.assertGreaterEqual(steps['x']['started'],steps['y']['finished'])
+
+    def test_step_left_running_by_a_stopped_worker_is_interrupted(self):
+        with patch.object(jobs,'start_worker'):
+            run=self.submit([self.step('stale'),{**self.step('next'),'after':['stale']},self.step('other')])['run_id']
+        with jobs.database(self.home) as db:
+            db.execute("UPDATE steps SET state='running' WHERE run_id=? AND id='stale'",(run,))
+        worker=threading.Thread(target=jobs.work,args=(run,self.home));worker.start();worker.join(20)
+        self.assertFalse(worker.is_alive())
+        result=jobs.status(run,path=self.home)
+        self.assertEqual({s['id']:s['state'] for s in result['steps']},{'stale':'interrupted','next':'blocked','other':'succeeded'})
+        self.assertEqual(result['state'],'failed')
+
+    def test_appended_steps_are_checked_against_existing_step_ids(self):
+        with patch.object(jobs,'start_worker'):
+            run=self.submit([self.step('a'),{**self.step('b'),'after':['a']}])['run_id']
+            for invalid in ([self.step('a')],[{**self.step('c'),'after':['missing']}],
+                            [{**self.step('c'),'after':['b','d']},{**self.step('d'),'after':['c']}]):
+                with self.assertRaises(ValueError):jobs.submit(invalid,run_id=run,path=self.home)
+            jobs.submit([{**self.step('c'),'after':['b','d']},self.step('d')],run_id=run,path=self.home)
+            self.assertEqual(jobs.status(run,path=self.home)['counts'],{'queued':4})
+
+    def test_file_binding_passes_a_predecessor_file_by_reference(self):
+        steps=[self.step('field',value=20),
+               {**self.step('use'),'bindings':{'source':{'step':'field','file':'value.csv'},'folder':{'step':'field','file':'.'}}},
+               {**self.step('absent'),'bindings':{'source':{'step':'field','file':'missing.npz'}}}]
+        run=self.submit(steps)['run_id']
+        result=self.wait(run)
+        states={s['id']:s for s in result['steps']}
+        self.assertEqual(states['use']['result']['result']['value'],21,result)  # the file's value plus one CSV file in the folder
+        self.assertEqual(states['absent']['state'],'failed')
+        self.assertIn('did not write missing.npz',states['absent']['error'])
+        with jobs.database(self.home) as db:
+            stored=db.execute("SELECT specification FROM steps WHERE run_id=? AND id='use'",(run,)).fetchone()[0]
+        self.assertNotIn(str(self.home),stored)  # the reference stays relative; the path is resolved when the step starts
+        request=json.loads((self.home/'runs'/run/'use'/'attempt-1'/'request.json').read_text())
+        self.assertEqual(Path(request['inputs']['source']),(self.home/'runs'/run/'field'/'attempt-1'/'value.csv').resolve())
+        for reference in ({'step':'field','file':'../other/value.csv'},{'step':'field','file':'/etc/hosts'},{'step':'field','file':'C:\\data'},
+                          {'step':'field','file':''},{'step':'field','file':'a','path':['result']}):
+            with self.assertRaises(ValueError,msg=reference):
+                jobs.submit([self.step('field'),{**self.step('bad'),'bindings':{'x':reference}}],path=self.home)
+
+    def test_listing_order_and_pages_match_a_full_sorted_listing(self):
+        run=self.root/'config'/'runs'/'listing'
+        names=['a.txt','a/b.txt','a/c/d.txt','a-b.txt','B.txt','b/1.txt','b/10.txt','b/2.txt','z','worker.lock','a/worker.lock']
+        for name in names:
+            (run/name).parent.mkdir(parents=True,exist_ok=True);(run/name).write_text(name)
+        try: os.symlink(run/'a.txt',run/'link.txt');os.symlink(run/'a',run/'linked')
+        except OSError: pass  # links need a privilege on Windows
+        expected=[p.relative_to(run).as_posix() for p in sorted(run.rglob('*'))
+                  if p.is_file() and not p.is_symlink() and p.name!='worker.lock' and 'linked' not in p.parts]
+        listed=[];offset=0
+        while offset is not None:
+            page=jobs.files('listing',path=self.home,offset=offset,limit=2)
+            self.assertEqual(page['total'],len(expected))
+            listed+=[f['file'] for f in page['files']];offset=page['next_offset']
+        self.assertEqual(listed,expected)
+        self.assertEqual([f['file'] for f in jobs.files('listing',path=self.home,prefix='b/1')['files']],['b/1.txt','b/10.txt'])
+        self.assertEqual(jobs.files('listing',path=self.home,prefix='a/c/')['files'],[{'file':'a/c/d.txt','bytes':9}])
 
     def test_cancel_terminates_native_process_tree(self):
         child=self.root/'child.txt'

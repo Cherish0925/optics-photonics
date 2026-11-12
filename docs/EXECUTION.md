@@ -46,7 +46,40 @@ MCP `run_status` defaults to compact state and accepts `wait` up to 25 seconds.
 Read result files only when needed; `include_results=true` returns inline step
 values. Python's existing status function retains its detailed default.
 Environment listing is paginated and does not start every interpreter unless
-`refresh=true`. Only referenced predecessor results are loaded for a step.
+`refresh=true`. Only referenced predecessor results are loaded for a step. A
+binding with `file` passes the location of a predecessor's file instead of a
+value, so large arrays are not copied through JSON.
+
+One MCP connection answers tool calls as each completes; replies carry their
+request ID and may arrive in a different order. Up to 16 calls execute at once.
+`run_status` waits use their own threads, so any number of them leaves a
+search, a file read or `cancel_run` sent afterwards unaffected. A connection
+accepts 256 unanswered requests. MCP `notifications/cancelled` ends that
+request's wait without a reply; `cancel_run` stops the calculation itself. When
+the host closes the connection, pending waits return their current state and
+accepted calculations continue.
+
+## Read large results
+
+`result_files` lists a run page by page; `prefix` such as `sweep/attempt-1/`
+walks only that step or folder. Folders are read one at a time and sizes only
+for the returned page. NPY and NPZ entries carry dtype and shape.
+`read_array` returns part of an NPY array or NPZ member without NumPy and
+without loading the file: per axis, `index` takes an integer to select one
+position, `[start, stop, step]` for a range, or `null` for the whole axis;
+`member` names an NPZ array. A selection
+larger than `max_elements` (default 10000, at most 100000) is thinned: each axis
+keeps at most c elements by a uniform step, with the largest c that fits, so
+short axes such as ports or field components stay whole. The response states
+the steps used. Complex values
+return `real` and `imag`. An array still being written reports how many bytes
+are present; an NPZ file is readable once the solver has closed it. Boolean,
+integer, real and complex arrays are supported. Use `read_result` for other
+formats.
+
+```json
+{"run_id": "RUN", "file": "solve/attempt-1/field.npz", "member": "Ex", "index": [[0, null, 4], 128]}
+```
 
 ## TypeScript
 
@@ -62,4 +95,9 @@ lab.close();
 
 Closing a client leaves accepted work running. Reconnect and read the same run ID.
 To stop a calculation, call `cancel`; closing a client is not a cancellation.
+Requests on one client run concurrently. `wait`, `status` and `call` accept an
+`AbortSignal`: aborting stops that request's wait on the server, not the run.
+`lab.download(run_id, file, destination)` copies a result file to the client's
+computer through the connection, also when the server runs on another machine;
+`lab.array(run_id, file, {index})` reads part of an array.
 The native MCP interface remains available to other languages and hosts.

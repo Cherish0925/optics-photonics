@@ -9,9 +9,12 @@ import tempfile
 import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT/'src'))
+from optics_photonics.packages import package, managed_server
 
 
 class MarketplaceTests(unittest.TestCase):
+    @unittest.skipUnless(shutil.which('uv'), 'Marketplace launchers use uv; fixed-interpreter packages do not')
     def test_native_marketplaces_and_research_os_launch_after_relocation(self):
         requests = [
             {'jsonrpc': '2.0', 'id': 1, 'method': 'initialize', 'params': {
@@ -43,20 +46,62 @@ class MarketplaceTests(unittest.TestCase):
             ]
             for package, spec in specs:
                 with self.subTest(command=spec):
-                    args = [arg.replace('${PLUGIN_ROOT}', str(package))
-                            .replace('${CLAUDE_PLUGIN_ROOT}', str(package))
+                    # Native Codex does not expand PLUGIN_ROOT; its cwd is plugin-relative.
+                    args = [arg.replace('${CLAUDE_PLUGIN_ROOT}', str(package))
                             .replace('${PACKAGE_ROOT}', str(package)) for arg in spec['args']]
                     command = sys.executable if spec['command'] == '${RESEARCH_PYTHON}' else spec['command']
                     env = {key: value for key, value in os.environ.items() if key != 'PYTHONPATH'}
                     env['OPTICS_HOME'] = str(root / 'state')
-                    process = subprocess.run([command, *args], cwd=root, env=env,
+                    cwd = package / spec['cwd'] if 'cwd' in spec else root
+                    process = subprocess.run([command, *args], cwd=cwd, env=env,
                         input='\n'.join(map(json.dumps, requests))+'\n', capture_output=True,
                         text=True, timeout=30, check=True)
-                    replies = [json.loads(line) for line in process.stdout.splitlines()]
+                    replies = sorted((json.loads(line) for line in process.stdout.splitlines()), key=lambda r:r['id'])
                     self.assertEqual([reply['id'] for reply in replies], [1, 2, 3])
                     self.assertGreaterEqual(len(replies[1]['result']['tools']), 17)
                     result = replies[2]['result']['structuredContent']
                     self.assertEqual(result['items'][0]['id'], 'tmm')
+
+    def test_native_manifests_use_their_host_path_rules(self):
+        for filename, host in [('mcp.codex.json','codex'),('.mcp.json','claude')]:
+            self.assertEqual(json.loads((ROOT/filename).read_text())['mcpServers']['optics'], managed_server(host))
+
+    def test_generated_native_plugins_move_without_regeneration(self):
+        with tempfile.TemporaryDirectory(prefix='Optics relocation ') as temporary:
+            root = Path(temporary)
+            for host in ('codex','claude'):
+                original, moved = root/host, root/(host+' installed')
+                package(original, host)
+                original.rename(moved)
+                spec = json.loads((moved/'.mcp.json').read_text())['mcpServers']['optics']
+                arguments = [x.replace('${CLAUDE_PLUGIN_ROOT}',str(moved)) for x in spec['args']]
+                # Start from another workspace, just as a real host does.
+                cwd = moved/spec['cwd'] if 'cwd' in spec else root
+                arguments[-1:] = ['search','mie scattering sphere']
+                result = subprocess.run([spec['command'],*arguments],cwd=cwd,capture_output=True,text=True,check=True)
+                self.assertEqual(json.loads(result.stdout)['items'][0]['id'],'miepython')
+
+    @unittest.skipUnless(shutil.which('uv'), 'Portable launcher uses uv')
+    def test_managed_packages_move_and_keep_existing_research(self):
+        with tempfile.TemporaryDirectory(prefix='Optics managed ') as temporary:
+            root = Path(temporary)
+            home = root/'research'
+            home.mkdir(); (home/'notes.txt').write_text('Retain this research')
+            for host in ('codex','claude','portable'):
+                original, moved = root/host, root/(host+' updated')
+                package(original, host, managed=True)
+                original.rename(moved)
+                manifest = '.mcp.json' if host in ('codex','claude') else 'mcp.json'
+                spec = json.loads((moved/manifest).read_text())['mcpServers']['optics']
+                self.assertEqual(spec['command'], 'uv')
+                self.assertNotIn(str(original), json.dumps(spec))
+                args = [x.replace('${PLUGIN_ROOT}',str(moved)).replace('${CLAUDE_PLUGIN_ROOT}',str(moved)) for x in spec['args']]
+                args[-1:] = ['search','xray beamline']
+                cwd = moved/spec['cwd'] if 'cwd' in spec else root
+                env = {**os.environ,'OPTICS_HOME':str(home),'UV_PYTHON_DOWNLOADS':'never'}
+                result = subprocess.run([spec['command'],*args],cwd=cwd,env=env,capture_output=True,text=True,timeout=30,check=True)
+                self.assertIn('xrt', [row['id'] for row in json.loads(result.stdout)['items']])
+            self.assertEqual((home/'notes.txt').read_text(),'Retain this research')
 
 
 if __name__ == '__main__':

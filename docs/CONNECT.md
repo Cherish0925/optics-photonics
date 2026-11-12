@@ -101,7 +101,7 @@ optics-photonics connect agentic-research-os --output optics-plugin
 | Qiushi | Research OS editions use its native package; other editions use `connect qiushi` for MCP or command access. |
 | Other MCP hosts | `connect mcp`; register the stdio command in the host's format. |
 
-MCP provides software search, environment preparation/binding, resource settings, submission, history, status, cancellation, resumption and result access. `prepare_environment` installs a listed recipe in the background and returns a run ID; successful installation registers the environment. Two Skills and 14 domain references supply scientific methods on demand.
+MCP provides software search, environment preparation/binding, resource settings, submission, history, status, cancellation, resumption and result access. `prepare_environment` installs a listed recipe in the background and returns a run ID; successful installation registers the environment. Two Skills and their references supply operating and scientific guidance on demand; `read_guide` returns any of them to a host that does not load Skills.
 
 Computations run on the MCP host. SSH can launch the stdio server on a workstation with the scientific software: `ssh -T USER@HOST /path/to/python -m optics_photonics mcp`. `read_result` returns bounded text/binary contents and `read_array` part of an NPY/NPZ array. `download_result` copies to a path on the MCP host. The TypeScript client's `download` transfers a file's content through the connection; SSH/SFTP remains an option for very large remote files.
 
@@ -148,4 +148,4 @@ Use `submit_calculation` or `submit_workflow` with this tool ID and a complete n
 MCP exposes `register_software` and `registered_software`; `software_details` reads both published and locally registered software. Shell clients use `optics-photonics register-software @definition.json` and `registered-software`. Registration describes software; binding selects an installed interpreter or executable. Installation remains under the tool's own requirements and license. Keep files under the job's OUTPUT_DIR so parallel computations own separate outputs.
 
 `optics-photonics connect portable --output DIR` creates an Agent Plugins package with root plugin.json, mcp.json and skills/.
-MCP resources `optics://guides/optical-computation` and `optics://guides/optical-research` provide instructions on demand.
+The `read_guide` tool and the MCP resources `optics://guides/TOPIC` return both Skills and each of their references on demand.

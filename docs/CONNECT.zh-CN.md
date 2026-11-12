@@ -114,7 +114,7 @@ optics-photonics connect agentic-research-os --output optics-plugin
 | Qiushi | 研究系统版本使用其原生插件包；其他版本使用 `connect qiushi` 生成的 MCP 或命令入口。 |
 | 其他 MCP 宿主 | `connect mcp`，按宿主格式注册 stdio 命令。 |
 
-MCP 包含软件检索、环境准备、连接、资源设置、提交、任务查询、取消、继续、文件读取与下载。`prepare_environment` 在后台安装已有配方，返回任务编号；安装完成后软件环境自动登记。完整研究方法由两个 Skills 和 14 个领域参考文件按需提供。
+MCP 包含软件检索、环境准备、连接、资源设置、提交、任务查询、取消、继续、文件读取与下载。`prepare_environment` 在后台安装已有配方，返回任务编号；安装完成后软件环境自动登记。操作方法和研究方法由两个 Skills 及其参考文件按需提供；不加载 Skills 的宿主用 `read_guide` 读取其中任何一份。
 
 计算发生在 MCP 服务所在的计算机。远程机器可通过 SSH 启动 stdio 服务，保持连接程序与科学环境在同一台机器：`ssh -T USER@HOST /path/to/python -m optics_photonics mcp`。`read_result` 把内容传回 Agent，`read_array` 传回 NPY/NPZ 数组的一部分；`download_result` 写入服务所在机器的目标路径。TypeScript 客户端的 `download` 通过连接把文件内容传到客户端所在的机器；特别大的远端文件仍可用 SSH/SFTP 取回。
 
@@ -147,4 +147,4 @@ environments.bind('lab-wave-model', python=sys.executable, threads=2, concurrenc
 随后用该 ID 提交完整研究程序、并行工作流或 episode 采样。C/C++、Java、Julia 等可执行程序使用 `kind='command'` 登记并绑定命令数组，沿用请求文件、输出目录和 JSON 结果接口。程序应将输出写入该任务的 OUTPUT_DIR，避免并行计算共享临时文件。登记不代替软件本身的安装与许可。
 
 `optics-photonics connect portable --output DIR` creates an Agent Plugins package with root plugin.json, mcp.json and skills/.
-MCP resources `optics://guides/optical-computation` and `optics://guides/optical-research` provide instructions on demand.
+`read_guide` 工具和 MCP 资源 `optics://guides/TOPIC` 按需返回两个 Skills 及其每一份参考文件。

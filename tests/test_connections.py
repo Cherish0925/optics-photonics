@@ -47,7 +47,27 @@ class ConnectionTests(unittest.TestCase):
         for query in ('thin film','thin-film','ＴＨＩＮ　ＦＩＬＭ','薄膜'):
             items = catalogue.search(query,license_group='open',limit=100)['items']
             self.assertTrue({'tmm','grcwa'} <= {row['id'] for row in items},query)
-        self.assertIn('py-pol',{r['id'] for r in catalogue.search('py pol')['items']})
+        self.assertEqual(catalogue.search('py pol')['items'][0]['id'],'py-pol')
+
+    def test_search_ranks_related_word_forms_and_reports_missing_words(self):
+        def found(query, **options):
+            return [(row['id'], row.get('missing')) for row in catalogue.search(query, limit=100, **options)['items']]
+        # Plural, participle and joined forms of the catalogue's words.
+        self.assertEqual(found('photonic crystal bands')[0], ('mpb', None))
+        self.assertEqual(found('mie scattering sphere')[0], ('miepython', None))
+        self.assertEqual({tool for tool, _ in found('xray beamline')}, {tool for tool, _ in found('x-ray beamline')})
+        self.assertIn(('xrt', None), found('xray beamline'))
+        # A word matches the start of a word: ring is not found inside scattering.
+        self.assertNotIn('miepython', [tool for tool, _ in found('ring')])
+        # Three or more words also return software one word short, after the full matches.
+        ranked = found('mie scattering sphere')
+        self.assertIn(('treams', ['sphere']), ranked)
+        self.assertEqual([missing for _, missing in ranked], sorted((missing for _, missing in ranked), key=bool))
+        # Two words must both match while some software has both.
+        self.assertTrue(all(missing is None for _, missing in found('thin film')))
+        self.assertEqual(found('zzzz film'), [(tool, ['zzzz']) for tool, _ in found('film')])
+        self.assertEqual(found('zzzz yyyy'), [])
+        self.assertEqual(len(found('')), len(catalogue.catalogue()))
 
     def test_mcp_initialization_and_tool_call(self):
         requests = [

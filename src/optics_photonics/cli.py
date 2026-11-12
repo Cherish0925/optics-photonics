@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 import sys
 import subprocess
-from . import __version__, catalogue, environments, execution, operations, jobs
+from . import __version__, catalogue, environments, execution, jobs
 
 
 def object_argument(value):
@@ -58,7 +58,7 @@ def main(argv=None):
     a=vars(parser.parse_args(argv)); command=a.pop('command')
     try:
         if command == 'search': result=catalogue.search(**a)
-        elif command == 'info': result={**environments.software(**a),'execution':operations.details(a['tool'])}
+        elif command == 'info': result=environments.details(**a)
         elif command == 'register-software': result=environments.register(**a['definition'])
         elif command == 'registered-software': result={'software':environments.registered()}
         elif command == 'environments': result={'environments':environments.available()}

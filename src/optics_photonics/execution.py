@@ -12,7 +12,8 @@ from .processes import Cancelled
 def binding(tool, path=None):
     configuration = environments.read(path)['tools']
     if tool not in configuration:
-        raise ValueError('Configure this software first: optics-photonics prepare ' + tool + ' or bind ' + tool)
+        raise ValueError('No environment is connected for ' + tool + '. Use prepare_environment or bind_environment '
+                         '(shell: optics-photonics prepare ' + tool + ', or bind ' + tool + ' --python PATH)')
     return configuration[tool]
 
 

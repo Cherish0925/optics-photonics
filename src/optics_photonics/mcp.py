@@ -3,7 +3,7 @@ from concurrent.futures import ThreadPoolExecutor
 import json
 import sys
 import threading
-from . import __version__, catalogue, environments, operations
+from . import __version__, catalogue, environments
 from . import jobs, signals
 
 
@@ -11,9 +11,29 @@ def schema(properties=None, required=None):
     return {'type':'object','properties':properties or {},'required':required or [],'additionalProperties':False}
 
 
+def guides():
+    """Topic -> Markdown file: each Skill under its name and each of its references under the file name."""
+    found = {}
+    for skill in sorted((catalogue.resources()/'skills').iterdir()):
+        if (skill/'SKILL.md').is_file():
+            found[skill.name] = skill/'SKILL.md'
+    for skill in list(found.values()):
+        for file in sorted((skill.parent/'references').glob('*.md')):
+            found[file.stem] = file
+    return found
+
+
+def guide(topic):
+    text = guides()[topic].read_text(encoding='utf-8')
+    # Skill front matter addresses Skill loaders, not readers.
+    return text.split('---', 2)[2].lstrip() if text.startswith('---') else text
+
+
 STRING = {'type':'string'}
+DOMAINS = [row[0] for row in json.loads((catalogue.resources()/'data'/'domains.en.json').read_text(encoding='utf-8'))]
 TOOLS = [
-    ('software_search', 'Find optical software by physical problem, domain and license; paginated results. Does not imply installation.', schema({'query':STRING,'domain':STRING,'license_group':{'enum':['open','paid','limited']},'offset':{'type':'integer','minimum':0},'limit':{'type':'integer','minimum':1,'maximum':100},'language':{'enum':['zh','en']}})),
+    ('read_guide', 'Read operating guidance as Markdown. optical-computation: how to connect software, submit programs and read results. optical-research: how to choose a physical model and software. The other topics are the references those two link to, by link name.', schema({'topic':{'enum':list(guides())}},['topic'])),
+    ('software_search', 'Find optical software by physical problem, method or name, in English or Chinese; filter by domain and license. Best matches first; an item lists the query words it lacks in missing. Does not imply installation.', schema({'query':STRING,'domain':{'enum':DOMAINS},'license_group':{'enum':['open','paid','limited']},'offset':{'type':'integer','minimum':0},'limit':{'type':'integer','minimum':1,'maximum':100},'language':{'enum':['zh','en']}})),
     ('software_details', 'Read native interfaces, installation source, upstream MCP/Skills and executable operation inputs for one software.', schema({'tool':STRING,'language':{'enum':['zh','en']}},['tool'])),
     ('register_software', 'Register a local research library, solver or executable that is not in the published catalogue. Provide its identity, installed module/distribution names and documentation sources; then use bind_environment. Registration does not download or execute it.', schema({'tool':STRING,'name':STRING,'description':STRING,'kind':{'enum':['python','command']},'modules':{'type':'array','items':STRING},'distributions':{'type':'array','items':STRING},'sources':{'type':'array','items':STRING}},['tool','name','description'])),
     ('registered_software', 'List locally registered research tools beyond the published software catalogue.', schema()),
@@ -23,8 +43,8 @@ TOOLS = [
     ('prepare_environment', 'Install a documented software recipe into its isolated Python environment in the background; returns a run ID. Existing environments can be bound directly.', schema({'tool':STRING,'python':STRING,'request_id':STRING},['tool'])),
     ('bind_environment', 'Connect an existing scientific Python environment or explicit native executable; does not install a solver.', schema({'tool':STRING,'python':STRING,'command':{'type':'array','items':STRING,'minItems':1},'threads':{'type':'integer','minimum':1},'concurrency':{'type':'integer','minimum':1},'cwd':STRING,'requirements':{'type':'object','additionalProperties':{'type':'integer','minimum':1}},'env':{'type':'object','additionalProperties':STRING}},['tool'])),
     ('compute_resources', 'Read or update shared CPU and named resource capacities (GPU, solver license, memory slots). Requirements are acquired together across all runs; adapters select the actual hardware or license.', schema({'cpu':{'type':'integer','minimum':1},'pools':{'type':'object','additionalProperties':{'type':'integer','minimum':1}}})),
-    ('submit_calculation', 'Start an independent background calculation and return its run ID immediately. source runs a complete native Python program with INPUTS, OUTPUT_DIR and RESULT. Reuse request_id when retrying.', schema({'tool':STRING,'inputs':{'type':'object'},'action':STRING,'source':STRING,'name':STRING,'request_id':STRING,'timeout':{'type':'number','exclusiveMinimum':0}},['tool'])),
-    ('sample_episodes', 'Run complete research episodes in independent native worker processes. source defines make_env() with Gymnasium-style reset/step/close and make_policy(seed) returning an action function. task/policy need id/version; change a version when the environment or policy changes. CPU and software concurrency settings apply across jobs. Each worker saves samples/trajectory.jsonl, samples/index.jsonl (one line per completed episode) and typed arrays; read through result_files/read_result. continue_from lists earlier runs whose completed episodes are not collected again, with any worker count or more episodes; resume_run likewise keeps the episodes a worker completed. on_error "continue" records a failed episode and goes on. No solver installation or training algorithm is implied.', schema({'tool':STRING, 'source':STRING, 'task':{'type':'object'}, 'policy':{'type':'object'}, 'episodes':{'type':'integer','minimum':1}, 'workers':{'type':'integer','minimum':1}, 'max_steps':{'type':'integer','minimum':1}, 'seed':{'type':'integer','minimum':0}, 'inputs':{'type':'object'}, 'options':{'type':'object'}, 'continue_from':{'type':'array','items':STRING}, 'on_error':{'enum':['stop','continue']}, 'request_id':STRING, 'timeout':{'type':'number','exclusiveMinimum':0}}, ['tool','source','task','policy','episodes'])),
+    ('submit_calculation', 'Start an independent background calculation and return its run ID immediately. action runs a packaged operation listed by software_details; source runs a complete native Python program with INPUTS, OUTPUT_DIR and RESULT. Reuse request_id when retrying.', schema({'tool':STRING,'inputs':{'type':'object'},'action':STRING,'source':STRING,'name':STRING,'request_id':STRING,'timeout':{'type':'number','exclusiveMinimum':0}},['tool'])),
+    ('sample_episodes', 'Collect complete episodes for learning in parallel worker processes. source defines make_env() with Gymnasium-style reset/step/close and make_policy(seed) returning an action function; task and policy need id and version. Each worker writes samples/trajectory.jsonl, samples/index.jsonl (one line per completed episode) and typed arrays. continue_from lists earlier runs whose completed episodes are not collected again. Details: read_guide episodes.', schema({'tool':STRING, 'source':STRING, 'task':{'type':'object'}, 'policy':{'type':'object'}, 'episodes':{'type':'integer','minimum':1}, 'workers':{'type':'integer','minimum':1}, 'max_steps':{'type':'integer','minimum':1}, 'seed':{'type':'integer','minimum':0}, 'inputs':{'type':'object'}, 'options':{'type':'object'}, 'continue_from':{'type':'array','items':STRING}, 'on_error':{'enum':['stop','continue']}, 'request_id':STRING, 'timeout':{'type':'number','exclusiveMinimum':0}}, ['tool','source','task','policy','episodes'])),
     ('submit_workflow', 'Submit dependent or independent calculation steps in one request. Each step has id, tool, action or source, inputs, after, optional timeout and bindings. A binding {input_name: {step, path: [keys]}} copies a value from a predecessor result; {input_name: {step, file: "relative/path"}} gives the location of a file or folder that predecessor wrote, for large data. Supply run_id to append a batch to an existing research run.', schema({'steps':{'type':'array','items':{'type':'object'},'minItems':1},'name':STRING,'request_id':STRING,'run_id':STRING},['steps'])),
     ('run_status', 'Read compact execution state. wait (0–25 seconds) waits for completion without repeated calls. Results stay in files by default; include_results returns step values. Calculations continue after disconnection.', schema({'run_id':STRING,'offset':{'type':'integer','minimum':0},'limit':{'type':'integer','minimum':1,'maximum':200},'include_results':{'type':'boolean'},'wait':{'type':'number','minimum':0,'maximum':25}},['run_id'])),
     ('cancel_run', 'Cancel a research run and its active calculations.', schema({'run_id':STRING},['run_id'])),
@@ -38,9 +58,9 @@ TOOLS = [
 
 
 def invoke(name, args, cancellation=None):
+    if name == 'read_guide': return guide(args['topic'])
     if name == 'software_search': return catalogue.search(**args)
-    if name == 'software_details':
-        return {**environments.software(**args), 'execution':operations.details(args['tool'])}
+    if name == 'software_details': return environments.details(**args)
     if name == 'register_software': return environments.register(**args)
     if name == 'registered_software': return {'software': environments.registered()}
     if name == 'environments': return environments.page(**args)
@@ -146,17 +166,75 @@ def waiting(params):
     return isinstance(arguments, dict) and bool(arguments.get('wait'))
 
 
+def conform(value, spec, name):
+    """Return an argument value that satisfies its schema, or raise ValueError naming what is expected.
+
+    Numbers and booleans sent as text are accepted; some hosts send every argument as a string.
+    """
+    if 'anyOf' in spec:
+        for option in spec['anyOf']:
+            try: return conform(value, option, name)
+            except ValueError: pass
+        raise ValueError(name+' has an unsupported form')
+    if 'enum' in spec:
+        if value not in spec['enum']: raise ValueError(name+' must be one of: '+', '.join(map(str, spec['enum'])))
+        return value
+    kinds = spec.get('type')
+    kinds = kinds if isinstance(kinds, list) else [kinds]
+    if value is None and 'null' in kinds: return None
+    kind = next((k for k in kinds if k != 'null'), None)
+    if kinds == ['null']: raise ValueError(name+' must be null')
+    if kind in ('integer', 'number'):
+        low, high = spec.get('minimum', spec.get('exclusiveMinimum')), spec.get('maximum')
+        expected = name+(' must be an integer' if kind == 'integer' else ' must be a number')+ \
+            (f' from {low} to {high}' if low is not None and high is not None else f' above {low}' if 'exclusiveMinimum' in spec
+             else f' of at least {low}' if low is not None else '')
+        if isinstance(value, str):
+            try: value = float(value) if kind == 'number' else int(value)
+            except ValueError: raise ValueError(expected) from None
+        if isinstance(value, bool) or not isinstance(value, (int, float)) or value != value: raise ValueError(expected)
+        if kind == 'integer':
+            if value != int(value): raise ValueError(expected)
+            value = int(value)
+        if 'minimum' in spec and value < spec['minimum'] or 'exclusiveMinimum' in spec and value <= spec['exclusiveMinimum'] \
+           or high is not None and value > high: raise ValueError(expected)
+    elif kind == 'boolean':
+        if isinstance(value, str) and value.lower() in ('true', 'false'): value = value.lower() == 'true'
+        if not isinstance(value, bool): raise ValueError(name+' must be true or false')
+    elif kind == 'string':
+        if not isinstance(value, str): raise ValueError(name+' must be text')
+    elif kind == 'array':
+        if not isinstance(value, list): raise ValueError(name+' must be a list')
+        if len(value) < spec.get('minItems', 0) or len(value) > spec.get('maxItems', len(value)):
+            raise ValueError(f"{name} must have {spec.get('minItems', 0)} to {spec.get('maxItems', 'any number of')} items")
+        if 'items' in spec: value = [conform(item, spec['items'], f'{name}[{i}]') for i, item in enumerate(value)]
+    elif kind == 'object':
+        if not isinstance(value, dict): raise ValueError(name+' must be an object')
+        if isinstance(spec.get('additionalProperties'), dict):
+            value = {key: conform(item, spec['additionalProperties'], f'{name}.{key}') for key, item in value.items()}
+    return value
+
+
+def arguments(name, args, spec):
+    """Tool arguments matched against the tool's input schema, with messages an agent can act on."""
+    if not isinstance(args, dict): raise ValueError('arguments must be an object')
+    unknown, missing = sorted(set(args)-set(spec['properties'])), sorted(set(spec['required'])-set(args))
+    if unknown: raise ValueError(f"{name} has no argument {', '.join(unknown)}; it takes: {', '.join(spec['properties']) or 'no arguments'}")
+    if missing: raise ValueError(f"{name} needs: {', '.join(missing)}")
+    return {key: conform(value, spec['properties'][key], key) for key, value in args.items()}
+
+
 def tool_result(params, cancellation=None):
     try:
-        name = params['name']; args = params.get('arguments', {})
+        name = params['name']; args = params.get('arguments') or {}
         spec = next((s for n,d,s in TOOLS if n == name), None)
-        if spec is None: raise ValueError('Unknown tool: '+name)
-        if not isinstance(args, dict) or set(args)-set(spec['properties']) or set(spec['required'])-set(args):
-            raise ValueError('Arguments do not match this tool’s input schema')
-        value = invoke(name, args, cancellation)
+        if spec is None: raise ValueError('Unknown tool: '+name+'. Tools: '+', '.join(n for n,d,s in TOOLS))
+        value = invoke(name, arguments(name, args, spec), cancellation)
+        if isinstance(value, str):  # Markdown guidance is returned as written
+            return {'content':[{'type':'text','text':value}], 'structuredContent':{'text':value}, 'isError':False}
         return {'content':[{'type':'text','text':json.dumps(value,ensure_ascii=False,allow_nan=False)}], 'structuredContent':value, 'isError':False}
     except Exception as error:
-        return {'content':[{'type':'text','text':str(error)}], 'isError':True}
+        return {'content':[{'type':'text','text':str(error) or type(error).__name__}], 'isError':True}
 
 
 def respond(method, params):
@@ -165,24 +243,28 @@ def respond(method, params):
         return {'protocolVersion':proposed if proposed in SUPPORTED else '2025-11-25',
                 'serverInfo':{'name':'optics-photonics','version':__version__},
                 'capabilities':{'tools':{'listChanged':False},'resources':{}},
-                'instructions':'Search software, read its operation inputs, select an installed environment, and submit long calculations to the independent background worker. Native programs use INPUTS, OUTPUT_DIR and a JSON RESULT. Solver installation and license requirements remain those of the upstream software.'}
+                'instructions':INSTRUCTIONS}
     if method == 'ping': return {}
     if method == 'tools/list':
         return {'tools':[{'name':n,'description':d,'inputSchema':s} for n,d,s in TOOLS]}
     if method == 'resources/list':
-        return {'resources':[{'uri':'optics://guides/'+name,'name':name,'mimeType':'text/markdown'} for name in GUIDES]}
+        return {'resources':[{'uri':'optics://guides/'+name,'name':name,'mimeType':'text/markdown'} for name in guides()]}
     if method == 'resources/read':
         uri = params.get('uri','')
         name = uri.removeprefix('optics://guides/')
-        if uri != 'optics://guides/'+name or name not in GUIDES:
+        if uri != 'optics://guides/'+name or name not in guides():
             raise ValueError('Unknown optical guide')
-        text = (catalogue.resources()/'skills'/name/'SKILL.md').read_text(encoding='utf-8')
-        return {'contents':[{'uri':uri,'mimeType':'text/markdown','text':text}]}
+        return {'contents':[{'uri':uri,'mimeType':'text/markdown','text':guide(name)}]}
     return None
 
 
 SUPPORTED = {'2025-11-25','2025-06-18','2025-03-26','2024-11-05'}
-GUIDES = ('optical-computation','optical-research')
+INSTRUCTIONS = ('Optics and photonics research environment. Flow: software_search and software_details to choose software; '
+                'bind_environment or prepare_environment to connect it; submit_calculation or submit_workflow with a complete program '
+                '(Python source receives INPUTS and OUTPUT_DIR and sets RESULT); run_status with wait to follow; '
+                'result_files, read_result and read_array to read results. Runs continue after disconnection; list_runs finds them. '
+                'read_guide optical-computation explains execution, read_guide optical-research the choice of model and software. '
+                'Solver installation and licenses remain those of the upstream software.')
 
 
 def serve(input_stream=None, output_stream=None):

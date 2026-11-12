@@ -90,6 +90,19 @@ def software(tool, language='en', path=None):
     return catalogue_software(tool, language)
 
 
+REPEATED = ('interface', 'sources', 'upstream', 'operations', 'native_program')
+
+
+def details(tool, language='en', path=None):
+    """One software entry with its connection and what it can run; each fact appears once."""
+    from . import operations
+    item = software(tool, language, path)
+    if item.get('origin') != 'local':
+        # connections.json repeats these catalogue fields so that the file can be read on its own.
+        item = {**item, 'connection': {key: value for key, value in item['connection'].items() if key not in REPEATED}}
+    return {**item, 'execution': operations.details(tool)}
+
+
 def registered(path=None):
     return list(read(path).get('software', {}).values())
 

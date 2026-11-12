@@ -7,7 +7,7 @@ Optics & Photonics 独立提供光学软件连接、原生研究程序、后台�
 连接程序使用 Python 3.10+，支持 Windows、macOS、Linux。科学软件使用各自支持的 Python、系统与许可；可以为每个软件连接不同的环境。
 
 ```sh
-python -m pip install "https://github.com/Cherish0925/Optics-Photonics-AI-Lab/releases/download/optics-v0.6.0/optics_photonics-0.6.0-py3-none-any.whl"
+python -m pip install "https://github.com/Cherish0925/Optics-Photonics-AI-Lab/releases/download/optics-v0.7.0/optics_photonics-0.7.0-py3-none-any.whl"
 optics-photonics search "thin film" --license-group open
 optics-photonics info tmm
 optics-photonics prepare tmm

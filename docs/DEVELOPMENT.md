@@ -4,23 +4,24 @@
 
 The objective is to let researchers and agents connect real computing environments, run complete optical research programs, combine software and retain scientific results that can be interpreted and reused. Optics-Photonics-AI-Lab installs, runs and releases independently.
 
-## Current implementation · 0.6.0
+## Current implementation · 0.7.0
 
-The contributions based on 0.5.1 are integrated. Subsequent work starts from these capabilities:
+The 0.6.0 integration and the subsequent `data-descriptions` and `host-launch` contributions are integrated. Subsequent work starts from these capabilities:
 
 | Work | Implemented | Remaining |
 | --- | --- | --- |
 | OP-01 / OP-02 | Concurrent MCP requests, separately cancellable waits, incremental dependency scheduling | Performance measurements for representative long and wide studies |
 | OP-03 | NPY/NPZ selections, file references between steps, prefix listings, TypeScript file transfer | Persistent file indexing and additional scientific formats |
+| OP-04 / OP-08 | Described arrays, units/coordinates/conventions and HCIPy → POPPY pupil-to-image exchange | More scientific quantities and the periodic-structure and photonic-circuit exchange paths |
 | OP-12 | Completed-episode indexes, retry/continuation with changed worker count, separate solver errors | Shared datasets and asynchronous learner integration |
 | OP-14 / OP-15 | Movable native/portable packages, managed Python launch, on-demand guides, concise Skills | Continued native host runs as host releases change |
-| OP-04 / OP-05 / OP-06–11 / OP-13 / OP-16 | Existing APIs remain available | Physical data descriptions, distributed integrations, complete research programs, remote jobs and broader software coverage |
+| OP-05 / OP-06 / OP-07 / OP-09–11 / OP-13 / OP-16 | Existing APIs remain available | Distributed integrations, complete research programs, remote jobs and broader software coverage |
 
 Catalogue entries, working adapters and complete scientific workflows remain distinct. The environment accepts software outside the catalogue; each solver keeps its own platform and licensing requirements.
 
 ## Next contributions
 
-Prioritize **OP-04 and OP-05**: interpretable scientific data and independently distributable software integrations. Use these with **OP-07/08** to complete research across multiple programs. Contributors with licensed workstations can advance **OP-06**; remote computing infrastructure supports **OP-09/10**. The entries below retain their identifiers for coordination.
+Prioritize **OP-05**: independently distributable software integrations. Build on the OP-04 data API and the first OP-08 exchange to extend **OP-07/08** across more programs. Contributors with licensed workstations can advance **OP-06**; remote computing infrastructure supports **OP-09/10**. The entries below retain their identifiers for coordination.
 
 ## Execution and data
 
@@ -42,11 +43,11 @@ Deliver bounded reads for many files, files still being written and datasets lar
 
 ### OP-04 · Scientific data descriptions
 
-Extend existing shape/dtype and file output with axes, units, coordinates, complex conventions, frequency/wavelength definitions, field or power normalization, port ordering and reference planes. Material parameters retain source, version and applicable conditions. Require only fields relevant to the data being exchanged.
+Implemented in 0.7.0: `data.quantity`, `data.save` and `data.load` exchange NPZ arrays with JSON descriptions. Coordinates can be named arrays, uniform samples or channel/port labels. `read_array` returns descriptions and the coordinates matching slices, reversed selections and downsampling, without requiring NumPy in the connector.
 
-Begin with composable field, spectrum, S-parameter and image descriptions. Transform conventions explicitly, preserving original and transformed data. Scalars remain simple.
+Unit and spectral conversions, complex time dependence and wavefront sign changes are explicit and retain their origin. Spectral conversions also update the physical quantity name. Descriptions accept normalization, reference planes and material sources as needed; ordinary arrays and scalar results remain usable without them.
 
-Deliver an actual exchange between two programs that reconstructs the physical meaning correctly. Extend to meshes, rays and density matrices through the same mechanism. Start in [native.py](../src/optics_photonics/native.py), [operations.py](../src/optics_photonics/operations.py) and [sampling.py](../src/optics_photonics/sampling.py).
+The [HCIPy → POPPY exchange](../examples/exchange/) saves an aberrated pupil, converts path-difference sign and units, and reproduces image displacement and Strehl ratio. Continue coverage for meshes, rays, density matrices and other software through the same mechanism. Implementation: [data.py](../src/optics_photonics/data.py), [arrays.py](../src/optics_photonics/arrays.py).
 
 ## Software and research capabilities
 
@@ -85,7 +86,7 @@ Deliver environment preparation, a parameterized research program, scientific ou
 
 ### OP-08 · Research across multiple programs
 
-Build executable exchanges for three useful paths: fields/aberrations to PSF and imaging quantities; periodic-structure complex reflection/transmission to finite-device propagation; layout to device S-parameters and circuit response. Start with two paths that can actually run in available environments.
+The fields/aberrations → PSF path is implemented in 0.7.0 with HCIPy and POPPY; run it from [steps.json](../examples/exchange/steps.json). The other two paths remain: periodic-structure complex reflection/transmission → finite-device propagation, and layout → device S-parameters → circuit response.
 
 Each conversion states its approximation, units, sampling, phase and reference plane. Geometry, materials and parameters remain replaceable.
 

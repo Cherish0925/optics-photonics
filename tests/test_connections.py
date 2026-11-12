@@ -99,6 +99,27 @@ class ConnectionTests(unittest.TestCase):
                 if host=='codex':
                     self.assertEqual(json.loads((p/'.codex-plugin/plugin.json').read_text())['mcpServers'],'./.mcp.json')
 
+    def test_package_versions_are_found_without_packages_distributions(self):
+        # Python 3.9 lacks importlib.metadata.packages_distributions; the worker reads the same facts itself.
+        from optics_photonics import worker
+        with tempfile.TemporaryDirectory() as tmp:
+            for name, module, files in (('listed-names', 'listed_module', {'top_level.txt': 'listed_module\n'}),
+                                        ('recorded-files', 'recorded_module', {'RECORD': 'recorded_module/__init__.py,,\nrecorded_files-1.0.dist-info/METADATA,,\n'})):
+                folder = Path(tmp) / (name.replace('-', '_') + '-1.0.dist-info')
+                folder.mkdir()
+                (folder / 'METADATA').write_text('Metadata-Version: 2.1\nName: ' + name + '\nVersion: 1.0\n')
+                for file, text in files.items():
+                    (folder / file).write_text(text)
+                (Path(tmp) / module).mkdir()
+                (Path(tmp) / module / '__init__.py').write_text('')
+            sys.path.insert(0, tmp)
+            try:
+                found = worker.distributions(native=None)
+            finally:
+                sys.path.remove(tmp)
+        self.assertEqual(found['listed_module'], ['listed-names'])
+        self.assertEqual(found['recorded_module'], ['recorded-files'])
+
     def test_probe_keeps_virtual_environment_interpreter(self):
         # A venv interpreter may be a symlink to the base Python on Unix.
         with tempfile.TemporaryDirectory() as tmp:

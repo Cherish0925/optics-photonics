@@ -81,6 +81,43 @@ formats.
 {"run_id": "RUN", "file": "solve/attempt-1/field.npz", "member": "Ex", "index": [[0, null, 4], 128]}
 ```
 
+## Keep the meaning of arrays between programs
+
+A program saves arrays with what they are: quantity, unit, axes, and the
+conventions another program must know (time dependence of complex amplitudes,
+sign of a path difference, normalization, port order, reference planes,
+material source).
+
+```python
+from optics_photonics import data
+data.save(OUTPUT_DIR / 'pupil', {
+    'opd': data.quantity(opd, 'optical path difference', unit='nm', axes=['y', 'x'], wavefront='positive lags'),
+    'x': data.quantity(x, 'pupil coordinate', unit='m'),
+    'y': data.quantity(y, 'pupil coordinate', unit='m')})
+```
+
+`pupil.npz` holds the numbers and `pupil.json` the descriptions. A later step
+that receives the file through a binding reads both with `data.load` and
+converts explicitly: `.to('m')`, `.axis('x')`, `.phasor('exp(+i omega t)')`,
+`.wavefront('positive leads')`. A conversion is recorded in the description; one
+the description does not support is refused. `result_files` shows each array's
+quantity, unit and axis names, and `read_array` returns the coordinates and
+units of the values it returns.
+
+[`examples/exchange`](../examples/exchange/) runs this between two libraries.
+HCIPy writes an aberrated pupil (tilt 100 nm RMS, defocus 20 nm, coma 15 nm, at
+550 nm on a 1 m aperture); POPPY computes the image from the file. HCIPy's
+path difference is positive where the wavefront lags and is stored in
+nanometres; POPPY takes metres, positive where it leads. Run on Linux with
+HCIPy 0.7.1 and POPPY 1.2.0:
+
+| | image shift along x | along y | Strehl ratio |
+| --- | --- | --- | --- |
+| HCIPy, its own propagation | 3.913e-7 rad | 7.70e-8 rad | 0.917 (sampled maximum) |
+| POPPY, from the file with both conversions | 3.922e-7 rad | 7.48e-8 rad | 0.9225 |
+| POPPY, unit converted, sign not converted | -3.922e-7 rad | -7.48e-8 rad | 0.9225 |
+| Analytic | 4σ/D = 4.0e-7 rad | | exp(-(2πσ/λ)²) = 0.9217 |
+
 ## TypeScript
 
 Install the `.tgz` from the release with npm, then:

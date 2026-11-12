@@ -133,7 +133,10 @@ def probe(tool, python=None, path=None):
     # Resolving a venv's symlink would select the base interpreter and lose its packages.
     interpreter = os.path.abspath(os.path.expanduser(str(python or sys.executable)))
     modules = record.get('modules', [])
-    code = """import importlib.util, importlib.metadata, json, sys
+    code = """import json, sys
+if sys.version_info < (3, 9):
+ sys.exit('This interpreter is Python %s; calculations need Python 3.9 or newer in the software environment' % sys.version.split()[0])
+import importlib.util, importlib.metadata
 modules=json.loads(sys.argv[1]); distributions=json.loads(sys.argv[2])
 found={}
 for name in modules:

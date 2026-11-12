@@ -8,5 +8,6 @@ These are short interface demonstrations, not complete experiments. / 以下为�
 | `layout.py` | Current `gdsfactory`; generic PDK for illustration only | `straight.gds`, geometry in micrometers |
 | `lumerical.py` | Licensed Lumerical with `lumapi`; existing `device.fsp` containing `core` and `transmission` | `result.npz`, wavelength in meters |
 | `symbolic_abcd.py` | `sympy`, `numpy` | Printed ABCD matrix, lengths in meters |
+| `exchange/` | `hcipy`, `poppy` | An aberrated pupil passed from HCIPy to POPPY with its units and sign convention; see its README |
 
 For real devices, supply measured material dispersion, a valid process PDK, appropriate boundaries and a calibrated observation model. Read the primary documentation linked by the catalogue for version-specific installation.

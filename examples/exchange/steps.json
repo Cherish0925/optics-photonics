@@ -1,0 +1,9 @@
+[
+  {"id": "pupil", "tool": "hcipy", "program": "pupil_hcipy.py",
+   "inputs": {"diameter_m": 1.0, "wavelength_nm": 550, "samples": 256,
+              "zernike_rms_nm": {"2": 100, "4": 20, "7": 15},
+              "pixels_per_lambda_over_d": 8, "radius_lambda_over_d": 16}},
+  {"id": "image", "tool": "poppy", "program": "psf_poppy.py", "after": ["pupil"],
+   "bindings": {"pupil": {"step": "pupil", "file": "pupil.npz"}},
+   "inputs": {"pixel_arcsec": 0.01, "pixels": 256}}
+]

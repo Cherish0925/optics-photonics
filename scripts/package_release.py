@@ -18,4 +18,8 @@ with tempfile.TemporaryDirectory() as tmp:
     (plugin/'plugin.json').unlink()
     (plugin/'INSTALL.md').write_text('Run: python server.py connect HOST --output /new/host/package\nHOST: agentic-research-os, codex, claude, deepseek, qiushi, mcp\nPython 3.10+ runs the connector. Configure each scientific solver separately.\n',encoding='utf-8')
     shutil.make_archive(str(out/('Optics-Photonics-'+__version__+'-Connect')),'zip',root,plugin.name)
+    for host in ('codex','claude','portable'):
+        directory = root/host/'optics-photonics'
+        package(directory, host, managed=True)
+        shutil.make_archive(str(out/('Optics-Photonics-'+__version__+'-'+host.title())),'zip',directory.parent,directory.name)
 print('\n'.join(p.name for p in out.iterdir()))

@@ -7,7 +7,7 @@ An independent package for optical software, native research programs, backgroun
 The connector supports Python 3.10+ on Windows, macOS and Linux. Each solver uses its own supported Python version, operating system and license. Different tools may use different environments.
 
 ```sh
-python -m pip install "https://github.com/Cherish0925/Optics-Photonics-AI-Lab/releases/download/optics-v0.5.1/optics_photonics-0.5.1-py3-none-any.whl"
+python -m pip install "https://github.com/Cherish0925/Optics-Photonics-AI-Lab/releases/download/optics-v0.6.0/optics_photonics-0.6.0-py3-none-any.whl"
 optics-photonics info tmm
 optics-photonics prepare tmm
 optics-photonics run tmm spectrum --inputs "@inputs.json"
@@ -70,9 +70,11 @@ Append preserves the research run. Resume retains successful steps and reruns un
 | Claude Code | `claude plugin marketplace add Cherish0925/Optics-Photonics-AI-Lab`, then `claude plugin install optics-photonics@optics-photonics`. |
 
 The Research OS package includes the connector, catalogue and Skills and uses
-the host's Python. The Codex/Claude GitHub plugin runs the included source with
-`python` from the tool host's PATH, version 3.10 or newer. If your interpreter has
-another name or path, generate a host package below using that interpreter.
+the host's Python. Codex/Claude marketplace plugins and the DeepSeek bundle use
+[uv](https://docs.astral.sh/uv/getting-started/installation/) to select Python 3.10+;
+it downloads an interpreter only when needed. Install uv once on the execution host.
+With an existing Python, generate a host package below to use it directly.
+Codex resolves the plugin working directory; Claude expands its own plugin path variable.
 Scientific software is prepared separately through `prepare_environment` or
 connected through `bind_environment` / `bind_native_software`.
 
@@ -148,4 +150,5 @@ Use `submit_calculation` or `submit_workflow` with this tool ID and a complete n
 MCP exposes `register_software` and `registered_software`; `software_details` reads both published and locally registered software. Shell clients use `optics-photonics register-software @definition.json` and `registered-software`. Registration describes software; binding selects an installed interpreter or executable. Installation remains under the tool's own requirements and license. Keep files under the job's OUTPUT_DIR so parallel computations own separate outputs.
 
 `optics-photonics connect portable --output DIR` creates an Agent Plugins package with root plugin.json, mcp.json and skills/.
+Portable packages use a bare `uv` command and plugin-relative paths, so moving or updating a package does not retain paths from its author’s computer. `connect codex --managed-python` and `connect claude --managed-python` generate similarly movable native packages. Local packages generated without that option retain the selected Python.
 The `read_guide` tool and the MCP resources `optics://guides/TOPIC` return both Skills and each of their references on demand.

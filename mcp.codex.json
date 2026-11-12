@@ -1,8 +1,9 @@
 {
   "mcpServers": {
     "optics": {
-      "command": "python",
-      "args": ["-B", "${PLUGIN_ROOT}/server.py", "mcp"]
+      "command": "uv",
+      "args": ["run", "--no-project", "--python", ">=3.10", "--", "server.py", "mcp"],
+      "cwd": "."
     }
   }
 }

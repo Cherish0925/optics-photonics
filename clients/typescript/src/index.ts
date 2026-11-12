@@ -41,7 +41,7 @@ export class OpticsLab {
   static async connect(options:Options={}) {
     const client=new OpticsLab(options);
     try {
-      await client.request('initialize',{protocolVersion:'2025-11-25',capabilities:{},clientInfo:{name:'optics-typescript',version:'0.5.0'}});
+      await client.request('initialize',{protocolVersion:'2025-11-25',capabilities:{},clientInfo:{name:'optics-typescript',version:'0.6.0'}});
       client.notify('notifications/initialized');
       return client;
     } catch(error) { client.close(); throw error; }
@@ -106,7 +106,7 @@ export class OpticsLab {
   }
   files(run_id:string,offset=0,limit=100,prefix=''){return this.call('result_files',{run_id,offset,limit,...(prefix?{prefix}:{})});}
   /** Part of an NPY array or NPZ member; index entries are positions or [start, stop, step]. */
-  array(run_id:string,file:string,options:{member?:string;index?:(number|(number|null)[])[];max_elements?:number}={}){return this.call('read_array',{run_id,file,...options});}
+  array(run_id:string,file:string,options:{member?:string;index?:(number|null|(number|null)[])[];max_elements?:number}={}){return this.call('read_array',{run_id,file,...options});}
   read(run_id:string,file:string,offset=0,limit=16384){return this.call('read_result',{run_id,file,offset,limit});}
   /** Copy a result file to this computer; the server may run elsewhere, for example over SSH. */
   async download(run_id:string,file:string,destination:string,options:RequestOptions={}):Promise<{path:string;bytes:number}> {
@@ -116,7 +116,7 @@ export class OpticsLab {
       for(;;){
         const part=await this.call<{encoding:string;data:string;next_offset:number|null}>('read_result',{run_id,file,offset,limit:65536},options);
         const chunk=Buffer.from(part.data,part.encoding==='base64'?'base64':'utf8');
-        await output.write(chunk);bytes+=chunk.length;
+        await output.writeFile(chunk);bytes+=chunk.length;
         if(part.next_offset===null) break;
         offset=part.next_offset;
       }

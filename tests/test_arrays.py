@@ -50,7 +50,7 @@ class ArrayReadingCase(unittest.TestCase):
                     if rng.random() < .3:
                         index.append(rng.randrange(-n, n))
                     else:
-                        index.append([rng.choice([None, 0, 1, -2]), rng.choice([None, n, -1, 2]), rng.choice([None, 1, 2, 3])])
+                        index.append([rng.choice([None, 0, 1, -2]), rng.choice([None, n, -1, 2]), rng.choice([None, 1, 2, 3, -1, -2])])
                 expected = nested
                 def take(value, items):
                     if not items: return value
@@ -126,6 +126,7 @@ class ArrayReadingCase(unittest.TestCase):
         self.assertEqual(arrays.describe(self.root / 'r.npz')['arrays'],
                          {'field': {'dtype': '<f8', 'shape': [3, 4]}, 'trace': {'dtype': '<c8', 'shape': [2]}})
         self.assertEqual(arrays.read(self.root / 'r.npz', member='field', index=[[1, 3], 2])['values'], [6.0, 10.0])
+        self.assertEqual(arrays.read(self.root / 'r.npz', member='field', index=[[None, None, -1], [None, None, -2]])['values'], [[11.0, 9.0], [7.0, 5.0], [3.0, 1.0]])
         with self.assertRaisesRegex(ValueError, 'field, trace'):
             arrays.read(self.root / 'r.npz')
 
@@ -140,7 +141,8 @@ class ArrayReadingCase(unittest.TestCase):
             for order in ('C', 'F'):
                 array = np.asarray(data.astype(dtype), order=order)
                 np.save(self.root / 'a.npy', array)
-                for index in ([1, [None, None, 2]], [[1, None], -1], [[None, None, 3], [1, 4], [0, 6, 5]]):
+                for index in ([1, [None, None, 2]], [[1, None], -1], [[None, None, 3], [1, 4], [0, 6, 5]],
+                              [[None, None, -1], [4, 0, -2], [None, None, -1]]):
                     got = arrays.read(self.root / 'a.npy', index=index)
                     expected = array[tuple(i if type(i) is int else slice(*i) for i in index)]
                     if dtype[1] == 'c':

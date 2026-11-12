@@ -156,7 +156,7 @@ class ConcurrentRequestsCase(unittest.TestCase):
 
     def test_invalid_request_ids_are_rejected(self):
         s = self.session
-        for bad in (None, True, [1], {'a': 1}):
+        for bad in (None, True, [1], {'a': 1}, float('inf'), float('nan')):
             s.send({'jsonrpc': '2.0', 'id': bad, 'method': 'ping'})
             message, _ = s.reply()
             self.assertIsNone(message['id'])

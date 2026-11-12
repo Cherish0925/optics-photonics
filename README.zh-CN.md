@@ -18,7 +18,7 @@
 
 | 宿主 | 安装方式 |
 | --- | --- |
-| Agentic Research OS | 下载 [Research OS 插件包](https://github.com/Cherish0925/Optics-Photonics-AI-Lab/releases/download/optics-v0.5.1/Optics-Photonics-0.5.1-ResearchOS.zip)，解压后安装包含 `plugin.json` 的目录；包内有六种系统与架构的原生执行程序、MCP、软件目录和两个 Skills，使用宿主自带的 Python。也可以在 **Extensions → Plugins → Add from link** 填入 `https://github.com/Cherish0925/Optics-Photonics-AI-Lab/tree/main/connect/agentic-research-os`。 |
+| Agentic Research OS | 下载 [Research OS 插件包](https://github.com/Cherish0925/Optics-Photonics-AI-Lab/releases/download/optics-v0.6.0/Optics-Photonics-0.6.0-ResearchOS.zip)，解压后安装包含 `plugin.json` 的目录；包内有六种系统与架构的原生执行程序、MCP、软件目录和两个 Skills，使用宿主自带的 Python。也可以在 **Extensions → Plugins → Add from link** 填入 `https://github.com/Cherish0925/Optics-Photonics-AI-Lab/tree/main/connect/agentic-research-os`。 |
 | Codex | `codex plugin marketplace add Cherish0925/Optics-Photonics-AI-Lab`，再 `codex plugin add optics-photonics@optics-photonics` |
 | Claude Code | `claude plugin marketplace add Cherish0925/Optics-Photonics-AI-Lab`，再 `claude plugin install optics-photonics@optics-photonics` |
 | Qiushi | 基于 Research OS 的版本使用上面的插件包；其他版本用 `optics-photonics connect qiushi` 生成 MCP 或命令入口。 |
@@ -26,12 +26,12 @@
 | 其他 MCP 宿主、Python、命令行 | 安装下面的 wheel，把 `optics-photonics mcp` 注册为 stdio 服务。 |
 
 ```sh
-python -m pip install "https://github.com/Cherish0925/Optics-Photonics-AI-Lab/releases/download/optics-v0.5.1/optics_photonics-0.5.1-py3-none-any.whl"
+python -m pip install "https://github.com/Cherish0925/Optics-Photonics-AI-Lab/releases/download/optics-v0.6.0/optics_photonics-0.6.0-py3-none-any.whl"
 optics-photonics prepare tmm
 optics-photonics connect agentic-research-os --output optics-plugin
 ```
 
-连接程序需要 Python 3.10+，支持 Windows、macOS 和 Linux，不依赖第三方库。插件市场安装的版本使用宿主 PATH 中的 `python`；需要指定解释器时，用 `optics-photonics connect HOST` 生成接入包。各科学软件保留自己的 Python、平台和许可。MCP 服务应运行在装有科学软件的机器上，本地或通过 SSH 均可。[接入说明](docs/CONNECT.zh-CN.md) · [交互指南](https://cherish0925.github.io/Optics-Photonics-AI-Lab/connect.zh.html) · [发布包](https://github.com/Cherish0925/Optics-Photonics-AI-Lab/releases)
+连接程序需要 Python 3.10+，支持 Windows、macOS 和 Linux，不依赖第三方库。GitHub 插件市场版本通过 [uv](https://docs.astral.sh/uv/getting-started/installation/) 选择执行端的 Python 3.10+，缺少时自动下载。先安装一次 uv；已有 Python 时也可以用 `optics-photonics connect HOST --python /path/to/python` 生成宿主包。Research OS 使用自带 Python。各科学软件保留自己的 Python、平台和许可。MCP 服务应运行在装有科学软件的机器上，本地或通过 SSH 均可。[接入说明](docs/CONNECT.zh-CN.md) · [交互指南](https://cherish0925.github.io/Optics-Photonics-AI-Lab/connect.zh.html) · [发布包](https://github.com/Cherish0925/Optics-Photonics-AI-Lab/releases)
 
 ## 一次计算怎么进行
 

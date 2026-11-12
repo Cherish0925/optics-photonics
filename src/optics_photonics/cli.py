@@ -54,7 +54,7 @@ def main(argv=None):
     commands.add_parser('tools')
     call=commands.add_parser('call'); call.add_argument('tool'); call.add_argument('arguments',type=object_argument)
     from .packages import HOSTS
-    connect=commands.add_parser('connect'); connect.add_argument('host',choices=HOSTS); connect.add_argument('--output',required=True); connect.add_argument('--python')
+    connect=commands.add_parser('connect'); connect.add_argument('host',choices=HOSTS); connect.add_argument('--output',required=True); connect.add_argument('--python'); connect.add_argument('--managed-python',dest='managed',action='store_true',help='Use uv to select Python on the destination machine (Codex, Claude, portable)')
     a=vars(parser.parse_args(argv)); command=a.pop('command')
     try:
         if command == 'search': result=catalogue.search(**a)

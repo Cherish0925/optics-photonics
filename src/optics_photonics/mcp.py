@@ -1,6 +1,7 @@
 """Dependency-free MCP stdio server. Calculations run independently in the background."""
 from concurrent.futures import ThreadPoolExecutor
 import json
+import math
 import sys
 import threading
 from . import __version__, catalogue, environments
@@ -132,6 +133,8 @@ class Connection:
 
     def call(self, request_id, params, cancellation):
         try:
+            with self.state:
+                if key(request_id) in self.withdrawn: return
             result = tool_result(params, cancellation)
             with self.state:
                 withdrawn = key(request_id) in self.withdrawn
@@ -151,7 +154,7 @@ class Connection:
 
 
 def valid_id(request_id):
-    return isinstance(request_id, (str, int, float)) and not isinstance(request_id, bool)
+    return type(request_id) in (str, int) or type(request_id) is float and math.isfinite(request_id)
 
 
 def key(request_id):
@@ -192,7 +195,7 @@ def conform(value, spec, name):
         if isinstance(value, str):
             try: value = float(value) if kind == 'number' else int(value)
             except ValueError: raise ValueError(expected) from None
-        if isinstance(value, bool) or not isinstance(value, (int, float)) or value != value: raise ValueError(expected)
+        if isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value): raise ValueError(expected)
         if kind == 'integer':
             if value != int(value): raise ValueError(expected)
             value = int(value)

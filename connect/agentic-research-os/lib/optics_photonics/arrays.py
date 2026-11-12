@@ -102,10 +102,10 @@ def selection(shape, index):
             axes.append([position, position + 1, 1, False])
         elif isinstance(item, list) and 1 <= len(item) <= 3 and all(v is None or type(v) is int for v in item):
             start, stop, step = (item + [None, None])[:3]
-            if step is not None and step < 1:
-                raise ValueError('Use a positive step')
+            if step == 0:
+                raise ValueError('An array slice step cannot be zero')
             start, stop, step = slice(start, stop, step).indices(n)
-            axes.append([start, max(start, stop), step, True])
+            axes.append([start, stop, step, True])
         else:
             raise ValueError('Each index is an integer or [start, stop, step]')
     return axes
@@ -169,6 +169,8 @@ def _read(stream, size, index, max_elements):
     for k in order:
         strides[k] = strides[k + 1] * shape[k + 1] if not fortran else strides[k - 1] * shape[k - 1]
     ranges = [range(a, b, s) for a, b, s, _ in axes]
+    # Preserve logical order in the result while reading forward through an archive.
+    storage_ranges = [r if r.step > 0 or not r else range(r[-1], r[0] + 1, -r.step) for r in ranges]
     kept = [k for k, a in enumerate(axes) if a[3]]
     result_shape = [len(ranges[k]) for k in kept]
     width = 2 if kind == 'c' else 1
@@ -178,10 +180,10 @@ def _read(stream, size, index, max_elements):
     outer = list(range(len(shape) - 1)) if not fortran else list(reversed(range(1, len(shape))))
     unit = struct.Struct(code)
     if shape and all(len(r) for r in ranges):
-        for combination in itertools.product(*(ranges[k] for k in outer)):
+        for combination in itertools.product(*(storage_ranges[k] for k in outer)):
             where = dict(zip(outer, combination))
             base = offset + sum(where[k] * strides[k] for k in outer)
-            span = ranges[fast]
+            span = storage_ranges[fast]
             if span.step <= 16:  # one read covers the span along the contiguous axis
                 stream.seek(base + span.start * itemsize)
                 data = stream.read((span[-1] - span.start + 1) * itemsize)

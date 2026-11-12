@@ -7,7 +7,7 @@ Optics & Photonics 独立提供光学软件连接、原生研究程序、后台�
 连接程序使用 Python 3.10+，支持 Windows、macOS、Linux。科学软件使用各自支持的 Python、系统与许可；可以为每个软件连接不同的环境。
 
 ```sh
-python -m pip install "https://github.com/Cherish0925/Optics-Photonics-AI-Lab/releases/download/optics-v0.5.1/optics_photonics-0.5.1-py3-none-any.whl"
+python -m pip install "https://github.com/Cherish0925/Optics-Photonics-AI-Lab/releases/download/optics-v0.6.0/optics_photonics-0.6.0-py3-none-any.whl"
 optics-photonics search "thin film" --license-group open
 optics-photonics info tmm
 optics-photonics prepare tmm
@@ -87,8 +87,9 @@ optics-photonics resume RUN_ID
 | Claude Code | `claude plugin marketplace add Cherish0925/Optics-Photonics-AI-Lab`，再执行 `claude plugin install optics-photonics@optics-photonics`。 |
 
 Research OS 包携带连接器、目录与 Skills，使用宿主自带的 Python。
-Codex/Claude 的 GitHub 插件通过工具执行端 PATH 中的 `python`（3.10+）运行包内代码。
-解释器名称或路径不同时，使用该解释器安装连接器，再生成下面的宿主包。
+Codex/Claude 的 GitHub 插件及 DeepSeek 包通过 [uv](https://docs.astral.sh/uv/getting-started/installation/) 选择 Python 3.10+，缺少时下载。执行端安装一次 uv 即可；已有 Python 时，也可以直接用它生成下面的宿主包。
+Codex 使用插件相对工作目录，Claude 使用自己的插件路径变量。
+`connect portable`、`connect codex --managed-python` 和 `connect claude --managed-python` 生成可跨机器移动的包；不带该选项的本机包保留选定的 Python 路径。
 科学软件通过 `prepare_environment` 准备，或通过 `bind_environment` / `bind_native_software` 接入。
 
 更新时在 Research OS 刷新来源，安装其新修订。Codex 使用

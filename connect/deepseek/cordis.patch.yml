@@ -7,8 +7,15 @@
         "config": {
           "serverName": "optics",
           "transport": "stdio",
-          "command": "optics-photonics",
+          "command": "uv",
           "args": [
+            "tool",
+            "run",
+            "--python",
+            ">=3.10",
+            "--from",
+            "https://github.com/Cherish0925/Optics-Photonics-AI-Lab/releases/download/optics-v0.6.0/optics_photonics-0.6.0-py3-none-any.whl",
+            "optics-photonics",
             "mcp"
           ],
           "env": {}

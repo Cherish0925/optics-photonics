@@ -22,8 +22,22 @@ def write(path, value):
     path.write_text(json.dumps(value, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
 
 
-def package(destination, host='mcp', python=None):
+def managed_server(host):
+    """A movable entry point using the host's actual plugin path rules."""
+    script = {'codex':'server.py', 'claude':'${CLAUDE_PLUGIN_ROOT}/server.py',
+              'portable':'${PLUGIN_ROOT}/server.py'}[host]
+    server = {'command':'uv', 'args':['run','--no-project','--python','>=3.10','--',script,'mcp']}
+    if host == 'codex': server['cwd'] = '.'
+    if host == 'portable': server.update(type='stdio', cwd='./')
+    return server
+
+
+def package(destination, host='mcp', python=None, *, managed=False):
     if host not in HOSTS: raise ValueError('Unknown host: '+host)
+    if managed and (python or host not in ('codex','claude','portable')):
+        raise ValueError('Managed Python applies to Codex, Claude or portable packages without a selected Python')
+    if host == 'portable' and python:
+        raise ValueError('Portable packages select Python on the destination machine; use a native host or mcp for a fixed interpreter')
     target = Path(destination).expanduser().resolve()
     if target.exists() and any(target.iterdir()):
         raise ValueError('Choose a new package directory; existing host configuration is kept')
@@ -45,8 +59,8 @@ def package(destination, host='mcp', python=None):
         write(target/'plugin.json', {'$schema':'https://agent-plugins.org/schemas/1.0.0/plugin.schema.json',
             **{k:v for k,v in descriptor.items() if k != 'skills'}, 'license':'MIT'})
         write(target/'mcp.json', {'$schema':'https://agent-plugins.org/schemas/1.0.0/mcp.schema.json',
-            'mcpServers':{'optics':{'type':'stdio',**server}}})
-        instructions = 'Install this directory in a host supporting Agent Plugins. Skills and mcp.json are discovered at the package root. The selected interpreter and server path are explicit; regenerate after moving the directory.'
+            'mcpServers':{'optics':managed_server('portable')}})
+        instructions = 'Install this directory in a host supporting Agent Plugins 1.0.0. Skills and mcp.json are discovered at the package root. Install uv (https://docs.astral.sh/uv/getting-started/installation/) on the execution host; it selects Python 3.10+ and downloads an interpreter only if needed. The package can be moved between machines. For an offline host with a selected Python, generate a native host or MCP package instead.'
     elif host == 'agentic-research-os':
         descriptor['mcpServers'] = {'optics':{'transport':'stdio','command':'${RESEARCH_PYTHON}',
             'args':['-B','${PACKAGE_ROOT}/server.py','mcp'], 'protocol_version':'2025-11-25'}}
@@ -54,20 +68,26 @@ def package(destination, host='mcp', python=None):
         instructions = 'Extract the release ZIP if needed, then install the directory containing plugin.json as an Agentic Research OS plugin. Activate its returned revision in the current workspace. The package uses the host Python and carries all connector code, catalogue data and Skills. Configure scientific software on the computing host.'
     elif host in ('codex','claude'):
         folder = '.codex-plugin' if host == 'codex' else '.claude-plugin'
-        # Both native plugin formats support a shared .mcp.json and discovered skills/ directory.
+        # Codex resolves cwd relative to the plugin; Claude expands CLAUDE_PLUGIN_ROOT.
         native = {k:v for k,v in descriptor.items() if k!='skills'}
         if host == 'codex':
             native.update(skills='./skills/', mcpServers='./.mcp.json', requires_local_executor=True,
                           interface={'displayName':'Optics & Photonics','shortDescription':'Optical software and research calculations','developerName':'Optics & Photonics'})
         write(target/folder/'plugin.json', native)
-        write(target/'.mcp.json', {'mcpServers':{'optics':server}})
-        write(target/'mcp.json', {'mcpServers':{'optics':server}})
-        instructions = ('Register this local plugin directory in '+host+'. Its MCP configuration points to the selected Python and this directory. Regenerate with `optics-photonics connect '+host+' --output PATH` after relocating it. The accompanying host connection command is recorded below.')
-        if host == 'codex':
+        native_server = {'command':interpreter, 'args':['-B','server.py','mcp'], 'cwd':'.'} if host == 'codex' else \
+                        {'command':interpreter, 'args':['-B','${CLAUDE_PLUGIN_ROOT}/server.py','mcp']}
+        if managed: native_server = managed_server(host)
+        write(target/'.mcp.json', {'mcpServers':{'optics':native_server}})
+        if not managed: write(target/'mcp.json', {'mcpServers':{'optics':server}})
+        instructions = ('Register this local plugin directory in '+host+'. The native plugin resolves its own directory and uses the selected Python. Moving it on this machine preserves that connection; generate a package again when selecting a different Python or computer. The standalone mcp.json and registration command below use this installation path.')
+        if managed:
+            instructions = 'Install uv (https://docs.astral.sh/uv/getting-started/installation/) on the execution host, then load this directory as a '+host+' plugin. It selects Python 3.10+ and downloads an interpreter only if needed. Move or update this package without changing its MCP paths. Environments and runs remain under OPTICS_HOME or ~/.optics-photonics.'
+        elif host == 'codex':
             command = ['codex','mcp','add','optics','--',interpreter,'-B',str(target/'server.py'),'mcp']
         else:
             command = ['claude','mcp','add','--transport','stdio','optics','--',interpreter,'-B',str(target/'server.py'),'mcp']
-        instructions += '\n\n```'+('powershell' if os.name == 'nt' else 'sh')+'\n'+shell_command(command)+'\n```\n'
+        if not managed:
+            instructions += '\n\n```'+('powershell' if os.name == 'nt' else 'sh')+'\n'+shell_command(command)+'\n```\n'
     elif host == 'deepseek':
         overlay = [{'insert':[{'id':'optics-photonics','name':'@deepseek-ai/dsh-mcp-client',
                     'config':{'serverName':'optics','transport':'stdio',**server,'env':{},'cwd':str(target)}}]}]

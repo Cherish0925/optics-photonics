@@ -20,7 +20,7 @@ optics-photonics bind-native opticstudio --python /path/to/python-with-zospy
 optics-photonics bind-native cst --python /path/to/vendor-compatible-python --sdk-path /path/to/python_cst_libraries
 ```
 
-Use the interpreter supported by the installed SDK, with Python 3.10+ for this worker. Install MPh or ZOSPy in that interpreter when using their bridges. Installing a bridge does not install COMSOL or OpticStudio. `software_details` lists the package requirements and primary API documentation. COMSOL version and OpticStudio DLL location can be supplied through `--options "@options.json"`. Lumerical options are `product`, `hide`, and `module`; the default product is FDTD. COMSOL and Lumerical receive the configured thread count. CST and OpticStudio thread controls belong to their native solver configuration; the shared job scheduler uses `threads` as the reserved CPU allocation.
+Use the interpreter supported by the installed SDK, with Python 3.9+ for this worker. Install MPh or ZOSPy in that interpreter when using their bridges. Installing a bridge does not install COMSOL or OpticStudio. `software_details` lists the package requirements and primary API documentation. COMSOL version and OpticStudio DLL location can be supplied through `--options "@options.json"`. Lumerical options are `product`, `hide`, and `module`; the default product is FDTD. COMSOL and Lumerical receive the configured thread count. CST and OpticStudio thread controls belong to their native solver configuration; the shared job scheduler uses `threads` as the reserved CPU allocation.
 
 MCP equivalents are `discover_native_software` and `bind_native_software`. Existing jobs retain the connection settings with which they were submitted.
 

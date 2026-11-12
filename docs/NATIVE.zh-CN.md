@@ -20,7 +20,7 @@ optics-photonics bind-native opticstudio --python /path/to/python-with-zospy
 optics-photonics bind-native cst --python /path/to/vendor-compatible-python --sdk-path /path/to/python_cst_libraries
 ```
 
-选择本机 SDK 支持的 Python，本工作进程要求 Python 3.10+。使用 MPh、ZOSPy 时，将对应桥接包安装到这个环境；桥接包不包含商业软件。`software_details` 返回包要求和原始 API 文档。`--options "@options.json"` 可指定 COMSOL 版本或 OpticStudio DLL 位置。Lumerical 可配置 `product`、`hide`、`module`，默认使用 FDTD。
+选择本机 SDK 支持的 Python，本工作进程要求 Python 3.9+。使用 MPh、ZOSPy 时，将对应桥接包安装到这个环境；桥接包不包含商业软件。`software_details` 返回包要求和原始 API 文档。`--options "@options.json"` 可指定 COMSOL 版本或 OpticStudio DLL 位置。Lumerical 可配置 `product`、`hide`、`module`，默认使用 FDTD。
 
 MCP 对应工具是 `discover_native_software` 和 `bind_native_software`。环境只需配置一次，插件升级保留这些设置。已提交任务继续使用提交时的配置。COMSOL 与 Lumerical 接收线程数；CST 与 OpticStudio 的求解线程由其原生设置控制，公共调度器使用 `threads` 分配计算额度。
 

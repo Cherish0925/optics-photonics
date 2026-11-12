@@ -41,7 +41,7 @@ export class OpticsLab {
   static async connect(options:Options={}) {
     const client=new OpticsLab(options);
     try {
-      await client.request('initialize',{protocolVersion:'2025-11-25',capabilities:{},clientInfo:{name:'optics-typescript',version:'0.6.0'}});
+      await client.request('initialize',{protocolVersion:'2025-11-25',capabilities:{},clientInfo:{name:'optics-typescript',version:'0.7.0'}});
       client.notify('notifications/initialized');
       return client;
     } catch(error) { client.close(); throw error; }

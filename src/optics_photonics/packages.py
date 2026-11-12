@@ -69,7 +69,7 @@ def package(destination, host='mcp', python=None, *, managed=False):
     elif host in ('codex','claude'):
         folder = '.codex-plugin' if host == 'codex' else '.claude-plugin'
         # Codex resolves cwd relative to the plugin; Claude expands CLAUDE_PLUGIN_ROOT.
-        native = {k:v for k,v in descriptor.items() if k!='skills'}
+        native = {**{k:v for k,v in descriptor.items() if k!='skills'}, 'author':{'name':'Optics & Photonics'}}
         if host == 'codex':
             native.update(skills='./skills/', mcpServers='./.mcp.json', requires_local_executor=True,
                           interface={'displayName':'Optics & Photonics','shortDescription':'Optical software and research calculations','developerName':'Optics & Photonics'})

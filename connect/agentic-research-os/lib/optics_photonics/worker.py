@@ -15,6 +15,20 @@ from optics_photonics.catalogue import software
 from optics_photonics.operations import calculate
 
 
+def distributions(native=getattr(importlib.metadata, 'packages_distributions', None)):
+    """Installed distribution names by top-level module name."""
+    if native:
+        return native()
+    found = {}  # Python 3.9 has no packages_distributions
+    for distribution in importlib.metadata.distributions():
+        modules = (distribution.read_text('top_level.txt') or '').split() or [
+            file.parts[0].split('.')[0] for file in distribution.files or []
+            if not file.parts[0].endswith(('.dist-info', '.egg-info'))]
+        for module in set(modules):
+            found.setdefault(module, []).append(distribution.metadata['Name'])
+    return found
+
+
 def execute(tool, request, output):
     output = Path(output).resolve()
     output.mkdir(parents=True, exist_ok=True)
@@ -44,7 +58,7 @@ def execute(tool, request, output):
             result = calculate(tool, request.get('action', ''), inputs, output)
     # Distribution names are taken from the active interpreter, including native-program dependencies.
     versions = {}
-    package_map = importlib.metadata.packages_distributions()
+    package_map = distributions()
     for module in set(name.split('.')[0] for name in sys.modules):
         for distribution in package_map.get(module, []):
             try: versions[distribution] = importlib.metadata.version(distribution)

@@ -80,7 +80,11 @@ def main(argv=None):
         elif command == 'resources': result=jobs.resources(**a)
         elif command == 'runs': result=jobs.list_runs(**a)
         elif command == 'submit-workflow':
-            steps=json.loads(a.pop('file').read_text(encoding='utf-8')); result=jobs.submit(steps,**a)
+            file=a.pop('file'); steps=json.loads(file.read_text(encoding='utf-8'))
+            for step in steps if isinstance(steps,list) else []:
+                # A step may name its program file beside the workflow file instead of carrying the source text.
+                if isinstance(step,dict) and 'program' in step: step['source']=(file.parent/step.pop('program')).read_text(encoding='utf-8')
+            result=jobs.submit(steps,**a)
         elif command in ('status','files','cancel','resume','download','read','array'):
             result=getattr(jobs, {'read':'read_result','array':'read_array'}.get(command,command))(**a)
         elif command == 'connect':

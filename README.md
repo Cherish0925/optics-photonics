@@ -18,7 +18,7 @@ The [English](https://raw.githubusercontent.com/Cherish0925/Optics-Photonics-AI-
 
 | Host | Install |
 | --- | --- |
-| Agentic Research OS | Download the [Research OS package](https://github.com/Cherish0925/Optics-Photonics-AI-Lab/releases/download/optics-v0.6.0/Optics-Photonics-0.6.0-ResearchOS.zip), extract it and install the directory containing `plugin.json`; it carries native executors for six system/architecture combinations, MCP, the catalogue and both Skills, and uses the host's Python. Or **Extensions → Plugins → Add from link** with `https://github.com/Cherish0925/Optics-Photonics-AI-Lab/tree/main/connect/agentic-research-os`. |
+| Agentic Research OS | Download the [Research OS package](https://github.com/Cherish0925/Optics-Photonics-AI-Lab/releases/download/optics-v0.7.0/Optics-Photonics-0.7.0-ResearchOS.zip), extract it and install the directory containing `plugin.json`; it carries native executors for six system/architecture combinations, MCP, the catalogue and both Skills, and uses the host's Python. Or **Extensions → Plugins → Add from link** with `https://github.com/Cherish0925/Optics-Photonics-AI-Lab/tree/main/connect/agentic-research-os`. |
 | Codex | `codex plugin marketplace add Cherish0925/Optics-Photonics-AI-Lab`, then `codex plugin add optics-photonics@optics-photonics` |
 | Claude Code | `claude plugin marketplace add Cherish0925/Optics-Photonics-AI-Lab`, then `claude plugin install optics-photonics@optics-photonics` |
 | Qiushi | Editions built on Research OS use the package above; other editions use `optics-photonics connect qiushi` for MCP or command access. |
@@ -26,7 +26,7 @@ The [English](https://raw.githubusercontent.com/Cherish0925/Optics-Photonics-AI-
 | Any MCP host, Python, shell | Install the wheel below and register `optics-photonics mcp` as a stdio server. |
 
 ```sh
-python -m pip install "https://github.com/Cherish0925/Optics-Photonics-AI-Lab/releases/download/optics-v0.6.0/optics_photonics-0.6.0-py3-none-any.whl"
+python -m pip install "https://github.com/Cherish0925/Optics-Photonics-AI-Lab/releases/download/optics-v0.7.0/optics_photonics-0.7.0-py3-none-any.whl"
 optics-photonics prepare tmm
 optics-photonics connect agentic-research-os --output optics-plugin
 ```
@@ -37,7 +37,7 @@ The connector needs Python 3.10+ on Windows, macOS or Linux and has no third-par
 
 1. **Choose software.** `software_search` and `software_details` return the physical method, interfaces, installation source and packaged operations of each catalogue entry. `register_software` adds a tool outside the catalogue.
 2. **Connect its environment.** `prepare_environment` installs a documented recipe into an isolated environment; `bind_environment` reuses an existing interpreter or executable; `discover_native_software` and `bind_native_software` connect installed COMSOL, Lumerical, OpticStudio and CST SDKs ([native sessions](docs/NATIVE.md)).
-3. **Submit a complete program.** A Python program receives `INPUTS` and `OUTPUT_DIR`, uses the solver's full native API and sets `RESULT`; an executable uses the same files through environment variables. `submit_calculation` returns a run ID at once; `submit_workflow` adds dependent or parallel steps; a later step receives values, or the locations of files, from earlier ones.
+3. **Submit a complete program.** A Python program receives `INPUTS` and `OUTPUT_DIR`, uses the solver's full native API and sets `RESULT`; an executable uses the same files through environment variables. `submit_calculation` returns a run ID at once; `submit_workflow` adds dependent or parallel steps; a later step receives values, or the locations of files, from earlier ones. `data.save` writes arrays with their units, axes and conventions, so the next program and `read_array` know what the numbers mean ([data](docs/EXECUTION.md#keep-the-meaning-of-arrays-between-programs)).
 4. **Continue and read results.** `run_status` waits up to 25 s per call; other requests on the same connection are answered meanwhile. Runs survive disconnection and are found again with `list_runs`. `result_files`, `read_result` and `read_array` return file listings, byte ranges and parts of NPY/NPZ arrays. `resume_run` reruns unfinished steps and keeps completed ones.
 5. **Collect episodes.** `sample_episodes` runs Gymnasium-style environments in parallel solver workers and stores seeds, actions, observations and rewards for learning; an interrupted or extended collection continues without repeating completed episodes ([episodes](docs/LEARNING.md)).
 

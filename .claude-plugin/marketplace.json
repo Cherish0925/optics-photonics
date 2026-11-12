@@ -1,6 +1,7 @@
 {
   "name": "optics-photonics",
   "owner": {"name": "Optics & Photonics"},
+  "metadata": {"description": "Optical and photonic research software, calculations that keep running, and research methods."},
   "plugins": [{
     "name": "optics-photonics",
     "source": "./",

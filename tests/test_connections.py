@@ -121,11 +121,39 @@ class ConnectionTests(unittest.TestCase):
     def test_concurrent_environment_registration_keeps_every_tool(self):
         with tempfile.TemporaryDirectory() as tmp:
             ids = ['tmm','grcwa','scipy','optiland','gdsfactory','py-pol']
-            code = 'from optics_photonics.environments import bind;import sys;bind(sys.argv[1],command=[sys.executable],path=sys.argv[2])'
-            workers = [subprocess.Popen([sys.executable, '-c', code, tool, tmp]) for tool in ids]
-            for process in workers:
-                self.assertEqual(process.wait(timeout=30), 0)
-            self.assertEqual(set(environments.read(tmp)['tools']), set(ids))
+            code = '''from optics_photonics.environments import bind, read
+import sys
+for i in range(20):
+    bind(sys.argv[1],command=[sys.executable],path=sys.argv[2],threads=i+1)
+    assert read(sys.argv[2])['tools'][sys.argv[1]]['threads']==i+1
+'''
+            workers = [subprocess.Popen([sys.executable, '-c', code, tool, tmp],
+                stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True) for tool in ids]
+            try:
+                outcomes = [(process, process.communicate(timeout=30)) for process in workers]
+                for process, (_, error) in outcomes:
+                    self.assertEqual(process.returncode, 0, error)
+            finally:
+                for process in workers:
+                    if process.poll() is None:
+                        process.kill(); process.communicate()
+            configured = environments.read(tmp)['tools']
+            self.assertEqual(set(configured), set(ids))
+            self.assertTrue(all(item['threads'] == 20 for item in configured.values()))
+
+    def test_concurrent_threads_keep_software_and_connections(self):
+        from concurrent.futures import ThreadPoolExecutor
+        with tempfile.TemporaryDirectory() as tmp:
+            def add(index):
+                tool = 'local-' + str(index)
+                environments.register(tool, tool, 'Local command', kind='command', path=tmp)
+                environments.bind(tool, command=[sys.executable], path=tmp)
+                return environments.software(tool, path=tmp)
+            with ThreadPoolExecutor(max_workers=8) as pool:
+                definitions = list(pool.map(add, range(24)))
+            configured = environments.read(tmp)
+            self.assertEqual(set(configured['software']), {item['id'] for item in definitions})
+            self.assertEqual(set(configured['tools']), set(configured['software']))
 
     def test_invalid_setup_does_not_change_connections(self):
         with tempfile.TemporaryDirectory() as tmp:

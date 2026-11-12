@@ -2,6 +2,8 @@
 
 Agent requests remain responsive while calculations run. MCP handles concurrent calls, independent status waits and request cancellation; the TypeScript client supports AbortSignal. Scheduling retains dependency state and reads newly appended work without loading old results each time.
 
+Concurrent environment registration coordinates readers and writers across processes and threads, including Windows file replacement. Software and native SDK bindings use the same update path.
+
 NPY/NPZ arrays can be read by axis, position and forward or reverse slice, with bounded output and complex values. Workflow steps pass files by reference. The TypeScript client retrieves binary or text results to the client computer.
 
 Episode collection records completed episodes separately, retains partial attempts and continues without collecting completed episodes again, including when the worker count changes. Task and policy versions identify scientific program changes; solver errors remain distinct from scientific outcomes.
